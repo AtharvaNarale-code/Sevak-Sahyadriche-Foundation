@@ -1,0 +1,351 @@
+{% extends "base.html" %}
+
+{% block title %}
+सेवक सह्याद्रीचे
+{% endblock %}
+
+
+{% block content %}
+
+
+<!-- ==================================================
+     MAIN HOME
+================================================== -->
+
+<section class="home">
+
+    <!-- LOGO -->
+
+    <div class="home-logo">
+
+        <img
+            src="{{ url_for('static', filename='img/logo.png') }}"
+            alt="सेवक सह्याद्रीचे लोगो">
+
+    </div>
+
+
+    <!-- NAME -->
+
+    <h2>॥ इतिहासबोधेन कर्तव्यमार्गः ॥
+    </h2>
+    <!-- SMALL DECORATION -->
+    <div class="small-line">
+
+        <span></span>
+
+        <i>✦</i>
+
+        <span></span>
+
+    </div>
+    <!-- INTRO -->
+    <p class="home-intro">
+इतिहासातून बोध घेऊन वर्तमानात योग्य कर्तव्याची दिशा ठरवणे, हीच आमची प्रेरणा <br>
+इतिहास जाणून, त्यातून शिकून समाजहितासाठी कृती करण्याचा आमचा संकल्प.
+
+
+    </p>
+
+
+    <!-- ============================================
+         FOUR MAIN SECTIONS
+    ============================================ -->
+
+    <section class="main-sections">
+
+        <!-- MOHIM -->
+
+        <a href="{{ url_for('mohim') }}"
+           class="main-card">
+
+            <div class="card-icon">
+                ⛰
+            </div>
+
+            <div>
+
+                <h2>
+                    मोहिम
+                </h2>
+
+                <p>
+                    विविध सामाजिक,
+                    ऐतिहासिक आणि पर्यावरणपूरक
+                    उपक्रम
+                </p>
+
+            </div>
+
+            <span class="arrow">
+                →
+            </span>
+
+        </a>
+
+
+        <!-- FOREIGN DIASPORA -->
+
+        <a href="{{ url_for('foreign_diaspora') }}"
+           class="main-card">
+
+            <div class="card-icon">
+                ◉
+            </div>
+
+            <div>
+
+                <h2>
+                    परदेशी डिस्पोरा
+                </h2>
+
+                <p>
+                    परदेशात असतानाही
+                    आपल्या मातीशी जोडलेले राहूया
+                </p>
+
+            </div>
+
+            <span class="arrow">
+                →
+            </span>
+
+        </a>
+
+
+        <!-- YUVA MANCH -->
+
+        <a href="{{ url_for('yuva_manch') }}"
+           class="main-card">
+
+            <div class="card-icon">
+                ✦
+            </div>
+
+            <div>
+
+                <h2>
+                    युवा मंच
+                </h2>
+
+                <p>
+                    युवकांच्या विचारांना
+                    आणि ऊर्जेला सकारात्मक दिशा
+                </p>
+
+            </div>
+
+            <span class="arrow">
+                →
+            </span>
+
+        </a>
+
+
+        <!-- LEKH -->
+
+        <a href="{{ url_for('lekh') }}"
+           class="main-card">
+
+            <div class="card-icon">
+                ✎
+            </div>
+
+            <div>
+
+                <h2>
+                    लेख
+                </h2>
+
+                <p>
+                    इतिहास, सह्याद्री,
+                    संस्कृती आणि विचार
+                </p>
+
+            </div>
+
+            <span class="arrow">
+                →
+            </span>
+
+        </a>
+
+    </section>
+
+
+    <!-- ============================================
+         UPCOMING NOTIFICATIONS
+    ============================================ -->
+
+    <section class="home-notifications">
+
+        <div class="section-title">
+
+            <span>
+                सूचना
+            </span>
+
+            <h2>
+                आगामी उपक्रम
+            </h2>
+
+        </div>
+
+
+        {% if upcoming %}
+
+            <div class="notification-list">
+
+                {% for item in upcoming %}
+
+                    <a
+                        href="{{ url_for('trek_detail', trek_id=item.id) }}"
+                        class="notification-item">
+
+                        <div class="notification-date">
+
+                            <strong>
+                                {{ item.event_date.strftime('%d') }}
+                            </strong>
+
+                            <small>
+                                {{ item.event_date.strftime('%b') }}
+                            </small>
+
+                        </div>
+
+
+                        <div class="notification-content">
+
+                            <span>
+                                {{ item.category }}
+                            </span>
+
+                            <h3>
+                                {{ item.title }}
+                            </h3>
+
+                            <p>
+                                {{ item.location }}
+                            </p>
+
+                        </div>
+
+
+                        <div class="notification-arrow">
+                            →
+                        </div>
+
+                    </a>
+
+                {% endfor %}
+
+            </div>
+
+
+            <a
+                href="{{ url_for('treks') }}"
+                class="view-more">
+
+                सर्व सूचना पहा →
+
+            </a>
+
+        {% else %}
+
+            <div class="no-notification">
+
+                <span>✦</span>
+
+                <p>
+                    सध्या कोणतीही आगामी सूचना नाही.
+                </p>
+
+            </div>
+
+        {% endif %}
+
+    </section>
+
+
+    <!-- ============================================
+         SHORT ABOUT
+    ============================================ -->
+
+    <section class="home-about">
+
+        <div class="section-title">
+
+            <span>
+                आमच्याबद्दल
+            </span>
+
+            <h2>
+                सेवक सह्याद्रीचे
+            </h2>
+
+        </div>
+
+
+        <p>
+
+            आपल्या इतिहासाचा, संस्कृतीचा आणि
+            सह्याद्रीचा वारसा समजून घेऊन तो
+            पुढील पिढीपर्यंत पोहोचवण्यासाठी
+            सकारात्मक कार्य करण्याचा आमचा प्रयत्न.
+
+        </p>
+
+
+        <a href="{{ url_for('about') }}"
+           class="simple-button">
+
+            अधिक जाणून घ्या
+
+        </a>
+
+    </section>
+
+
+    <!-- ============================================
+         DONATE
+    ============================================ -->
+
+    <section class="home-donate">
+
+        <div>
+
+            <span>
+                आपली साथ
+            </span>
+
+            <h2>
+                या प्रवासात सहभागी व्हा
+            </h2>
+
+            <p>
+
+                आपल्या वेळेने, सहभागाने,
+                ज्ञानाने किंवा योगदानाने
+                या कार्याला हातभार लावा.
+
+            </p>
+
+        </div>
+
+
+        <a
+            href="{{ url_for('donate') }}"
+            class="donate-button">
+
+            देणगी द्या
+
+        </a>
+
+    </section>
+
+
+</section>
+
+
+{% endblock %}

@@ -1,0 +1,51 @@
+{% extends "admin/base_admin.html" %}
+{% block title %}Admin Dashboard — Sevak Sahyadriche{% endblock %}
+
+{% block admin_content %}
+<div class="admin-topbar">
+  <h1>Dashboard</h1>
+  <a href="{{ url_for('admin_trek_new') }}" class="btn btn-primary btn-sm">+ Add New Trek / Event</a>
+</div>
+
+<div class="dash-cards">
+  <div class="dash-card">
+    <div class="num">{{ total_treks }}</div>
+    <div class="label">Total Treks &amp; Events</div>
+  </div>
+  <div class="dash-card">
+    <div class="num">{{ upcoming_count }}</div>
+    <div class="label">Upcoming</div>
+  </div>
+  <div class="dash-card">
+    <div class="num">{{ unread_messages }}</div>
+    <div class="label">Unread Messages</div>
+  </div>
+</div>
+
+<h3>Recently Added</h3>
+{% if recent_treks %}
+<table class="admin-table">
+  <thead>
+    <tr><th>Title</th><th>Category</th><th>Date</th><th>Status</th><th>Actions</th></tr>
+  </thead>
+  <tbody>
+    {% for trek in recent_treks %}
+    <tr>
+      <td>{{ trek.title }}</td>
+      <td>{{ trek.category }}</td>
+      <td>{{ trek.event_date.strftime('%d %b %Y') }}</td>
+      <td>
+        <span class="status-dot {{ 'on' if trek.is_published else 'off' }}"></span>
+        {{ 'Published' if trek.is_published else 'Hidden' }}
+      </td>
+      <td class="action-links">
+        <a href="{{ url_for('admin_trek_edit', trek_id=trek.id) }}" class="btn btn-ghost btn-sm">Edit</a>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% else %}
+<p style="color:#6b6259;">No treks added yet.</p>
+{% endif %}
+{% endblock %}

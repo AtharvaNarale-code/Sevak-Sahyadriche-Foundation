@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 760" role="img" aria-labelledby="t d">
+  <title id="t">Sahyadri landscape placeholder</title><desc id="d">A stylised mountain landscape used when an activity has no uploaded image.</desc>
+  <rect width="1200" height="760" fill="#201914"/><circle cx="920" cy="180" r="92" fill="#c98532" opacity=".8"/>
+  <path d="M0 560 190 350 320 500 510 260 720 530 890 360 1200 610V760H0Z" fill="#5b3b28"/>
+  <path d="M0 650 260 450 420 580 640 380 840 590 1010 430 1200 600V760H0Z" fill="#8a5a35" opacity=".85"/>
+  <path d="M510 260 575 365 545 345 510 390 470 350Z" fill="#ead9c1" opacity=".9"/>
+</svg>

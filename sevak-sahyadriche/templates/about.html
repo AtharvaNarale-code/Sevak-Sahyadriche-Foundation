@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% block title %}About Us — Sevak Sahyadriche Foundation{% endblock %}
+
+{% block content %}
+<section>
+  <div class="container">
+    <div class="about-hero">
+      <div>
+        <span class="eyebrow" style="color:#e65c00; font-weight:600; letter-spacing:2px; font-size:12.5px; text-transform:uppercase;">Our Story</span>
+        <h2 style="font-size: 32px; margin-top:10px;">Rooted in the Sahyadris, Driven by Seva</h2>
+        <p style="color:#55504a;">
+          Sevak Sahyadriche Foundation was founded by a small group of trekkers
+          and heritage enthusiasts in Pune who wanted trekking to mean more than
+          reaching a summit. What began as weekend fort visits among friends has
+          grown into a foundation that organizes treks, heritage walks, and
+          cultural events across Maharashtra — always anchored in respect for
+          history, community, and the mountains themselves.
+        </p>
+        <p style="color:#55504a;">
+          Every trek we run pairs the physical climb with the story of the
+          fort: the Maratha history, the local communities living around it,
+          and the traditions that are still kept alive today. We also run
+          cultural events — from Gudi Padwa celebrations to Lavani and Powada
+          evenings — to celebrate Maharashtrian heritage beyond the trail.
+        </p>
+      </div>
+      <img src="https://images.unsplash.com/photo-1626621331169-5f34be280e4f?q=80&w=900&auto=format&fit=crop" alt="Sahyadri mountain range">
+    </div>
+  </div>
+</section>
+
+<section class="alt-bg">
+  <div class="container">
+    <div class="section-title">
+      <span class="eyebrow">What We Stand For</span>
+      <h2>Our Mission &amp; Values</h2>
+    </div>
+    <div class="value-grid">
+      <div class="value-card">
+        <div class="icon">🏰</div>
+        <h4>Preserve Heritage</h4>
+        <p>Documenting and sharing the history of Sahyadri forts and the Maratha legacy with every generation.</p>
+      </div>
+      <div class="value-card">
+        <div class="icon">🌄</div>
+        <h4>Promote Safe Trekking</h4>
+        <p>Trained trek leaders, safety-first planning, and routes suited to every experience level.</p>
+      </div>
+      <div class="value-card">
+        <div class="icon">🎭</div>
+        <h4>Celebrate Culture</h4>
+        <p>Keeping Maharashtrian folk arts, festivals and cuisine alive through community events.</p>
+      </div>
+      <div class="value-card">
+        <div class="icon">🌱</div>
+        <h4>Give Back</h4>
+        <p>Supporting local guides, porters and villages along our trekking routes.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container" style="text-align:center;">
+    <h2>Want to trek with us?</h2>
+    <p style="color:#55504a; max-width:520px; margin: 0 auto 26px;">
+      Check our upcoming treks and cultural events, or reach out if you'd like
+      to volunteer as a "sevak" with the foundation.
+    </p>
+    <a href="{{ url_for('treks') }}" class="btn btn-primary">See Upcoming Treks</a>
+    <a href="{{ url_for('contact') }}" class="btn btn-maroon">Get in Touch</a>
+  </div>
+</section>
+{% endblock %}

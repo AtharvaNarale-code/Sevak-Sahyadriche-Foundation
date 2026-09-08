@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Admin Login — Sevak Sahyadriche{% endblock %}
+
+{% block content %}
+<div class="auth-shell">
+  <div class="auth-card">
+    <h2>Admin Login</h2>
+    <p class="sub">Sevak Sahyadriche Foundation — Trek Management Panel</p>
+    <form method="POST">
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" class="form-control" required autofocus>
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" class="form-control" required>
+      </div>
+      <button type="submit" class="btn btn-primary" style="width:100%;">Log In</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

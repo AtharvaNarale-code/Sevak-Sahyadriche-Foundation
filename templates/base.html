@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="mr">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+          content="सेवक सह्याद्रीचे">
+
+    <title>
+        {% block title %}सेवक सह्याद्रीचे{% endblock %}
+    </title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=Noto+Sans+Devanagari:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet">
+</head>
+
+
+<body>
+
+<header class="top-header">
+
+    <div class="header-container">
+
+        <!-- LEFT : ONLY NAME -->
+
+        <a href="{{ url_for('home') }}"
+           class="site-name">
+
+            सेवक सह्याद्रीचे
+
+        </a>
+
+
+       
+
+
+        <!-- RIGHT : THREE DOT -->
+
+        <button
+            class="three-dot"
+            id="menuButton"
+            type="button"
+            aria-label="मेनू">
+
+            <span></span>
+            <span></span>
+            <span></span>
+
+        </button>
+
+    </div>
+
+</header>
+
+
+<!-- ================= SIDE MENU ================= -->
+
+<div class="menu-overlay"
+     id="menuOverlay"></div>
+
+
+<aside class="side-menu"
+       id="sideMenu">
+
+    <div class="side-menu-header">
+
+        <span>मेनू</span>
+
+        <button
+            id="menuClose"
+            type="button">
+
+            ×
+
+        </button>
+
+    </div>
+
+
+    <nav>
+
+        <a href="{{ url_for('home') }}">
+            मुख्यपृष्ठ
+        </a>
+
+        <a href="{{ url_for('about') }}">
+            आमच्याबद्दल
+        </a>
+
+        <a href="{{ url_for('treks') }}">
+            सूचना
+        </a>
+
+        <a href="{{ url_for('donate') }}">
+            देणगी
+        </a>
+
+        <a href="{{ url_for('contact') }}">
+            संपर्क करा
+        </a>
+
+        <a href="{{ url_for('gallery') }}">
+            गॅलरी
+        </a>
+
+        <div class="menu-line"></div>
+
+        <div class="menu-line"></div>
+
+
+    </nav>
+
+</aside>
+
+
+<!-- ================= FLASH ================= -->
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+
+    {% if messages %}
+
+        <div class="flash-area">
+
+            {% for category, message in messages %}
+
+                <div class="flash {{ category }}">
+                    {{ message }}
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    {% endif %}
+
+{% endwith %}
+
+
+<main>
+
+    {% block content %}{% endblock %}
+
+</main>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer class="footer">
+
+    <div class="footer-logo">
+
+        <img
+            src="{{ url_for('static', filename='img/logo.png') }}"
+            alt=" ">
+
+    </div>
+
+    <h3>
+        सेवक सह्याद्रीचे
+    </h3>
+
+    <p>
+        इतिहास • संस्कृती • समाज • सह्याद्री
+    </p>
+
+    <div class="footer-links">
+
+        <a href="{{ url_for('about') }}">
+            आमच्याबद्दल
+        </a>
+
+        <a href="{{ url_for('contact') }}">
+            संपर्क
+        </a>
+
+        <a href="{{ url_for('donate') }}">
+            देणगी
+        </a>
+
+    </div>
+
+    <div class="copyright">
+
+        © {{ current_year }} सेवक सह्याद्रीचे
+
+    </div>
+
+</footer>
+
+
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+</body>
+
+</html>

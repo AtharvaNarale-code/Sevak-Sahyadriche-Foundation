@@ -1,0 +1,526 @@
+{% extends "base.html" %}
+
+{% block title %}Contact Us — Sevak Sahyadriche Foundation{% endblock %}
+
+{% block content %}
+
+<style>
+  .contact-page {
+    background: #f5f1e8;
+    color: #2d211b;
+  }
+
+  /* =========================
+     HERO
+  ========================= */
+
+  .contact-hero {
+    text-align: center;
+    padding: 75px 20px 65px;
+    background: #fffdf8;
+    border-bottom: 1px solid #e1d8cc;
+  }
+
+  .contact-eyebrow {
+    display: inline-block;
+    margin-bottom: 12px;
+    color: #b16f31;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+  }
+
+  .contact-hero h1 {
+    margin: 0 0 14px;
+    font-size: clamp(36px, 5vw, 52px);
+    line-height: 1.15;
+    color: #2d211b;
+  }
+
+  .contact-hero p {
+    max-width: 680px;
+    margin: 0 auto;
+    color: #6c625a;
+    font-size: 16px;
+    line-height: 1.7;
+  }
+
+
+  /* =========================
+     MAIN CONTACT AREA
+  ========================= */
+
+  .contact-section {
+    padding: 70px 0 90px;
+  }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 28px;
+    align-items: start;
+  }
+
+
+  /* =========================
+     FORM CARD
+  ========================= */
+
+  .contact-form-card {
+    background: #fffdf9;
+    border: 1px solid #ddd4c8;
+    border-radius: 14px;
+    padding: 34px;
+    box-shadow: 0 10px 30px rgba(45, 33, 27, 0.07);
+  }
+
+  .contact-form-card h2 {
+    margin: 0 0 7px;
+    font-size: 24px;
+  }
+
+  .contact-form-card .form-description {
+    margin: 0 0 27px;
+    color: #766b62;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  .contact-form .form-group {
+    margin-bottom: 18px;
+  }
+
+  .contact-form label {
+    display: block;
+    margin-bottom: 7px;
+    color: #493a31;
+    font-size: 13px;
+    font-weight: 700;
+  }
+
+  .contact-form .form-control {
+    width: 100%;
+    height: 46px;
+    padding: 0 13px;
+    border: 1px solid #cec3b6;
+    border-radius: 8px;
+    background: #ffffff;
+    color: #2d211b;
+    font-family: inherit;
+    font-size: 14px;
+    outline: none;
+    transition: 0.2s ease;
+  }
+
+  .contact-form textarea.form-control {
+    height: 145px;
+    padding: 12px 13px;
+    resize: vertical;
+    line-height: 1.6;
+  }
+
+  .contact-form .form-control:focus {
+    border-color: #a66c38;
+    box-shadow: 0 0 0 3px rgba(166, 108, 56, 0.12);
+  }
+
+  .contact-submit {
+    width: 100%;
+    height: 46px;
+    border: none;
+    border-radius: 8px;
+    background: #523225;
+    color: white;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.2s ease;
+  }
+
+  .contact-submit:hover {
+    background: #3e261c;
+    transform: translateY(-1px);
+    box-shadow: 0 7px 18px rgba(62, 38, 28, 0.18);
+  }
+
+
+  /* =========================
+     CONTACT INFO
+  ========================= */
+
+  .contact-info {
+    background: #38231a;
+    color: white;
+    border-radius: 14px;
+    padding: 34px;
+    box-shadow: 0 10px 30px rgba(45, 33, 27, 0.1);
+  }
+
+  .contact-info h2 {
+    margin: 0 0 8px;
+    font-size: 24px;
+  }
+
+  .contact-info > p {
+    margin: 0 0 30px;
+    color: #d7c9bd;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  .contact-item {
+    display: flex;
+    gap: 16px;
+    padding: 20px 0;
+    border-top: 1px solid rgba(255,255,255,0.12);
+  }
+
+  .contact-item:first-of-type {
+    border-top: none;
+    padding-top: 0;
+  }
+
+  .contact-icon {
+    width: 42px;
+    height: 42px;
+    flex: 0 0 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9px;
+    background: rgba(255,255,255,0.1);
+    font-size: 18px;
+  }
+
+  .contact-item h3 {
+    margin: 0 0 5px;
+    font-size: 14px;
+    color: #e0a15a;
+  }
+
+  .contact-item p {
+    margin: 0;
+    color: #eee4db;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  .contact-item a {
+    color: #eee4db;
+    text-decoration: none;
+  }
+
+  .contact-item a:hover {
+    color: #e0a15a;
+  }
+
+
+  /* =========================
+     BOTTOM CTA
+  ========================= */
+
+  .contact-bottom {
+    padding: 65px 20px;
+    background: #e9e0d4;
+    text-align: center;
+  }
+
+  .contact-bottom h2 {
+    margin: 0 0 10px;
+    font-size: 30px;
+  }
+
+  .contact-bottom p {
+    max-width: 550px;
+    margin: 0 auto 24px;
+    color: #6e6259;
+    line-height: 1.7;
+    font-size: 14px;
+  }
+
+  .contact-bottom a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 11px 21px;
+    border-radius: 7px;
+    background: #523225;
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 700;
+  }
+
+
+  /* =========================
+     RESPONSIVE
+  ========================= */
+
+  @media (max-width: 850px) {
+
+    .contact-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .contact-info {
+      order: 2;
+    }
+
+  }
+
+  @media (max-width: 600px) {
+
+    .contact-hero {
+      padding: 55px 20px 50px;
+    }
+
+    .contact-section {
+      padding: 45px 15px 65px;
+    }
+
+    .contact-form-card,
+    .contact-info {
+      padding: 25px;
+    }
+
+    .contact-hero h1 {
+      font-size: 34px;
+    }
+
+  }
+</style>
+
+
+<div class="contact-page">
+
+  <!-- HERO -->
+
+  <section class="contact-hero">
+
+    <span class="contact-eyebrow">
+      Get In Touch
+    </span>
+
+    <h1>
+      Contact Sevak Sahyadriche
+    </h1>
+
+    <p>
+      Questions about a trek, want to volunteer, or interested
+      in partnering with us? We'd love to hear from you.
+    </p>
+
+  </section>
+
+
+  <!-- CONTACT AREA -->
+
+  <section class="contact-section">
+
+    <div class="container">
+
+      <div class="contact-grid">
+
+        <!-- FORM -->
+
+        <div class="contact-form-card">
+
+          <h2>Send us a message</h2>
+
+          <p class="form-description">
+            Fill in the details below and our team will get back
+            to you as soon as possible.
+          </p>
+
+          <form
+            method="POST"
+            action="{{ url_for('contact') }}"
+            class="contact-form"
+          >
+
+            <div class="form-group">
+
+              <label for="name">
+                Full Name
+              </label>
+
+              <input
+                type="text"
+                id="name"
+                name="name"
+                class="form-control"
+                placeholder="Your name"
+                required
+              >
+
+            </div>
+
+
+            <div class="form-group">
+
+              <label for="email">
+                Email Address
+              </label>
+
+              <input
+                type="email"
+                id="email"
+                name="email"
+                class="form-control"
+                placeholder="you@example.com"
+                required
+              >
+
+            </div>
+
+
+            <div class="form-group">
+
+              <label for="phone">
+                Phone Number
+                <span style="font-weight:400;color:#8a7e74;">
+                  (optional)
+                </span>
+              </label>
+
+              <input
+                type="tel"
+                id="phone"
+                name="phone"
+                class="form-control"
+                placeholder="+91 9XXXXXXXXX"
+              >
+
+            </div>
+
+
+            <div class="form-group">
+
+              <label for="message">
+                Message
+              </label>
+
+              <textarea
+                id="message"
+                name="message"
+                class="form-control"
+                placeholder="Tell us how we can help..."
+                required
+              ></textarea>
+
+            </div>
+
+
+            <button
+              type="submit"
+              class="contact-submit"
+            >
+              Send Message
+            </button>
+
+          </form>
+
+        </div>
+
+
+        <!-- INFORMATION -->
+
+        <div class="contact-info">
+
+          <h2>Foundation Office</h2>
+
+          <p>
+            Reach out to us for trek enquiries, volunteering,
+            collaborations or general information.
+          </p>
+
+
+          <div class="contact-item">
+
+            <div class="contact-icon">
+              📍
+            </div>
+
+            <div>
+              <h3>Visit Us</h3>
+
+              <p>
+                Sevak Sahyadriche Foundation<br>
+                Pune, Maharashtra, India
+              </p>
+            </div>
+
+          </div>
+
+
+          <div class="contact-item">
+
+            <div class="contact-icon">
+              ✉
+            </div>
+
+            <div>
+              <h3>Email</h3>
+
+              <p>
+                <a href="mailto:info@sevaksahyadriche.org">
+                  info@sevaksahyadriche.org
+                </a>
+              </p>
+            </div>
+
+          </div>
+
+
+          <div class="contact-item">
+
+            <div class="contact-icon">
+              ☎
+            </div>
+
+            <div>
+              <h3>Phone</h3>
+
+              <p>
+                <a href="tel:+919000000000">
+                  +91 90000 00000
+                </a>
+              </p>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- CTA -->
+
+  <section class="contact-bottom">
+
+    <h2>
+      Want to be part of the journey?
+    </h2>
+
+    <p>
+      Join us on a trek, volunteer with the foundation,
+      or simply help us spread the word about preserving
+      Maharashtra's heritage.
+    </p>
+
+    <a href="{{ url_for('treks') }}">
+      Explore Upcoming Treks
+    </a>
+
+  </section>
+
+</div>
+
+{% endblock %}

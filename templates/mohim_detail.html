@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+
+{% block title %}
+{{ trek.title }} | सेवक सह्याद्रीचे
+{% endblock %}
+
+{% block content %}
+
+<section class="mohim-detail-page">
+
+    <a href="{{ url_for('mohim') }}" class="detail-back">← सर्व मोहिम</a>
+
+    <header class="mohim-detail-header">
+        <span class="detail-number">मोहिम {{ mohim_number }}</span>
+        <span class="detail-category">{{ trek.category }}</span>
+        <h1>{{ trek.title }}</h1>
+
+        <div class="detail-meta">
+            <span>📍 {{ trek.location }}</span>
+            <span>📅 {{ trek.event_date.strftime('%d %B %Y') }}</span>
+            <span>⏱ {{ trek.duration }}</span>
+        </div>
+    </header>
+
+
+    <!-- PHOTOS -->
+    {% if photos %}
+        <section class="detail-section detail-gallery-section">
+            <div class="detail-section-heading">
+                <span>छायाचित्रे</span>
+                <h2>मोहिमेचे फोटो</h2>
+            </div>
+
+            <div class="mohim-photo-grid">
+                {% for photo in photos %}
+                    <a href="{{ photo }}" target="_blank" rel="noopener" class="mohim-photo">
+                        <img src="{{ photo }}" alt="{{ trek.title }} - फोटो {{ loop.index }}" loading="lazy">
+                    </a>
+                {% endfor %}
+            </div>
+        </section>
+    {% endif %}
+
+
+    <!-- DETAILS -->
+    <section class="detail-section">
+        <div class="detail-section-heading">
+            <span>मोहिम माहिती</span>
+            <h2>मोहिम तपशील</h2>
+        </div>
+
+        <p class="detail-description">
+            {{ details or trek.description }}
+        </p>
+
+        <div class="detail-info-box">
+            <div class="detail-info-row"><span>किंमत</span><strong>{{ trek.price }}</strong></div>
+            <div class="detail-info-row"><span>कालावधी</span><strong>{{ trek.duration }}</strong></div>
+            <div class="detail-info-row"><span>अवघडपणा</span><strong>{{ trek.difficulty }}</strong></div>
+            <div class="detail-info-row"><span>एकूण जागा</span><strong>{{ trek.total_slots }}</strong></div>
+            <div class="detail-info-row"><span>उपलब्ध जागा</span><strong>{{ trek.slots_left }}</strong></div>
+            {% if trek.contact_person %}
+                <div class="detail-info-row"><span>समन्वयक</span><strong>{{ trek.contact_person }}</strong></div>
+            {% endif %}
+            {% if trek.contact_phone %}
+                <div class="detail-info-row"><span>संपर्क</span><strong>{{ trek.contact_phone }}</strong></div>
+            {% endif %}
+        </div>
+    </section>
+
+
+    <!-- ACTIVITY -->
+    <section class="detail-section detail-activity">
+        <div class="detail-section-heading">
+            <span>Activity Conducted</span>
+            <h2>उपक्रम / Activity Conducted</h2>
+        </div>
+
+        <p class="detail-description">
+            {{ activity or trek.description }}
+        </p>
+    </section>
+
+
+    <!-- JOIN -->
+    {% if trek.is_upcoming %}
+        <a href="{{ url_for('contact') }}" class="detail-join-button">
+            सहभागी व्हा <span>→</span>
+        </a>
+    {% else %}
+        <div class="detail-completed">ही मोहिम पूर्ण झाली आहे</div>
+    {% endif %}
+
+</section>
+
+{% endblock %}

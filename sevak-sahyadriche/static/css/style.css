@@ -1,0 +1,77 @@
+/* Layout additions for style.css */
+.top-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 32px;
+  border-bottom: 2px solid var(--maroon);
+}
+
+.title-box {
+  border: 2px solid var(--maroon);
+  padding: 8px 16px;
+  font-weight: 700;
+  color: var(--maroon);
+}
+
+.nav-links a {
+  margin-left: 20px;
+  font-weight: 600;
+}
+
+.hero-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 40px auto;
+  text-align: center;
+}
+
+.logo-circle {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 2px solid var(--maroon);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.right-sidebar {
+  position: fixed;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 60px;
+  background-color: var(--maroon);
+}
+
+.admin-panel {
+  position: absolute;
+  left: 0;
+  top: 120px;
+  width: 140px;
+  padding: 16px;
+  border: 2px solid var(--maroon);
+  border-left: none;
+  background: white;
+}
+
+.admin-panel.hidden {
+  display: none;
+}
+
+.activity-strip {
+  display: flex;
+  justify-content: space-around;
+  padding: 20px;
+  background: white;
+  border-top: 2px solid var(--maroon);
+  margin-right: 60px; /* Leave space for right sidebar */
+}
+
+.activity-item {
+  text-align: center;
+  font-weight: bold;
+}

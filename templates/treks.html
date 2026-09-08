@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block title %}Treks &amp; Events — Sevak Sahyadriche Foundation{% endblock %}
+
+{% block content %}
+<section>
+  <div class="container">
+    <div class="section-title">
+      <span class="eyebrow">Sahyadri Calls</span>
+      <h2>Treks &amp; Cultural Events</h2>
+      <p>Browse upcoming treks and events, or look back at what we've done so far.</p>
+    </div>
+
+    <div class="filter-tabs">
+      <a href="{{ url_for('treks', type='upcoming') }}" class="{{ 'active' if filter_type=='upcoming' }}">Upcoming</a>
+      <a href="{{ url_for('treks', type='past') }}" class="{{ 'active' if filter_type=='past' }}">Past</a>
+      <a href="{{ url_for('treks', type='all') }}" class="{{ 'active' if filter_type=='all' }}">All</a>
+    </div>
+
+    {% if treks %}
+    <div class="card-grid">
+      {% for trek in treks %}
+      <div class="trek-card">
+        <div class="img-wrap">
+          <img src="{{ trek.image_url }}" alt="{{ trek.title }}">
+          <span class="badge {{ 'past' if not trek.is_upcoming }}">{{ trek.category }}</span>
+        </div>
+        <div class="content">
+          <h3>{{ trek.title }}</h3>
+          <div class="meta">
+            <span>📍 {{ trek.location }}</span>
+            <span>📅 {{ trek.event_date.strftime('%d %b %Y') }}</span>
+          </div>
+          <span class="pill {{ trek.difficulty|lower }}">{{ trek.difficulty }}</span>
+          <p class="desc" style="margin-top:10px;">{{ trek.description[:100] }}{% if trek.description|length > 100 %}...{% endif %}</p>
+          <div class="card-footer">
+            <span class="price">{{ trek.price }}</span>
+            <a href="{{ url_for('trek_detail', trek_id=trek.id) }}" class="btn btn-ghost btn-sm">View Details</a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    {% else %}
+    <div class="empty-state">
+      <div class="emoji">🏔️</div>
+      <p>No treks found in this category yet.</p>
+    </div>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

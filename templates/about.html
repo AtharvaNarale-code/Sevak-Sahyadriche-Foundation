@@ -1,0 +1,659 @@
+{% extends "base.html" %}
+{% block title %}About Us — Sevak Sahyadriche Foundation{% endblock %}
+
+{% block content %}
+
+<style>
+  .about-page {
+    color: #2d211b;
+  }
+
+  /* HERO */
+  .about-hero {
+    position: relative;
+    min-height: 500px;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    background: #332017;
+  }
+
+  .about-hero-image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .about-hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      90deg,
+      rgba(40, 25, 18, 0.92) 0%,
+      rgba(40, 25, 18, 0.72) 45%,
+      rgba(40, 25, 18, 0.25) 100%
+    );
+  }
+
+  .about-hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 700px;
+    padding: 80px 0;
+    color: white;
+  }
+
+  .about-eyebrow {
+    display: inline-block;
+    margin-bottom: 14px;
+    color: #d69a52;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+  }
+
+  .about-hero h1 {
+    margin: 0 0 20px;
+    font-size: clamp(38px, 5vw, 62px);
+    line-height: 1.08;
+    font-weight: 700;
+  }
+
+  .about-hero h1 span {
+    color: #d69a52;
+  }
+
+  .about-hero p {
+    max-width: 650px;
+    margin: 0;
+    color: #eee5dc;
+    font-size: 17px;
+    line-height: 1.8;
+  }
+
+
+  /* STORY */
+  .about-story {
+    padding: 90px 0;
+    background: #fffdf8;
+  }
+
+  .story-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 70px;
+    align-items: center;
+  }
+
+  .story-image-wrap {
+    position: relative;
+  }
+
+  .story-image {
+    width: 100%;
+    height: 470px;
+    object-fit: cover;
+    border-radius: 14px;
+    display: block;
+  }
+
+  .story-accent {
+    position: absolute;
+    width: 90px;
+    height: 90px;
+    border: 3px solid #c58b45;
+    border-radius: 12px;
+    right: -18px;
+    bottom: -18px;
+    z-index: 0;
+  }
+
+  .story-image {
+    position: relative;
+    z-index: 1;
+  }
+
+  .story-content h2 {
+    margin: 8px 0 22px;
+    font-size: 38px;
+    line-height: 1.2;
+  }
+
+  .story-content p {
+    margin: 0 0 18px;
+    color: #625850;
+    font-size: 15.5px;
+    line-height: 1.85;
+  }
+
+  .story-label {
+    color: #b16f31;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+
+  /* VALUES */
+  .values-section {
+    padding: 90px 0;
+    background: #f3eee5;
+  }
+
+  .section-heading {
+    max-width: 650px;
+    margin-bottom: 45px;
+  }
+
+  .section-heading .eyebrow {
+    color: #b16f31;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  .section-heading h2 {
+    margin: 10px 0 12px;
+    font-size: 38px;
+    line-height: 1.2;
+  }
+
+  .section-heading p {
+    margin: 0;
+    color: #6d625a;
+    line-height: 1.7;
+  }
+
+  .value-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+  }
+
+  .value-card {
+    background: #fffdf9;
+    border: 1px solid #e0d7cb;
+    border-radius: 12px;
+    padding: 28px 24px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .value-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 14px 30px rgba(45, 33, 27, 0.09);
+  }
+
+  .value-icon {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #efe3d2;
+    border-radius: 10px;
+    font-size: 23px;
+    margin-bottom: 20px;
+  }
+
+  .value-card h3 {
+    margin: 0 0 10px;
+    font-size: 18px;
+  }
+
+  .value-card p {
+    margin: 0;
+    color: #70665e;
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+
+  /* APPROACH */
+  .approach-section {
+    padding: 90px 0;
+    background: #fffdf8;
+  }
+
+  .approach-header {
+    text-align: center;
+    max-width: 650px;
+    margin: 0 auto 45px;
+  }
+
+  .approach-header .eyebrow {
+    color: #b16f31;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  .approach-header h2 {
+    margin: 10px 0;
+    font-size: 38px;
+  }
+
+  .approach-header p {
+    color: #70665e;
+    line-height: 1.7;
+  }
+
+  .approach-list {
+    max-width: 900px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+  }
+
+  .approach-item {
+    text-align: center;
+    padding: 25px;
+  }
+
+  .approach-number {
+    width: 46px;
+    height: 46px;
+    margin: 0 auto 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #523225;
+    color: white;
+    font-size: 14px;
+    font-weight: 700;
+  }
+
+  .approach-item h3 {
+    margin: 0 0 9px;
+    font-size: 17px;
+  }
+
+  .approach-item p {
+    margin: 0;
+    color: #746960;
+    font-size: 14px;
+    line-height: 1.65;
+  }
+
+
+  /* CTA */
+  .about-cta {
+    padding: 85px 20px;
+    background: #38231a;
+    color: white;
+    text-align: center;
+  }
+
+  .about-cta h2 {
+    margin: 0 0 14px;
+    font-size: 38px;
+  }
+
+  .about-cta p {
+    max-width: 570px;
+    margin: 0 auto 28px;
+    color: #ddd0c5;
+    line-height: 1.7;
+  }
+
+  .about-cta-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .about-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 22px;
+    border-radius: 7px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 700;
+  }
+
+  .about-btn-primary {
+    background: #c58b45;
+    color: white;
+  }
+
+  .about-btn-secondary {
+    border: 1px solid rgba(255,255,255,0.3);
+    color: white;
+  }
+
+  .about-btn-secondary:hover {
+    background: rgba(255,255,255,0.08);
+  }
+
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .story-grid {
+      grid-template-columns: 1fr;
+      gap: 45px;
+    }
+
+    .value-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .approach-list {
+      grid-template-columns: 1fr;
+    }
+
+    .story-image {
+      height: 400px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .about-hero {
+      min-height: 560px;
+    }
+
+    .about-hero-content {
+      padding: 60px 20px;
+    }
+
+    .about-story,
+    .values-section,
+    .approach-section {
+      padding: 65px 0;
+    }
+
+    .story-content h2,
+    .section-heading h2,
+    .approach-header h2,
+    .about-cta h2 {
+      font-size: 30px;
+    }
+
+    .value-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .story-image {
+      height: 330px;
+    }
+  }
+</style>
+
+
+<div class="about-page">
+
+  <!-- HERO -->
+
+  <section class="about-hero">
+
+    <img
+      class="about-hero-image"
+      src="https://images.unsplash.com/photo-1626621331169-5f34be280e4f?q=80&w=1600&auto=format&fit=crop"
+      alt="Sahyadri mountain range"
+    >
+
+    <div class="about-hero-overlay"></div>
+
+    <div class="container">
+      <div class="about-hero-content">
+
+        <span class="about-eyebrow">Our Story</span>
+
+        <h1>
+          Rooted in the Sahyadris.<br>
+          Driven by <span>Seva.</span>
+        </h1>
+
+        <p>
+          We believe trekking is more than reaching a summit.
+          It is a way to connect with Maharashtra's mountains,
+          history, people and living culture.
+        </p>
+
+      </div>
+    </div>
+
+  </section>
+
+
+  <!-- STORY -->
+
+  <section class="about-story">
+
+    <div class="container">
+
+      <div class="story-grid">
+
+        <div class="story-image-wrap">
+
+          <img
+            class="story-image"
+            src="https://images.unsplash.com/photo-1598091383021-15ddea10925d?q=80&w=1000&auto=format&fit=crop"
+            alt="Trekking in the Sahyadri mountains"
+          >
+
+          <div class="story-accent"></div>
+
+        </div>
+
+
+        <div class="story-content">
+
+          <span class="story-label">Who We Are</span>
+
+          <h2>
+            From weekend treks
+            to a shared purpose.
+          </h2>
+
+          <p>
+            Sevak Sahyadriche Foundation was founded by a small
+            group of trekkers and heritage enthusiasts in Pune who
+            wanted trekking to mean more than simply reaching a summit.
+          </p>
+
+          <p>
+            What began as weekend fort visits among friends has
+            grown into a foundation organizing treks, heritage walks
+            and cultural events across Maharashtra.
+          </p>
+
+          <p>
+            Every journey is rooted in respect for history,
+            local communities and the mountains themselves.
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- VALUES -->
+
+  <section class="values-section">
+
+    <div class="container">
+
+      <div class="section-heading">
+
+        <span class="eyebrow">What We Stand For</span>
+
+        <h2>
+          Our work is guided by four simple values.
+        </h2>
+
+        <p>
+          These principles shape how we trek, how we work with
+          communities and how we preserve the heritage around us.
+        </p>
+
+      </div>
+
+
+      <div class="value-grid">
+
+        <div class="value-card">
+          <div class="value-icon">🏰</div>
+          <h3>Preserve Heritage</h3>
+          <p>
+            Documenting and sharing the history of Sahyadri forts
+            and the Maratha legacy with every generation.
+          </p>
+        </div>
+
+
+        <div class="value-card">
+          <div class="value-icon">🌄</div>
+          <h3>Promote Safe Trekking</h3>
+          <p>
+            Trained trek leaders, safety-first planning and routes
+            suited to different experience levels.
+          </p>
+        </div>
+
+
+        <div class="value-card">
+          <div class="value-icon">🎭</div>
+          <h3>Celebrate Culture</h3>
+          <p>
+            Keeping Maharashtrian folk arts, festivals and traditions
+            alive through community events.
+          </p>
+        </div>
+
+
+        <div class="value-card">
+          <div class="value-icon">🌱</div>
+          <h3>Give Back</h3>
+          <p>
+            Supporting local guides, porters and communities
+            around the places we visit.
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- OUR APPROACH -->
+
+  <section class="approach-section">
+
+    <div class="container">
+
+      <div class="approach-header">
+
+        <span class="eyebrow">Our Approach</span>
+
+        <h2>Every journey has a purpose.</h2>
+
+        <p>
+          Our activities bring together exploration, heritage
+          and community — creating experiences that go beyond
+          the trail.
+        </p>
+
+      </div>
+
+
+      <div class="approach-list">
+
+        <div class="approach-item">
+
+          <div class="approach-number">01</div>
+
+          <h3>Explore</h3>
+
+          <p>
+            Discover the Sahyadris through thoughtfully planned
+            treks and heritage walks.
+          </p>
+
+        </div>
+
+
+        <div class="approach-item">
+
+          <div class="approach-number">02</div>
+
+          <h3>Understand</h3>
+
+          <p>
+            Learn the stories, history and traditions connected
+            to every place we visit.
+          </p>
+
+        </div>
+
+
+        <div class="approach-item">
+
+          <div class="approach-number">03</div>
+
+          <h3>Serve</h3>
+
+          <p>
+            Give back to local communities and help preserve
+            the places and traditions we value.
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- CTA -->
+
+  <section class="about-cta">
+
+    <h2>Come walk the Sahyadris with us.</h2>
+
+    <p>
+      Explore our upcoming treks and cultural events,
+      or get in touch if you'd like to become a sevak
+      and contribute to our work.
+    </p>
+
+    <div class="about-cta-buttons">
+
+      <a
+        href="{{ url_for('treks') }}"
+        class="about-btn about-btn-primary"
+      >
+        Explore Upcoming Treks
+      </a>
+
+      <a
+        href="{{ url_for('contact') }}"
+        class="about-btn about-btn-secondary"
+      >
+        Get in Touch
+      </a>
+
+    </div>
+
+  </section>
+
+</div>
+
+{% endblock %}

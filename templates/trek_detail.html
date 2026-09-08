@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block title %}{{ trek.title }} — Sevak Sahyadriche Foundation{% endblock %}
+
+{% block content %}
+<section>
+  <div class="container">
+    <a href="{{ url_for('treks') }}" style="color:#7a0c1e; font-weight:600; font-size:14px;">&larr; Back to all treks</a>
+
+    <div style="margin-top:20px;">
+      <img src="{{ trek.image_url }}" alt="{{ trek.title }}" class="trek-hero-img">
+    </div>
+
+    <div class="detail-grid">
+      <div>
+        <span class="pill">{{ trek.category }}</span>
+        <span class="pill {{ trek.difficulty|lower }}">{{ trek.difficulty }}</span>
+        {% if not trek.is_published %}<span class="pill" style="background:#fbe1e1;color:#a32828;">Unpublished (admin preview)</span>{% endif %}
+
+        <h1 style="margin-top:14px;">{{ trek.title }}</h1>
+        <div class="meta" style="margin-bottom: 20px;">
+          <span>📍 {{ trek.location }}</span>
+          <span>📅 {{ trek.event_date.strftime('%d %B %Y') }}</span>
+          <span>⏱️ {{ trek.duration }}</span>
+        </div>
+        <h3>About this {{ trek.category|lower }}</h3>
+        <p style="color:#403a34; white-space: pre-line;">{{ trek.description }}</p>
+      </div>
+
+      <div>
+        <div class="info-box">
+          <div class="info-row"><span class="label">Price</span><span class="value">{{ trek.price }}</span></div>
+          <div class="info-row"><span class="label">Duration</span><span class="value">{{ trek.duration }}</span></div>
+          <div class="info-row"><span class="label">Difficulty</span><span class="value">{{ trek.difficulty }}</span></div>
+          <div class="info-row"><span class="label">Total Slots</span><span class="value">{{ trek.total_slots }}</span></div>
+          <div class="info-row"><span class="label">Slots Left</span><span class="value">{{ trek.slots_left }}</span></div>
+          {% if trek.contact_person %}
+          <div class="info-row"><span class="label">Coordinator</span><span class="value">{{ trek.contact_person }}</span></div>
+          {% endif %}
+          {% if trek.contact_phone %}
+          <div class="info-row"><span class="label">Phone</span><span class="value">{{ trek.contact_phone }}</span></div>
+          {% endif %}
+
+          {% if trek.is_upcoming %}
+            <a href="{{ url_for('contact') }}" class="btn btn-primary" style="width:100%; text-align:center; margin-top:20px;">Enquire to Join</a>
+          {% else %}
+            <div class="pill past" style="display:block; text-align:center; margin-top:20px; background:#eee; color:#666;">This event has concluded</div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

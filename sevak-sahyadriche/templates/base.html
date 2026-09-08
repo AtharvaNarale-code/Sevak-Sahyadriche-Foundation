@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{% block title %}Sevak Sahyadriche Foundation{% endblock %}</title>
+<meta name="description" content="Sevak Sahyadriche Foundation organizes treks, fort visits and cultural events celebrating Maharashtrian heritage.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Yatra+One&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+{% block extra_head %}{% endblock %}
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="{{ url_for('home') }}" class="brand">
+      <span class="brand-mark">सह्याद्री</span>
+      <span class="brand-text">
+        <strong>Sevak Sahyadriche</strong>
+        <small>Foundation</small>
+      </span>
+    </a>
+
+    <input type="checkbox" id="nav-toggle" class="nav-toggle">
+    <label for="nav-toggle" class="nav-toggle-label"><span></span></label>
+
+    <nav class="main-nav">
+      <a href="{{ url_for('home') }}" class="{{ 'active' if request.endpoint=='home' }}">Home</a>
+      <a href="{{ url_for('about') }}" class="{{ 'active' if request.endpoint=='about' }}">About Us</a>
+      <a href="{{ url_for('treks') }}" class="{{ 'active' if request.endpoint in ['treks','trek_detail'] }}">Treks &amp; Events</a>
+      <a href="{{ url_for('gallery') }}" class="{{ 'active' if request.endpoint=='gallery' }}">Gallery</a>
+      <a href="{{ url_for('contact') }}" class="{{ 'active' if request.endpoint=='contact' }}">Contact</a>
+      {% if current_user.is_authenticated %}
+        <a href="{{ url_for('admin_dashboard') }}" class="nav-admin-btn">Admin Panel</a>
+      {% endif %}
+    </nav>
+  </div>
+</header>
+
+<div class="flash-wrap container">
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, message in messages %}
+        <div class="flash flash-{{ category }}">{{ message }}</div>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+</div>
+
+<main>
+{% block content %}{% endblock %}
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div class="footer-col">
+      <h4>Sevak Sahyadriche Foundation</h4>
+      <p>A non-profit dedicated to trekking through the forts of the Sahyadris and keeping Maharashtrian culture, history and community spirit alive.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <a href="{{ url_for('treks') }}">Upcoming Treks</a>
+      <a href="{{ url_for('gallery') }}">Past Events Gallery</a>
+      <a href="{{ url_for('about') }}">About the Foundation</a>
+      <a href="{{ url_for('contact') }}">Get in Touch</a>
+    </div>
+    <div class="footer-col">
+      <h4>Reach Us</h4>
+      <p>📍 Pune, Maharashtra</p>
+      <p>✉️ info@sevaksahyadriche.org</p>
+      <p>📞 +91 90000 00000</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; {{ current_year }} Sevak Sahyadriche Foundation. Har Har Mahadev. 🚩</p>
+  </div>
+</footer>
+
+</body>
+</html>

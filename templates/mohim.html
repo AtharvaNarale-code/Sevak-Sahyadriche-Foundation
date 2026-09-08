@@ -1,0 +1,127 @@
+{% extends "base.html" %}
+
+{% block title %}
+मोहिम | सेवक सह्याद्रीचे
+{% endblock %}
+
+{% block content %}
+
+<section class="mohim-page">
+
+    <div class="mohim-intro">
+        <span class="mohim-label">सेवक सह्याद्रीचे</span>
+        <h1>मोहिम</h1>
+        <div class="mohim-line">
+            <span></span>
+            <i>✦</i>
+            <span></span>
+        </div>
+        <p>
+            सह्याद्री, इतिहास, संस्कृती आणि समाजाशी
+            संबंधित विविध उपक्रमांमधून सकारात्मक
+            परिवर्तन घडवण्याचा एक प्रयत्न.
+        </p>
+    </div>
+
+
+    <!-- ==================================================
+         LATEST 3 MOHIM — LARGE FEATURED CARDS
+    ================================================== -->
+
+    <section class="latest-mohim">
+
+
+        {% if latest_mohim %}
+            <div class="featured-mohim-list">
+
+                {% for item in latest_mohim %}
+                    {% set trek = item.trek %}
+
+                    <article class="featured-mohim {% if loop.index is even %}featured-reverse{% endif %}">
+
+                        <div class="featured-image">
+                            {% if item.main_photo %}
+                                <img src="{{ item.main_photo }}" alt="{{ trek.title }}" loading="lazy">
+                            {% else %}
+                                <img src="{{ url_for('static', filename='img/placeholder.svg') }}" alt="{{ trek.title }}">
+                            {% endif %}
+                        </div>
+
+                        <div class="featured-content">
+                            <span class="featured-number">मोहिम {{ item.number }}</span>
+                            <span class="featured-category">{{ trek.category }}</span>
+
+                            <h2>{{ trek.title }}</h2>
+
+                            <div class="featured-meta">
+                                <span>📍 {{ trek.location }}</span>
+                                <span>📅 {{ trek.event_date.strftime('%d %B %Y') }}</span>
+                                <span>⏱ {{ trek.duration }}</span>
+                            </div>
+
+                            <p class="featured-short-description">
+                                {{ trek.description[:180] }}{% if trek.description|length > 180 %}...{% endif %}
+                            </p>
+
+                            <a href="{{ url_for('mohim_detail', trek_id=trek.id) }}" class="mohim-button">
+                                अधिक माहिती
+                                <span>↓</span>
+                            </a>
+                        </div>
+
+                    </article>
+                {% endfor %}
+
+            </div>
+        {% endif %}
+
+    </section>
+
+
+    <!-- ==================================================
+         ALL OTHER MOHIM — SMALL CARDS
+    ================================================== -->
+
+    {% if all_mohim %}
+        <section class="all-mohim">
+
+            <div class="all-mohim-list">
+
+                {% for item in all_mohim %}
+                    {% set trek = item.trek %}
+
+                    <a href="{{ url_for('mohim_detail', trek_id=trek.id) }}" class="compact-mohim">
+
+                        <div class="compact-number">
+                            <strong>{{ item.number }}</strong>
+                            <span>मोहिम</span>
+                        </div>
+
+                        <div class="compact-content">
+                            <span>{{ trek.category }}</span>
+                            <h3>{{ trek.title }}</h3>
+                            <p>
+                                📍 {{ trek.location }}
+                                &nbsp;&nbsp;
+                                📅 {{ trek.event_date.strftime('%d %B %Y') }}
+                            </p>
+                        </div>
+
+                        <div class="compact-arrow">→</div>
+
+                    </a>
+                {% endfor %}
+
+            </div>
+        </section>
+    {% elif not latest_mohim %}
+        <div class="mohim-empty">
+            <div>✦</div>
+            <h2>सध्या कोणतीही मोहिम उपलब्ध नाही</h2>
+            <p>नवीन मोहिमांची माहिती लवकरच येथे उपलब्ध होईल.</p>
+        </div>
+    {% endif %}
+
+</section>
+
+{% endblock %}
