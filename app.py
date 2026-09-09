@@ -1,4 +1,3 @@
-#pythonpython -m pip install Flask-Login 
 """
 Sevak Sahyadriche Foundation - Website Backend
 Flask application powering the public site (home, about, treks/events,
@@ -27,6 +26,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.utils import secure_filename
 
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
+IS_VERCEL = os.environ.get("VERCEL") == "1" or os.environ.get("VERCEL") == "true"
 UPLOAD_FOLDER = os.path.join(BASE_DIR, "static", "img", "treks")
 ALLOWED_EXTENSIONS = {"png", "jpg", "jpeg", "webp", "gif"}
 
@@ -37,16 +37,41 @@ if not SECRET_KEY:
 app.config["SECRET_KEY"] = SECRET_KEY
 app.config["SESSION_COOKIE_HTTPONLY"] = True
 app.config["SESSION_COOKIE_SAMESITE"] = "Lax"
-app.config["SESSION_COOKIE_SECURE"] = os.environ.get("SESSION_COOKIE_SECURE", "0") == "1"
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///" + os.path.join(BASE_DIR, "sevak.db")
+app.config["SESSION_COOKIE_SECURE"] = (
+    os.environ.get("SESSION_COOKIE_SECURE", "1" if IS_VERCEL else "0") == "1"
+)
+
+# Vercel Functions do not provide a persistent writable application filesystem.
+# Production therefore uses a managed Postgres database (DATABASE_URL).
+# Local development keeps using SQLite for convenience.
+DATABASE_URL = os.environ.get("DATABASE_URL")
+if DATABASE_URL:
+    if DATABASE_URL.startswith("postgres://"):
+        DATABASE_URL = DATABASE_URL.replace("postgres://", "postgresql+psycopg://", 1)
+    elif DATABASE_URL.startswith("postgresql://"):
+        DATABASE_URL = DATABASE_URL.replace("postgresql://", "postgresql+psycopg://", 1)
+    app.config["SQLALCHEMY_DATABASE_URI"] = DATABASE_URL
+elif IS_VERCEL:
+    raise RuntimeError(
+        "DATABASE_URL is not configured on Vercel. Connect a production Postgres database "
+        "(for example Neon) and add its DATABASE_URL environment variable."
+    )
+else:
+    app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///" + os.path.join(BASE_DIR, "sevak.db")
+
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+app.config["SQLALCHEMY_ENGINE_OPTIONS"] = {"pool_pre_ping": True}
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
-app.config["MAX_CONTENT_LENGTH"] = 5 * 1024 * 1024  # 5 MB uploads
+# Vercel Functions have a 4.5 MB request-body limit for server uploads.
+app.config["MAX_CONTENT_LENGTH"] = 4 * 1024 * 1024
 
 # Production secrets MUST be supplied through environment variables.
 # Never commit real SECRET_KEY / ADMIN_PASSWORD_HASH values to GitHub.
 
-os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+# Only local development has a persistent writable upload directory.
+# On Vercel, admin-uploaded images are stored in Vercel Blob instead.
+if not IS_VERCEL:
+    os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
 db = SQLAlchemy(app)
 
@@ -125,6 +150,10 @@ class Trek(db.Model):
     @property
     def image_url(self):
         if self.image_filename:
+            # Production uploads are stored in Vercel Blob and the database stores
+            # their public URL. Existing local/deployed images remain supported.
+            if self.image_filename.startswith(("http://", "https://")):
+                return self.image_filename
             return url_for("static", filename=f"img/treks/{self.image_filename}")
         return url_for("static", filename="img/placeholder.svg")
 
@@ -138,6 +167,13 @@ class ContactMessage(db.Model):
     message = db.Column(db.Text, nullable=False)
     submitted_at = db.Column(db.DateTime, default=datetime.utcnow)
     is_read = db.Column(db.Boolean, default=False)
+
+
+# Create tables automatically for a first production deployment.
+# This is intentionally limited to create_all: it does not perform destructive migrations.
+if IS_VERCEL and DATABASE_URL:
+    with app.app_context():
+        db.create_all()
 
 
 @login_manager.user_loader
@@ -461,7 +497,7 @@ def admin_treks():
 
 
 def _save_uploaded_image(file_storage):
-    """Save an uploaded image and return its filename, or None."""
+    """Persist an uploaded image using local disk in development or Vercel Blob in production."""
     if not file_storage or file_storage.filename == "":
         return None
     if not allowed_file(file_storage.filename):
@@ -469,7 +505,31 @@ def _save_uploaded_image(file_storage):
         return None
 
     filename = secure_filename(file_storage.filename)
-    unique_name = f"{datetime.utcnow().strftime('%Y%m%d%H%M%S')}_{filename}"
+    if not filename:
+        flash("Invalid image filename.", "danger")
+        return None
+
+    unique_name = f"{datetime.utcnow().strftime('%Y%m%d%H%M%S%f')}_{filename}"
+
+    if IS_VERCEL:
+        try:
+            from vercel.blob import BlobClient
+
+            file_bytes = file_storage.read()
+            client = BlobClient()
+            blob = client.put(
+                f"treks/{unique_name}",
+                file_bytes,
+                access="public",
+                content_type=file_storage.mimetype or "application/octet-stream",
+                add_random_suffix=True,
+            )
+            return blob.url
+        except Exception:
+            app.logger.exception("Vercel Blob image upload failed")
+            flash("Image upload failed. Please try again.", "danger")
+            return None
+
     file_storage.save(os.path.join(app.config["UPLOAD_FOLDER"], unique_name))
     return unique_name
 
