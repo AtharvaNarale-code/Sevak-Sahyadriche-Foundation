@@ -23,6 +23,7 @@ from flask_login import (
     LoginManager, UserMixin, login_user, logout_user,
     login_required, current_user
 )
+from vercel import blob
 from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.utils import secure_filename
 
@@ -74,7 +75,7 @@ else:
 
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
-app.config["MAX_CONTENT_LENGTH"] = 5 * 1024 * 1024  # 5 MB uploads
+app.config["MAX_CONTENT_LENGTH"] = 4 * 1024 * 1024  # 4 MB uploads
 
 # Production secrets MUST be supplied through environment variables.
 # Never commit real SECRET_KEY / ADMIN_PASSWORD_HASH values to GitHub.
@@ -160,7 +161,14 @@ class Trek(db.Model):
     @property
     def image_url(self):
         if self.image_filename:
-            return url_for("static", filename=f"img/treks/{self.image_filename}")
+            if self.image_filename.startswith(("http://", "https://")):
+                return self.image_filename
+
+            return url_for(
+                "static",
+                filename=f"img/treks/{self.image_filename}"
+            )
+
         return url_for("static", filename="img/placeholder.svg")
 
 
@@ -503,16 +511,32 @@ def admin_treks():
 
 
 def _save_uploaded_image(file_storage):
-    """Save an uploaded image and return its filename, or None."""
+    """Upload an image to Vercel Blob on Vercel, or save locally during development."""
     if not file_storage or file_storage.filename == "":
         return None
+
     if not allowed_file(file_storage.filename):
         flash("Unsupported image format. Use png, jpg, jpeg, webp or gif.", "danger")
         return None
 
     filename = secure_filename(file_storage.filename)
     unique_name = f"{datetime.utcnow().strftime('%Y%m%d%H%M%S')}_{filename}"
-    file_storage.save(os.path.join(app.config["UPLOAD_FOLDER"], unique_name))
+
+    if IS_VERCEL:
+        temp_path = os.path.join("/tmp", unique_name)
+        file_storage.save(temp_path)
+
+        uploaded = blob.upload_file(
+            local_path=temp_path,
+            path=f"treks/{unique_name}",
+            access="public",
+        )
+
+        return uploaded.url
+
+    file_storage.save(
+        os.path.join(app.config["UPLOAD_FOLDER"], unique_name)
+    )
     return unique_name
 
 
