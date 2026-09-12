@@ -1,659 +1,586 @@
-{% extends "base.html" %}
-{% block title %}About Us — Sevak Sahyadriche Foundation{% endblock %}
+<!DOCTYPE html>
+<html lang="mr">
 
-{% block content %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<style>
-  .about-page {
-    color: #2d211b;
-  }
+    <title>About | Sevak Sahyadriche</title>
 
-  /* HERO */
-  .about-hero {
-    position: relative;
-    min-height: 500px;
-    display: flex;
-    align-items: center;
-    overflow: hidden;
-    background: #332017;
-  }
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
 
-  .about-hero-image {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
+    <link rel="preconnect" href="https://fonts.googleapis.com">
 
-  .about-hero-overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-      90deg,
-      rgba(40, 25, 18, 0.92) 0%,
-      rgba(40, 25, 18, 0.72) 45%,
-      rgba(40, 25, 18, 0.25) 100%
-    );
-  }
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
 
-  .about-hero-content {
-    position: relative;
-    z-index: 1;
-    max-width: 700px;
-    padding: 80px 0;
-    color: white;
-  }
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&display=swap"
+          rel="stylesheet">
+</head>
 
-  .about-eyebrow {
-    display: inline-block;
-    margin-bottom: 14px;
-    color: #d69a52;
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 2.5px;
-    text-transform: uppercase;
-  }
 
-  .about-hero h1 {
-    margin: 0 0 20px;
-    font-size: clamp(38px, 5vw, 62px);
-    line-height: 1.08;
-    font-weight: 700;
-  }
+<body>
 
-  .about-hero h1 span {
-    color: #d69a52;
-  }
+<section class="sevak-story">
 
-  .about-hero p {
-    max-width: 650px;
-    margin: 0;
-    color: #eee5dc;
-    font-size: 17px;
-    line-height: 1.8;
-  }
 
+    <!-- =================================================
+         HERO
+    ================================================= -->
 
-  /* STORY */
-  .about-story {
-    padding: 90px 0;
-    background: #fffdf8;
-  }
+    <div class="about-hero">
 
-  .story-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 70px;
-    align-items: center;
-  }
-
-  .story-image-wrap {
-    position: relative;
-  }
-
-  .story-image {
-    width: 100%;
-    height: 470px;
-    object-fit: cover;
-    border-radius: 14px;
-    display: block;
-  }
-
-  .story-accent {
-    position: absolute;
-    width: 90px;
-    height: 90px;
-    border: 3px solid #c58b45;
-    border-radius: 12px;
-    right: -18px;
-    bottom: -18px;
-    z-index: 0;
-  }
-
-  .story-image {
-    position: relative;
-    z-index: 1;
-  }
-
-  .story-content h2 {
-    margin: 8px 0 22px;
-    font-size: 38px;
-    line-height: 1.2;
-  }
-
-  .story-content p {
-    margin: 0 0 18px;
-    color: #625850;
-    font-size: 15.5px;
-    line-height: 1.85;
-  }
-
-  .story-label {
-    color: #b16f31;
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-  }
-
-
-  /* VALUES */
-  .values-section {
-    padding: 90px 0;
-    background: #f3eee5;
-  }
-
-  .section-heading {
-    max-width: 650px;
-    margin-bottom: 45px;
-  }
-
-  .section-heading .eyebrow {
-    color: #b16f31;
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-  }
-
-  .section-heading h2 {
-    margin: 10px 0 12px;
-    font-size: 38px;
-    line-height: 1.2;
-  }
-
-  .section-heading p {
-    margin: 0;
-    color: #6d625a;
-    line-height: 1.7;
-  }
-
-  .value-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 18px;
-  }
-
-  .value-card {
-    background: #fffdf9;
-    border: 1px solid #e0d7cb;
-    border-radius: 12px;
-    padding: 28px 24px;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-  }
-
-  .value-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 14px 30px rgba(45, 33, 27, 0.09);
-  }
-
-  .value-icon {
-    width: 48px;
-    height: 48px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #efe3d2;
-    border-radius: 10px;
-    font-size: 23px;
-    margin-bottom: 20px;
-  }
-
-  .value-card h3 {
-    margin: 0 0 10px;
-    font-size: 18px;
-  }
-
-  .value-card p {
-    margin: 0;
-    color: #70665e;
-    font-size: 14px;
-    line-height: 1.7;
-  }
-
-
-  /* APPROACH */
-  .approach-section {
-    padding: 90px 0;
-    background: #fffdf8;
-  }
-
-  .approach-header {
-    text-align: center;
-    max-width: 650px;
-    margin: 0 auto 45px;
-  }
-
-  .approach-header .eyebrow {
-    color: #b16f31;
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-  }
-
-  .approach-header h2 {
-    margin: 10px 0;
-    font-size: 38px;
-  }
-
-  .approach-header p {
-    color: #70665e;
-    line-height: 1.7;
-  }
-
-  .approach-list {
-    max-width: 900px;
-    margin: auto;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 25px;
-  }
-
-  .approach-item {
-    text-align: center;
-    padding: 25px;
-  }
-
-  .approach-number {
-    width: 46px;
-    height: 46px;
-    margin: 0 auto 16px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    background: #523225;
-    color: white;
-    font-size: 14px;
-    font-weight: 700;
-  }
-
-  .approach-item h3 {
-    margin: 0 0 9px;
-    font-size: 17px;
-  }
-
-  .approach-item p {
-    margin: 0;
-    color: #746960;
-    font-size: 14px;
-    line-height: 1.65;
-  }
-
-
-  /* CTA */
-  .about-cta {
-    padding: 85px 20px;
-    background: #38231a;
-    color: white;
-    text-align: center;
-  }
-
-  .about-cta h2 {
-    margin: 0 0 14px;
-    font-size: 38px;
-  }
-
-  .about-cta p {
-    max-width: 570px;
-    margin: 0 auto 28px;
-    color: #ddd0c5;
-    line-height: 1.7;
-  }
-
-  .about-cta-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 12px;
-    flex-wrap: wrap;
-  }
-
-  .about-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 12px 22px;
-    border-radius: 7px;
-    text-decoration: none;
-    font-size: 14px;
-    font-weight: 700;
-  }
-
-  .about-btn-primary {
-    background: #c58b45;
-    color: white;
-  }
-
-  .about-btn-secondary {
-    border: 1px solid rgba(255,255,255,0.3);
-    color: white;
-  }
-
-  .about-btn-secondary:hover {
-    background: rgba(255,255,255,0.08);
-  }
-
-
-  /* RESPONSIVE */
-  @media (max-width: 900px) {
-    .story-grid {
-      grid-template-columns: 1fr;
-      gap: 45px;
-    }
-
-    .value-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-
-    .approach-list {
-      grid-template-columns: 1fr;
-    }
-
-    .story-image {
-      height: 400px;
-    }
-  }
-
-  @media (max-width: 600px) {
-    .about-hero {
-      min-height: 560px;
-    }
-
-    .about-hero-content {
-      padding: 60px 20px;
-    }
-
-    .about-story,
-    .values-section,
-    .approach-section {
-      padding: 65px 0;
-    }
-
-    .story-content h2,
-    .section-heading h2,
-    .approach-header h2,
-    .about-cta h2 {
-      font-size: 30px;
-    }
-
-    .value-grid {
-      grid-template-columns: 1fr;
-    }
-
-    .story-image {
-      height: 330px;
-    }
-  }
-</style>
-
-
-<div class="about-page">
-
-  <!-- HERO -->
-
-  <section class="about-hero">
-
-    <img
-      class="about-hero-image"
-      src="https://images.unsplash.com/photo-1626621331169-5f34be280e4f?q=80&w=1600&auto=format&fit=crop"
-      alt="Sahyadri mountain range"
-    >
-
-    <div class="about-hero-overlay"></div>
-
-    <div class="container">
-      <div class="about-hero-content">
-
-        <span class="about-eyebrow">Our Story</span>
+        <span class="about-eyebrow">
+            <h4>आमची ओळख</h4>
+        </span>
 
         <h1>
-          Rooted in the Sahyadris.<br>
-          Driven by <span>Seva.</span>
+            सेवक सह्याद्रीचे
         </h1>
 
+        <div class="about-hero-line"></div>
+
         <p>
-          We believe trekking is more than reaching a summit.
-          It is a way to connect with Maharashtra's mountains,
-          history, people and living culture.
+            इतिहासातून प्रेरणा घेऊन,
+            वर्तमानात काहीतरी करण्याचा प्रवास.
         </p>
 
-      </div>
     </div>
 
-  </section>
 
 
-  <!-- STORY -->
+    <!-- =================================================
+         FOUNDER INTRO
+    ================================================= -->
 
-  <section class="about-story">
+    <div class="founder-section">
 
-    <div class="container">
 
-      <div class="story-grid">
+        <!-- PHOTO -->
 
-        <div class="story-image-wrap">
+        <div class="founder-photo-wrapper">
 
-          <img
-            class="story-image"
-            src="https://images.unsplash.com/photo-1598091383021-15ddea10925d?q=80&w=1000&auto=format&fit=crop"
-            alt="Trekking in the Sahyadri mountains"
-          >
+            <div class="founder-photo">
 
-          <div class="story-accent"></div>
+                <img
+                    src="{{ url_for('static', filename='img/founder.jpeg') }}"
+                    alt="सेवक सह्याद्रीचे संस्थापक"
+                >
+
+            </div>
+
+
+            <div class="founder-name-card">
+
+                <span>
+                    संस्थापक
+                </span>
+
+                <h4>
+                    सेवक सह्याद्रीचे
+                </h4>
+
+                <p>
+                    एका विचारातून सुरू झालेला प्रवास
+                </p>
+
+            </div>
 
         </div>
 
 
-        <div class="story-content">
 
-          <span class="story-label">Who We Are</span>
+        <!-- CONTENT -->
 
-          <h2>
-            From weekend treks
-            to a shared purpose.
-          </h2>
+        <div class="founder-content">
 
-          <p>
-            Sevak Sahyadriche Foundation was founded by a small
-            group of trekkers and heritage enthusiasts in Pune who
-            wanted trekking to mean more than simply reaching a summit.
-          </p>
+            <span class="story-small-title">
+                एका विचाराची सुरुवात
+            </span>
 
-          <p>
-            What began as weekend fort visits among friends has
-            grown into a foundation organizing treks, heritage walks
-            and cultural events across Maharashtra.
-          </p>
+            <h2>
+                सह्याद्री केवळ पाहायचा नाही,
+                तो जपायचा आहे.
+            </h2>
 
-          <p>
-            Every journey is rooted in respect for history,
-            local communities and the mountains themselves.
-          </p>
+            <p class="founder-lead">
+                सह्याद्रीच्या कुशीत उभे असलेले गडकिल्ले
+                हा केवळ दगड-मातीचा वारसा नाही;
+                तो आपल्या इतिहासाचा, संस्कृतीचा आणि
+                अस्मितेचा जिवंत ठेवा आहे.
+            </p>
+
+            <p>
+                छत्रपती शिवाजी महाराजांनी उभे केलेले स्वराज्य,
+                त्यासाठी झटलेले मावळे आणि आपल्या पूर्वजांनी
+                जपलेली ही समृद्ध परंपरा.
+            </p>
+
+            <p>
+                हा वारसा केवळ अभिमानाने सांगण्यासाठी नाही,
+                तर त्यातून प्रेरणा घेऊन वर्तमानात काहीतरी
+                करण्यासाठी आहे.महाराष्ट्रासाठी, आपल्या देशासाठी 
+                आणि आपल्या गौरवशाली सांस्कृतिक वारशाच्या संवर्धनासाठी 
+                काहीतरी करावे, ही इच्छा शालेय जीवनापासूनच मनात होती.
+                 मात्र त्यासाठी मोठे होण्याचीच वाट का पाहायची ? आपण विद्यार्थी 
+                असतानाच, कॉलेजमध्ये असतानाच आपल्या परीने काहीतरी करू 
+                शकत नाही का? या विचारातूनच एका छोट्या प्रयत्नाला सुरुवात झाली.
+            </p>
 
         </div>
 
-      </div>
+    </div>
+
+
+
+    <!-- =================================================
+         QUOTE
+    ================================================= -->
+
+    <div class="story-quote">
+
+        <span class="quote-mark">
+            “
+        </span>
+
+        <p>
+            आपण विद्यार्थी असतानाच, कॉलेजमध्ये असतानाच
+            आपल्या परीने काहीतरी करू शकत नाही का?
+        </p>
+
+        <span class="quote-mark quote-end">
+            ”
+        </span>
 
     </div>
 
-  </section>
 
 
-  <!-- VALUES -->
+    <!-- =================================================
+         JOURNEY START
+    ================================================= -->
+<div class="journey-card">
 
-  <section class="values-section">
+    <!-- LEFT: CONTENT -->
 
-    <div class="container">
+    <div class="journey-text">
+       <span class="story-small-title">
+            ०१ ·सुरुवात
+        </span>
 
-      <div class="section-heading">
+        <span>
+            ३ जून २०२४
+        </span>
 
-        <span class="eyebrow">What We Stand For</span>
+        <h3>
+            सात मावळे.
+            <br>
+            एक विचार.
+            <br>
+            एक सुरुवात.
+        </h3>
+
+        <p>
+            या विचारातूनच एका छोट्या प्रयत्नाला
+            सुरुवात झाली. ३ जून २०२४ रोजी
+            सात मावळ्यांना सोबत घेऊन
+            ‘सेवक सह्याद्रीचे’ या प्रवासाची सुरुवात झाली.
+        </p>
+
+        <div class="journey-highlight">
+            “गडावर जाऊया, स्वच्छता करूया आणि
+            आपल्या परीने काहीतरी योगदान देऊया.”
+        </div>
+
+    </div>
+
+
+    <!-- RIGHT: SMALL SQUARE PHOTO -->
+
+    <div class="journey-photo">
+
+        <img
+            src="{{ url_for('static', filename='img/image2.jpg') }}"
+            alt="सेवक सह्याद्रीचे सात मावळे"
+        >
+
+        <div class="journey-photo-label">
+            ७ मावळे
+        </div>
+
+    </div>
+
+</div>
+<!-- =================================================
+     GROWTH / EXPANSION
+================================================= -->
+
+<section class="growth-section">
+
+    <!-- LEFT : CONTENT -->
+    <div class="growth-content">
+
+        <span class="story-small-title">
+            ०२ · विस्तार
+        </span>
 
         <h2>
-          Our work is guided by four simple values.
+            एका मोहिमेपासून
+            <br>
+            अनेक उपक्रमांपर्यंत
+        </h2>
+
+        <div class="growth-line"></div>
+
+        <p class="growth-description">
+            गडकिल्ल्यांच्या स्वच्छतेपासून सुरू झालेल्या
+            या छोट्याशा प्रयत्नाला हळूहळू समाजाचा आणि
+            युवकांचा प्रतिसाद मिळू लागला.
+        </p>
+
+        <p class="growth-description">
+            प्रत्येक मोहिमेसोबत नवीन माणसे जोडली गेली,
+            नवीन विचार समोर आले आणि कार्याची व्याप्तीही
+            वाढत गेली.
+        </p>
+
+        <p class="growth-description">
+            केवळ गड स्वच्छ करण्यापासून सुरू झालेला हा प्रवास
+            पुढे विविध सामाजिक, ऐतिहासिक आणि पर्यावरणपूरक
+            उपक्रमांपर्यंत पोहोचला.
+        </p>
+
+
+        <!-- ACTIVITIES -->
+
+        <div class="growth-activities">
+
+            <span>गडकिल्ले संवर्धन</span>
+            <span>स्वच्छता</span>
+            <span>वृक्षारोपण</span>
+            <span>इतिहास प्रबोधन</span>
+            <span>शिवजयंती उत्सव</span>
+            <span>दीपोत्सव</span>
+            <span>गणपती विसर्जन स्वच्छता</span>
+            <span>शिवदर्शन</span>
+
+        </div>
+
+    </div>
+
+<!-- RIGHT : COLLAGE -->
+
+<div class="growth-visual">
+
+    <div class="growth-image-frame">
+
+        <img 
+            src="{{ url_for('static', filename='img/sevak_sahyadriche_activity_collage.png') }}"
+            alt="सेवक सह्याद्रीचे उपक्रम"
+        >
+
+    </div>
+
+    <div class="growth-image-caption">
+
+        <span>सेवक सह्याद्रीचे</span>
+
+        <strong>
+            कार्याची एक झलक
+        </strong>
+
+    </div>
+
+</div>
+</section>
+
+<!-- =================================================
+     PHILOSOPHY AFTER GROWTH
+================================================= -->
+
+<section class="growth-philosophy">
+
+    <span class="story-small-title">
+        आमचा विचार
+    </span>
+
+    <h3>
+        गडकिल्ले केवळ पर्यटनस्थळे नाहीत,
+        <br>
+        इतिहासाची जिवंत स्मारके आहेत.
+    </h3>
+
+    <p>
+        स्वच्छता ही केवळ एक मोहीम नाही तर सामाजिक
+        जबाबदारी आहे; आणि इतिहास हा केवळ भूतकाळ नाही,
+        तर वर्तमान घडवण्याची प्रेरणा आहे.
+    </p>
+
+    <p>
+        या विचारातून सेवक सह्याद्रीचेच्या कार्याची दिशा
+        अधिक व्यापक होत गेली.
+    </p>
+
+</section>
+
+<!-- =================================================
+     OUR MISSION
+================================================= -->
+
+<section class="mission-section">
+
+    <div class="mission-number">
+        ०३
+    </div>
+
+    <div class="mission-content">
+
+        <span class="story-small-title">
+            आमचा केंद्रबिंदू
+        </span>
+
+        <h2>
+            इतिहासातून प्रेरणा,
+            <br>
+            वर्तमानात कृती.
         </h2>
 
         <p>
-          These principles shape how we trek, how we work with
-          communities and how we preserve the heritage around us.
+            आमच्यासाठी इतिहास म्हणजे केवळ भूतकाळाचा अभ्यास नाही.
+            छत्रपती शिवाजी महाराजांच्या कार्यातून नेतृत्व, शिस्त,
+            नियोजन, व्यवस्थापन, पर्यावरणविषयक जाण, सामाजिक बांधिलकी
+            आणि राष्ट्रनिर्मितीची प्रेरणा घेऊन ती आजच्या जीवनात
+            प्रत्यक्ष उतरवणे, हा आमच्या कार्याचा केंद्रबिंदू आहे.
         </p>
-
-      </div>
-
-
-      <div class="value-grid">
-
-        <div class="value-card">
-          <div class="value-icon"></div>
-          <h3>Preserve Heritage</h3>
-          <p>
-            Documenting and sharing the history of Sahyadri forts
-            and the Maratha legacy with every generation.
-          </p>
-        </div>
-
-
-        <div class="value-card">
-          <div class="value-icon"></div>
-          <h3>Promote Safe Trekking</h3>
-          <p>
-            Trained trek leaders, safety-first planning and routes
-            suited to different experience levels.
-          </p>
-        </div>
-
-
-        <div class="value-card">
-          <div class="value-icon"></div>
-          <h3>Celebrate Culture</h3>
-          <p>
-            Keeping Maharashtrian folk arts, festivals and traditions
-            alive through community events.
-          </p>
-        </div>
-
-
-        <div class="value-card">
-          <div class="value-icon"></div>
-          <h3>Give Back</h3>
-          <p>
-            Supporting local guides, porters and communities
-            around the places we visit.
-          </p>
-        </div>
-
-      </div>
 
     </div>
 
-  </section>
+</section>
 
 
-  <!-- OUR APPROACH -->
+<!-- =================================================
+     7 → 7000 JOURNEY
+================================================= -->
 
-  <section class="approach-section">
+<section class="seven-to-seven">
 
-    <div class="container">
+    <div class="journey-intro">
 
-      <div class="approach-header">
+        <span class="story-small-title">
+            एका छोट्या सुरुवातीपासून...
+        </span>
 
-        <span class="eyebrow">Our Approach</span>
-
-        <h2>Every journey has a purpose.</h2>
+        <h2>
+            ७ मावळ्यांपासून
+            <br>
+            <span>७०००+ मावळ्यांपर्यंत</span>
+        </h2>
 
         <p>
-          Our activities bring together exploration, heritage
-          and community — creating experiences that go beyond
-          the trail.
+            एका छोट्या गडकिल्ले मोहिमेपासून सुरू झालेला
+            हा प्रवास आज अनेक युवकांना आणि
+            सह्याद्रीप्रेमींना जोडत आहे.
         </p>
 
-      </div>
+    </div>
 
 
-      <div class="approach-list">
+    <!-- JOURNEY STATS -->
 
-        <div class="approach-item">
+    <div class="journey-stats">
 
-          <div class="approach-number">01</div>
+        <div class="journey-stat">
 
-          <h3>Explore</h3>
+            <strong>
+                ०७
+            </strong>
 
-          <p>
-            Discover the Sahyadris through thoughtfully planned
-            treks and heritage walks.
-          </p>
-
-        </div>
-
-
-        <div class="approach-item">
-
-          <div class="approach-number">02</div>
-
-          <h3>Understand</h3>
-
-          <p>
-            Learn the stories, history and traditions connected
-            to every place we visit.
-          </p>
+            <span>
+                सुरुवातीचे मावळे
+            </span>
 
         </div>
 
 
-        <div class="approach-item">
-
-          <div class="approach-number">03</div>
-
-          <h3>Serve</h3>
-
-          <p>
-            Give back to local communities and help preserve
-            the places and traditions we value.
-          </p>
-
+        <div class="journey-line">
+            <span>→</span>
         </div>
 
-      </div>
+
+        <div class="journey-stat featured">
+
+            <strong>
+                ७०००+
+            </strong>
+
+            <span>
+                जोडलेले मावळे
+            </span>
+
+        </div>
 
     </div>
 
-  </section>
 
+    <!-- JOURNEY MESSAGE -->
 
-  <!-- CTA -->
+    <div class="seven-message">
 
-  <section class="about-cta">
+        <span>
+            हा प्रवास इथे थांबलेला नाही...
+        </span>
 
-    <h2>Come walk the Sahyadris with us.</h2>
-
-    <p>
-      Explore our upcoming treks and cultural events,
-      or get in touch if you'd like to become a sevak
-      and contribute to our work.
-    </p>
-
-    <div class="about-cta-buttons">
-
-      <a
-        href="{{ url_for('treks') }}"
-        class="about-btn about-btn-primary"
-      >
-        Explore Upcoming Treks
-      </a>
-
-      <a
-        href="{{ url_for('contact') }}"
-        class="about-btn about-btn-secondary"
-      >
-        Get in Touch
-      </a>
+        <h3>
+            पुढचा मावळा
+            <br>
+            तुम्ही असाल का?
+        </h3>
 
     </div>
 
-  </section>
+</section>
+    <!-- =================================================
+         TEAM PHOTO
+    ================================================= -->
 
-</div>
+    <section class="team-section">
 
-{% endblock %}
+        <div class="team-heading">
+
+            <span class="story-small-title">
+                आमचा परिवार
+            </span>
+
+            <h2>
+                एक विचार.
+                <br>
+                हजारो मावळे.
+            </h2>
+
+            <p>
+                हा प्रवास एका व्यक्तीचा नाही.
+                हा प्रवास आहे प्रत्येक त्या मावळ्याचा,
+                ज्याने सह्याद्रीसाठी आपला वेळ,
+                श्रम आणि प्रेम दिले.
+            </p>
+
+        </div>
+
+
+        <div class="team-photo-wrapper">
+
+            <img
+                src="{{ url_for('static', filename='img/image1.jpg') }}"
+                alt="सेवक सह्याद्रीचे परिवार"
+            >
+
+            <div class="team-photo-overlay">
+
+                <h4>
+                    सात मावळ्यांपासून सुरू झालेला प्रवास, <br>
+आज हजारो मावळ्यांच्या सोबतीने पुढे जात आहे.<br>
+                </h4>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         JOIN US
+    ================================================= -->
+
+    <section class="join-section">
+
+        <span class="story-eyebrow">
+            तुमचीही साथ हवी आहे
+        </span>
+
+        <h2>
+            सह्याद्रीसाठी
+            <br>
+            तुम्हीही आमच्यासोबत या.
+        </h2>
+
+        <p>
+            तुमचा सहभाग छोटा असो वा मोठा,
+            प्रत्येक प्रयत्न महत्त्वाचा आहे.
+            चला, इतिहासातून प्रेरणा घेऊया
+            आणि वर्तमानात काहीतरी चांगलं घडवूया.
+        </p>
+
+
+        <div class="join-quote">
+
+            “
+            एक मावळा बदल घडवू शकतो;
+            हजारो मावळे इतिहास घडवू शकतात.
+            ”
+
+        </div>
+
+
+        <a
+            href="{{ url_for('contact') }}"
+            class="join-button"
+        >
+            आमच्यासोबत जोडले जा
+            <span>→</span>
+        </a>
+
+    </section>
+
+
+
+    <!-- =================================================
+         FINAL STORY
+    ================================================= -->
+
+    <div class="story-final">
+
+        <div class="final-number">
+            ∞
+        </div>
+
+        <span class="story-eyebrow">
+            आज आणि उद्या
+        </span>
+
+        <h3>
+            प्रत्येक मोहिमेतून एक आठवण.
+            <br>
+            प्रत्येक सहभागातून एक सेवक.
+        </h3>
+
+        <p>
+            प्रत्येक मोहिमेतून एक इतिहासाची आठवण,
+            प्रत्येक स्वच्छता उपक्रमातून एक सामाजिक
+            जबाबदारी, प्रत्येक प्रबोधनातून एक विचार
+            आणि प्रत्येक सहभागीमधून एक ‘सेवक’
+            घडवण्याचा आमचा प्रयत्न आहे.
+        </p>
+
+        <p>
+            पुढेही हा प्रवास असाच सुरू ठेवायचा आहे!
+            आपल्या क्षमतेनुसार काहीतरी चांगलं करत राहायचं,
+            अधिकाधिक युवकांना या विचाराशी जोडायचं आणि
+            आपल्या इतिहासातून मिळणारी प्रेरणा
+            वर्तमानात उतरवायची.
+        </p>
+
+        <strong>
+            हीच सेवक सह्याद्रीचेची वाटचाल!!
+        </strong>
+
+    </div>
+
+
+</section>
+
+</body>
+</html>
