@@ -49,14 +49,29 @@ app.config["SESSION_COOKIE_SECURE"] = (
     os.environ.get("SESSION_COOKIE_SECURE", "1" if IS_VERCEL else "0") == "1"
 )
 
-# Keep SQLite for now. On Vercel it must live in /tmp because the deployment
-# filesystem is read-only. This is intentionally temporary; persistent DB
-# storage can be added later without changing the public site routes.
-app.config["SQLALCHEMY_DATABASE_URI"] = (
-    "sqlite:////tmp/sevak.db"
-    if IS_VERCEL
-    else "sqlite:///" + os.path.join(BASE_DIR, "sevak.db")
-)
+# Use Neon PostgreSQL on Vercel, SQLite locally
+DATABASE_URL = os.environ.get("DATABASE_URL")
+
+if DATABASE_URL:
+    if DATABASE_URL.startswith("postgres://"):
+        DATABASE_URL = DATABASE_URL.replace(
+            "postgres://", "postgresql+psycopg://", 1
+        )
+    elif DATABASE_URL.startswith("postgresql://"):
+        DATABASE_URL = DATABASE_URL.replace(
+            "postgresql://", "postgresql+psycopg://", 1
+        )
+
+    app.config["SQLALCHEMY_DATABASE_URI"] = DATABASE_URL
+
+elif IS_VERCEL:
+    app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:////tmp/sevak.db"
+
+else:
+    app.config["SQLALCHEMY_DATABASE_URI"] = (
+        "sqlite:///" + os.path.join(BASE_DIR, "sevak.db")
+    )
+
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 app.config["MAX_CONTENT_LENGTH"] = 5 * 1024 * 1024  # 5 MB uploads
