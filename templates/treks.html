@@ -1,51 +1,644 @@
 {% extends "base.html" %}
-{% block title %}Treks &amp; Events — Sevak Sahyadriche Foundation{% endblock %}
+
+{% block title %}
+    {% if current_language == 'mr' %}
+        सूचना — सेवक सह्याद्रीचे
+    {% else %}
+        Events — सेवक सह्याद्रीचे
+    {% endif %}
+{% endblock %}
+
 
 {% block content %}
-<section>
-  <div class="container">
-    <div class="section-title">
-      <span class="eyebrow">Sahyadri Calls</span>
-      <h2>Treks &amp; Cultural Events</h2>
-      <p>Browse upcoming treks and events, or look back at what we've done so far.</p>
+
+<style>
+
+/* ==================================================
+   TREKS & EVENTS PAGE
+================================================== */
+
+.treks-page {
+    padding: 45px 20px 75px;
+}
+
+.treks-container {
+    max-width: 1120px;
+    margin: 0 auto;
+}
+
+
+/* ==================================================
+   PAGE INTRO
+================================================== */
+
+.treks-heading {
+    text-align: center;
+    max-width: 720px;
+    margin: 0 auto 30px;
+}
+
+.treks-eyebrow {
+    display: block;
+    margin-bottom: 8px;
+    color: #894720;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.treks-heading h1 {
+    margin: 0;
+    color: #3c2b23;
+    font-size: clamp(32px, 4vw, 46px);
+    line-height: 1.15;
+}
+
+.treks-heading p {
+    margin: 14px auto 0;
+    max-width: 650px;
+    color: #6c5b50;
+    font-size: 16px;
+    line-height: 1.7;
+}
+
+
+/* ==================================================
+   FILTER TABS
+================================================== */
+
+.trek-filter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    margin: 0 auto 38px;
+}
+
+.trek-filter a {
+    padding: 9px 20px;
+    border: 1px solid rgba(137, 71, 32, 0.18);
+    border-radius: 999px;
+    color: #604331;
+    background: rgba(255, 255, 255, 0.5);
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.trek-filter a:hover {
+    border-color: #894720;
+    color: #894720;
+}
+
+.trek-filter a.active {
+    background: #894720;
+    border-color: #894720;
+    color: #ffffff;
+}
+
+
+/* ==================================================
+   CARD GRID
+================================================== */
+
+.treks-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 25px;
+}
+
+
+/* ==================================================
+   EVENT CARD
+================================================== */
+
+.trek-event-card {
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(137, 71, 32, 0.14);
+    border-radius: 17px;
+    box-shadow: 0 7px 25px rgba(70, 45, 25, 0.06);
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.trek-event-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(70, 45, 25, 0.11);
+}
+
+
+/* ==================================================
+   IMAGE
+================================================== */
+
+.trek-card-image {
+    position: relative;
+    height: 220px;
+    overflow: hidden;
+    background: #eee5d6;
+}
+
+.trek-card-image img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+
+    user-select: none;
+    -webkit-user-drag: none;
+
+    transition: transform 0.35s ease;
+}
+
+.trek-event-card:hover .trek-card-image img {
+    transform: scale(1.03);
+}
+
+
+/* CATEGORY BADGE */
+
+.trek-category {
+    position: absolute;
+    left: 14px;
+    bottom: 14px;
+
+    padding: 6px 11px;
+
+    border-radius: 999px;
+
+    background: rgba(60, 43, 35, 0.88);
+    color: #ffffff;
+
+    font-size: 12px;
+    font-weight: 700;
+}
+
+
+/* ==================================================
+   CARD CONTENT
+================================================== */
+
+.trek-card-content {
+    padding: 20px;
+}
+
+.trek-card-content h2 {
+    margin: 0 0 12px;
+    color: #3c2b23;
+    font-size: 22px;
+    line-height: 1.25;
+}
+
+.trek-card-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 13px;
+
+    color: #6c5b50;
+    font-size: 13px;
+}
+
+
+.trek-card-description {
+    margin: 12px 0 20px;
+
+    color: #665950;
+    font-size: 14px;
+    line-height: 1.65;
+}
+
+
+/* ==================================================
+   CARD FOOTER
+================================================== */
+
+.trek-card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+
+    padding-top: 15px;
+
+    border-top: 1px solid rgba(137, 71, 32, 0.12);
+}
+
+
+.trek-price {
+    color: #894720;
+    font-size: 17px;
+    font-weight: 700;
+}
+
+
+.trek-view-button {
+    padding: 8px 14px;
+
+    border: 1px solid rgba(137, 71, 32, 0.25);
+    border-radius: 8px;
+
+    color: #894720;
+    background: transparent;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    text-decoration: none;
+
+    transition: all 0.2s ease;
+}
+
+.trek-view-button:hover {
+    background: #894720;
+    color: #ffffff;
+}
+
+
+/* ==================================================
+   EMPTY STATE
+================================================== */
+
+.trek-empty {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 50px 25px;
+
+    border: 1px solid rgba(137, 71, 32, 0.12);
+    border-radius: 16px;
+
+    background: rgba(255, 255, 255, 0.5);
+
+    text-align: center;
+}
+
+.trek-empty-symbol {
+    display: block;
+    margin-bottom: 12px;
+
+    color: #894720;
+    font-size: 28px;
+}
+
+.trek-empty p {
+    margin: 0;
+    color: #6c5b50;
+}
+
+
+/* ==================================================
+   TABLET
+================================================== */
+
+@media (max-width: 900px) {
+
+    .treks-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+}
+
+
+/* ==================================================
+   MOBILE
+================================================== */
+
+@media (max-width: 650px) {
+
+    .treks-page {
+        padding: 30px 15px 55px;
+    }
+
+    .treks-heading {
+        margin-bottom: 25px;
+    }
+
+    .treks-heading h1 {
+        font-size: 32px;
+    }
+
+    .treks-heading p {
+        font-size: 15px;
+    }
+
+
+    .trek-filter {
+        width: 100%;
+        margin-bottom: 28px;
+    }
+
+    .trek-filter a {
+        flex: 1;
+        padding: 8px 10px;
+        text-align: center;
+        font-size: 13px;
+    }
+
+
+    /* ONE CARD PER ROW */
+
+    .treks-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+
+    .trek-card-image {
+        height: 230px;
+    }
+
+
+    .trek-card-content {
+        padding: 18px;
+    }
+
+}
+
+
+/* ==================================================
+   SMALL PHONES
+================================================== */
+
+@media (max-width: 420px) {
+
+    .trek-card-image {
+        height: 210px;
+    }
+
+    .trek-card-content h2 {
+        font-size: 20px;
+    }
+
+    .trek-card-footer {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .trek-view-button {
+        text-align: center;
+    }
+
+}
+
+</style>
+
+
+<section class="treks-page">
+
+    <div class="treks-container">
+
+
+        <!-- ==================================================
+             HEADING
+        ================================================== -->
+
+        <div class="treks-heading">
+
+            <span class="treks-eyebrow">
+
+                {% if current_language == 'mr' %}
+                    सह्याद्रीची हाक
+                {% else %}
+                    Sahyadri Calls
+                {% endif %}
+
+            </span>
+
+
+            <h1>
+
+                {% if current_language == 'mr' %}
+                    सूचना व उपक्रम
+                {% else %}
+                    Treks &amp; Cultural Events
+                {% endif %}
+
+            </h1>
+
+
+            <p>
+
+                {% if current_language == 'mr' %}
+
+                    आगामी मोहिमा आणि उपक्रम जाणून घ्या,
+                    तसेच यापूर्वी झालेल्या उपक्रमांची माहिती पहा.
+
+                {% else %}
+
+                    Explore upcoming treks and cultural events,
+                    or look back at the initiatives we've completed.
+
+                {% endif %}
+
+            </p>
+
+        </div>
+
+
+        <!-- ==================================================
+             FILTERS
+        ================================================== -->
+
+        <div class="trek-filter">
+
+            <a
+                href="{{ url_for('treks', type='upcoming') }}"
+                class="{{ 'active' if filter_type == 'upcoming' }}">
+
+                {% if current_language == 'mr' %}
+                    आगामी
+                {% else %}
+                    Upcoming
+                {% endif %}
+
+            </a>
+
+
+            <a
+                href="{{ url_for('treks', type='past') }}"
+                class="{{ 'active' if filter_type == 'past' }}">
+
+                {% if current_language == 'mr' %}
+                    मागील
+                {% else %}
+                    Past
+                {% endif %}
+
+            </a>
+
+
+            <a
+                href="{{ url_for('treks', type='all') }}"
+                class="{{ 'active' if filter_type == 'all' }}">
+
+                {% if current_language == 'mr' %}
+                    सर्व
+                {% else %}
+                    All
+                {% endif %}
+
+            </a>
+
+        </div>
+
+
+        <!-- ==================================================
+             EVENTS
+        ================================================== -->
+
+        {% if treks %}
+
+            <div class="treks-grid">
+
+                {% for trek in treks %}
+
+                    <article class="trek-event-card">
+
+
+                        <!-- IMAGE -->
+
+                        <div class="trek-card-image">
+
+                            <img
+                                src="{{ trek.image_url }}"
+                                alt="{{ trek.title }}"
+                                draggable="false">
+
+
+                            <span class="trek-category">
+
+                                {{ trek.category }}
+
+                            </span>
+
+                        </div>
+
+
+                        <!-- CONTENT -->
+
+                        <div class="trek-card-content">
+
+
+                            <h2>
+                                {{ trek.title }}
+                            </h2>
+
+
+                            <div class="trek-card-meta">
+
+                                <span>
+                                    📍 {{ trek.location }}
+                                </span>
+
+                                <span>
+                                    📅 {{ trek.event_date.strftime('%d %b %Y') }}
+                                </span>
+
+                            </div>
+
+
+                            <span class="pill {{ trek.difficulty|lower }}">
+                                {{ trek.difficulty }}
+                            </span>
+
+
+                            <p class="trek-card-description">
+
+                                {{ trek.description[:100] }}
+
+                                {% if trek.description|length > 100 %}
+                                    ...
+                                {% endif %}
+
+                            </p>
+
+
+                            <!-- FOOTER -->
+
+                            <div class="trek-card-footer">
+
+                                <span class="trek-price">
+                                    {{ trek.price }}
+                                </span>
+
+
+                                <a
+                                    href="{{ url_for('trek_detail', trek_id=trek.id) }}"
+                                    class="trek-view-button">
+
+                                    {% if current_language == 'mr' %}
+                                        अधिक माहिती →
+                                    {% else %}
+                                        View Details →
+                                    {% endif %}
+
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+                {% endfor %}
+
+            </div>
+
+
+        {% else %}
+
+            <div class="trek-empty">
+
+                <span class="trek-empty-symbol">
+                    ✦
+                </span>
+
+                <p>
+
+                    {% if current_language == 'mr' %}
+                        या विभागात सध्या कोणतेही उपक्रम उपलब्ध नाहीत.
+                    {% else %}
+                        No events found in this category yet.
+                    {% endif %}
+
+                </p>
+
+            </div>
+
+        {% endif %}
+
+
     </div>
 
-    <div class="filter-tabs">
-      <a href="{{ url_for('treks', type='upcoming') }}" class="{{ 'active' if filter_type=='upcoming' }}">Upcoming</a>
-      <a href="{{ url_for('treks', type='past') }}" class="{{ 'active' if filter_type=='past' }}">Past</a>
-      <a href="{{ url_for('treks', type='all') }}" class="{{ 'active' if filter_type=='all' }}">All</a>
-    </div>
-
-    {% if treks %}
-    <div class="card-grid">
-      {% for trek in treks %}
-      <div class="trek-card">
-        <div class="img-wrap">
-          <img src="{{ trek.image_url }}" alt="{{ trek.title }}">
-          <span class="badge {{ 'past' if not trek.is_upcoming }}">{{ trek.category }}</span>
-        </div>
-        <div class="content">
-          <h3>{{ trek.title }}</h3>
-          <div class="meta">
-            <span>📍 {{ trek.location }}</span>
-            <span>📅 {{ trek.event_date.strftime('%d %b %Y') }}</span>
-          </div>
-          <span class="pill {{ trek.difficulty|lower }}">{{ trek.difficulty }}</span>
-          <p class="desc" style="margin-top:10px;">{{ trek.description[:100] }}{% if trek.description|length > 100 %}...{% endif %}</p>
-          <div class="card-footer">
-            <span class="price">{{ trek.price }}</span>
-            <a href="{{ url_for('trek_detail', trek_id=trek.id) }}" class="btn btn-ghost btn-sm">View Details</a>
-          </div>
-        </div>
-      </div>
-      {% endfor %}
-    </div>
-    {% else %}
-    <div class="empty-state">
-      <div class="emoji"></div>
-      <p>No treks found in this category yet.</p>
-    </div>
-    {% endif %}
-  </div>
 </section>
+
+
+<script>
+
+/* ==================================================
+   BASIC IMAGE PROTECTION
+================================================== */
+
+document.addEventListener("contextmenu", function (event) {
+
+    if (event.target.closest(".trek-card-image")) {
+        event.preventDefault();
+    }
+
+});
+
+
+document.addEventListener("dragstart", function (event) {
+
+    if (event.target.closest(".trek-card-image")) {
+        event.preventDefault();
+    }
+
+});
+
+</script>
+
 {% endblock %}

@@ -1,53 +1,551 @@
 {% extends "base.html" %}
-{% block title %}{{ trek.title }} — Sevak Sahyadriche Foundation{% endblock %}
+
+{% block title %}
+    {{ trek.title }} — सेवक सह्याद्रीचे
+{% endblock %}
+
 
 {% block content %}
-<section>
-  <div class="container">
-    <a href="{{ url_for('treks') }}" style="color:#7a0c1e; font-weight:600; font-size:14px;">&larr; Back to all treks</a>
 
-    <div style="margin-top:20px;">
-      <img src="{{ trek.image_url }}" alt="{{ trek.title }}" class="trek-hero-img">
+<style>
+
+/* ==================================================
+   TREK DETAIL PAGE
+================================================== */
+
+.trek-detail-page {
+    padding: 35px 20px 70px;
+}
+
+.trek-detail-container {
+    max-width: 1120px;
+    margin: 0 auto;
+}
+
+
+/* BACK LINK */
+
+.trek-back {
+    display: inline-block;
+    margin-bottom: 22px;
+    color: #894720;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.trek-back:hover {
+    text-decoration: underline;
+}
+
+
+/* HERO IMAGE */
+
+.trek-detail-image-wrap {
+    width: 100%;
+    height: 430px;
+    border-radius: 18px;
+    overflow: hidden;
+    background: #eee5d6;
+    margin-bottom: 38px;
+}
+
+.trek-detail-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+
+    /* Prevent image dragging */
+    user-select: none;
+    -webkit-user-drag: none;
+}
+
+
+/* MAIN GRID */
+
+.trek-detail-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.65fr) minmax(300px, 0.8fr);
+    gap: 55px;
+    align-items: start;
+}
+
+
+/* LEFT CONTENT */
+
+.trek-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 15px;
+}
+
+.trek-detail-title {
+    margin: 0 0 18px;
+    font-size: clamp(32px, 4vw, 48px);
+    line-height: 1.12;
+    color: #3c2b23;
+}
+
+.trek-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 22px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid rgba(137, 71, 32, 0.15);
+    color: #6c5b50;
+    font-size: 15px;
+}
+
+
+/* DESCRIPTION */
+
+.trek-description {
+    padding-top: 28px;
+}
+
+.trek-description h2 {
+    margin: 0 0 12px;
+    color: #3c2b23;
+    font-size: 23px;
+}
+
+.trek-description p {
+    margin: 0;
+    color: #403a34;
+    font-size: 17px;
+    line-height: 1.8;
+    white-space: pre-line;
+}
+
+
+/* INFO CARD */
+
+.trek-info-card {
+    background: rgba(255, 255, 255, 0.72);
+    border: 1px solid rgba(137, 71, 32, 0.16);
+    border-radius: 18px;
+    padding: 25px;
+    box-shadow: 0 8px 30px rgba(70, 45, 25, 0.07);
+}
+
+.trek-info-heading {
+    color: #894720;
+    font-size: 21px;
+    font-weight: 700;
+    padding-bottom: 16px;
+    margin-bottom: 4px;
+    border-bottom: 1px solid rgba(137, 71, 32, 0.15);
+}
+
+.trek-info-list {
+    margin-top: 4px;
+}
+
+.trek-info-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 14px 0;
+    border-bottom: 1px solid rgba(137, 71, 32, 0.10);
+    font-size: 14px;
+}
+
+.trek-info-row span {
+    color: #76675d;
+}
+
+.trek-info-row strong {
+    color: #3c2b23;
+    text-align: right;
+}
+
+
+/* BUTTON */
+
+.trek-enquire-button {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: 22px;
+    padding: 13px 18px;
+    border-radius: 9px;
+    background: #894720;
+    color: #fff;
+    text-align: center;
+    font-weight: 700;
+    text-decoration: none;
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease;
+}
+
+.trek-enquire-button:hover {
+    background: #713919;
+    transform: translateY(-1px);
+}
+
+
+/* EVENT ENDED */
+
+.trek-event-ended {
+    margin-top: 22px;
+    padding: 12px;
+    border-radius: 9px;
+    background: #eee;
+    color: #666;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+
+/* UNPUBLISHED */
+
+.trek-unpublished {
+    background: #fbe1e1 !important;
+    color: #a32828 !important;
+}
+
+
+/* ==================================================
+   MOBILE
+================================================== */
+
+@media (max-width: 768px) {
+
+    .trek-detail-page {
+        padding: 22px 16px 50px;
+    }
+
+    .trek-detail-image-wrap {
+        height: 260px;
+        border-radius: 14px;
+        margin-bottom: 28px;
+    }
+
+    .trek-detail-grid {
+        grid-template-columns: 1fr;
+        gap: 32px;
+    }
+
+    .trek-detail-title {
+        font-size: 32px;
+    }
+
+    .trek-meta {
+        flex-direction: column;
+        gap: 9px;
+    }
+
+    .trek-description p {
+        font-size: 16px;
+        line-height: 1.7;
+    }
+
+    .trek-info-card {
+        padding: 20px;
+    }
+}
+
+
+/* ==================================================
+   SMALL PHONES
+================================================== */
+
+@media (max-width: 480px) {
+
+    .trek-detail-page {
+        padding-left: 13px;
+        padding-right: 13px;
+    }
+
+    .trek-detail-image-wrap {
+        height: 220px;
+    }
+
+    .trek-detail-title {
+        font-size: 28px;
+    }
+
+    .trek-info-row {
+        padding: 12px 0;
+    }
+}
+
+</style>
+
+
+<section class="trek-detail-page">
+
+    <div class="trek-detail-container">
+
+
+        <!-- BACK -->
+
+        <a href="{{ url_for('treks') }}"
+           class="trek-back">
+
+            ← Back to all events
+
+        </a>
+
+
+        <!-- HERO IMAGE -->
+
+        <div class="trek-detail-image-wrap">
+
+            <img
+                src="{{ trek.image_url }}"
+                alt="{{ trek.title }}"
+                class="trek-detail-image"
+                draggable="false">
+
+        </div>
+
+
+        <!-- MAIN CONTENT -->
+
+        <div class="trek-detail-grid">
+
+
+            <!-- LEFT -->
+
+            <article class="trek-detail-content">
+
+                <div class="trek-pills">
+
+                    <span class="pill">
+                        {{ trek.category }}
+                    </span>
+
+                    <span class="pill {{ trek.difficulty|lower }}">
+                        {{ trek.difficulty }}
+                    </span>
+
+
+                    {% if not trek.is_published %}
+
+                        <span class="pill trek-unpublished">
+                            Unpublished (admin preview)
+                        </span>
+
+                    {% endif %}
+
+                </div>
+
+
+                <h1 class="trek-detail-title">
+                    {{ trek.title }}
+                </h1>
+
+
+                <div class="trek-meta">
+
+                    <span>
+                        📍 {{ trek.location }}
+                    </span>
+
+                    <span>
+                        📅 {{ trek.event_date.strftime('%d %B %Y') }}
+                    </span>
+
+                    <span>
+                        ⏱ {{ trek.duration }}
+                    </span>
+
+                </div>
+
+
+                <!-- DESCRIPTION -->
+
+                <div class="trek-description">
+
+                    <h2>
+                        About this {{ trek.category|lower }}
+                    </h2>
+
+                    <p>
+                        {{ trek.description }}
+                    </p>
+
+                </div>
+
+            </article>
+
+
+            <!-- RIGHT INFO -->
+
+            <aside class="trek-info-card">
+
+                <div class="trek-info-heading">
+                    Event Details
+                </div>
+
+
+                <div class="trek-info-list">
+
+
+                    <div class="trek-info-row">
+
+                        <span>
+                            Price
+                        </span>
+
+                        <strong>
+                            {{ trek.price }}
+                        </strong>
+
+                    </div>
+
+
+                    <div class="trek-info-row">
+
+                        <span>
+                            Duration
+                        </span>
+
+                        <strong>
+                            {{ trek.duration }}
+                        </strong>
+
+                    </div>
+
+
+                    <div class="trek-info-row">
+
+                        <span>
+                            Difficulty
+                        </span>
+
+                        <strong>
+                            {{ trek.difficulty }}
+                        </strong>
+
+                    </div>
+
+
+                    <div class="trek-info-row">
+
+                        <span>
+                            Total Slots
+                        </span>
+
+                        <strong>
+                            {{ trek.total_slots }}
+                        </strong>
+
+                    </div>
+
+
+                    <div class="trek-info-row">
+
+                        <span>
+                            Slots Left
+                        </span>
+
+                        <strong>
+                            {{ trek.slots_left }}
+                        </strong>
+
+                    </div>
+
+
+                    {% if trek.contact_person %}
+
+                    <div class="trek-info-row">
+
+                        <span>
+                            Coordinator
+                        </span>
+
+                        <strong>
+                            {{ trek.contact_person }}
+                        </strong>
+
+                    </div>
+
+                    {% endif %}
+
+
+                    {% if trek.contact_phone %}
+
+                    <div class="trek-info-row">
+
+                        <span>
+                            Phone
+                        </span>
+
+                        <strong>
+                            {{ trek.contact_phone }}
+                        </strong>
+
+                    </div>
+
+                    {% endif %}
+
+
+                </div>
+
+
+                {% if trek.is_upcoming %}
+
+                    <a
+                        href="{{ url_for('contact') }}"
+                        class="trek-enquire-button">
+
+                        Enquire to Join
+
+                    </a>
+
+                {% else %}
+
+                    <div class="trek-event-ended">
+
+                        This event has concluded
+
+                    </div>
+
+                {% endif %}
+
+
+            </aside>
+
+
+        </div>
+
     </div>
 
-    <div class="detail-grid">
-      <div>
-        <span class="pill">{{ trek.category }}</span>
-        <span class="pill {{ trek.difficulty|lower }}">{{ trek.difficulty }}</span>
-        {% if not trek.is_published %}<span class="pill" style="background:#fbe1e1;color:#a32828;">Unpublished (admin preview)</span>{% endif %}
-
-        <h1 style="margin-top:14px;">{{ trek.title }}</h1>
-        <div class="meta" style="margin-bottom: 20px;">
-          <span>📍 {{ trek.location }}</span>
-          <span>📅 {{ trek.event_date.strftime('%d %B %Y') }}</span>
-          <span>⏱️ {{ trek.duration }}</span>
-        </div>
-        <h3>About this {{ trek.category|lower }}</h3>
-        <p style="color:#403a34; white-space: pre-line;">{{ trek.description }}</p>
-      </div>
-
-      <div>
-        <div class="info-box">
-          <div class="info-row"><span class="label">Price</span><span class="value">{{ trek.price }}</span></div>
-          <div class="info-row"><span class="label">Duration</span><span class="value">{{ trek.duration }}</span></div>
-          <div class="info-row"><span class="label">Difficulty</span><span class="value">{{ trek.difficulty }}</span></div>
-          <div class="info-row"><span class="label">Total Slots</span><span class="value">{{ trek.total_slots }}</span></div>
-          <div class="info-row"><span class="label">Slots Left</span><span class="value">{{ trek.slots_left }}</span></div>
-          {% if trek.contact_person %}
-          <div class="info-row"><span class="label">Coordinator</span><span class="value">{{ trek.contact_person }}</span></div>
-          {% endif %}
-          {% if trek.contact_phone %}
-          <div class="info-row"><span class="label">Phone</span><span class="value">{{ trek.contact_phone }}</span></div>
-          {% endif %}
-
-          {% if trek.is_upcoming %}
-            <a href="{{ url_for('contact') }}" class="btn btn-primary" style="width:100%; text-align:center; margin-top:20px;">Enquire to Join</a>
-          {% else %}
-            <div class="pill past" style="display:block; text-align:center; margin-top:20px; background:#eee; color:#666;">This event has concluded</div>
-          {% endif %}
-        </div>
-      </div>
-    </div>
-  </div>
 </section>
+
+
+<script>
+
+/* ==================================================
+   BASIC IMAGE PROTECTION
+================================================== */
+
+document.addEventListener("contextmenu", function (event) {
+
+    if (event.target.classList.contains("trek-detail-image")) {
+        event.preventDefault();
+    }
+
+});
+
+
+/* Prevent dragging the event image */
+
+document.addEventListener("dragstart", function (event) {
+
+    if (event.target.classList.contains("trek-detail-image")) {
+        event.preventDefault();
+    }
+
+});
+
+</script>
+
 {% endblock %}
