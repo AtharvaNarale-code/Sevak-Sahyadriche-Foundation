@@ -1,86 +1,646 @@
 {% extends "base.html" %}
 
 {% block title %}
-देणगी | सेवक सह्याद्रीचे
+    {% if current_language == 'mr' %}
+        देणगी | सेवक सह्याद्रीचे
+    {% else %}
+        Support Us | सेवक सह्याद्रीचे
+    {% endif %}
 {% endblock %}
+
 
 {% block content %}
 
-<section class="page-hero">
+<style>
 
-    <div>
+/* ==================================================
+   DONATION PAGE
+================================================== */
 
-        <span class="eyebrow">
-            आपली साथ
-        </span>
-
-        <h1>
-            देणगी
-        </h1>
-
-        <p>
-            आपल्या योगदानातून या कार्याला बळ द्या.
-        </p>
-
-    </div>
-
-</section>
+.donate-page {
+    padding-bottom: 80px;
+}
 
 
-<section class="section">
+/* ==================================================
+   HERO
+================================================== */
 
-    <div class="section-container">
+.donate-hero {
+    padding: 70px 20px 65px;
+    text-align: center;
+}
 
-        <div class="donation-content">
+.donate-hero-inner {
+    max-width: 700px;
+    margin: 0 auto;
+}
 
-            <div class="section-heading center">
+.donate-eyebrow {
+    display: block;
+    margin-bottom: 10px;
 
-                <span class="eyebrow">
+    color: #894720;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.donate-hero h1 {
+    margin: 0;
+
+    color: #3c2b23;
+    font-size: clamp(38px, 5vw, 58px);
+    line-height: 1.1;
+}
+
+.donate-hero p {
+    margin: 16px auto 0;
+
+    max-width: 600px;
+
+    color: #6c5b50;
+    font-size: 17px;
+    line-height: 1.7;
+}
+
+
+/* ==================================================
+   MAIN CONTENT
+================================================== */
+
+.donate-content {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+
+/* ==================================================
+   INTRO
+================================================== */
+
+.donate-intro {
+    max-width: 700px;
+    margin: 0 auto 35px;
+    text-align: center;
+}
+
+.donate-intro-eyebrow {
+    display: block;
+    margin-bottom: 8px;
+
+    color: #894720;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.donate-intro h2 {
+    margin: 0;
+
+    color: #3c2b23;
+    font-size: clamp(26px, 4vw, 36px);
+    line-height: 1.25;
+}
+
+.donate-intro p {
+    margin: 14px auto 0;
+
+    color: #665950;
+    font-size: 16px;
+    line-height: 1.8;
+}
+
+
+/* ==================================================
+   DONATION CARD
+================================================== */
+
+.donate-card {
+    position: relative;
+
+    max-width: 680px;
+    margin: 0 auto;
+
+    padding: 45px 35px;
+
+    border: 1px solid rgba(137, 71, 32, 0.16);
+    border-radius: 22px;
+
+    background: rgba(255, 255, 255, 0.68);
+
+    box-shadow:
+        0 12px 40px rgba(70, 45, 25, 0.08);
+
+    text-align: center;
+}
+
+
+/* DECORATION */
+
+.donate-symbol {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 65px;
+    height: 65px;
+
+    margin: 0 auto 22px;
+
+    border-radius: 50%;
+
+    background: rgba(137, 71, 32, 0.10);
+
+    color: #894720;
+
+    font-size: 29px;
+}
+
+
+/* CARD TEXT */
+
+.donate-card h3 {
+    margin: 0;
+
+    color: #3c2b23;
+    font-size: 25px;
+    line-height: 1.3;
+}
+
+.donate-card p {
+    max-width: 520px;
+    margin: 13px auto 25px;
+
+    color: #6c5b50;
+    font-size: 15px;
+    line-height: 1.7;
+}
+
+
+/* ==================================================
+   FUTURE DONATION AREA
+================================================== */
+
+.donation-coming-soon {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    padding: 9px 15px;
+
+    border-radius: 999px;
+
+    background: rgba(137, 71, 32, 0.08);
+
+    color: #894720;
+
+    font-size: 13px;
+    font-weight: 700;
+}
+
+
+/* ==================================================
+   CONTACT BUTTON
+================================================== */
+
+.donate-contact-button {
+    display: inline-block;
+
+    margin-top: 20px;
+
+    padding: 12px 23px;
+
+    border-radius: 9px;
+
+    background: #894720;
+    color: #ffffff;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    text-decoration: none;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+.donate-contact-button:hover {
+    background: #713919;
+    transform: translateY(-1px);
+}
+
+
+/* ==================================================
+   WHAT YOUR SUPPORT ENABLES
+================================================== */
+
+.donate-support {
+    margin-top: 55px;
+
+    text-align: center;
+}
+
+.donate-support h3 {
+    margin: 0 0 25px;
+
+    color: #3c2b23;
+    font-size: 24px;
+}
+
+.support-points {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+}
+
+.support-point {
+    padding: 22px 17px;
+
+    border: 1px solid rgba(137, 71, 32, 0.12);
+    border-radius: 14px;
+
+    background: rgba(255, 255, 255, 0.42);
+}
+
+.support-point span {
+    display: block;
+    margin-bottom: 9px;
+
+    color: #894720;
+    font-size: 23px;
+}
+
+.support-point strong {
+    display: block;
+
+    color: #46362d;
+    font-size: 15px;
+}
+
+.support-point p {
+    margin: 7px 0 0;
+
+    color: #76675d;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+
+/* ==================================================
+   MOBILE
+================================================== */
+
+@media (max-width: 700px) {
+
+    .donate-hero {
+        padding: 45px 18px 45px;
+    }
+
+    .donate-hero h1 {
+        font-size: 40px;
+    }
+
+    .donate-hero p {
+        font-size: 15px;
+    }
+
+    .donate-content {
+        padding: 0 15px;
+    }
+
+    .donate-card {
+        padding: 35px 22px;
+        border-radius: 18px;
+    }
+
+    .support-points {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+
+/* ==================================================
+   SMALL PHONES
+================================================== */
+
+@media (max-width: 420px) {
+
+    .donate-hero h1 {
+        font-size: 34px;
+    }
+
+    .donate-card h3 {
+        font-size: 22px;
+    }
+
+    .donate-card p {
+        font-size: 14px;
+    }
+
+}
+
+</style>
+
+
+<section class="donate-page">
+
+
+    <!-- ==================================================
+         HERO
+    ================================================== -->
+
+    <section class="donate-hero">
+
+        <div class="donate-hero-inner">
+
+            <span class="donate-eyebrow">
+
+                {% if current_language == 'mr' %}
+                    आपली साथ
+                {% else %}
+                    Your Support
+                {% endif %}
+
+            </span>
+
+
+            <h1>
+
+                {% if current_language == 'mr' %}
+                    देणगी
+                {% else %}
+                    Support Our Work
+                {% endif %}
+
+            </h1>
+
+
+            <p>
+
+                {% if current_language == 'mr' %}
+
+                    आपल्या योगदानातून या कार्याला
+                    बळ आणि नवी दिशा द्या.
+
+                {% else %}
+
+                    Your contribution helps strengthen
+                    our work and gives it a new direction.
+
+                {% endif %}
+
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- ==================================================
+         MAIN
+    ================================================== -->
+
+    <section class="donate-content">
+
+
+        <!-- INTRO -->
+
+        <div class="donate-intro">
+
+            <span class="donate-intro-eyebrow">
+
+                {% if current_language == 'mr' %}
                     योगदान
-                </span>
+                {% else %}
+                    Contribute
+                {% endif %}
 
-                <h2>
+            </span>
+
+
+            <h2>
+
+                {% if current_language == 'mr' %}
+
                     आपल्या योगदानाचे स्वागत आहे
-                </h2>
 
-                <p>
+                {% else %}
+
+                    Every Contribution Matters
+
+                {% endif %}
+
+            </h2>
+
+
+            <p>
+
+                {% if current_language == 'mr' %}
 
                     सेवक सह्याद्रीचे यांच्या विविध
                     सामाजिक, ऐतिहासिक आणि सांस्कृतिक
                     उपक्रमांना आपल्या परीने हातभार लावा.
 
-                </p>
+                {% else %}
+
+                    Support Sevak Sahyadriche and our
+                    social, historical and cultural
+                    initiatives in whatever way you can.
+
+                {% endif %}
+
+            </p>
+
+        </div>
+
+
+        <!-- ==================================================
+             DONATION CARD
+        ================================================== -->
+
+        <div class="donate-card">
+
+            <div class="donate-symbol">
+                ♡
+            </div>
+
+
+            <h3>
+
+                {% if current_language == 'mr' %}
+
+                    देणगीची सुविधा लवकरच उपलब्ध होईल
+
+                {% else %}
+
+                    Donation Options Coming Soon
+
+                {% endif %}
+
+            </h3>
+
+
+            <p>
+
+                {% if current_language == 'mr' %}
+
+                    ऑनलाइन देणगी आणि इतर योगदानाच्या
+                    सुविधा लवकरच येथे उपलब्ध होतील.
+                    तोपर्यंत अधिक माहितीसाठी आमच्याशी संपर्क साधा.
+
+                {% else %}
+
+                    Online donation and other contribution
+                    options will be available here soon.
+                    Until then, please contact us for more information.
+
+                {% endif %}
+
+            </p>
+
+
+            <div class="donation-coming-soon">
+
+                ✦
+
+                {% if current_language == 'mr' %}
+                    सुविधा लवकरच
+                {% else %}
+                    Coming Soon
+                {% endif %}
 
             </div>
 
 
-            <div class="donation-placeholder">
+            <br>
 
-                <span>
-                    ♡
-                </span>
 
-                <h3>
-                    देणगीची माहिती लवकरच उपलब्ध होईल
-                </h3>
+            <a
+                href="{{ url_for('contact') }}"
+                class="donate-contact-button">
 
-                <p>
-                    अधिक माहितीसाठी आमच्याशी संपर्क साधा.
-                </p>
-
-                <a
-                    href="{{ url_for('contact') }}"
-                    class="btn btn-dark">
-
+                {% if current_language == 'mr' %}
                     संपर्क करा
+                {% else %}
+                    Contact Us
+                {% endif %}
 
-                </a>
+            </a>
+
+        </div>
+
+
+        <!-- ==================================================
+             SUPPORT
+        ================================================== -->
+
+        <div class="donate-support">
+
+            <h3>
+
+                {% if current_language == 'mr' %}
+                    आपल्या सहकार्यामुळे
+                {% else %}
+                    Your Support Helps Us
+                {% endif %}
+
+            </h3>
+
+
+            <div class="support-points">
+
+
+                <div class="support-point">
+
+                    <span>⛰</span>
+
+                    <strong>
+
+                        {% if current_language == 'mr' %}
+                            सह्याद्री संवर्धन
+                        {% else %}
+                            Sahyadri Conservation
+                        {% endif %}
+
+                    </strong>
+
+                    <p>
+
+                        {% if current_language == 'mr' %}
+                            निसर्ग आणि सह्याद्रीच्या वारशासाठी कार्य.
+                        {% else %}
+                            Work towards preserving nature and the Sahyadri heritage.
+                        {% endif %}
+
+                    </p>
+
+                </div>
+
+
+                <div class="support-point">
+
+                    <span>✦</span>
+
+                    <strong>
+
+                        {% if current_language == 'mr' %}
+                            इतिहास व संस्कृती
+                        {% else %}
+                            History & Culture
+                        {% endif %}
+
+                    </strong>
+
+                    <p>
+
+                        {% if current_language == 'mr' %}
+                            इतिहास आणि संस्कृती पुढील पिढीपर्यंत पोहोचवणे.
+                        {% else %}
+                            Helping carry history and culture forward to future generations.
+                        {% endif %}
+
+                    </p>
+
+                </div>
+
+
+                <div class="support-point">
+
+                    <span>♡</span>
+
+                    <strong>
+
+                        {% if current_language == 'mr' %}
+                            सामाजिक कार्य
+                        {% else %}
+                            Social Initiatives
+                        {% endif %}
+
+                    </strong>
+
+                    <p>
+
+                        {% if current_language == 'mr' %}
+                            समाजहितासाठी सकारात्मक उपक्रमांना प्रोत्साहन.
+                        {% else %}
+                            Supporting meaningful initiatives for the betterment of society.
+                        {% endif %}
+
+                    </p>
+
+                </div>
+
 
             </div>
 
         </div>
 
-    </div>
+
+    </section>
 
 </section>
 

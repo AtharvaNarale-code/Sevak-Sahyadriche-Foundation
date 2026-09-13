@@ -1,16 +1,11 @@
 {% extends "base.html" %}
 
 {% block title %}
-सेवक सह्याद्रीचे
+    Sevak Sahyadriche
 {% endblock %}
 
 
 {% block content %}
-
-
-<!-- ==================================================
-     MAIN HOME
-================================================== -->
 
 <section class="home">
 
@@ -20,10 +15,14 @@
 
         <img
             src="{{ url_for('static', filename='img/logo.png') }}"
-            alt="सेवक सह्याद्रीचे लोगो">
+            alt="सेवक सह्याद्रीचे लोगो"
+            draggable="false">
 
     </div>
+
+
     <!-- SMALL DECORATION -->
+
     <div class="small-line">
 
         <span></span>
@@ -33,11 +32,28 @@
         <span></span>
 
     </div>
-    <!-- INTRO -->
-    <p class="home-intro">
-इतिहासातून बोध घेऊन वर्तमानात योग्य कर्तव्याची दिशा ठरवणे, हीच आमची प्रेरणा <br>
-इतिहास जाणून, त्यातून शिकून समाजहितासाठी कृती करण्याचा आमचा संकल्प.
 
+
+    <!-- INTRO -->
+
+    <p class="home-intro">
+
+        {% if current_language == 'mr' %}
+
+            इतिहासातून बोध घेऊन वर्तमानात योग्य कर्तव्याची दिशा ठरवणे,
+            हीच आमची प्रेरणा <br>
+
+            इतिहास जाणून, त्यातून शिकून समाजहितासाठी कृती करण्याचा आमचा संकल्प.
+
+        {% else %}
+
+            Learning from history and finding the right direction for our
+            responsibilities in the present is our inspiration. <br>
+
+            Our resolve is to understand history, learn from it, and take
+            meaningful action for the betterment of society.
+
+        {% endif %}
 
     </p>
 
@@ -47,6 +63,7 @@
     ============================================ -->
 
     <section class="main-sections">
+
 
         <!-- MOHIM -->
 
@@ -60,13 +77,31 @@
             <div>
 
                 <h2>
-                    मोहिम
+
+                    {% if current_language == 'mr' %}
+                        मोहिम
+                    {% else %}
+                        Initiatives
+                    {% endif %}
+
                 </h2>
 
                 <p>
-                    विविध सामाजिक,
-                    ऐतिहासिक आणि पर्यावरणपूरक
-                    उपक्रम
+
+                    {% if current_language == 'mr' %}
+
+                        विविध सामाजिक,
+                        ऐतिहासिक आणि पर्यावरणपूरक
+                        उपक्रम
+
+                    {% else %}
+
+                        Various social, historical
+                        and environment-focused
+                        initiatives
+
+                    {% endif %}
+
                 </p>
 
             </div>
@@ -90,12 +125,29 @@
             <div>
 
                 <h2>
-                    परदेशी डिस्पोरा
+
+                    {% if current_language == 'mr' %}
+                        परदेशी डिस्पोरा
+                    {% else %}
+                        Global Marathi Community
+                    {% endif %}
+
                 </h2>
 
                 <p>
-                    परदेशात असतानाही
-                    आपल्या मातीशी जोडलेले राहूया
+
+                    {% if current_language == 'mr' %}
+
+                        परदेशात असतानाही
+                        आपल्या मातीशी जोडलेले राहूया
+
+                    {% else %}
+
+                        Stay connected with
+                        our roots even while living abroad
+
+                    {% endif %}
+
                 </p>
 
             </div>
@@ -119,12 +171,29 @@
             <div>
 
                 <h2>
-                    युवा मंच
+
+                    {% if current_language == 'mr' %}
+                        युवा मंच
+                    {% else %}
+                        Yuva Manch
+                    {% endif %}
+
                 </h2>
 
                 <p>
-                    युवकांच्या विचारांना
-                    आणि ऊर्जेला सकारात्मक दिशा
+
+                    {% if current_language == 'mr' %}
+
+                        युवकांच्या विचारांना
+                        आणि ऊर्जेला सकारात्मक दिशा
+
+                    {% else %}
+
+                        Giving young minds and
+                        their energy a positive direction
+
+                    {% endif %}
+
                 </p>
 
             </div>
@@ -148,12 +217,29 @@
             <div>
 
                 <h2>
-                    लेख
+
+                    {% if current_language == 'mr' %}
+                        लेख
+                    {% else %}
+                        Articles
+                    {% endif %}
+
                 </h2>
 
                 <p>
-                    इतिहास, सह्याद्री,
-                    संस्कृती आणि विचार
+
+                    {% if current_language == 'mr' %}
+
+                        इतिहास, सह्याद्री,
+                        संस्कृती आणि विचार
+
+                    {% else %}
+
+                        History, the Sahyadris,
+                        culture and ideas
+
+                    {% endif %}
+
                 </p>
 
             </div>
@@ -176,11 +262,23 @@
         <div class="section-title">
 
             <span>
-                सूचना
+
+                {% if current_language == 'mr' %}
+                    सूचना
+                {% else %}
+                    What's Coming Up
+                {% endif %}
+
             </span>
 
             <h2>
-                आगामी उपक्रम
+
+                {% if current_language == 'mr' %}
+                    आगामी उपक्रम
+                {% else %}
+                    Upcoming Events
+                {% endif %}
+
             </h2>
 
         </div>
@@ -241,9 +339,14 @@
                 href="{{ url_for('treks') }}"
                 class="view-more">
 
-                सर्व सूचना पहा →
+                {% if current_language == 'mr' %}
+                    सर्व सूचना पहा →
+                {% else %}
+                    View all events →
+                {% endif %}
 
             </a>
+
 
         {% else %}
 
@@ -252,7 +355,13 @@
                 <span>✦</span>
 
                 <p>
-                    सध्या कोणतीही आगामी सूचना नाही.
+
+                    {% if current_language == 'mr' %}
+                        सध्या कोणतीही आगामी सूचना नाही.
+                    {% else %}
+                        There are currently no upcoming events.
+                    {% endif %}
+
                 </p>
 
             </div>
@@ -271,7 +380,13 @@
         <div class="section-title">
 
             <span>
-                आमच्याबद्दल
+
+                {% if current_language == 'mr' %}
+                    आमच्याबद्दल
+                {% else %}
+                    About Us
+                {% endif %}
+
             </span>
 
             <h2>
@@ -283,10 +398,21 @@
 
         <p>
 
-            आपल्या इतिहासाचा, संस्कृतीचा आणि
-            सह्याद्रीचा वारसा समजून घेऊन तो
-            पुढील पिढीपर्यंत पोहोचवण्यासाठी
-            सकारात्मक कार्य करण्याचा आमचा प्रयत्न.
+            {% if current_language == 'mr' %}
+
+                आपल्या इतिहासाचा, संस्कृतीचा आणि
+                सह्याद्रीचा वारसा समजून घेऊन तो
+                पुढील पिढीपर्यंत पोहोचवण्यासाठी
+                सकारात्मक कार्य करण्याचा आमचा प्रयत्न.
+
+            {% else %}
+
+                We strive to understand the heritage of
+                our history, culture and the Sahyadris,
+                and carry it forward to the next generation
+                through meaningful action.
+
+            {% endif %}
 
         </p>
 
@@ -294,7 +420,11 @@
         <a href="{{ url_for('about') }}"
            class="simple-button">
 
-            अधिक जाणून घ्या
+            {% if current_language == 'mr' %}
+                अधिक जाणून घ्या
+            {% else %}
+                Learn More
+            {% endif %}
 
         </a>
 
@@ -310,18 +440,42 @@
         <div>
 
             <span>
-                आपली साथ
+
+                {% if current_language == 'mr' %}
+                    आपली साथ
+                {% else %}
+                    Your Support
+                {% endif %}
+
             </span>
 
+
             <h2>
-                या प्रवासात सहभागी व्हा
+
+                {% if current_language == 'mr' %}
+                    या प्रवासात सहभागी व्हा
+                {% else %}
+                    Be a Part of This Journey
+                {% endif %}
+
             </h2>
+
 
             <p>
 
-                आपल्या वेळेने, सहभागाने,
-                ज्ञानाने किंवा योगदानाने
-                या कार्याला हातभार लावा.
+                {% if current_language == 'mr' %}
+
+                    आपल्या वेळेने, सहभागाने,
+                    ज्ञानाने किंवा योगदानाने
+                    या कार्याला हातभार लावा.
+
+                {% else %}
+
+                    Contribute to this work through
+                    your time, participation,
+                    knowledge or support.
+
+                {% endif %}
 
             </p>
 
@@ -332,7 +486,11 @@
             href="{{ url_for('donate') }}"
             class="donate-button">
 
-            देणगी द्या
+            {% if current_language == 'mr' %}
+                देणगी द्या
+            {% else %}
+                Donate
+            {% endif %}
 
         </a>
 
@@ -340,6 +498,5 @@
 
 
 </section>
-
 
 {% endblock %}

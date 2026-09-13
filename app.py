@@ -214,6 +214,24 @@ def inject_globals():
 # PUBLIC ROUTES
 # ---------------------------------------------------------------------
 
+@app.route("/set-language/<lang>")
+def set_language(lang):
+    if lang in ("mr", "en"):
+        session["language"] = lang
+
+    next_page = request.args.get("next")
+
+    if next_page and next_page.startswith("/"):
+        return redirect(next_page)
+
+    return redirect(url_for("home"))
+
+@app.context_processor
+def inject_language():
+    return {
+        "current_language": session.get("language", "mr")
+    }
+
 @app.route("/")
 def home():
     published_query = Trek.query.filter(Trek.is_published.is_(True))

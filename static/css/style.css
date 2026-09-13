@@ -4806,3 +4806,206 @@ body {
     position: relative;
     z-index: 1;
 }
+/* ==================================================
+   LANGUAGE SWITCH
+================================================== */
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+}
+
+.language-switch {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 12px;
+    border: 1px solid rgba(120, 70, 35, 0.25);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.45);
+    font-size: 14px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.language-switch span {
+    opacity: 0.45;
+}
+
+.language-option {
+    color: #604331;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.language-option.active {
+    color: #a85d25;
+    font-weight: 700;
+}
+
+.language-option:hover {
+    color: #a85d25;
+}
+
+
+/* ==================================================
+   MOBILE RESPONSIVE
+================================================== */
+
+@media (max-width: 768px) {
+
+    /* HEADER */
+
+    .header-container {
+        padding-left: 18px;
+        padding-right: 18px;
+    }
+
+    .header-actions {
+        gap: 10px;
+    }
+
+    .language-switch {
+        padding: 6px 9px;
+        gap: 6px;
+        font-size: 13px;
+    }
+
+
+    /* FOUR MAIN CARDS */
+
+    .main-sections {
+        grid-template-columns: 1fr !important;
+        width: 100%;
+    }
+
+    .main-card {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+
+    /* HOME INTRO */
+
+    .home-intro {
+        padding-left: 20px;
+        padding-right: 20px;
+        font-size: 17px;
+        line-height: 1.7;
+    }
+
+
+    /* NOTIFICATIONS */
+
+    .notification-item {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+}
+
+
+/* ==================================================
+   SMALL PHONES
+================================================== */
+
+@media (max-width: 480px) {
+
+    .site-name {
+        font-size: 18px;
+    }
+
+    .language-switch {
+        font-size: 12px;
+        padding: 5px 8px;
+    }
+
+    .header-actions {
+        gap: 7px;
+    }
+
+    .home-intro {
+        font-size: 16px;
+        line-height: 1.65;
+    }
+
+}
+/* ==================================================
+   HEADER — FINAL BRAND STYLE
+================================================== */
+
+.top-header {
+    background: #894720;
+    min-height: 78px;
+    border-bottom: none;
+}
+
+.header-container {
+    min-height: 78px;
+}
+
+
+/* BRAND NAME */
+
+.site-name {
+    color: #ffffff !important;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.site-name:hover {
+    color: #ffffff !important;
+}
+
+
+/* LANGUAGE SWITCH */
+
+.language-switch {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.35);
+}
+
+.language-option {
+    color: rgba(255, 255, 255, 0.75);
+}
+
+.language-option.active {
+    color: #ffffff;
+}
+
+.language-option:hover {
+    color: #ffffff;
+}
+
+.language-switch span {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+
+/* THREE DOT MENU */
+
+.three-dot span {
+    background: #ffffff;
+}
+
+
+/* ==================================================
+   MOBILE HEADER
+================================================== */
+
+@media (max-width: 768px) {
+
+    .top-header {
+        min-height: 68px;
+    }
+
+    .header-container {
+        min-height: 68px;
+    }
+
+    .site-name {
+        font-size: 18px;
+    }
+
+}

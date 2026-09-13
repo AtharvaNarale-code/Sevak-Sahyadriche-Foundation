@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="mr">
+<html lang="{{ 'mr' if current_language == 'mr' else 'en' }}">
 
 <head>
     <meta charset="UTF-8">
@@ -8,10 +8,10 @@
           content="width=device-width, initial-scale=1.0">
 
     <meta name="description"
-          content="सेवक सह्याद्रीचे">
+          content="Sevak Sahydriche">
 
     <title>
-        {% block title %}सेवक सह्याद्रीचे{% endblock %}
+        {% block title %}Sevak Sahydriche{% endblock %}
     </title>
 
     <link rel="stylesheet"
@@ -25,7 +25,7 @@
           crossorigin>
 
     <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=Noto+Sans+Devanagari:wght@400;500;600;700;800&display=swap"
-      rel="stylesheet">
+          rel="stylesheet">
 </head>
 
 
@@ -35,32 +35,78 @@
 
     <div class="header-container">
 
-        <!-- LEFT : ONLY NAME -->
+        <!-- BRAND NAME — NEVER TRANSLATED -->
 
         <a href="{{ url_for('home') }}"
            class="site-name">
 
-            सेवक सह्याद्रीचे
+            Sevak Sahyadriche
 
         </a>
 
 
-       
+        <!-- RIGHT SIDE -->
+
+        <div class="header-actions">
+
+            <!-- LANGUAGE SWITCH -->
+
+            <div class="language-switch">
+
+                {% if current_language == 'mr' %}
+
+                    <a href="{{ url_for('set_language', lang='en', next=request.path) }}"
+                       class="language-option active">
+
+                        English
+
+                    </a>
+
+                    <span>|</span>
+
+                    <span class="language-option">
+
+                        मराठी
+
+                    </span>
+
+                {% else %}
+
+                    <span class="language-option">
+
+                        English
+
+                    </span>
+
+                    <span>|</span>
+
+                    <a href="{{ url_for('set_language', lang='mr', next=request.path) }}"
+                       class="language-option active">
+
+                        मराठी
+
+                    </a>
+
+                {% endif %}
+
+            </div>
 
 
-        <!-- RIGHT : THREE DOT -->
+            <!-- THREE DOT MENU -->
 
-        <button
-            class="three-dot"
-            id="menuButton"
-            type="button"
-            aria-label="मेनू">
+            <button
+                class="three-dot"
+                id="menuButton"
+                type="button"
+                aria-label="Menu">
 
-            <span></span>
-            <span></span>
-            <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
 
-        </button>
+            </button>
+
+        </div>
 
     </div>
 
@@ -78,7 +124,9 @@
 
     <div class="side-menu-header">
 
-        <span>मेनू</span>
+        <span>
+            {{ 'मेनू' if current_language == 'mr' else 'Menu' }}
+        </span>
 
         <button
             id="menuClose"
@@ -94,33 +142,30 @@
     <nav>
 
         <a href="{{ url_for('home') }}">
-            मुख्यपृष्ठ
+            {{ 'मुख्यपृष्ठ' if current_language == 'mr' else 'Home' }}
         </a>
 
         <a href="{{ url_for('about') }}">
-            आमच्याबद्दल
+            {{ 'आमच्याबद्दल' if current_language == 'mr' else 'About Us' }}
         </a>
 
         <a href="{{ url_for('treks') }}">
-            सूचना
+            {{ 'सूचना' if current_language == 'mr' else 'Events' }}
         </a>
 
         <a href="{{ url_for('donate') }}">
-            देणगी
+            {{ 'देणगी' if current_language == 'mr' else 'Donate' }}
         </a>
 
         <a href="{{ url_for('contact') }}">
-            संपर्क करा
+            {{ 'संपर्क करा' if current_language == 'mr' else 'Contact' }}
         </a>
 
         <a href="{{ url_for('gallery') }}">
-            गॅलरी
+            {{ 'गॅलरी' if current_language == 'mr' else 'Gallery' }}
         </a>
 
         <div class="menu-line"></div>
-
-        <div class="menu-line"></div>
-
 
     </nav>
 
@@ -165,7 +210,8 @@
 
         <img
             src="{{ url_for('static', filename='img/logo.png') }}"
-            alt=" ">
+            alt=" "
+            draggable="false">
 
     </div>
 
@@ -180,15 +226,15 @@
     <div class="footer-links">
 
         <a href="{{ url_for('about') }}">
-            आमच्याबद्दल
+            {{ 'आमच्याबद्दल' if current_language == 'mr' else 'About Us' }}
         </a>
 
         <a href="{{ url_for('contact') }}">
-            संपर्क
+            {{ 'संपर्क' if current_language == 'mr' else 'Contact' }}
         </a>
 
         <a href="{{ url_for('donate') }}">
-            देणगी
+            {{ 'देणगी' if current_language == 'mr' else 'Donate' }}
         </a>
 
     </div>
