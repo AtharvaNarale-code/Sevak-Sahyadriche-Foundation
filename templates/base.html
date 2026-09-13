@@ -10,9 +10,7 @@
     <meta name="description"
           content="सेवक सह्याद्रीचे">
 
-    <title>
-        {% block title %}सेवक सह्याद्रीचे{% endblock %}
-    </title>
+    <title>{% block title %}सेवक सह्याद्रीचे{% endblock %}</title>
 
     <link rel="stylesheet"
           href="{{ url_for('static', filename='css/style.css') }}">
@@ -25,36 +23,31 @@
           crossorigin>
 
     <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=Noto+Sans+Devanagari:wght@400;500;600;700;800&display=swap"
-      rel="stylesheet">
+          rel="stylesheet">
 </head>
 
 
 <body>
 
+<!-- =====================================================
+     HEADER
+====================================================== -->
+
 <header class="top-header">
 
     <div class="header-container">
 
-        <!-- LEFT : ONLY NAME -->
-
         <a href="{{ url_for('home') }}"
            class="site-name">
-
             सेवक सह्याद्रीचे
-
         </a>
-
-
-       
-
-
-        <!-- RIGHT : THREE DOT -->
 
         <button
             class="three-dot"
             id="menuButton"
             type="button"
-            aria-label="मेनू">
+            aria-label="मेनू"
+            aria-expanded="false">
 
             <span></span>
             <span></span>
@@ -67,14 +60,18 @@
 </header>
 
 
-<!-- ================= SIDE MENU ================= -->
+<!-- =====================================================
+     SIDE MENU
+====================================================== -->
 
 <div class="menu-overlay"
-     id="menuOverlay"></div>
+     id="menuOverlay">
+</div>
 
 
 <aside class="side-menu"
-       id="sideMenu">
+       id="sideMenu"
+       aria-hidden="true">
 
     <div class="side-menu-header">
 
@@ -82,7 +79,8 @@
 
         <button
             id="menuClose"
-            type="button">
+            type="button"
+            aria-label="मेनू बंद करा">
 
             ×
 
@@ -117,17 +115,14 @@
             गॅलरी
         </a>
 
-        <div class="menu-line"></div>
-
-        <div class="menu-line"></div>
-
-
     </nav>
 
 </aside>
 
 
-<!-- ================= FLASH ================= -->
+<!-- =====================================================
+     FLASH MESSAGES
+====================================================== -->
 
 {% with messages = get_flashed_messages(with_categories=true) %}
 
@@ -150,11 +145,16 @@
 {% endwith %}
 
 
+<!-- =====================================================
+     MAIN CONTENT
+====================================================== -->
+
 <main>
 
     {% block content %}{% endblock %}
 
 </main>
+
 
 <!-- =====================================================
      GLOBAL FOOTER
@@ -164,15 +164,12 @@
 
     <div class="footer-inner">
 
-        <!-- BRAND -->
-
         <div class="footer-brand">
 
             <img
                 src="{{ url_for('static', filename='img/logo.png') }}"
                 alt="सेवक सह्याद्रीचे"
-                class="footer-logo"
-            >
+                class="footer-logo">
 
             <h3>सेवक सह्याद्रीचे</h3>
 
@@ -188,29 +185,30 @@
         </div>
 
 
-        <!-- QUICK LINKS -->
-<div class="footer-column">
+        <div class="footer-column">
 
-    <span class="footer-heading">दुवे</span>
+            <span class="footer-heading">
+                दुवे
+            </span>
 
-    <a href="{{ url_for('home') }}">
-        मुख्यपृष्ठ
-    </a>
+            <a href="{{ url_for('home') }}">
+                मुख्यपृष्ठ
+            </a>
 
-    <a href="{{ url_for('about') }}">
-        आमच्याबद्दल
-    </a>
+            <a href="{{ url_for('about') }}">
+                आमच्याबद्दल
+            </a>
 
-    <a href="{{ url_for('treks') }}">
-        सूचना
-    </a>
+            <a href="{{ url_for('treks') }}">
+                सूचना
+            </a>
 
-    <a href="{{ url_for('contact') }}">
-        संपर्क
-    </a>
+            <a href="{{ url_for('contact') }}">
+                संपर्क
+            </a>
 
-</div>
-        <!-- SOCIAL -->
+        </div>
+
 
         <div class="footer-column">
 
@@ -222,28 +220,28 @@
                 href="YOUR_INSTAGRAM_LINK"
                 target="_blank"
                 rel="noopener noreferrer"
-                class="footer-social-link"
-            >
+                class="footer-social-link">
+
                 <span>◎</span>
                 Instagram
+
             </a>
 
             <a
                 href="YOUR_YOUTUBE_LINK"
                 target="_blank"
                 rel="noopener noreferrer"
-                class="footer-social-link"
-            >
+                class="footer-social-link">
+
                 <span>▶</span>
                 YouTube
+
             </a>
 
         </div>
 
     </div>
 
-
-    <!-- BOTTOM -->
 
     <div class="footer-bottom">
 
@@ -256,10 +254,13 @@
         </p>
 
     </div>
+
 </footer>
 
 
-<!-- ================= SIDE MENU JAVASCRIPT ================= -->
+<!-- =====================================================
+     SIDE MENU JAVASCRIPT
+====================================================== -->
 
 <script>
 
@@ -270,55 +271,91 @@ document.addEventListener("DOMContentLoaded", function () {
     const sideMenu = document.getElementById("sideMenu");
     const menuOverlay = document.getElementById("menuOverlay");
 
+    if (!menuButton || !menuClose || !sideMenu || !menuOverlay) {
+        console.error("Menu elements not found.");
+        return;
+    }
 
-    /* OPEN MENU */
 
-    menuButton.addEventListener("click", function () {
+    function openMenu() {
 
         sideMenu.classList.add("active");
         menuOverlay.classList.add("active");
 
-        document.body.style.overflow = "hidden";
+        sideMenu.setAttribute("aria-hidden", "false");
+        menuButton.setAttribute("aria-expanded", "true");
 
-    });
+        document.body.classList.add("menu-open");
+    }
 
 
-    /* CLOSE MENU */
-
-    menuClose.addEventListener("click", function () {
+    function closeMenu() {
 
         sideMenu.classList.remove("active");
         menuOverlay.classList.remove("active");
 
-        document.body.style.overflow = "";
+        sideMenu.setAttribute("aria-hidden", "true");
+        menuButton.setAttribute("aria-expanded", "false");
+
+        document.body.classList.remove("menu-open");
+    }
+
+
+    /* OPEN */
+
+    menuButton.addEventListener("click", function (event) {
+
+        event.preventDefault();
+
+        openMenu();
 
     });
 
 
-    /* CLOSE WHEN CLICKING OUTSIDE */
+    /* CLOSE */
+
+    menuClose.addEventListener("click", function (event) {
+
+        event.preventDefault();
+
+        closeMenu();
+
+    });
+
+
+    /* CLICK OUTSIDE */
 
     menuOverlay.addEventListener("click", function () {
 
-        sideMenu.classList.remove("active");
-        menuOverlay.classList.remove("active");
-
-        document.body.style.overflow = "";
+        closeMenu();
 
     });
 
 
-    /* CLOSE WITH ESC */
+    /* ESCAPE */
 
     document.addEventListener("keydown", function (event) {
 
         if (event.key === "Escape") {
 
-            sideMenu.classList.remove("active");
-            menuOverlay.classList.remove("active");
-
-            document.body.style.overflow = "";
+            closeMenu();
 
         }
+
+    });
+
+
+    /* CLOSE AFTER CLICKING A MENU LINK */
+
+    const menuLinks = sideMenu.querySelectorAll("a");
+
+    menuLinks.forEach(function (link) {
+
+        link.addEventListener("click", function () {
+
+            closeMenu();
+
+        });
 
     });
 

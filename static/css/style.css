@@ -1,3 +1,4 @@
+
 body {
     margin: 0 !important;
     background: #f6efdf !important;
@@ -4748,61 +4749,4256 @@ body {
         font-size: 39px;
     }
 
-}
-/* =========================================================
+}/* =========================================================
    SAHYADRI FORT BACKGROUND
    HOME PAGE
 ========================================================= */
+@media (max-width: 768px) {
+
+    .home::before {
+        background-size: auto 100%;
+        background-position: center top;
+        background-repeat: repeat-y;
+        opacity: 0.30;
+    }
+
+}
 
 .home {
     position: relative;
+    min-height: 100vh;
+    overflow: hidden;
     isolation: isolate;
-
-    background: #f5eddf;
+    background: #f6efdf;
 }
 
-
-/* Fort illustration */
-
+/* Fort illustration background */
 .home::before {
     content: "";
-
-    position: fixed;
+    position: absolute;
     inset: 0;
 
     background-image: url("../img/forts-bg.png");
-
-    background-repeat: no-repeat;
-
-    background-position: center bottom;
-
+    background-repeat: repeat-y;
+    background-position: center top;
     background-size: 100% auto;
 
-    z-index: -2;
-
-    pointer-events: none;
-}
-
-
-/* Cream overlay */
-
-.home::after {
-    content: "";
-
-    position: fixed;
-    inset: 0;
-
-    background: rgba(245, 237, 223, 0.12);
+    opacity: 0.35;
 
     z-index: -1;
-
     pointer-events: none;
 }
 
-
-/* Keep home content above illustration */
-
+/* Keep homepage content above the fort background */
 .home > * {
     position: relative;
     z-index: 1;
+}
+/* =========================================================
+   FOOTER — SEVAK SAHYADRICE
+========================================================= */
+
+.site-footer {
+    position: relative;
+    margin-top: 0;
+    background: #3d281d;
+    color: #f6efdf;
+    overflow: hidden;
+}
+
+/* Subtle decorative top border */
+.site-footer::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: #b78a4b;
+}
+
+/* Main footer area */
+.footer-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 70px 50px 55px;
+
+    display: grid;
+    grid-template-columns: 1.6fr 1fr 1fr;
+    gap: 70px;
+
+    box-sizing: border-box;
+}
+
+/* =========================================================
+   BRAND
+========================================================= */
+
+.footer-brand {
+    max-width: 430px;
+}
+
+.footer-logo {
+    width: 75px;
+    height: 75px;
+    object-fit: contain;
+    display: block;
+    margin-bottom: 20px;
+
+    border-radius: 50%;
+}
+
+.footer-brand h3 {
+    margin: 0 0 8px;
+    font-family: "Baloo 2", "Noto Sans Devanagari", sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: #fffdf8;
+}
+
+.footer-tagline {
+    margin: 0 0 16px;
+    font-family: "Noto Sans Devanagari", sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: #d6b57a;
+    letter-spacing: 0.5px;
+}
+
+.footer-description {
+    margin: 0;
+    max-width: 400px;
+
+    font-family: "Noto Sans Devanagari", sans-serif;
+    font-size: 15px;
+    line-height: 1.9;
+    color: #d8ccc1;
+}
+
+/* =========================================================
+   FOOTER COLUMNS
+========================================================= */
+
+.footer-column {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.footer-heading {
+    position: relative;
+
+    display: inline-block;
+    margin-bottom: 22px;
+
+    font-family: "Baloo 2", "Noto Sans Devanagari", sans-serif;
+    font-size: 19px;
+    font-weight: 700;
+    color: #fffdf8;
+}
+
+/* Small gold line below heading */
+.footer-heading::after {
+    content: "";
+    display: block;
+
+    width: 35px;
+    height: 2px;
+
+    margin-top: 7px;
+
+    background: #b78a4b;
+}
+
+/* Footer links */
+.footer-column a {
+    position: relative;
+
+    margin-bottom: 13px;
+
+    font-family: "Noto Sans Devanagari", sans-serif;
+    font-size: 15px;
+    color: #d8ccc1;
+
+    text-decoration: none;
+
+    transition:
+        color 0.25s ease,
+        transform 0.25s ease;
+}
+
+.footer-column a:hover {
+    color: #d6b57a;
+    transform: translateX(5px);
+}
+
+/* =========================================================
+   SOCIAL LINKS
+========================================================= */
+
+.footer-social-link {
+    display: flex !important;
+    align-items: center;
+    gap: 10px;
+}
+
+.footer-social-link span {
+    width: 28px;
+    height: 28px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid rgba(214, 181, 122, 0.5);
+    border-radius: 50%;
+
+    color: #d6b57a;
+    font-size: 14px;
+
+    transition: all 0.25s ease;
+}
+
+.footer-social-link:hover span {
+    background: #b78a4b;
+    border-color: #b78a4b;
+    color: #3d281d;
+}
+
+/* =========================================================
+   BOTTOM BAR
+========================================================= */
+
+.footer-bottom {
+    border-top: 1px solid rgba(246, 239, 223, 0.14);
+
+    max-width: 1100px;
+    margin: 0 auto;
+
+    padding: 22px 30px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+
+    box-sizing: border-box;
+}
+
+.footer-bottom p {
+    margin: 0;
+
+    font-family: "Noto Sans Devanagari", sans-serif;
+    font-size: 13px;
+    color: #bcaea2;
+}
+
+.footer-message {
+    color: #d6b57a !important;
+    font-weight: 600;
+}
+
+/* =========================================================
+   MOBILE FOOTER
+========================================================= */
+
+@media (max-width: 768px) {
+
+    .footer-inner {
+        grid-template-columns: 1fr;
+        gap: 38px;
+
+        padding: 55px 28px 40px;
+    }
+
+    .footer-brand {
+        max-width: 100%;
+    }
+
+    .footer-logo {
+        width: 68px;
+        height: 68px;
+    }
+
+    .footer-brand h3 {
+        font-size: 25px;
+    }
+
+    .footer-description {
+        font-size: 14px;
+        line-height: 1.8;
+    }
+
+    .footer-column {
+        padding-top: 5px;
+    }
+
+    .footer-heading {
+        margin-bottom: 18px;
+    }
+
+    .footer-column a {
+        font-size: 14px;
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+        padding: 20px 25px 25px;
+        gap: 8px;
+    }
+
+    .footer-bottom p {
+        font-size: 12px;
+    }
+}
+/* =========================================================
+   HEADER + MENU — ALWAYS ABOVE PAGE CONTENT
+========================================================= */
+
+.top-header {
+    position: relative;
+    z-index: 10000;
+}
+
+.header-container {
+    position: relative;
+    z-index: 10001;
+}
+
+.three-dot {
+    position: relative;
+    z-index: 10002;
+    cursor: pointer;
+    pointer-events: auto;
+}
+
+.menu-overlay {
+    position: fixed;
+    inset: 0;
+
+    background: rgba(40, 25, 18, 0.45);
+
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+
+    transition: opacity 0.25s ease;
+
+    z-index: 99998;
+}
+
+.menu-overlay.active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+.side-menu {
+    position: fixed;
+
+    top: 0;
+    right: 0;
+
+    width: min(380px, 90vw);
+    height: 100vh;
+
+    background: #f6efdf;
+
+    transform: translateX(100%);
+
+    transition: transform 0.3s ease;
+
+    z-index: 99999;
+
+    overflow-y: auto;
+}
+
+.side-menu.active {
+    transform: translateX(0);
+}
+
+body.menu-open {
+    overflow: hidden;
+}
+
+
+/* Menu header */
+
+.side-menu-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 22px 25px;
+
+    background: #3d281d;
+    color: #f6efdf;
+}
+
+.side-menu-header span {
+    font-family: "Baloo 2",
+                 "Noto Sans Devanagari",
+                 sans-serif;
+
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.side-menu-header button {
+    border: none;
+    background: transparent;
+
+    color: #f6efdf;
+
+    font-size: 34px;
+    line-height: 1;
+
+    cursor: pointer;
+}
+
+
+/* Menu links */
+
+.side-menu nav {
+    display: flex;
+    flex-direction: column;
+
+    padding: 25px;
+}
+
+.side-menu nav a {
+    padding: 17px 10px;
+
+    border-bottom: 1px solid rgba(61, 40, 29, 0.12);
+
+    color: #3d281d;
+
+    font-family: "Baloo 2",
+                 "Noto Sans Devanagari",
+                 sans-serif;
+
+    font-size: 18px;
+    font-weight: 600;
+
+    text-decoration: none;
+
+    transition: all 0.2s ease;
+}
+
+.side-menu nav a:hover {
+    padding-left: 18px;
+    color: #a95d29;
+}
+
+
+/* Mobile */
+
+@media (max-width: 768px) {
+
+    .side-menu {
+        width: 88vw;
+        max-width: 360px;
+    }
+
+    .three-dot {
+        min-width: 48px;
+        min-height: 48px;
+    }
+
+}
+/* =========================================================
+   PARADESHTHA SAHYADRI
+   FOREIGN DIASPORA PAGE
+   Premium Cream / Brown / Gold Theme
+========================================================= */
+
+.fd-page {
+    --fd-cream: #f6efdf;
+    --fd-cream-light: #fffaf0;
+    --fd-cream-dark: #eadcc3;
+    --fd-brown: #3d281d;
+    --fd-brown-light: #654838;
+    --fd-gold: #b78a4b;
+    --fd-gold-light: #d7b77d;
+    --fd-saffron: #a95d29;
+    --fd-text: #3d281d;
+    --fd-muted: #76675c;
+
+    background: var(--fd-cream);
+    color: var(--fd-text);
+
+    font-family:
+        "Noto Sans Devanagari",
+        "Baloo 2",
+        sans-serif;
+
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.fd-hero {
+    position: relative;
+
+    min-height: 680px;
+
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    align-items: center;
+
+    max-width: 1250px;
+    margin: 0 auto;
+
+    padding: 80px 55px;
+
+    box-sizing: border-box;
+}
+
+
+/* subtle background glow */
+
+.fd-hero::before {
+    content: "";
+
+    position: absolute;
+
+    width: 520px;
+    height: 520px;
+
+    right: 4%;
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(183, 138, 75, 0.15),
+            transparent 68%
+        );
+
+    pointer-events: none;
+}
+
+
+/* Hero text */
+
+.fd-hero-content {
+    position: relative;
+    z-index: 2;
+
+    max-width: 650px;
+}
+
+.fd-label {
+    display: inline-flex;
+    align-items: center;
+
+    margin-bottom: 20px;
+    padding: 7px 15px;
+
+    border: 1px solid rgba(183, 138, 75, 0.45);
+    border-radius: 30px;
+
+    color: var(--fd-saffron);
+
+    font-size: 14px;
+    font-weight: 700;
+
+    background: rgba(255, 250, 240, 0.7);
+}
+
+
+.fd-label::before {
+    content: "✦";
+
+    margin-right: 8px;
+
+    color: var(--fd-gold);
+}
+
+
+/* Hero heading */
+
+.fd-hero h1 {
+    margin: 0 0 25px;
+
+    font-family:
+        "Baloo 2",
+        "Noto Sans Devanagari",
+        sans-serif;
+
+    font-size: clamp(46px, 5vw, 76px);
+    line-height: 1.08;
+
+    font-weight: 800;
+
+    letter-spacing: -1px;
+
+    color: var(--fd-brown);
+}
+
+.fd-hero h1 span {
+    display: block;
+
+    color: var(--fd-saffron);
+}
+
+
+/* Hero paragraph */
+
+.fd-hero-text {
+    max-width: 610px;
+
+    margin: 0 0 35px;
+
+    font-size: 18px;
+    line-height: 2;
+
+    color: var(--fd-muted);
+}
+
+
+/* =========================================================
+   HERO BUTTONS
+========================================================= */
+
+.fd-hero-buttons {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+
+    flex-wrap: wrap;
+}
+
+.fd-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 52px;
+
+    padding: 0 25px;
+
+    border-radius: 30px;
+
+    font-family:
+        "Baloo 2",
+        "Noto Sans Devanagari",
+        sans-serif;
+
+    font-size: 16px;
+    font-weight: 700;
+
+    text-decoration: none;
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        background 0.25s ease;
+}
+
+.fd-btn-main {
+    gap: 12px;
+
+    background: var(--fd-brown);
+    color: #fffaf0;
+
+    box-shadow:
+        0 10px 25px rgba(61, 40, 29, 0.18);
+}
+
+.fd-btn-main:hover {
+    transform: translateY(-3px);
+
+    background: var(--fd-saffron);
+
+    box-shadow:
+        0 14px 30px rgba(61, 40, 29, 0.25);
+}
+
+.fd-btn-main span {
+    font-size: 20px;
+}
+
+.fd-btn-link {
+    color: var(--fd-brown);
+}
+
+.fd-btn-link:hover {
+    color: var(--fd-saffron);
+}
+
+
+/* =========================================================
+   GLOBE VISUAL
+========================================================= */
+
+.fd-globe {
+    position: relative;
+
+    width: min(450px, 100%);
+    aspect-ratio: 1;
+
+    margin: auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* glow */
+
+.fd-glow {
+    position: absolute;
+    inset: 12%;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(183, 138, 75, 0.22),
+            rgba(183, 138, 75, 0.05) 50%,
+            transparent 72%
+        );
+
+    filter: blur(5px);
+}
+
+
+/* Rings */
+
+.fd-ring {
+    position: absolute;
+
+    border: 1px solid rgba(183, 138, 75, 0.38);
+
+    border-radius: 50%;
+
+    transform: rotate(-20deg);
+}
+
+.fd-ring-1 {
+    width: 78%;
+    height: 42%;
+}
+
+.fd-ring-2 {
+    width: 90%;
+    height: 54%;
+
+    transform: rotate(35deg);
+}
+
+.fd-ring-3 {
+    width: 105%;
+    height: 65%;
+
+    transform: rotate(-50deg);
+
+    border-color: rgba(169, 93, 41, 0.2);
+}
+
+
+/* Globe core */
+
+.fd-globe-core {
+    position: relative;
+    z-index: 3;
+
+    width: 190px;
+    height: 190px;
+
+    border-radius: 50%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    background:
+        radial-gradient(
+            circle at 35% 30%,
+            #754d38,
+            #3d281d 70%
+        );
+
+    color: #fffaf0;
+
+    box-shadow:
+        0 25px 55px rgba(61, 40, 29, 0.25),
+        inset 0 0 0 8px rgba(183, 138, 75, 0.18);
+}
+
+.fd-globe-core small {
+    margin-bottom: 5px;
+
+    color: var(--fd-gold-light);
+
+    font-size: 13px;
+}
+
+.fd-globe-core strong {
+    font-family:
+        "Baloo 2",
+        "Noto Sans Devanagari",
+        sans-serif;
+
+    font-size: 30px;
+}
+
+.fd-globe-core span {
+    margin-top: 5px;
+
+    color: #d6a05d;
+
+    font-size: 22px;
+}
+
+
+/* =========================================================
+   GLOBE LOCATIONS
+========================================================= */
+
+.fd-location {
+    position: absolute;
+    z-index: 5;
+
+    padding: 8px 13px;
+
+    border-radius: 20px;
+
+    background: rgba(255, 250, 240, 0.9);
+
+    border: 1px solid rgba(183, 138, 75, 0.35);
+
+    box-shadow:
+        0 8px 20px rgba(61, 40, 29, 0.08);
+
+    color: var(--fd-brown);
+
+    font-size: 13px;
+    font-weight: 700;
+
+    backdrop-filter: blur(5px);
+}
+
+.fd-location b {
+    margin-right: 5px;
+
+    color: var(--fd-saffron);
+}
+
+.fd-india {
+    left: 2%;
+    top: 25%;
+}
+
+.fd-world {
+    right: 0;
+    top: 38%;
+}
+
+.fd-community {
+    bottom: 17%;
+    left: 12%;
+}
+
+
+/* =========================================================
+   INTRO STRIP
+========================================================= */
+
+.fd-intro-strip {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+
+    max-width: 1100px;
+
+    margin: 0 auto 30px;
+
+    border-top: 1px solid rgba(61, 40, 29, 0.12);
+    border-bottom: 1px solid rgba(61, 40, 29, 0.12);
+}
+
+.fd-intro-strip > div {
+    padding: 30px 25px;
+
+    text-align: center;
+
+    border-right: 1px solid rgba(61, 40, 29, 0.1);
+}
+
+.fd-intro-strip > div:last-child {
+    border-right: none;
+}
+
+.fd-intro-strip strong {
+    display: block;
+
+    margin-bottom: 5px;
+
+    font-family:
+        "Baloo 2",
+        "Noto Sans Devanagari",
+        sans-serif;
+
+    font-size: 21px;
+
+    color: var(--fd-brown);
+}
+
+.fd-intro-strip span {
+    color: var(--fd-muted);
+
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   GENERAL SECTIONS
+========================================================= */
+
+.fd-section {
+    max-width: 1150px;
+
+    margin: 0 auto;
+
+    padding: 110px 40px;
+    box-sizing: border-box;
+}
+
+.fd-section-heading {
+    margin-bottom: 55px;
+}
+
+.fd-section-heading.center {
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+
+    text-align: center;
+}
+
+.fd-section-heading > span,
+.fd-values-heading > span {
+    display: inline-block;
+
+    margin-bottom: 10px;
+
+    color: var(--fd-saffron);
+
+    font-size: 14px;
+    font-weight: 800;
+
+    letter-spacing: 1px;
+}
+
+.fd-section-heading > span::before,
+.fd-values-heading > span::before {
+    content: "✦";
+
+    margin-right: 8px;
+
+    color: var(--fd-gold);
+}
+
+.fd-section-heading h2,
+.fd-values-heading h2 {
+    margin: 0;
+
+    font-family:
+        "Baloo 2",
+        "Noto Sans Devanagari",
+        sans-serif;
+
+    font-size: clamp(35px, 4vw, 52px);
+    line-height: 1.2;
+
+    color: var(--fd-brown);
+}
+
+.fd-section-heading h2 em,
+.fd-values-heading h2 em {
+    color: var(--fd-saffron);
+
+    font-style: normal;
+}
+
+.fd-section-heading.center p {
+    margin: 20px auto 0;
+
+    max-width: 650px;
+
+    color: var(--fd-muted);
+
+    font-size: 16px;
+    line-height: 1.9;
+}
+
+
+/* =========================================================
+   VISION
+========================================================= */
+
+.fd-vision-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+
+    gap: 70px;
+
+    align-items: center;
+}
+
+.fd-vision-text p {
+    margin: 0 0 22px;
+
+    color: var(--fd-muted);
+
+    font-size: 17px;
+    line-height: 2;
+}
+
+.fd-vision-text strong {
+    color: var(--fd-saffron);
+}
+
+
+/* Quote */
+
+.fd-quote-card {
+    position: relative;
+
+    padding: 50px 45px;
+
+    background: var(--fd-brown);
+
+    border-radius: 25px;
+
+    color: #fffaf0;
+
+    box-shadow:
+        0 20px 45px rgba(61, 40, 29, 0.16);
+
+    overflow: hidden;
+}
+
+.fd-quote-card::after {
+    content: "";
+
+    position: absolute;
+
+    width: 170px;
+    height: 170px;
+
+    right: -70px;
+    bottom: -80px;
+
+    border: 1px solid rgba(215, 183, 125, 0.25);
+
+    border-radius: 50%;
+}
+
+.fd-quote-mark {
+    margin-bottom: 15px;
+
+    color: var(--fd-gold-light);
+
+    font-family: Georgia, serif;
+
+    font-size: 70px;
+    line-height: 0.7;
+}
+
+.fd-quote-card h3 {
+    position: relative;
+    z-index: 2;
+
+    margin: 0;
+
+    font-family:
+        "Baloo 2",
+        "Noto Sans Devanagari",
+        sans-serif;
+
+    font-size: 28px;
+    line-height: 1.55;
+}
+
+.fd-quote-line {
+    width: 45px;
+    height: 2px;
+
+    margin: 25px 0 12px;
+
+    background: var(--fd-gold);
+}
+
+.fd-quote-card > span {
+    color: #cdbba9;
+
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   CONNECT / CARDS
+========================================================= */
+
+.fd-connect {
+    padding-top: 60px;
+}
+
+.fd-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 25px;
+}
+
+.fd-card {
+    position: relative;
+
+    min-height: 350px;
+
+    padding: 35px;
+
+    box-sizing: border-box;
+
+    background: rgba(255, 250, 240, 0.78);
+
+    border: 1px solid rgba(61, 40, 29, 0.1);
+
+    border-radius: 22px;
+
+    box-shadow:
+        0 10px 30px rgba(61, 40, 29, 0.05);
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+.fd-card:hover {
+    transform: translateY(-8px);
+
+    box-shadow:
+        0 20px 40px rgba(61, 40, 29, 0.12);
+}
+
+.fd-card-featured {
+    background: var(--fd-brown);
+
+    color: #fffaf0;
+
+    transform: translateY(-10px);
+
+    box-shadow:
+        0 20px 40px rgba(61, 40, 29, 0.17);
+}
+
+.fd-card-featured:hover {
+    transform: translateY(-16px);
+}
+
+.fd-card-number {
+    position: absolute;
+
+    top: 22px;
+    right: 25px;
+
+    color: rgba(183, 138, 75, 0.65);
+
+    font-family: Georgia, serif;
+
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.fd-card-icon {
+    width: 58px;
+    height: 58px;
+
+    margin-bottom: 25px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 16px;
+
+    background: #ecdfc5;
+
+    color: var(--fd-saffron);
+
+    font-size: 23px;
+}
+
+.fd-card-featured .fd-card-icon {
+    background: rgba(255, 250, 240, 0.12);
+    color: var(--fd-gold-light);
+}
+
+.fd-card h3 {
+    margin: 0 0 15px;
+
+    font-family:
+        "Baloo 2",
+        "Noto Sans Devanagari",
+        sans-serif;
+
+    font-size: 23px;
+}
+
+.fd-card p {
+    margin: 0 0 25px;
+
+    color: var(--fd-muted);
+
+    font-size: 14px;
+    line-height: 1.9;
+}
+
+.fd-card-featured p {
+    color: #d9ccc0;
+}
+
+.fd-card a {
+    display: inline-block;
+
+    color: var(--fd-saffron);
+
+    font-size: 14px;
+    font-weight: 800;
+
+    text-decoration: none;
+}
+
+.fd-card-featured a {
+    color: var(--fd-gold-light);
+}
+
+.fd-card a:hover {
+    text-decoration: underline;
+}
+
+
+/* =========================================================
+   VALUES
+========================================================= */
+
+.fd-values {
+    position: relative;
+
+    max-width: 1150px;
+
+    margin: 30px auto 100px;
+
+    padding: 75px 70px;
+
+    box-sizing: border-box;
+
+    display: grid;
+    grid-template-columns: 0.8fr 1.2fr;
+
+    gap: 80px;
+
+    background: var(--fd-cream-dark);
+
+    border-radius: 30px;
+
+    overflow: hidden;
+}
+
+.fd-values::before {
+    content: "";
+
+    position: absolute;
+
+    width: 350px;
+    height: 350px;
+
+    right: -120px;
+    top: -120px;
+
+    border: 1px solid rgba(183, 138, 75, 0.3);
+
+    border-radius: 50%;
+}
+
+.fd-values-heading {
+    position: relative;
+    z-index: 2;
+}
+
+.fd-values-list {
+    position: relative;
+    z-index: 2;
+
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 25px;
+}
+
+.fd-value {
+    display: flex;
+    gap: 17px;
+
+    padding-bottom: 22px;
+
+    border-bottom: 1px solid rgba(61, 40, 29, 0.13);
+}
+
+.fd-value > span {
+    color: var(--fd-gold);
+
+    font-family: Georgia, serif;
+
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.fd-value h3 {
+    margin: 0 0 6px;
+
+    font-family:
+        "Baloo 2",
+        "Noto Sans Devanagari",
+        sans-serif;
+
+    font-size: 19px;
+}
+
+.fd-value p {
+    margin: 0;
+
+    color: var(--fd-muted);
+
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   FINAL CTA
+========================================================= */
+
+.fd-final {
+    position: relative;
+
+    max-width: 100%;
+
+    padding: 110px 30px;
+
+    text-align: center;
+
+    background: var(--fd-brown);
+
+    color: #fffaf0;
+
+    overflow: hidden;
+}
+
+.fd-final::before,
+.fd-final::after {
+    content: "";
+
+    position: absolute;
+
+    border: 1px solid rgba(215, 183, 125, 0.18);
+
+    border-radius: 50%;
+}
+
+.fd-final::before {
+    width: 420px;
+    height: 420px;
+
+    left: -180px;
+    top: -170px;
+}
+
+.fd-final::after {
+    width: 300px;
+    height: 300px;
+
+    right: -120px;
+    bottom: -150px;
+}
+
+.fd-final-decoration {
+    position: relative;
+
+    margin-bottom: 20px;
+
+    color: var(--fd-gold-light);
+
+    font-size: 24px;
+}
+
+.fd-final > span {
+    position: relative;
+
+    color: var(--fd-gold-light);
+
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.fd-final h2 {
+    position: relative;
+
+    margin: 15px 0 20px;
+
+    font-family:
+        "Baloo 2",
+        "Noto Sans Devanagari",
+        sans-serif;
+
+    font-size: clamp(40px, 5vw, 65px);
+    line-height: 1.15;
+}
+
+.fd-final h2 em {
+    color: var(--fd-gold-light);
+
+    font-style: normal;
+}
+
+.fd-final p {
+    position: relative;
+
+    max-width: 550px;
+
+    margin: 0 auto 35px;
+
+    color: #d8ccc1;
+
+    font-size: 16px;
+    line-height: 1.9;
+}
+
+.fd-final-button {
+    position: relative;
+
+    display: inline-flex;
+    align-items: center;
+    gap: 15px;
+
+    padding: 15px 28px;
+
+    border-radius: 30px;
+
+    background: #fffaf0;
+
+    color: var(--fd-brown);
+
+    font-family:
+        "Baloo 2",
+        "Noto Sans Devanagari",
+        sans-serif;
+
+    font-size: 16px;
+    font-weight: 800;
+
+    text-decoration: none;
+
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.15);
+
+    transition:
+        transform 0.25s ease,
+        background 0.25s ease;
+}
+
+.fd-final-button:hover {
+    transform: translateY(-4px);
+
+    background: var(--fd-gold-light);
+}
+
+.fd-final-button span {
+    font-size: 20px;
+}
+
+.fd-final small {
+    position: relative;
+
+    display: block;
+
+    margin-top: 35px;
+
+    color: #a99586;
+
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 900px) {
+
+    .fd-hero {
+        grid-template-columns: 1fr;
+
+        text-align: center;
+
+        padding: 70px 30px;
+    }
+
+    .fd-hero-content {
+        max-width: 700px;
+        margin: 0 auto;
+    }
+
+    .fd-hero-text {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .fd-hero-buttons {
+        justify-content: center;
+    }
+
+    .fd-globe {
+        margin-top: 50px;
+    }
+
+    .fd-vision-grid {
+        grid-template-columns: 1fr;
+
+        gap: 40px;
+    }
+
+    .fd-cards {
+        grid-template-columns: 1fr;
+    }
+
+    .fd-card {
+        min-height: auto;
+    }
+
+    .fd-card-featured {
+        transform: none;
+    }
+
+    .fd-card-featured:hover {
+        transform: translateY(-8px);
+    }
+
+    .fd-values {
+        grid-template-columns: 1fr;
+
+        gap: 45px;
+
+        padding: 55px 40px;
+    }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .fd-hero {
+        min-height: auto;
+
+        padding: 55px 20px 65px;
+    }
+
+    .fd-label {
+        font-size: 12px;
+    }
+
+    .fd-hero h1 {
+        font-size: 42px;
+        line-height: 1.12;
+    }
+
+    .fd-hero-text {
+        font-size: 15px;
+        line-height: 1.85;
+    }
+
+    .fd-hero-buttons {
+        flex-direction: column;
+
+        width: 100%;
+        gap: 10px;
+    }
+
+    .fd-btn {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .fd-globe {
+        width: 320px;
+        max-width: 90vw;
+
+        margin-top: 35px;
+    }
+
+    .fd-globe-core {
+        width: 145px;
+        height: 145px;
+    }
+
+    .fd-globe-core strong {
+        font-size: 24px;
+    }
+
+    .fd-location {
+        font-size: 11px;
+        padding: 6px 9px;
+    }
+
+    .fd-intro-strip {
+        grid-template-columns: 1fr;
+
+        margin: 0 20px;
+    }
+
+    .fd-intro-strip > div {
+        border-right: none;
+        border-bottom: 1px solid rgba(61, 40, 29, 0.1);
+    }
+
+    .fd-intro-strip > div:last-child {
+        border-bottom: none;
+    }
+
+    .fd-section {
+        padding: 75px 20px;
+    }
+
+    .fd-section-heading {
+        margin-bottom: 35px;
+    }
+
+    .fd-section-heading h2,
+    .fd-values-heading h2 {
+        font-size: 36px;
+    }
+
+    .fd-section-heading.center p {
+        font-size: 14px;
+    }
+
+    .fd-vision-text p {
+        font-size: 15px;
+        line-height: 1.9;
+    }
+
+    .fd-quote-card {
+        padding: 35px 28px;
+        border-radius: 20px;
+    }
+
+    .fd-quote-card h3 {
+        font-size: 23px;
+    }
+
+    .fd-card {
+        padding: 28px;
+
+        border-radius: 20px;
+    }
+
+    .fd-card h3 {
+        font-size: 21px;
+    }
+
+    .fd-values {
+        margin: 10px 20px 60px;
+
+        padding: 45px 25px;
+
+        border-radius: 22px;
+    }
+
+    .fd-values-list {
+        grid-template-columns: 1fr;
+
+        gap: 20px;
+    }
+
+    .fd-final {
+        padding: 80px 22px;
+    }
+
+    .fd-final h2 {
+        font-size: 40px;
+    }
+
+    .fd-final p {
+        font-size: 14px;
+    }
+
+    .fd-final-button {
+        width: 100%;
+        justify-content: center;
+        box-sizing: border-box;
+
+        font-size: 14px;
+    }
+}
+/* =========================================================
+   YUVA MANCH
+   PREMIUM BROWN / CREAM THEME
+========================================================= */
+
+.yuva-hero,
+.yuva-intro,
+.shivdarshan-section,
+.yuva-process,
+.school-session-section,
+.yuva-vision,
+.yuva-join {
+    font-family:
+        "Noto Sans Devanagari",
+        "Baloo 2",
+        sans-serif;
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.yuva-hero {
+    position: relative;
+
+    min-height: 680px;
+
+    max-width: 1250px;
+    margin: 0 auto;
+
+    padding: 90px 70px;
+
+    box-sizing: border-box;
+
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    align-items: center;
+
+    overflow: hidden;
+
+    background:
+        radial-gradient(
+            circle at 85% 50%,
+            rgba(183, 138, 75, 0.16),
+            transparent 32%
+        );
+}
+
+
+/* decorative circle */
+
+.yuva-hero::before {
+    content: "";
+
+    position: absolute;
+
+    width: 500px;
+    height: 500px;
+
+    right: -150px;
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    border: 1px solid rgba(183, 138, 75, 0.25);
+
+    border-radius: 50%;
+}
+
+.yuva-hero::after {
+    content: "";
+
+    position: absolute;
+
+    width: 350px;
+    height: 350px;
+
+    right: -75px;
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    border: 1px solid rgba(183, 138, 75, 0.16);
+
+    border-radius: 50%;
+}
+
+
+/* Hero content */
+
+.yuva-hero-content {
+    position: relative;
+    z-index: 3;
+
+    max-width: 700px;
+}
+
+
+/* eyebrow */
+
+.yuva-eyebrow {
+    display: inline-flex;
+    align-items: center;
+
+    margin-bottom: 22px;
+    padding: 7px 16px;
+
+    border: 1px solid rgba(183, 138, 75, 0.45);
+
+    border-radius: 30px;
+
+    background: rgba(255, 250, 240, 0.65);
+
+    color: #a95d29;
+
+    font-size: 14px;
+    font-weight: 800;
+}
+
+.yuva-eyebrow::before {
+    content: "✦";
+
+    margin-right: 8px;
+
+    color: #b78a4b;
+}
+
+
+/* heading */
+
+.yuva-hero h1 {
+    margin: 0 0 25px;
+
+    font-family:
+        "Baloo 2",
+        "Noto Sans Devanagari",
+        sans-serif;
+
+    font-size: clamp(48px, 6vw, 78px);
+
+    line-height: 1.05;
+
+    font-weight: 800;
+
+    color: #3d281d;
+
+    letter-spacing: -1px;
+}
+
+.yuva-hero h1 span {
+    color: #a95d29;
+}
+
+
+/* paragraph */
+
+.yuva-hero p {
+    max-width: 650px;
+
+    margin: 0 0 35px;
+
+    color: #76675c;
+
+    font-size: 18px;
+
+    line-height: 2;
+}
+
+
+/* =========================================================
+   HERO BUTTONS
+========================================================= */
+
+.yuva-hero-buttons {
+    display: flex;
+    align-items: center;
+
+    gap: 15px;
+
+    flex-wrap: wrap;
+}
+
+.yuva-primary-btn,
+.yuva-secondary-btn {
+    min-height: 52px;
+
+    padding: 0 25px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 30px;
+
+    font-family:
+        "Baloo 2",
+        "Noto Sans Devanagari",
+        sans-serif;
+
+    font-size: 16px;
+    font-weight: 700;
+
+    text-decoration: none;
+
+    transition: all 0.25s ease;
+}
+
+.yuva-primary-btn {
+    gap: 12px;
+
+    background: #3d281d;
+
+    color: #fffaf0;
+
+    box-shadow:
+        0 12px 28px rgba(61, 40, 29, 0.18);
+}
+
+.yuva-primary-btn:hover {
+    transform: translateY(-3px);
+
+    background: #a95d29;
+
+    box-shadow:
+        0 15px 32px rgba(61, 40, 29, 0.25);
+}
+
+.yuva-primary-btn span {
+    font-size: 20px;
+}
+
+.yuva-secondary-btn {
+    color: #3d281d;
+
+    border: 1px solid rgba(61, 40, 29, 0.2);
+}
+
+.yuva-secondary-btn:hover {
+    border-color: #b78a4b;
+
+    color: #a95d29;
+
+    background: rgba(183, 138, 75, 0.07);
+}
+
+
+/* =========================================================
+   HERO MARK
+========================================================= */
+
+.yuva-hero-mark {
+    position: relative;
+    z-index: 3;
+
+    width: 240px;
+    height: 240px;
+
+    margin: auto;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle at 35% 30%,
+            #704a35,
+            #3d281d 70%
+        );
+
+    color: #fffaf0;
+
+    box-shadow:
+        0 30px 60px rgba(61, 40, 29, 0.22),
+        inset 0 0 0 8px rgba(183, 138, 75, 0.16);
+}
+
+.yuva-hero-mark::before {
+    content: "✦";
+
+    position: absolute;
+
+    top: 28px;
+
+    color: #d7b77d;
+
+    font-size: 18px;
+}
+
+.yuva-hero-mark span {
+    font-family:
+        "Baloo 2",
+        "Noto Sans Devanagari",
+        sans-serif;
+
+    font-size: 58px;
+
+    font-weight: 800;
+
+    line-height: 1;
+}
+
+.yuva-hero-mark small {
+    margin-top: 7px;
+
+    color: #d7b77d;
+
+    font-size: 15px;
+}
+
+
+/* =========================================================
+   INTRO
+========================================================= */
+
+.yuva-intro {
+    max-width: 1150px;
+
+    margin: 0 auto;
+
+    padding: 110px 50px;
+
+    box-sizing: border-box;
+}
+
+.yuva-section-label {
+    margin-bottom: 55px;
+
+    color: #a95d29;
+
+    font-size: 14px;
+
+    font-weight: 800;
+
+    letter-spacing: 1px;
+}
+
+.yuva-section-label::before {
+    content: "✦";
+
+    margin-right: 9px;
+
+    color: #b78a4b;
+}
+
+.yuva-intro-grid {
+    display: grid;
+
+    grid-template-columns: 0.9fr 1.1fr;
+
+    gap: 90px;
+
+    align-items: start;
+}
+
+.yuva-intro-title h2 {
+    margin: 0;
+
+    font-family:
+        "Baloo 2",
+        "Noto Sans Devanagari",
+        sans-serif;
+
+    font-size: clamp(40px, 5vw, 60px);
+
+    line-height: 1.15;
+
+    color: #3d281d;
+}
+
+.yuva-intro-title h2 span {
+    color: #a95d29;
+}
+
+.yuva-intro-text {
+    padding-top: 8px;
+}
+
+.yuva-intro-text p {
+    margin: 0 0 25px;
+
+    color: #76675c;
+
+    font-size: 17px;
+
+    line-height: 2;
+}
+
+.yuva-intro-text strong {
+    color: #a95d29;
+}
+
+
+/* =========================================================
+   SHIVDARSHAN
+========================================================= */
+
+.shivdarshan-section {
+    position: relative;
+
+    max-width: 1150px;
+
+    margin: 0 auto 80px;
+
+    padding: 85px 80px;
+
+    box-sizing: border-box;
+
+    border-radius: 30px;
+
+    background: #3d281d;
+
+    color: #fffaf0;
+
+    overflow: hidden;
+}
+
+.shivdarshan-section::before {
+    content: "शिवदर्शन";
+
+    position: absolute;
+
+    right: -35px;
+    bottom: -35px;
+
+    font-family:
+        "Baloo 2",
+        sans-serif;
+
+    font-size: 120px;
+
+    font-weight: 800;
+
+    color: rgba(255, 250, 240, 0.035);
+}
+
+.shivdarshan-section::after {
+    content: "";
+
+    position: absolute;
+
+    width: 280px;
+    height: 280px;
+
+    right: -100px;
+    top: -100px;
+
+    border: 1px solid rgba(215, 183, 125, 0.2);
+
+    border-radius: 50%;
+}
+
+.shivdarshan-number {
+    position: absolute;
+
+    top: 35px;
+    right: 45px;
+
+    color: #b78a4b;
+
+    font-family: Georgia, serif;
+
+    font-size: 18px;
+
+    font-weight: 700;
+}
+
+.shivdarshan-content {
+    position: relative;
+
+    z-index: 2;
+
+    max-width: 760px;
+}
+
+.yuva-small-title {
+    display: inline-block;
+
+    margin-bottom: 18px;
+
+    color: #d7b77d;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    letter-spacing: 0.5px;
+}
+
+.shivdarshan-content h2 {
+    margin: 0 0 25px;
+
+    font-family:
+        "Baloo 2",
+        "Noto Sans Devanagari",
+        sans-serif;
+
+    font-size: clamp(38px, 4vw, 54px);
+
+    line-height: 1.15;
+}
+
+.shivdarshan-content h2 span {
+    color: #d7b77d;
+}
+
+.shivdarshan-content p {
+    margin: 0 0 20px;
+
+    color: #d9ccc0;
+
+    font-size: 16px;
+
+    line-height: 2;
+}
+
+
+/* =========================================================
+   PROCESS
+========================================================= */
+
+.yuva-process {
+    max-width: 1150px;
+
+    margin: 0 auto;
+
+    padding: 80px 50px 110px;
+
+    box-sizing: border-box;
+}
+
+.yuva-process-heading {
+    margin-bottom: 55px;
+}
+
+.yuva-process-heading h2 {
+    margin: 0;
+
+    font-family:
+        "Baloo 2",
+        "Noto Sans Devanagari",
+        sans-serif;
+
+    font-size: clamp(38px, 4.5vw, 58px);
+
+    line-height: 1.12;
+
+    color: #3d281d;
+}
+
+.yuva-process-heading h2 span {
+    color: #a95d29;
+}
+
+.yuva-process-cards {
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 18px;
+}
+
+.yuva-process-card {
+    position: relative;
+
+    min-height: 270px;
+
+    padding: 30px;
+
+    box-sizing: border-box;
+
+    background: #fffaf0;
+
+    border: 1px solid rgba(61, 40, 29, 0.1);
+
+    border-radius: 20px;
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+.yuva-process-card:hover {
+    transform: translateY(-7px);
+
+    box-shadow:
+        0 18px 35px rgba(61, 40, 29, 0.1);
+}
+
+.process-icon {
+    display: flex;
+
+    width: 45px;
+    height: 45px;
+
+    align-items: center;
+    justify-content: center;
+
+    margin-bottom: 25px;
+
+    border-radius: 13px;
+
+    background: #ecdfc5;
+
+    color: #a95d29;
+
+    font-size: 13px;
+
+    font-weight: 800;
+}
+
+.yuva-process-card h3 {
+    margin: 0 0 12px;
+
+    font-family:
+        "Baloo 2",
+        "Noto Sans Devanagari",
+        sans-serif;
+
+    font-size: 21px;
+
+    color: #3d281d;
+}
+
+.yuva-process-card p {
+    margin: 0;
+
+    color: #76675c;
+
+    font-size: 13px;
+
+    line-height: 1.85;
+}
+
+
+/* Featured */
+
+.yuva-process-card.featured {
+    background: #3d281d;
+
+    border-color: #3d281d;
+
+    box-shadow:
+        0 18px 40px rgba(61, 40, 29, 0.16);
+}
+
+.yuva-process-card.featured .process-icon {
+    background: rgba(215, 183, 125, 0.15);
+
+    color: #d7b77d;
+}
+
+.yuva-process-card.featured h3 {
+    color: #fffaf0;
+}
+
+.yuva-process-card.featured p {
+    color: #d9ccc0;
+}
+
+
+/* =========================================================
+   SCHOOL SESSIONS
+========================================================= */
+
+.school-session-section {
+    position: relative;
+
+    max-width: 1150px;
+
+    margin: 20px auto 100px;
+
+    padding: 90px 80px;
+
+    box-sizing: border-box;
+
+    border-radius: 30px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #eadcc3,
+            #f6efdf
+        );
+
+    overflow: hidden;
+}
+
+.school-session-section::before {
+    content: "युवा";
+
+    position: absolute;
+
+    right: -20px;
+    top: -70px;
+
+    font-family:
+        "Baloo 2",
+        sans-serif;
+
+    font-size: 220px;
+
+    font-weight: 800;
+
+    color: rgba(61, 40, 29, 0.035);
+}
+
+.school-session-inner {
+    position: relative;
+
+    z-index: 2;
+
+    max-width: 750px;
+}
+
+.school-session-badge {
+    display: inline-block;
+
+    margin-bottom: 20px;
+
+    padding: 7px 16px;
+
+    border-radius: 30px;
+
+    background: #a95d29;
+
+    color: #fffaf0;
+
+    font-size: 12px;
+
+    font-weight: 800;
+}
+
+.school-session-inner h2 {
+    margin: 0 0 25px;
+
+    font-family:
+        "Baloo 2",
+        "Noto Sans Devanagari",
+        sans-serif;
+
+    font-size: clamp(40px, 4.5vw, 58px);
+
+    line-height: 1.12;
+
+    color: #3d281d;
+}
+
+.school-session-inner h2 span {
+    color: #a95d29;
+}
+
+.school-session-inner p {
+    margin: 0 0 18px;
+
+    color: #76675c;
+
+    font-size: 16px;
+
+    line-height: 2;
+}
+
+
+/* points */
+
+.school-points {
+    display: grid;
+
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 12px;
+
+    margin-top: 35px;
+}
+
+.school-points div {
+    padding: 13px 15px;
+
+    border-radius: 12px;
+
+    background: rgba(255, 250, 240, 0.65);
+
+    border: 1px solid rgba(61, 40, 29, 0.08);
+
+    color: #3d281d;
+
+    font-size: 14px;
+
+    font-weight: 600;
+}
+
+.school-points span {
+    margin-right: 8px;
+
+    color: #b78a4b;
+}
+
+
+/* =========================================================
+   VISION
+========================================================= */
+
+.yuva-vision {
+    max-width: 850px;
+
+    margin: 0 auto;
+
+    padding: 100px 30px;
+
+    text-align: center;
+}
+
+.vision-symbol {
+    margin-bottom: 25px;
+
+    color: #b78a4b;
+
+    font-family: Georgia, serif;
+
+    font-size: 55px;
+
+    line-height: 1;
+}
+
+.yuva-vision h2 {
+    margin: 10px 0 25px;
+
+    font-family:
+        "Baloo 2",
+        "Noto Sans Devanagari",
+        sans-serif;
+
+    font-size: clamp(40px, 5vw, 60px);
+
+    line-height: 1.15;
+
+    color: #3d281d;
+}
+
+.yuva-vision h2 span {
+    color: #a95d29;
+}
+
+.yuva-vision > p {
+    max-width: 650px;
+
+    margin: 0 auto 30px;
+
+    color: #76675c;
+
+    font-size: 16px;
+
+    line-height: 2;
+}
+
+.vision-quote {
+    display: inline-block;
+
+    padding: 17px 25px;
+
+    border-left: 3px solid #b78a4b;
+
+    background: #fffaf0;
+
+    color: #654838;
+
+    font-size: 15px;
+
+    font-weight: 600;
+
+    line-height: 1.8;
+}
+
+
+/* =========================================================
+   JOIN
+========================================================= */
+
+.yuva-join {
+    position: relative;
+
+    margin: 0;
+
+    padding: 105px 30px;
+
+    text-align: center;
+
+    background: #3d281d;
+
+    color: #fffaf0;
+
+    overflow: hidden;
+}
+
+.yuva-join::before {
+    content: "";
+
+    position: absolute;
+
+    width: 420px;
+    height: 420px;
+
+    left: -200px;
+    top: -180px;
+
+    border: 1px solid rgba(215, 183, 125, 0.16);
+
+    border-radius: 50%;
+}
+
+.yuva-join::after {
+    content: "";
+
+    position: absolute;
+
+    width: 300px;
+    height: 300px;
+
+    right: -130px;
+    bottom: -160px;
+
+    border: 1px solid rgba(215, 183, 125, 0.14);
+
+    border-radius: 50%;
+}
+
+.yuva-join > * {
+    position: relative;
+
+    z-index: 2;
+}
+
+.yuva-join h2 {
+    margin: 15px 0 20px;
+
+    font-family:
+        "Baloo 2",
+        "Noto Sans Devanagari",
+        sans-serif;
+
+    font-size: clamp(40px, 5vw, 65px);
+
+    line-height: 1.12;
+}
+
+.yuva-join h2 span {
+    color: #d7b77d;
+}
+
+.yuva-join p {
+    max-width: 650px;
+
+    margin: 0 auto 35px;
+
+    color: #d9ccc0;
+
+    font-size: 16px;
+
+    line-height: 1.9;
+}
+
+.yuva-join-button {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 12px;
+
+    padding: 15px 30px;
+
+    border-radius: 30px;
+
+    background: #fffaf0;
+
+    color: #3d281d;
+
+    font-family:
+        "Baloo 2",
+        "Noto Sans Devanagari",
+        sans-serif;
+
+    font-size: 16px;
+
+    font-weight: 800;
+
+    text-decoration: none;
+
+    box-shadow:
+        0 12px 30px rgba(0, 0, 0, 0.15);
+
+    transition: all 0.25s ease;
+}
+
+.yuva-join-button:hover {
+    transform: translateY(-4px);
+
+    background: #d7b77d;
+}
+
+.yuva-join-button span {
+    font-size: 20px;
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 950px) {
+
+    .yuva-hero {
+        grid-template-columns: 1fr;
+
+        text-align: center;
+
+        padding: 75px 35px;
+    }
+
+    .yuva-hero-content {
+        margin: 0 auto;
+    }
+
+    .yuva-hero p {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .yuva-hero-buttons {
+        justify-content: center;
+    }
+
+    .yuva-hero-mark {
+        margin-top: 55px;
+    }
+
+    .yuva-intro-grid {
+        grid-template-columns: 1fr;
+
+        gap: 40px;
+    }
+
+    .yuva-process-cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .shivdarshan-section,
+    .school-session-section {
+        margin-left: 25px;
+        margin-right: 25px;
+    }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .yuva-hero {
+        min-height: auto;
+
+        padding: 60px 22px 70px;
+    }
+
+    .yuva-hero h1 {
+        font-size: 43px;
+    }
+
+    .yuva-hero p {
+        font-size: 15px;
+
+        line-height: 1.85;
+    }
+
+    .yuva-hero-buttons {
+        flex-direction: column;
+
+        width: 100%;
+    }
+
+    .yuva-primary-btn,
+    .yuva-secondary-btn {
+        width: 100%;
+
+        box-sizing: border-box;
+    }
+
+    .yuva-hero-mark {
+        width: 180px;
+        height: 180px;
+    }
+
+    .yuva-hero-mark span {
+        font-size: 45px;
+    }
+
+    .yuva-intro {
+        padding: 70px 22px;
+    }
+
+    .yuva-section-label {
+        margin-bottom: 35px;
+    }
+
+    .yuva-intro-title h2 {
+        font-size: 39px;
+    }
+
+    .yuva-intro-text p {
+        font-size: 15px;
+    }
+
+    .shivdarshan-section {
+        margin: 10px 18px 60px;
+
+        padding: 55px 25px;
+
+        border-radius: 22px;
+    }
+
+    .shivdarshan-content h2 {
+        font-size: 36px;
+    }
+
+    .shivdarshan-content p {
+        font-size: 14px;
+    }
+
+    .yuva-process {
+        padding: 65px 22px;
+    }
+
+    .yuva-process-heading h2 {
+        font-size: 39px;
+    }
+
+    .yuva-process-cards {
+        grid-template-columns: 1fr;
+
+        gap: 15px;
+    }
+
+    .yuva-process-card {
+        min-height: auto;
+
+        padding: 27px;
+    }
+
+    .school-session-section {
+        margin: 10px 18px 60px;
+
+        padding: 55px 25px;
+
+        border-radius: 22px;
+    }
+
+    .school-session-inner h2 {
+        font-size: 38px;
+    }
+
+    .school-session-inner p {
+        font-size: 14px;
+    }
+
+    .school-points {
+        grid-template-columns: 1fr;
+    }
+
+    .yuva-vision {
+        padding: 70px 22px;
+    }
+
+    .yuva-vision h2 {
+        font-size: 39px;
+    }
+
+    .yuva-vision > p {
+        font-size: 14px;
+    }
+
+    .yuva-join {
+        padding: 75px 22px;
+    }
+
+    .yuva-join h2 {
+        font-size: 40px;
+    }
+
+    .yuva-join p {
+        font-size: 14px;
+    }
+
+    .yuva-join-button {
+        width: 100%;
+
+        box-sizing: border-box;
+
+        font-size: 14px;
+    }
+}
+/* =========================================================
+   LEKH PAGE
+   PREMIUM BROWN + CREAM EDITORIAL DESIGN
+========================================================= */
+
+.lekh-page {
+    position: relative;
+    overflow: hidden;
+
+    background:
+        radial-gradient(
+            circle at 85% 8%,
+            rgba(183, 138, 75, 0.13),
+            transparent 25%
+        ),
+        radial-gradient(
+            circle at 10% 45%,
+            rgba(169, 93, 41, 0.06),
+            transparent 25%
+        ),
+        #f6efdf;
+
+    color: #3d281d;
+}
+
+
+/* =========================================================
+   COMMON
+========================================================= */
+
+.lekh-page * {
+    box-sizing: border-box;
+}
+
+.lekh-page h1,
+.lekh-page h2,
+.lekh-page h3,
+.lekh-page p {
+    margin-top: 0;
+}
+
+.lekh-page a {
+    -webkit-tap-highlight-color: transparent;
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.lekh-hero {
+    position: relative;
+
+    min-height: 560px;
+
+    max-width: 1200px;
+
+    margin: 0 auto;
+
+    padding: 110px 45px 100px;
+
+    display: flex;
+    align-items: center;
+
+    overflow: hidden;
+}
+
+
+/* Decorative circles */
+
+.lekh-hero::before {
+    content: "";
+
+    position: absolute;
+
+    width: 520px;
+    height: 520px;
+
+    right: -190px;
+    top: -190px;
+
+    border: 1px solid rgba(183, 138, 75, 0.28);
+
+    border-radius: 50%;
+}
+
+.lekh-hero::after {
+    content: "";
+
+    position: absolute;
+
+    width: 300px;
+    height: 300px;
+
+    left: -150px;
+    bottom: -170px;
+
+    border: 1px solid rgba(169, 93, 41, 0.16);
+
+    border-radius: 50%;
+}
+
+
+/* Hero content */
+
+.lekh-hero-content {
+    position: relative;
+    z-index: 2;
+
+    max-width: 780px;
+}
+
+
+/* Eyebrow */
+
+.lekh-eyebrow {
+    display: inline-flex;
+    align-items: center;
+
+    padding: 7px 16px;
+
+    margin-bottom: 20px;
+
+    border: 1px solid rgba(183, 138, 75, 0.45);
+
+    border-radius: 30px;
+
+    background: rgba(255, 252, 245, 0.65);
+
+    color: #a95d29;
+
+    font-family:
+        "Baloo 2",
+        "Noto Sans Devanagari",
+        sans-serif;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    letter-spacing: .3px;
+}
+
+.lekh-eyebrow::before {
+    content: "✦";
+
+    margin-right: 8px;
+
+    color: #b78a4b;
+}
+
+
+/* Hero heading */
+
+.lekh-hero h1 {
+    margin: 0;
+
+    font-family:
+        "Baloo 2",
+        "Noto Sans Devanagari",
+        sans-serif;
+
+    font-size: clamp(70px, 9vw, 125px);
+
+    line-height: .95;
+
+    font-weight: 800;
+
+    letter-spacing: -3px;
+
+    color: #3d281d;
+}
+
+
+/* Hero line */
+
+.lekh-hero-line {
+    width: 100px;
+    height: 3px;
+
+    margin: 28px 0;
+
+    background: #a95d29;
+
+    border-radius: 10px;
+
+    position: relative;
+}
+
+.lekh-hero-line::after {
+    content: "✦";
+
+    position: absolute;
+
+    left: 50%;
+
+    top: 50%;
+
+    transform: translate(-50%, -50%);
+
+    padding: 0 8px;
+
+    background: #f6efdf;
+
+    color: #b78a4b;
+
+    font-size: 13px;
+}
+
+
+/* Hero paragraph */
+
+.lekh-hero p {
+    max-width: 700px;
+
+    margin: 0;
+
+    color: #76675c;
+
+    font-size: 18px;
+
+    line-height: 1.9;
+}
+
+
+/* Hero symbol */
+
+.lekh-hero-symbol {
+    position: absolute;
+
+    right: 90px;
+    bottom: 80px;
+
+    width: 100px;
+    height: 100px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid rgba(183, 138, 75, .35);
+
+    border-radius: 50%;
+
+    color: #a95d29;
+
+    font-size: 28px;
+
+    transform: rotate(12deg);
+}
+
+
+/* =========================================================
+   FEATURED ARTICLE
+========================================================= */
+
+.lekh-featured {
+    position: relative;
+
+    max-width: 1100px;
+
+    margin: 20px auto 120px;
+
+    padding: 65px 70px;
+
+    display: grid;
+
+    grid-template-columns: 1fr auto;
+
+    gap: 40px;
+
+    background: #3d281d;
+
+    border-radius: 28px;
+
+    color: #fffaf0;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 25px 60px rgba(61, 40, 29, .18);
+}
+
+
+/* Decorative background */
+
+.lekh-featured::before {
+    content: "";
+
+    position: absolute;
+
+    width: 420px;
+    height: 420px;
+
+    right: -160px;
+    top: -180px;
+
+    border: 1px solid rgba(255,255,255,.12);
+
+    border-radius: 50%;
+}
+
+.lekh-featured::after {
+    content: "";
+
+    position: absolute;
+
+    width: 250px;
+    height: 250px;
+
+    right: 50px;
+    bottom: -180px;
+
+    border: 1px solid rgba(255,255,255,.08);
+
+    border-radius: 50%;
+}
+
+
+/* Label */
+
+.lekh-featured-label {
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    padding: 10px 24px;
+
+    border-radius:
+        0 0 18px 0;
+
+    background: #b78a4b;
+
+    color: #3d281d;
+
+    font-family:
+        "Baloo 2",
+        "Noto Sans Devanagari",
+        sans-serif;
+
+    font-weight: 800;
+}
+
+
+/* Content */
+
+.lekh-featured-content {
+    position: relative;
+    z-index: 2;
+
+    padding-top: 35px;
+}
+
+
+/* Category */
+
+.lekh-category {
+    display: inline-block;
+
+    margin-bottom: 18px;
+
+    color: #d9b87b;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    letter-spacing: 1px;
+}
+
+
+/* Featured heading */
+
+.lekh-featured h2 {
+    max-width: 720px;
+
+    margin-bottom: 20px;
+
+    font-family:
+        "Baloo 2",
+        "Noto Sans Devanagari",
+        sans-serif;
+
+    font-size: clamp(34px, 4vw, 52px);
+
+    line-height: 1.15;
+
+    font-weight: 800;
+}
+
+.lekh-featured h2 span {
+    color: #d4aa68;
+}
+
+
+/* Description */
+
+.lekh-featured p {
+    max-width: 700px;
+
+    color: rgba(255,250,240,.72);
+
+    font-size: 16px;
+
+    line-height: 1.9;
+}
+
+
+/* Meta */
+
+.lekh-meta {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 10px;
+
+    margin: 25px 0;
+
+    color: rgba(255,250,240,.55);
+
+    font-size: 13px;
+}
+
+
+/* Read button */
+
+.lekh-read-btn {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 13px 23px;
+
+    border: 1px solid rgba(255,255,255,.25);
+
+    border-radius: 30px;
+
+    color: #fffaf0;
+
+    text-decoration: none;
+
+    font-weight: 700;
+
+    transition: .25s ease;
+}
+
+.lekh-read-btn:hover {
+    background: #fffaf0;
+
+    color: #3d281d;
+
+    transform: translateY(-3px);
+}
+
+.lekh-read-btn span {
+    transition: .25s ease;
+}
+
+.lekh-read-btn:hover span {
+    transform: translateX(4px);
+}
+
+
+/* Number */
+
+.lekh-featured-mark {
+    position: relative;
+    z-index: 2;
+
+    align-self: center;
+
+    width: 130px;
+    height: 130px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid rgba(255,255,255,.2);
+
+    border-radius: 50%;
+
+    color: #d9b87b;
+
+    font-family:
+        "Baloo 2",
+        sans-serif;
+
+    font-size: 38px;
+
+    font-weight: 800;
+}
+
+
+/* =========================================================
+   ARTICLE COLLECTION
+========================================================= */
+
+.lekh-collection {
+    max-width: 1100px;
+
+    margin: 0 auto;
+
+    padding: 0 30px 120px;
+}
+
+
+/* Heading */
+
+.lekh-section-heading {
+    max-width: 700px;
+
+    margin-bottom: 55px;
+}
+
+.lekh-section-heading > span {
+    display: block;
+
+    margin-bottom: 10px;
+
+    color: #a95d29;
+
+    font-size: 14px;
+
+    font-weight: 800;
+
+    letter-spacing: 1px;
+}
+
+.lekh-section-heading h2 {
+    margin-bottom: 12px;
+
+    font-family:
+        "Baloo 2",
+        "Noto Sans Devanagari",
+        sans-serif;
+
+    font-size: clamp(38px, 5vw, 60px);
+
+    line-height: 1.05;
+
+    font-weight: 800;
+}
+
+.lekh-section-heading h2 strong {
+    color: #a95d29;
+}
+
+.lekh-section-heading p {
+    color: #76675c;
+
+    font-size: 16px;
+
+    line-height: 1.8;
+}
+
+
+/* =========================================================
+   ARTICLE GRID
+========================================================= */
+
+.lekh-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 22px;
+}
+
+
+/* Card */
+
+.lekh-card {
+    position: relative;
+
+    min-height: 330px;
+
+    padding: 30px;
+
+    display: flex;
+    flex-direction: column;
+
+    background: #fffaf0;
+
+    border: 1px solid rgba(61,40,29,.10);
+
+    border-radius: 22px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 12px 30px rgba(61,40,29,.05);
+
+    transition:
+        transform .3s ease,
+        box-shadow .3s ease,
+        border-color .3s ease;
+}
+
+.lekh-card:hover {
+    transform: translateY(-7px);
+
+    border-color: rgba(169,93,41,.28);
+
+    box-shadow:
+        0 22px 45px rgba(61,40,29,.12);
+}
+
+
+/* Top row */
+
+.lekh-card-top {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 25px;
+}
+
+
+/* Number */
+
+.lekh-card-number {
+    color: #b78a4b;
+
+    font-family:
+        "Baloo 2",
+        sans-serif;
+
+    font-size: 14px;
+
+    font-weight: 800;
+}
+
+
+/* Category */
+
+.lekh-card-category {
+    padding: 5px 12px;
+
+    border-radius: 20px;
+
+    background: #f0e2c9;
+
+    color: #7a4a2e;
+
+    font-size: 12px;
+
+    font-weight: 700;
+}
+
+
+/* Icon */
+
+.lekh-card-icon {
+    width: 58px;
+    height: 58px;
+
+    margin-bottom: 22px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 16px;
+
+    background: #ead9b8;
+
+    color: #a95d29;
+
+    font-size: 25px;
+
+    transition: .3s ease;
+}
+
+.lekh-card:hover .lekh-card-icon {
+    background: #3d281d;
+
+    color: #d9b87b;
+
+    transform: rotate(-5deg);
+}
+
+
+/* Card heading */
+
+.lekh-card h3 {
+    margin-bottom: 13px;
+
+    font-family:
+        "Baloo 2",
+        "Noto Sans Devanagari",
+        sans-serif;
+
+    font-size: 27px;
+
+    line-height: 1.25;
+
+    font-weight: 800;
+
+    color: #3d281d;
+}
+
+
+/* Card paragraph */
+
+.lekh-card p {
+    margin-bottom: 25px;
+
+    color: #76675c;
+
+    font-size: 15px;
+
+    line-height: 1.8;
+}
+
+
+/* Bottom */
+
+.lekh-card-bottom {
+    margin-top: auto;
+
+    padding-top: 18px;
+
+    border-top: 1px solid rgba(61,40,29,.09);
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    color: #927d6c;
+
+    font-size: 13px;
+}
+
+
+/* Arrow */
+
+.lekh-arrow {
+    width: 36px;
+    height: 36px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #3d281d;
+
+    color: #fffaf0;
+
+    transition: .25s ease;
+}
+
+.lekh-card:hover .lekh-arrow {
+    background: #a95d29;
+
+    transform: translateX(4px);
+}
+
+
+/* =========================================================
+   AUTHOR
+========================================================= */
+
+.lekh-author {
+    position: relative;
+
+    max-width: 1100px;
+
+    margin: 0 auto 110px;
+
+    padding: 75px 70px;
+
+    border-radius: 28px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ead9b8,
+            #f8f0df
+        );
+
+    border: 1px solid rgba(183,138,75,.25);
+
+    overflow: hidden;
+}
+
+.lekh-author::after {
+    content: "लेख";
+
+    position: absolute;
+
+    right: 45px;
+    bottom: -30px;
+
+    font-family:
+        "Baloo 2",
+        sans-serif;
+
+    font-size: 180px;
+
+    line-height: 1;
+
+    font-weight: 800;
+
+    color: rgba(61,40,29,.045);
+}
+
+.lekh-author-content {
+    position: relative;
+
+    z-index: 2;
+
+    max-width: 650px;
+}
+
+.lekh-author h2 {
+    margin-bottom: 15px;
+
+    font-family:
+        "Baloo 2",
+        "Noto Sans Devanagari",
+        sans-serif;
+
+    font-size: 52px;
+
+    font-weight: 800;
+}
+
+.lekh-author p {
+    margin-bottom: 25px;
+
+    color: #66564b;
+
+    font-size: 16px;
+
+    line-height: 1.9;
+}
+
+
+/* Instagram */
+
+.lekh-instagram {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 12px 20px;
+
+    border-radius: 30px;
+
+    background: #3d281d;
+
+    color: #fffaf0;
+
+    text-decoration: none;
+
+    font-weight: 700;
+
+    transition: .25s ease;
+}
+
+.lekh-instagram:hover {
+    background: #a95d29;
+
+    transform: translateY(-3px);
+}
+
+
+/* Decoration */
+
+.lekh-author-decoration {
+    position: absolute;
+
+    right: 80px;
+    top: 55px;
+
+    width: 90px;
+    height: 90px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid rgba(169,93,41,.25);
+
+    border-radius: 50%;
+
+    color: #a95d29;
+
+    font-size: 22px;
+}
+
+
+/* =========================================================
+   DIGITAL SIGNATURE
+========================================================= */
+
+.lekh-signature {
+    max-width: 650px;
+
+    margin: 0 auto 120px;
+
+    padding: 30px;
+
+    text-align: center;
+}
+
+.signature-label {
+    color: #a95d29;
+
+    font-size: 13px;
+
+    font-weight: 800;
+
+    letter-spacing: 1px;
+}
+
+.signature-line {
+    width: 90px;
+    height: 1px;
+
+    margin: 18px auto;
+
+    background: #b78a4b;
+}
+
+.signature-name {
+    font-family:
+        "Baloo 2",
+        "Noto Sans Devanagari",
+        sans-serif;
+
+    font-size: 27px;
+
+    font-weight: 700;
+
+    color: #3d281d;
+}
+
+.signature-role {
+    margin-top: 4px;
+
+    color: #8a7768;
+
+    font-size: 14px;
+}
+
+.signature-symbol {
+    margin-top: 18px;
+
+    color: #b78a4b;
+
+    font-size: 15px;
+}
+
+
+/* =========================================================
+   INSTAGRAM CTA
+========================================================= */
+
+.lekh-instagram-section {
+    position: relative;
+
+    max-width: 1100px;
+
+    margin: 0 auto 100px;
+
+    padding: 85px 40px;
+
+    text-align: center;
+
+    border-radius: 30px;
+
+    background: #3d281d;
+
+    color: #fffaf0;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 25px 55px rgba(61,40,29,.18);
+}
+
+
+/* Decorative circles */
+
+.lekh-instagram-section::before {
+    content: "";
+
+    position: absolute;
+
+    width: 420px;
+    height: 420px;
+
+    left: -210px;
+    top: -230px;
+
+    border: 1px solid rgba(255,255,255,.10);
+
+    border-radius: 50%;
+}
+
+.lekh-instagram-section::after {
+    content: "";
+
+    position: absolute;
+
+    width: 350px;
+    height: 350px;
+
+    right: -180px;
+    bottom: -220px;
+
+    border: 1px solid rgba(255,255,255,.08);
+
+    border-radius: 50%;
+}
+
+
+.lekh-instagram-section > * {
+    position: relative;
+
+    z-index: 2;
+}
+
+
+.lekh-instagram-section .lekh-eyebrow {
+    background: transparent;
+
+    border-color: rgba(255,255,255,.2);
+
+    color: #d9b87b;
+}
+
+
+.lekh-instagram-section h2 {
+    margin-bottom: 20px;
+
+    font-family:
+        "Baloo 2",
+        "Noto Sans Devanagari",
+        sans-serif;
+
+    font-size: clamp(42px, 6vw, 68px);
+
+    line-height: 1.05;
+
+    font-weight: 800;
+}
+
+.lekh-instagram-section p {
+    max-width: 600px;
+
+    margin: 0 auto 30px;
+
+    color: rgba(255,250,240,.68);
+
+    line-height: 1.8;
+}
+
+
+/* Main Instagram button */
+
+.lekh-instagram-main {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 15px 27px;
+
+    border-radius: 30px;
+
+    background: #fffaf0;
+
+    color: #3d281d;
+
+    text-decoration: none;
+
+    font-weight: 800;
+
+    transition: .25s ease;
+}
+
+.lekh-instagram-main:hover {
+    background: #d9b87b;
+
+    transform: translateY(-4px);
+}
+
+
+/* =========================================================
+   WATERMARK
+========================================================= */
+
+.lekh-watermark {
+    padding: 20px;
+
+    text-align: center;
+
+    color: rgba(61,40,29,.25);
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    letter-spacing: 2px;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 768px) {
+
+    .lekh-hero {
+        min-height: 480px;
+
+        padding: 70px 22px 80px;
+
+        text-align: center;
+
+        justify-content: center;
+    }
+
+    .lekh-hero-content {
+        max-width: 100%;
+    }
+
+    .lekh-hero h1 {
+        font-size: 72px;
+
+        letter-spacing: -2px;
+    }
+
+    .lekh-hero-line {
+        margin: 24px auto;
+    }
+
+    .lekh-hero p {
+        font-size: 15px;
+
+        line-height: 1.8;
+    }
+
+    .lekh-hero-symbol {
+        width: 70px;
+        height: 70px;
+
+        right: 20px;
+        bottom: 25px;
+
+        font-size: 20px;
+    }
+
+
+    /* Featured */
+
+    .lekh-featured {
+        margin: 0 16px 80px;
+
+        padding: 55px 25px 30px;
+
+        grid-template-columns: 1fr;
+
+        gap: 20px;
+
+        border-radius: 22px;
+    }
+
+    .lekh-featured h2 {
+        font-size: 34px;
+    }
+
+    .lekh-featured p {
+        font-size: 15px;
+    }
+
+    .lekh-featured-mark {
+        width: 75px;
+        height: 75px;
+
+        font-size: 24px;
+
+        justify-self: end;
+    }
+
+
+    /* Collection */
+
+    .lekh-collection {
+        padding: 0 16px 80px;
+    }
+
+    .lekh-section-heading {
+        margin-bottom: 35px;
+    }
+
+    .lekh-section-heading h2 {
+        font-size: 40px;
+    }
+
+    .lekh-grid {
+        grid-template-columns: 1fr;
+
+        gap: 16px;
+    }
+
+    .lekh-card {
+        min-height: 310px;
+
+        padding: 25px;
+    }
+
+    .lekh-card h3 {
+        font-size: 25px;
+    }
+
+
+    /* Author */
+
+    .lekh-author {
+        margin: 0 16px 80px;
+
+        padding: 50px 25px;
+
+        border-radius: 22px;
+    }
+
+    .lekh-author h2 {
+        font-size: 42px;
+    }
+
+    .lekh-author p {
+        font-size: 15px;
+    }
+
+    .lekh-author-decoration {
+        right: 20px;
+        top: 25px;
+
+        width: 55px;
+        height: 55px;
+    }
+
+
+    /* Signature */
+
+    .lekh-signature {
+        margin-bottom: 80px;
+
+        padding: 20px;
+    }
+
+    .signature-name {
+        font-size: 22px;
+    }
+
+
+    /* Instagram */
+
+    .lekh-instagram-section {
+        margin: 0 16px 70px;
+
+        padding: 65px 22px;
+
+        border-radius: 22px;
+    }
+
+    .lekh-instagram-section h2 {
+        font-size: 43px;
+    }
+
+    .lekh-instagram-section p {
+        font-size: 15px;
+    }
+
+    .lekh-instagram-main {
+        width: 100%;
+
+        justify-content: center;
+
+        box-sizing: border-box;
+    }
+}
+
+
+/* =========================================================
+   SMALL PHONES
+========================================================= */
+
+@media (max-width: 400px) {
+
+    .lekh-hero {
+        padding-left: 18px;
+        padding-right: 18px;
+    }
+
+    .lekh-hero h1 {
+        font-size: 62px;
+    }
+
+    .lekh-featured {
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+
+    .lekh-card {
+        padding: 22px;
+    }
+
+    .lekh-author {
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+
+    .lekh-instagram-section {
+        margin-left: 10px;
+        margin-right: 10px;
+    }
 }
