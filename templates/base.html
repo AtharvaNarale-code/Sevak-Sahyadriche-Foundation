@@ -156,54 +156,176 @@
 
 </main>
 
+<!-- =====================================================
+     GLOBAL FOOTER
+====================================================== -->
 
-<!-- ================= FOOTER ================= -->
+<footer class="site-footer">
 
-<footer class="footer">
+    <div class="footer-inner">
 
-    <div class="footer-logo">
+        <!-- BRAND -->
 
-        <img
-            src="{{ url_for('static', filename='img/logo.png') }}"
-            alt=" ">
+        <div class="footer-brand">
+
+            <img
+                src="{{ url_for('static', filename='img/logo.png') }}"
+                alt="सेवक सह्याद्रीचे"
+                class="footer-logo"
+            >
+
+            <h3>सेवक सह्याद्रीचे</h3>
+
+            <p class="footer-tagline">
+                इतिहास • संस्कृती • समाज • सह्याद्री
+            </p>
+
+            <p class="footer-description">
+                सह्याद्रीचा वारसा जपत, इतिहासातून प्रेरणा घेऊन
+                समाजासाठी सकारात्मक कार्य करण्याचा एक प्रयत्न.
+            </p>
+
+        </div>
+
+
+        <!-- QUICK LINKS -->
+<div class="footer-column">
+
+    <span class="footer-heading">दुवे</span>
+
+    <a href="{{ url_for('home') }}">
+        मुख्यपृष्ठ
+    </a>
+
+    <a href="{{ url_for('about') }}">
+        आमच्याबद्दल
+    </a>
+
+    <a href="{{ url_for('treks') }}">
+        सूचना
+    </a>
+
+    <a href="{{ url_for('contact') }}">
+        संपर्क
+    </a>
+
+</div>
+        <!-- SOCIAL -->
+
+        <div class="footer-column">
+
+            <span class="footer-heading">
+                आमच्याशी जोडा
+            </span>
+
+            <a
+                href="YOUR_INSTAGRAM_LINK"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="footer-social-link"
+            >
+                <span>◎</span>
+                Instagram
+            </a>
+
+            <a
+                href="YOUR_YOUTUBE_LINK"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="footer-social-link"
+            >
+                <span>▶</span>
+                YouTube
+            </a>
+
+        </div>
 
     </div>
 
-    <h3>
-        सेवक सह्याद्रीचे
-    </h3>
 
-    <p>
-        इतिहास • संस्कृती • समाज • सह्याद्री
-    </p>
+    <!-- BOTTOM -->
 
-    <div class="footer-links">
+    <div class="footer-bottom">
 
-        <a href="{{ url_for('about') }}">
-            आमच्याबद्दल
-        </a>
+        <p>
+            © 2026 सेवक सह्याद्रीचे
+        </p>
 
-        <a href="{{ url_for('contact') }}">
-            संपर्क
-        </a>
-
-        <a href="{{ url_for('donate') }}">
-            देणगी
-        </a>
+        <p class="footer-message">
+            सह्याद्री जपूया • इतिहास जगवूया
+        </p>
 
     </div>
-
-    <div class="copyright">
-
-        © {{ current_year }} सेवक सह्याद्रीचे
-
-    </div>
-
 </footer>
 
 
-<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+<!-- ================= SIDE MENU JAVASCRIPT ================= -->
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const menuButton = document.getElementById("menuButton");
+    const menuClose = document.getElementById("menuClose");
+    const sideMenu = document.getElementById("sideMenu");
+    const menuOverlay = document.getElementById("menuOverlay");
+
+
+    /* OPEN MENU */
+
+    menuButton.addEventListener("click", function () {
+
+        sideMenu.classList.add("active");
+        menuOverlay.classList.add("active");
+
+        document.body.style.overflow = "hidden";
+
+    });
+
+
+    /* CLOSE MENU */
+
+    menuClose.addEventListener("click", function () {
+
+        sideMenu.classList.remove("active");
+        menuOverlay.classList.remove("active");
+
+        document.body.style.overflow = "";
+
+    });
+
+
+    /* CLOSE WHEN CLICKING OUTSIDE */
+
+    menuOverlay.addEventListener("click", function () {
+
+        sideMenu.classList.remove("active");
+        menuOverlay.classList.remove("active");
+
+        document.body.style.overflow = "";
+
+    });
+
+
+    /* CLOSE WITH ESC */
+
+    document.addEventListener("keydown", function (event) {
+
+        if (event.key === "Escape") {
+
+            sideMenu.classList.remove("active");
+            menuOverlay.classList.remove("active");
+
+            document.body.style.overflow = "";
+
+        }
+
+    });
+
+});
+
+</script>
+
 
 </body>
-
 </html>

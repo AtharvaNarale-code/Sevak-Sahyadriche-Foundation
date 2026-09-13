@@ -1,0 +1,439 @@
+{% extends "base.html" %}
+
+{% block title %}
+परदेशस्थ सह्याद्री | सेवक सह्याद्रीचे
+{% endblock %}
+
+{% block content %}
+
+<main class="fd-page">
+
+    <!-- =====================================================
+         HERO
+    ====================================================== -->
+
+    <section class="fd-hero">
+
+        <div class="fd-hero-content">
+
+            <div class="fd-label">
+        परदेशस्थ सह्याद्री
+            </div>
+
+            <h1>
+                मातीपासून दूर,
+                <span>सह्याद्रीपासून नाही.</span>
+            </h1>
+
+            <p class="fd-hero-text">
+                जगाच्या कोणत्याही कोपऱ्यात आपण राहत असलो,
+                तरी आपल्या मातीतल्या इतिहासाशी, संस्कृतीशी
+                आणि सह्याद्रीशी असलेलं नातं कायम जिवंत राहावं,
+                यासाठी एकत्र येऊया.
+            </p>
+
+            <div class="fd-hero-buttons">
+
+                <a href="{{ url_for('contact') }}" class="fd-btn fd-btn-main">
+                    आमच्याशी जोडा
+                    <span>→</span>
+                </a>
+
+                <a href="#fd-vision" class="fd-btn fd-btn-link">
+                    अधिक जाणून घ्या ↓
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- GLOBAL VISUAL -->
+
+        <div class="fd-globe">
+
+            <div class="fd-glow"></div>
+
+            <div class="fd-ring fd-ring-1"></div>
+            <div class="fd-ring fd-ring-2"></div>
+            <div class="fd-ring fd-ring-3"></div>
+
+            <div class="fd-globe-core">
+
+                <small>आपली माती</small>
+
+                <strong>
+                    सह्याद्री
+                </strong>
+
+                <span>
+                    ♥
+                </span>
+
+            </div>
+
+            <div class="fd-location fd-india">
+                <b>●</b>
+                भारत
+            </div>
+
+            <div class="fd-location fd-world">
+                <b>●</b>
+                जगभर
+            </div>
+
+            <div class="fd-location fd-community">
+                <b>●</b>
+                परिवार
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         INTRO STRIP
+    ====================================================== -->
+
+    <section class="fd-intro-strip">
+
+        <div>
+            <strong>एक माती</strong>
+            <span>जिच्याशी नातं कायम</span>
+        </div>
+
+        <div>
+            <strong>एक इतिहास</strong>
+            <span>जो जगाला सांगायचा आहे</span>
+        </div>
+
+        <div>
+            <strong>एक परिवार</strong>
+            <span>जो सीमांच्या पलीकडे आहे</span>
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         VISION
+    ====================================================== -->
+
+    <section class="fd-section fd-vision" id="fd-vision">
+
+        <div class="fd-section-heading">
+
+            <span>आपली संकल्पना</span>
+
+            <h2>
+                अंतर वाढलं,
+                <em>नातं नाही.</em>
+            </h2>
+
+        </div>
+
+
+        <div class="fd-vision-grid">
+
+            <div class="fd-vision-text">
+
+                <p>
+                    आज महाराष्ट्रातील अनेक युवक शिक्षण,
+                    नोकरी आणि व्यवसायाच्या निमित्ताने
+                    जगाच्या विविध देशांमध्ये स्थायिक झाले आहेत.
+                </p>
+
+                <p>
+                    भौगोलिक अंतर वाढलं असलं तरी आपल्या
+                    इतिहासाशी, संस्कृतीशी आणि सह्याद्रीशी
+                    असलेलं नातं तुटायला नको.
+                </p>
+
+                <p>
+                    <strong>
+                        परदेशस्थ सह्याद्री
+                    </strong>
+                    ही याच भावनेतून निर्माण झालेली एक
+                    जोडणी आहे — जिथे जगभरातील
+                    सह्याद्रीप्रेमी एकमेकांशी जोडले जातील,
+                    अनुभवांची देवाणघेवाण करतील आणि
+                    आपल्या मातीसाठी काहीतरी योगदान देतील.
+                </p>
+
+            </div>
+
+
+            <div class="fd-quote-card">
+
+                <div class="fd-quote-mark">
+                    “
+                </div>
+
+                <h3>
+                    सह्याद्रीपासून
+                    कितीही दूर गेलो,
+                    तरी सह्याद्री
+                    आपल्या मनातच असतो.
+                </h3>
+
+                <div class="fd-quote-line"></div>
+
+                <span>
+                    — सेवक सह्याद्रीचे
+                </span>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         WAYS TO CONNECT
+    ====================================================== -->
+
+    <section class="fd-section fd-connect">
+
+        <div class="fd-section-heading center">
+
+            <span>आपली भूमिका</span>
+
+            <h2>
+                तुम्ही कसे
+                <em>जोडू शकता?</em>
+            </h2>
+
+            <p>
+                तुमच्याकडे वेळ असो, ज्ञान असो,
+                कौशल्य असो किंवा फक्त एक चांगली कल्पना —
+                प्रत्येक योगदान महत्त्वाचं आहे.
+            </p>
+
+        </div>
+
+
+        <div class="fd-cards">
+
+
+            <!-- CARD 1 -->
+
+            <article class="fd-card">
+
+                <div class="fd-card-number">
+                    01
+                </div>
+
+                <div class="fd-card-icon">
+                    ✦
+                </div>
+
+                <h3>
+                    ज्ञानाची देवाणघेवाण
+                </h3>
+
+                <p>
+                    इतिहास, संस्कृती, तंत्रज्ञान,
+                    शिक्षण किंवा तुमच्या क्षेत्रातील
+                    अनुभव इतर युवकांपर्यंत पोहोचवा.
+                </p>
+
+                <a href="{{ url_for('contact') }}">
+                    तुमचा अनुभव जोडा →
+                </a>
+
+            </article>
+
+
+            <!-- CARD 2 -->
+
+            <article class="fd-card fd-card-featured">
+
+                <div class="fd-card-number">
+                    02
+                </div>
+
+                <div class="fd-card-icon">
+                    ♥
+                </div>
+
+                <h3>
+                    उपक्रमांना साथ
+                </h3>
+
+                <p>
+                    गडकिल्ले संवर्धन, स्वच्छता,
+                    वृक्षारोपण, इतिहास प्रबोधन आणि
+                    विविध सामाजिक उपक्रमांमध्ये
+                    आपल्या परीने योगदान द्या.
+                </p>
+
+                <a href="{{ url_for('contact') }}">
+                    सेवेत सहभागी व्हा →
+                </a>
+
+            </article>
+
+
+            <!-- CARD 3 -->
+
+            <article class="fd-card">
+
+                <div class="fd-card-number">
+                    03
+                </div>
+
+                <div class="fd-card-icon">
+                    ◎
+                </div>
+
+                <h3>
+                    जागतिक परिवार उभारा
+                </h3>
+
+                <p>
+                    आपल्या शहरातील, देशातील आणि
+                    जगभरातील मराठी व सह्याद्रीप्रेमी
+                    मित्रांना या विचाराशी जोडा.
+                </p>
+
+                <a href="{{ url_for('contact') }}">
+                    परिवाराशी जोडा →
+                </a>
+
+            </article>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         VALUES
+    ====================================================== -->
+
+    <section class="fd-values">
+
+        <div class="fd-values-heading">
+
+            <span>आपले मूल्य</span>
+
+            <h2>
+                परदेशात असूनही
+                <br>
+                <em>मातीशी जोडलेले.</em>
+            </h2>
+
+        </div>
+
+
+        <div class="fd-values-list">
+
+            <div class="fd-value">
+
+                <span>01</span>
+
+                <div>
+                    <h3>इतिहास</h3>
+
+                    <p>
+                        आपल्या गौरवशाली इतिहासाची
+                        ओळख पुढील पिढीपर्यंत पोहोचवणे.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="fd-value">
+
+                <span>02</span>
+
+                <div>
+                    <h3>संस्कृती</h3>
+
+                    <p>
+                        महाराष्ट्राची भाषा, परंपरा
+                        आणि संस्कृती जिवंत ठेवणे.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="fd-value">
+
+                <span>03</span>
+
+                <div>
+                    <h3>समाजसेवा</h3>
+
+                    <p>
+                        आपल्या ज्ञानाचा आणि क्षमतेचा
+                        समाजासाठी सकारात्मक उपयोग करणे.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="fd-value">
+
+                <span>04</span>
+
+                <div>
+                    <h3>एकजूट</h3>
+
+                    <p>
+                        जगभरातील सह्याद्रीप्रेमींना
+                        एका विचाराने जोडणे.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         FINAL CTA
+    ====================================================== -->
+
+    <section class="fd-final">
+
+        <div class="fd-final-decoration">
+            ✦
+        </div>
+
+        <span>
+            अंतर कितीही असो...
+        </span>
+
+        <h2>
+            सह्याद्रीशी नातं
+            <br>
+            <em>जपायचं आहे.</em>
+        </h2>
+
+        <p>
+            चला, जगभरातील सह्याद्रीप्रेमींना
+            एका परिवारात जोडूया.
+        </p>
+
+        <a href="{{ url_for('contact') }}" class="fd-final-button">
+            सेवक सह्याद्रीचे परिवाराशी जोडा
+            <span>→</span>
+        </a>
+
+        <small>
+            सेवक सह्याद्रीचे • परदेशस्थ सह्याद्री
+        </small>
+
+    </section>
+
+</main>
+
+{% endblock %}
