@@ -1,0 +1,39 @@
+{% extends "admin/base_admin.html" %}
+{% block title %}Tourism Planning — Sevak Sahyadriche{% endblock %}
+{% block admin_content %}
+<div class="admin-topbar">
+  <div>
+    <h1>Tourism Planning</h1>
+    <p class="admin-subtitle">Manage upcoming plans, posters, details and past feedback.</p>
+  </div>
+  <a href="{{ url_for('admin_tourism_plan_new') }}" class="btn btn-primary btn-sm">+ Add Plan</a>
+</div>
+
+{% if items %}
+<div class="table-wrap">
+<table class="admin-table">
+  <thead><tr><th>Title</th><th>Location</th><th>Date</th><th>Stage</th><th>Status</th><th>Actions</th></tr></thead>
+  <tbody>
+  {% for item in items %}
+  <tr>
+    <td><strong>{{ item.title }}</strong></td>
+    <td>{{ item.location or '—' }}</td>
+    <td>{{ item.event_date.strftime('%d %b %Y') if item.event_date else '—' }}</td>
+    <td>{{ 'Past' if item.is_completed else 'Upcoming' }}</td>
+    <td><span class="status-dot {{ 'on' if item.is_published else 'off' }}"></span>{{ 'Published' if item.is_published else 'Hidden' }}</td>
+    <td class="action-links">
+      <a href="{{ url_for('tourism_planning') }}" class="btn btn-ghost btn-sm" target="_blank">View</a>
+      <a href="{{ url_for('admin_tourism_plan_edit', item_id=item.id) }}" class="btn btn-ghost btn-sm">Edit</a>
+      <form class="inline-form" method="POST" action="{{ url_for('admin_tourism_plan_delete', item_id=item.id) }}" onsubmit="return confirm('Delete this tourism planning item?');">
+        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+      </form>
+    </td>
+  </tr>
+  {% endfor %}
+  </tbody>
+</table>
+</div>
+{% else %}
+<div class="empty-state"><div style="font-size:32px">🗺️</div><p>No tourism plans added yet.</p></div>
+{% endif %}
+{% endblock %}

@@ -4,417 +4,1191 @@
 लेख | सेवक सह्याद्रीचे
 {% endblock %}
 
+
 {% block content %}
+
+<style>
+
+/* =========================================================
+   LEKH PAGE
+   ========================================================= */
+
+.lekh-page {
+    position: relative;
+
+    min-height: 100vh;
+
+    background: #f7f0df;
+
+    color: #3d281d;
+
+    font-family:
+        "Noto Sans Devanagari",
+        "Baloo 2",
+        sans-serif;
+
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   PAGE BACKGROUND
+   ========================================================= */
+
+.lekh-page::before {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background-image:
+        url("{{ url_for('static', filename='img/lekh-bg.jpeg') }}");
+
+    background-repeat: no-repeat;
+
+    background-position: center top;
+
+    background-size: cover;
+
+    opacity: 0.16;
+
+    pointer-events: none;
+
+    z-index: 0;
+}
+
+
+/* =========================================================
+   LOGO WATERMARK
+   ========================================================= */
+
+.lekh-page::after {
+    content: "";
+
+    position: fixed;
+
+    left: 50%;
+    top: 58%;
+
+    width: 420px;
+    height: 420px;
+
+    transform: translate(-50%, -50%);
+
+    background-image:
+        url("{{ url_for('static', filename='img/logo.png') }}");
+
+    background-repeat: no-repeat;
+
+    background-position: center;
+
+    background-size: contain;
+
+    opacity: 0.035;
+
+    pointer-events: none;
+
+    z-index: 0;
+
+    filter: sepia(0.2);
+}
+
+
+/* =========================================================
+   CONTENT
+   ========================================================= */
+
+.lekh-content {
+    position: relative;
+
+    z-index: 1;
+
+    width: 100%;
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.lekh-header {
+    max-width: 1000px;
+
+    margin: 0 auto;
+
+    padding: 70px 25px 35px;
+
+    text-align: center;
+}
+
+
+.lekh-header h1 {
+    margin: 0;
+
+    color: #3d281d;
+
+    font-family:
+        "Baloo 2",
+        "Noto Sans Devanagari",
+        sans-serif;
+
+    font-size: clamp(55px, 7vw, 90px);
+
+    font-weight: 800;
+
+    line-height: 1;
+}
+
+
+/* =========================================================
+   DIVIDER
+   ========================================================= */
+
+.lekh-divider {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 14px;
+
+    margin: 25px auto 28px;
+}
+
+
+.lekh-divider span {
+    width: 68px;
+
+    height: 1px;
+
+    background: #b78a4b;
+}
+
+
+.lekh-divider i {
+    color: #a95d29;
+
+    font-size: 17px;
+
+    font-style: normal;
+}
+
+
+/* =========================================================
+   PAGE DESCRIPTION
+   ========================================================= */
+
+.lekh-description {
+    max-width: 980px;
+
+    margin: 0 auto;
+
+    padding: 0 28px 70px;
+
+    text-align: center;
+}
+
+
+.lekh-description p {
+    margin: 0 auto;
+
+    color: #615348;
+
+    font-size: 17px;
+
+    line-height: 1.95;
+
+    text-align: center;
+}
+
+
+/* =========================================================
+   ARTICLE SECTION
+   ========================================================= */
+
+.lekh-articles {
+    max-width: 1200px;
+
+    margin: 0 auto;
+
+    padding: 20px 30px 110px;
+}
+
+
+.lekh-section-title {
+    margin-bottom: 30px;
+
+    text-align: center;
+}
+
+
+.lekh-section-title span {
+    display: block;
+
+    margin-bottom: 5px;
+
+    color: #a95d29;
+
+    font-size: 13px;
+
+    font-weight: 800;
+
+    letter-spacing: 0.8px;
+}
+
+
+.lekh-section-title h2 {
+    margin: 0;
+
+    color: #3d281d;
+
+    font-family:
+        "Baloo 2",
+        "Noto Sans Devanagari",
+        sans-serif;
+
+    font-size: 34px;
+
+    font-weight: 800;
+}
+
+
+/* =========================================================
+   ARTICLE LIST
+   ========================================================= */
+
+.lekh-article-list {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 22px;
+}
+
+
+/* =========================================================
+   ARTICLE CARD
+   ========================================================= */
+
+.lekh-article-card {
+    display: grid;
+
+    grid-template-columns:
+        280px minmax(0, 1fr);
+
+    min-height: 240px;
+
+    overflow: hidden;
+
+    background:
+        rgba(255, 250, 240, 0.90);
+
+    border:
+        1px solid rgba(61, 40, 29, 0.12);
+
+    border-radius: 22px;
+
+    box-shadow:
+        0 12px 35px rgba(61, 40, 29, 0.07);
+
+    text-decoration: none;
+
+    color: inherit;
+
+    transition:
+        transform .25s ease,
+        box-shadow .25s ease,
+        border-color .25s ease;
+}
+
+
+.lekh-article-card:hover {
+    transform: translateY(-3px);
+
+    border-color:
+        rgba(169, 93, 41, 0.28);
+
+    box-shadow:
+        0 18px 40px rgba(61, 40, 29, 0.10);
+
+    text-decoration: none;
+
+    color: inherit;
+}
+
+
+/* =========================================================
+   ARTICLE IMAGE
+   ========================================================= */
+
+.lekh-article-image {
+    min-height: 240px;
+
+    overflow: hidden;
+
+    background: #eadfc9;
+}
+
+
+.lekh-article-image img {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    transition:
+        transform .45s ease;
+}
+
+
+.lekh-article-card:hover
+.lekh-article-image img {
+    transform: scale(1.025);
+}
+
+
+/* =========================================================
+   IMAGE PLACEHOLDER
+   ========================================================= */
+
+.lekh-article-placeholder {
+    width: 100%;
+    height: 100%;
+    min-height: 240px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    color: #b78a4b;
+
+    font-size: 30px;
+}
+
+
+/* =========================================================
+   ARTICLE CONTENT
+   ========================================================= */
+
+.lekh-article-content {
+    min-width: 0;
+
+    padding: 34px 35px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+}
+
+
+.lekh-article-number {
+    display: inline-block;
+
+    margin-bottom: 7px;
+
+    color: #b56b32;
+
+    font-size: 12px;
+
+    font-weight: 800;
+}
+
+
+.lekh-article-content h3 {
+    margin: 0 0 12px;
+
+    color: #3d281d;
+
+    font-family:
+        "Baloo 2",
+        "Noto Sans Devanagari",
+        sans-serif;
+
+    font-size: clamp(25px, 3vw, 36px);
+
+    font-weight: 800;
+
+    line-height: 1.2;
+}
+
+
+/* =========================================================
+   ARTICLE EXCERPT
+   ========================================================= */
+
+.lekh-article-excerpt {
+    margin: 0;
+
+    color: #685a50;
+
+    font-size: 14px;
+
+    line-height: 1.8;
+
+    display: -webkit-box;
+
+    -webkit-line-clamp: 4;
+
+    line-clamp: 4;
+
+    -webkit-box-orient: vertical;
+
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   ARTICLE META
+   ========================================================= */
+
+.lekh-article-meta {
+    display: flex;
+
+    align-items: center;
+
+    flex-wrap: wrap;
+
+    gap: 8px 15px;
+
+    margin-top: 17px;
+
+    color: #927866;
+
+    font-size: 11px;
+
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   READ MORE
+   ========================================================= */
+
+.lekh-read-more {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    align-self: flex-start;
+
+    margin-top: 18px;
+
+    padding: 9px 17px;
+
+    border: 1px solid #3d281d;
+
+    border-radius: 100px;
+
+    color: #3d281d;
+
+    background: transparent;
+
+    text-decoration: none;
+
+    font-size: 12px;
+
+    font-weight: 800;
+
+    transition: .2s ease;
+}
+
+
+.lekh-read-more span {
+    color: #a95d29;
+
+    transition:
+        transform .2s ease;
+}
+
+
+.lekh-read-more:hover {
+    background: #3d281d;
+
+    color: #f7f0df;
+
+    text-decoration: none;
+}
+
+
+.lekh-read-more:hover span {
+    transform: translateX(3px);
+}
+
+
+/* =========================================================
+   EMPTY ARTICLE STATE
+   ========================================================= */
+
+.lekh-empty {
+    padding: 70px 25px;
+
+    border:
+        1px dashed rgba(61, 40, 29, 0.22);
+
+    border-radius: 20px;
+
+    color: #806f61;
+
+    text-align: center;
+}
+
+
+.lekh-empty-icon {
+    margin-bottom: 10px;
+
+    color: #b78a4b;
+
+    font-size: 28px;
+}
+
+
+.lekh-empty h3 {
+    margin: 0 0 5px;
+
+    color: #3d281d;
+
+    font-size: 22px;
+}
+
+
+.lekh-empty p {
+    margin: 0;
+
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   FOOTER NOTE
+   ========================================================= */
+
+.lekh-bottom-mark {
+    max-width: 1000px;
+
+    margin: 0 auto;
+
+    padding: 0 25px 80px;
+
+    color: rgba(61, 40, 29, 0.32);
+
+    font-size: 11px;
+
+    letter-spacing: 2px;
+
+    text-align: center;
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+    .lekh-header {
+        padding-top: 60px;
+    }
+
+
+    .lekh-description {
+        padding-left: 35px;
+
+        padding-right: 35px;
+    }
+
+
+    .lekh-articles {
+        padding-left: 25px;
+
+        padding-right: 25px;
+    }
+
+
+    .lekh-article-card {
+        grid-template-columns:
+            220px minmax(0, 1fr);
+    }
+
+
+    .lekh-article-image {
+        min-height: 220px;
+    }
+
+
+    .lekh-article-content {
+        padding: 28px;
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+    .lekh-page::before {
+        opacity: 0.10;
+
+        background-size: auto 100%;
+
+        background-position: center top;
+    }
+
+
+    .lekh-page::after {
+        position: absolute;
+
+        width: 280px;
+        height: 280px;
+
+        top: 55%;
+
+        opacity: 0.025;
+    }
+
+
+    .lekh-header {
+        padding:
+            50px
+            18px
+            30px;
+    }
+
+
+    .lekh-header h1 {
+        font-size: 58px;
+    }
+
+
+    .lekh-divider {
+        margin-top: 21px;
+
+        gap: 10px;
+    }
+
+
+    .lekh-divider span {
+        width: 45px;
+    }
+
+
+    .lekh-description {
+        padding:
+            0
+            18px
+            55px;
+    }
+
+
+    .lekh-description p {
+        font-size: 14px;
+
+        line-height: 1.9;
+    }
+
+
+    .lekh-articles {
+        padding:
+            5px
+            16px
+            70px;
+    }
+
+
+    .lekh-section-title h2 {
+        font-size: 29px;
+    }
+
+
+    .lekh-article-card {
+        display: block;
+
+        border-radius: 18px;
+    }
+
+
+    .lekh-article-image {
+        height: 220px;
+
+        min-height: 0;
+    }
+
+
+    .lekh-article-placeholder {
+        min-height: 220px;
+    }
+
+
+    .lekh-article-content {
+        padding: 24px 20px;
+    }
+
+
+    .lekh-article-content h3 {
+        font-size: 25px;
+    }
+
+
+    .lekh-article-excerpt {
+        font-size: 13px;
+
+        line-height: 1.75;
+
+        -webkit-line-clamp: 5;
+        line-clamp: 5;
+    }
+
+
+    .lekh-article-meta {
+        font-size: 10px;
+    }
+
+
+    .lekh-bottom-mark {
+        padding-bottom: 50px;
+    }
+
+}
+
+
+/* =========================================================
+   SMALL PHONES
+   ========================================================= */
+
+@media (max-width: 400px) {
+
+    .lekh-header {
+        padding-top: 42px;
+    }
+
+
+    .lekh-header h1 {
+        font-size: 50px;
+    }
+
+
+    .lekh-description p {
+        font-size: 13px;
+    }
+
+
+    .lekh-article-image {
+        height: 190px;
+    }
+
+
+    .lekh-article-placeholder {
+        min-height: 190px;
+    }
+
+
+    .lekh-article-content {
+        padding: 21px 17px;
+    }
+
+
+    .lekh-article-content h3 {
+        font-size: 22px;
+    }
+
+}
+
+</style>
+
+
+<!-- =========================================================
+     LEKH PAGE
+     ========================================================= -->
 
 <section class="lekh-page">
 
-    <!-- =================================================
-         HERO
-    ================================================= -->
-    <section class="lekh-hero">
+    <div class="lekh-content">
 
-        <div class="lekh-hero-content">
 
-            <span class="lekh-eyebrow">
-                विचार • इतिहास • संस्कृती
-            </span>
+        <!-- =================================================
+             TITLE
+        ================================================== -->
+
+        <section class="lekh-header">
 
             <h1>
                 लेख
             </h1>
 
-            <div class="lekh-hero-line"></div>
 
-            <p>
-                इतिहास, सह्याद्री, संस्कृती आणि समाजाविषयी
-                विचार मांडणारे लेख.
-                पुराव्यांवर आधारित माहिती, वेगळे विचार
-                आणि आपल्या इतिहासाकडे पाहण्याची नवी दृष्टी.
-            </p>
+            <div class="lekh-divider">
 
-        </div>
+                <span></span>
 
-        <div class="lekh-hero-symbol">
-            ✦
-        </div>
+                <i>✦</i>
 
-    </section>
+                <span></span>
 
-
-    <!-- =================================================
-         FEATURED ARTICLE
-    ================================================= -->
-
-    <section class="lekh-featured">
-
-        <div class="lekh-featured-label">
-            विशेष लेख
-        </div>
-
-        <div class="lekh-featured-content">
-
-            <span class="lekh-category">
-                इतिहास
-            </span>
-
-            <h2>
-                इतिहास केवळ वाचायचा नसतो,
-                <span>समजून घ्यायचा असतो.</span>
-            </h2>
-
-            <p>
-                आपल्या इतिहासातील घटना, व्यक्ती आणि परंपरांकडे
-                केवळ अभिमानाने न पाहता त्यामागील सत्य,
-                संदर्भ आणि पुरावे समजून घेण्याचा एक प्रयत्न.
-            </p>
-
-            <div class="lekh-meta">
-                <span>लेखक : श्रेयश अस्मिता समिंद्र पाटील</span>
-                <span>•</span>
-                <span>सेवक सह्याद्रीचे</span>
             </div>
 
-            <a href="#articles" class="lekh-read-btn">
-                लेख वाचा
-                <span>→</span>
-            </a>
-
-        </div>
-
-        <div class="lekh-featured-mark">
-            ०१
-        </div>
-
-    </section>
+        </section>
 
 
-    <!-- =================================================
-         ARTICLE COLLECTION
-    ================================================= -->
+        <!-- =================================================
+             DESCRIPTION
+        ================================================== -->
 
-    <section class="lekh-collection" id="articles">
-
-        <div class="lekh-section-heading">
-
-            <span>
-                आमचे लेख
-            </span>
-
-            <h2>
-                विचारांची एक छोटीशी
-                <strong>जत्रा.</strong>
-            </h2>
+        <section class="lekh-description">
 
             <p>
-                इतिहासापासून संस्कृतीपर्यंत आणि सणांच्या
-                माहितीपासून सामाजिक विचारांपर्यंत.
+                गड-किल्ले, ऐतिहासिक घटना, व्यक्तिमत्त्वे, परंपरा,
+                संस्कृती आणि विविध सामाजिक-सांस्कृतिक विषयांवर
+                संदर्भाधारित लेखन व वैचारिक मांडणी.
             </p>
 
+        </section>
+
+
+        <!-- =================================================
+             ARTICLE SECTION
+        ================================================== -->
+
+        <section class="lekh-articles">
+
+
+            <div class="lekh-section-title">
+
+                <span>
+                    आमचे लेख
+                </span>
+
+                <h2>
+                    विचार आणि इतिहासाची मांडणी
+                </h2>
+
+            </div>
+
+
+            <!-- =================================================
+                 DYNAMIC ARTICLE LIST
+            ================================================== -->
+
+            <div class="lekh-article-list">
+
+
+                {% if articles %}
+
+
+                    {% for article in articles %}
+
+                    <a
+                        href="{{ url_for('lekh_detail', article_id=article.id) }}"
+                        class="lekh-article-card"
+                    >
+
+
+                        <!-- =====================================
+                             IMAGE
+                        ====================================== -->
+
+                        <div class="lekh-article-image">
+
+                            {% if article.image_url %}
+
+                                <img
+                                    src="{{ article.image_url }}"
+                                    alt="{{ article.title }}"
+                                    loading="lazy"
+                                >
+
+                            {% else %}
+
+                                <div class="lekh-article-placeholder">
+                                    ✦
+                                </div>
+
+                            {% endif %}
+
+                        </div>
+
+
+                        <!-- =====================================
+                             CONTENT
+                        ====================================== -->
+
+                        <div class="lekh-article-content">
+
+
+                            <span class="lekh-article-number">
+
+                                लेख
+                                {{ '%02d' | format(loop.index) }}
+
+                            </span>
+
+
+                            <h3>
+                                {{ article.title }}
+                            </h3>
+
+
+                            <p class="lekh-article-excerpt">
+                                {{ article.text }}
+                            </p>
+
+
+                            <!-- =================================
+                                 META
+                            ================================== -->
+
+                            <div class="lekh-article-meta">
+
+                                <span>
+                                    सेवक सह्याद्रीचे
+                                </span>
+
+
+                                {% if article.created_at %}
+
+                                <span>
+                                    •
+                                </span>
+
+                                <span>
+                                    {{ article.created_at.strftime('%d %B %Y') }}
+                                </span>
+
+                                {% endif %}
+
+                            </div>
+
+
+                            <!-- =================================
+                                 READ MORE
+                            ================================== -->
+
+                            <span class="lekh-read-more">
+
+                                पूर्ण लेख
+
+                                <span>
+                                    →
+                                </span>
+
+                            </span>
+
+
+                        </div>
+
+
+                    </a>
+
+                    {% endfor %}
+
+
+                {% else %}
+
+
+                    <!-- =====================================
+                         EMPTY STATE
+                    ====================================== -->
+
+                    <div class="lekh-empty">
+
+                        <div class="lekh-empty-icon">
+                            ✦
+                        </div>
+
+
+                        <h3>
+                            लेख लवकरच येथे प्रकाशित होतील
+                        </h3>
+
+
+                        <p>
+                            नवीन लेख, विचार आणि संदर्भाधारित
+                            मांडणी येथे उपलब्ध होईल.
+                        </p>
+
+                    </div>
+
+
+                {% endif %}
+
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             BOTTOM MARK
+        ================================================== -->
+
+        <div class="lekh-bottom-mark">
+
+            SEVAK SAHYADRICHE
+            •
+            इतिहास
+            •
+            संस्कृती
+            •
+            विचार
+
         </div>
 
 
-        <div class="lekh-grid">
-
-
-            <!-- ARTICLE 01 -->
-
-            <article class="lekh-card">
-
-                <div class="lekh-card-top">
-
-                    <span class="lekh-card-number">
-                        ०१
-                    </span>
-
-                    <span class="lekh-card-category">
-                        इतिहास
-                    </span>
-
-                </div>
-
-                <div class="lekh-card-icon">
-                    ✦
-                </div>
-
-                <h3>
-                    आपल्या इतिहासाकडे
-                    पाहण्याची नवी दृष्टी
-                </h3>
-
-                <p>
-                    इतिहासातील घटनांकडे पुराव्यांच्या आधारे
-                    पाहणे आणि त्यातून वर्तमानासाठी काहीतरी
-                    शिकण्याचा प्रयत्न.
-                </p>
-
-                <div class="lekh-card-bottom">
-
-                    <span>
-                        वाचनासाठी लवकरच
-                    </span>
-
-                    <span class="lekh-arrow">
-                        →
-                    </span>
-
-                </div>
-
-            </article>
-
-
-            <!-- ARTICLE 02 -->
-
-            <article class="lekh-card">
-
-                <div class="lekh-card-top">
-
-                    <span class="lekh-card-number">
-                        ०२
-                    </span>
-
-                    <span class="lekh-card-category">
-                        सह्याद्री
-                    </span>
-
-                </div>
-
-                <div class="lekh-card-icon">
-                    ⛰
-                </div>
-
-                <h3>
-                    गडकिल्ले म्हणजे
-                    केवळ दगड-माती नाही
-                </h3>
-
-                <p>
-                    सह्याद्रीतील गड-किल्ल्यांचा इतिहास,
-                    त्यांचे महत्त्व आणि त्यांच्याशी जोडलेली
-                    आपली सांस्कृतिक ओळख.
-                </p>
-
-                <div class="lekh-card-bottom">
-
-                    <span>
-                        वाचनासाठी लवकरच
-                    </span>
-
-                    <span class="lekh-arrow">
-                        →
-                    </span>
-
-                </div>
-
-            </article>
-
-
-            <!-- ARTICLE 03 -->
-
-            <article class="lekh-card">
-
-                <div class="lekh-card-top">
-
-                    <span class="lekh-card-number">
-                        ०३
-                    </span>
-
-                    <span class="lekh-card-category">
-                        संस्कृती
-                    </span>
-
-                </div>
-
-                <div class="lekh-card-icon">
-                    ◉
-                </div>
-
-                <h3>
-                    आपल्या सणांमागची
-                    गोष्ट काय आहे?
-                </h3>
-
-                <p>
-                    आपल्या सण-उत्सवांच्या परंपरा,
-                    त्यामागील इतिहास आणि आजच्या काळातील
-                    त्यांचे महत्त्व.
-                </p>
-
-                <div class="lekh-card-bottom">
-
-                    <span>
-                        वाचनासाठी लवकरच
-                    </span>
-
-                    <span class="lekh-arrow">
-                        →
-                    </span>
-
-                </div>
-
-            </article>
-
-
-            <!-- ARTICLE 04 -->
-
-            <article class="lekh-card">
-
-                <div class="lekh-card-top">
-
-                    <span class="lekh-card-number">
-                        ०४
-                    </span>
-
-                    <span class="lekh-card-category">
-                        विचार
-                    </span>
-
-                </div>
-
-                <div class="lekh-card-icon">
-                    ✎
-                </div>
-
-                <h3>
-                    इतिहासातून प्रेरणा,
-                    वर्तमानात कृती
-                </h3>
-
-                <p>
-                    आपल्या पूर्वजांच्या कार्यातून नेतृत्व,
-                    शिस्त, नियोजन आणि सामाजिक बांधिलकी
-                    शिकण्याचा प्रयत्न.
-                </p>
-
-                <div class="lekh-card-bottom">
-
-                    <span>
-                        वाचनासाठी लवकरच
-                    </span>
-
-                    <span class="lekh-arrow">
-                        →
-                    </span>
-
-                </div>
-
-            </article>
-
-
-        </div>
-
-    </section>
-
-
-    <!-- =================================================
-         FOUNDER / WRITER
-    ================================================= -->
-
-    <section class="lekh-author">
-
-        <div class="lekh-author-decoration">
-            ✦
-        </div>
-
-        <div class="lekh-author-content">
-
-            <span class="lekh-eyebrow">
-                या लेखांमागचा आवाज
-            </span>
-
-            <h2>
-                श्रेयश पाटील
-            </h2>
-
-            <p>
-                इतिहास, संस्कृती आणि समाजाविषयीचे विचार,
-                संदर्भ आणि पुराव्यांवर आधारित माहिती
-                मांडण्याचा एक प्रयत्न.
-            </p>
-
-            <a
-                href="https://www.instagram.com/shreyas_patil_writes?stkn=Zmt6aWw0ZmRhMW9x"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="lekh-instagram"
-            >
-                Shreyas Patil Writes
-                <span>↗</span>
-            </a>
-
-        </div>
-
-    </section>
-
-
-    <!-- =================================================
-         DIGITAL SIGNATURE
-    ================================================= -->
-
-    <section class="lekh-signature">
-
-        <span class="signature-label">
-            लेखक
-        </span>
-
-        <div class="signature-line"></div>
-
-        <div class="signature-name">
-            श्रेयश अस्मिता समिंद्र पाटील
-        </div>
-
-        <div class="signature-role">
-            संस्थापक, सेवक सह्याद्रीचे
-        </div>
-
-        <div class="signature-symbol">
-            ✦
-        </div>
-
-    </section>
-
-
-    <!-- =================================================
-         INSTAGRAM CTA
-    ================================================= -->
-
-    <section class="lekh-instagram-section">
-
-        <span class="lekh-eyebrow">
-            आणखी विचारांसाठी
-        </span>
-
-        <h2>
-            लेख वाचा.
-            <br>
-            विचार जोडा.
-        </h2>
-
-        <p>
-            इतिहास, संस्कृती आणि वेगळ्या विचारांसाठी
-            श्रेयश पाटील यांच्या Instagram पेजला भेट द्या.
-        </p>
-
-        <a
-            href="https://www.instagram.com/shreyas_patil_writes?stkn=Zmt6aWw0ZmRhMW9x"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="lekh-instagram-main"
-        >
-            Instagram वर भेट द्या
-            <span>↗</span>
-        </a>
-
-    </section>
-
-
-    <!-- =================================================
-         COPYRIGHT / WATERMARK
-    ================================================= -->
-
-    <div class="lekh-watermark">
-        SEVAK SAHYADRICHЕ • इतिहास • विचार • संस्कृती
     </div>
 
 </section>
+
+
+<script>
+
+/* =========================================================
+   LEKH PAGE JS
+   ========================================================= */
+
+document.addEventListener("DOMContentLoaded", function () {
+
+
+    /* -------------------------------------------------------
+       ARTICLE CARDS
+    ------------------------------------------------------- */
+
+    const articleCards =
+        document.querySelectorAll(".lekh-article-card");
+
+
+    articleCards.forEach(function (card) {
+
+
+        /* Prevent image dragging */
+
+        const image =
+            card.querySelector(".lekh-article-image img");
+
+
+        if (image) {
+
+            image.addEventListener(
+                "dragstart",
+                function (event) {
+
+                    event.preventDefault();
+
+                }
+            );
+
+        }
+
+
+        /* Small click feedback */
+
+        card.addEventListener(
+            "click",
+            function () {
+
+                card.style.transform =
+                    "translateY(-1px)";
+
+                setTimeout(
+                    function () {
+
+                        card.style.transform = "";
+
+                    },
+                    120
+                );
+
+            }
+        );
+
+    });
+
+
+    /* -------------------------------------------------------
+       SCROLL REVEAL
+    ------------------------------------------------------- */
+
+    const cards =
+        document.querySelectorAll(".lekh-article-card");
+
+
+    if ("IntersectionObserver" in window) {
+
+
+        const observer =
+            new IntersectionObserver(
+                function (entries, observer) {
+
+
+                    entries.forEach(
+                        function (entry) {
+
+
+                            if (
+                                entry.isIntersecting
+                            ) {
+
+
+                                entry.target.style.opacity =
+                                    "1";
+
+
+                                entry.target.style.transform =
+                                    "translateY(0)";
+
+
+                                observer.unobserve(
+                                    entry.target
+                                );
+
+                            }
+
+                        }
+                    );
+
+                },
+                {
+                    threshold: 0.08
+                }
+            );
+
+
+        cards.forEach(
+            function (card) {
+
+
+                card.style.opacity = "0";
+
+                card.style.transform =
+                    "translateY(18px)";
+
+                card.style.transition =
+                    "opacity 0.5s ease, " +
+                    "transform 0.5s ease, " +
+                    "box-shadow 0.25s ease, " +
+                    "border-color 0.25s ease";
+
+
+                observer.observe(card);
+
+            }
+        );
+
+    }
+
+});
+
+</script>
+
 
 {% endblock %}

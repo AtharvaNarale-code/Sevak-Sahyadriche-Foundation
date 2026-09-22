@@ -1,379 +1,1428 @@
 {% extends "base.html" %}
 
 {% block title %}
-युवा मंच • सेवक सह्याद्रीचे
+अभ्युदय | सेवक सह्याद्रीचे
 {% endblock %}
+
 
 {% block content %}
 
+<style>
+
+/* =========================================================
+   ABHYUDAY / YUVA MANCH PAGE
+   ========================================================= */
+
+.abhyuday-page {
+    position: relative;
+
+    width: 100%;
+    min-height: 100vh;
+
+    background: #f7f0df;
+
+    color: #3d281d;
+
+    font-family:
+        "Noto Sans Devanagari",
+        "Baloo 2",
+        sans-serif;
+
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   BACKGROUND ART
+   ========================================================= */
+
+.abhyuday-page::before {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    background-image:
+        url("{{ url_for('static', filename='img/abhyuday-bg.jpeg') }}");
+
+    background-repeat: no-repeat;
+
+    background-position: center top;
+
+    background-size: cover;
+
+    opacity: 0.16;
+
+    pointer-events: none;
+
+    z-index: 0;
+}
+
+
+/* =========================================================
+   CONTENT
+   ========================================================= */
+
+.abhyuday-content {
+    position: relative;
+
+    z-index: 1;
+
+    width: 100%;
+}
+
+
+/* =========================================================
+   TITLE SECTION
+   ========================================================= */
+
+.abhyuday-title-section {
+    max-width: 1100px;
+
+    margin: 0 auto;
+
+    padding: 75px 30px 40px;
+
+    text-align: center;
+}
+
+
+.abhyuday-title {
+    margin: 0;
+
+    color: #3d281d;
+
+    font-family:
+        "Baloo 2",
+        "Noto Sans Devanagari",
+        sans-serif;
+
+    font-size: clamp(42px, 5vw, 62px);
+
+    font-weight: 800;
+
+    line-height: 1.15;
+}
+
+
+/* =========================================================
+   ACRONYM
+   ========================================================= */
+
+.abhyuday-acronym {
+    max-width: 950px;
+
+    margin: 28px auto 0;
+
+    color: #6c594c;
+
+    font-family:
+        "Baloo 2",
+        sans-serif;
+
+    font-size: 15px;
+
+    line-height: 2;
+
+    text-align: center;
+}
+
+
+.abhyuday-acronym-row {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    flex-wrap: wrap;
+
+    gap: 5px 19px;
+}
+
+
+.abhyuday-acronym-item {
+    white-space: nowrap;
+}
+
+
+.abhyuday-acronym-item strong {
+    color: #a95d29;
+
+    font-size: 18px;
+
+    font-weight: 800;
+}
+
+
+.abhyuday-acronym-item span {
+    color: #6c594c;
+}
+
+
+/* =========================================================
+   TITLE DIVIDER
+   ========================================================= */
+
+.abhyuday-title-divider {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 12px;
+
+    margin-top: 25px;
+}
+
+
+.abhyuday-title-divider span {
+    width: 55px;
+
+    height: 1px;
+
+    background: #b78a4b;
+}
+
+
+.abhyuday-title-divider i {
+    color: #a95d29;
+
+    font-size: 15px;
+
+    font-style: normal;
+}
+
+
+/* =========================================================
+   DESCRIPTION
+   ========================================================= */
+
+.abhyuday-description {
+    max-width: 1120px;
+
+    margin: 0 auto;
+
+    padding: 20px 40px 75px;
+}
+
+
+.abhyuday-description-text {
+    width: 100%;
+
+    color: #4e423a;
+
+    font-size: 17px;
+
+    font-weight: 500;
+
+    line-height: 2;
+
+    text-align: justify;
+}
+
+
+.abhyuday-description-text p {
+    margin: 0 0 28px;
+
+    text-align: justify;
+}
+
+
+/* =========================================================
+   FINAL STATEMENT
+   ========================================================= */
+
+.abhyuday-final {
+    margin-top: 40px;
+
+    padding-top: 28px;
+
+    border-top: 1px solid rgba(183, 138, 75, 0.38);
+
+    color: #3d281d;
+
+    font-size: 18px;
+
+    font-weight: 600;
+
+    line-height: 1.9;
+
+    text-align: center;
+}
+
+
+.abhyuday-final strong {
+    color: #a95d29;
+
+    font-weight: 800;
+}
+
+
+/* =========================================================
+   PROGRAM SECTION
+   ========================================================= */
+
+.abhyuday-programs {
+    max-width: 1200px;
+
+    margin: 0 auto;
+
+    padding: 15px 30px 100px;
+}
+
+
+.abhyuday-program-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 28px;
+
+    align-items: start;
+}
+
+
+/* =========================================================
+   PROGRAM COLUMN
+   ========================================================= */
+
+.abhyuday-program-column {
+    padding: 28px;
+
+    background:
+        rgba(255, 250, 240, 0.82);
+
+    border:
+        1px solid rgba(61, 40, 29, 0.13);
+
+    border-radius: 22px;
+
+    box-shadow:
+        0 12px 35px rgba(61, 40, 29, 0.06);
+}
+
+
+/* =========================================================
+   PROGRAM LABEL
+   ========================================================= */
+
+.abhyuday-program-label {
+    display: block;
+
+    margin-bottom: 5px;
+
+    color: #a95d29;
+
+    font-size: 13px;
+
+    font-weight: 800;
+
+    text-align: center;
+
+    letter-spacing: 0.5px;
+}
+
+
+/* =========================================================
+   PROGRAM TITLE
+   ========================================================= */
+
+.abhyuday-program-title {
+    margin: 0 0 25px;
+
+    color: #3d281d;
+
+    font-family:
+        "Baloo 2",
+        "Noto Sans Devanagari",
+        sans-serif;
+
+    font-size: 30px;
+
+    font-weight: 800;
+
+    line-height: 1.2;
+
+    text-align: center;
+}
+
+
+/* =========================================================
+   SESSION LIST
+   ========================================================= */
+
+.abhyuday-session-list {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 13px;
+}
+
+
+/* =========================================================
+   SESSION CARD
+   ========================================================= */
+
+.abhyuday-session-card {
+    display: flex;
+
+    align-items: center;
+
+    gap: 16px;
+
+    min-height: 92px;
+
+    padding: 12px 15px;
+
+    box-sizing: border-box;
+
+    background:
+        rgba(251, 246, 234, 0.95);
+
+    border:
+        1px solid rgba(61, 40, 29, 0.12);
+
+    border-radius: 16px;
+
+    text-decoration: none;
+
+    color: inherit;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        border-color 0.2s ease;
+}
+
+
+.abhyuday-session-card:hover {
+    transform: translateY(-3px);
+
+    border-color:
+        rgba(169, 93, 41, 0.30);
+
+    box-shadow:
+        0 8px 22px rgba(61, 40, 29, 0.08);
+
+    text-decoration: none;
+
+    color: inherit;
+}
+
+
+/* =========================================================
+   SESSION IMAGE
+   ========================================================= */
+
+.abhyuday-session-image {
+    flex: 0 0 64px;
+
+    width: 64px;
+
+    height: 64px;
+
+    overflow: hidden;
+
+    border-radius: 50%;
+
+    border: 2px solid #b78a4b;
+
+    background: #eadfc9;
+}
+
+
+.abhyuday-session-image img {
+    display: block;
+
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: cover;
+}
+
+
+/* =========================================================
+   FALLBACK IMAGE
+   ========================================================= */
+
+.abhyuday-session-placeholder {
+    width: 100%;
+
+    height: 100%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    color: #a95d29;
+
+    font-size: 20px;
+}
+
+
+/* =========================================================
+   SESSION NUMBER
+   ========================================================= */
+
+.abhyuday-session-number {
+    flex: 0 0 40px;
+
+    text-align: center;
+}
+
+
+.abhyuday-session-number strong {
+    display: block;
+
+    color: #3d281d;
+
+    font-size: 21px;
+
+    font-weight: 800;
+
+    line-height: 1;
+}
+
+
+.abhyuday-session-number span {
+    display: block;
+
+    margin-top: 4px;
+
+    color: #a95d29;
+
+    font-size: 10px;
+
+    font-weight: 800;
+}
+
+
+/* =========================================================
+   SESSION TEXT
+   ========================================================= */
+
+.abhyuday-session-info {
+    flex: 1;
+
+    min-width: 0;
+}
+
+
+.abhyuday-session-info h4 {
+    margin: 0 0 4px;
+
+    color: #3d281d;
+
+    font-family:
+        "Baloo 2",
+        "Noto Sans Devanagari",
+        sans-serif;
+
+    font-size: 17px;
+
+    font-weight: 800;
+
+    line-height: 1.3;
+}
+
+
+.abhyuday-session-info p {
+    margin: 0;
+
+    color: #75665a;
+
+    font-size: 12px;
+
+    line-height: 1.5;
+
+    display: -webkit-box;
+
+    -webkit-line-clamp: 2;
+
+    line-clamp: 2;
+
+    -webkit-box-orient: vertical;
+
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   DATE
+   ========================================================= */
+
+.abhyuday-session-date {
+    margin-top: 6px;
+
+    color: #a95d29;
+
+    font-size: 11px;
+
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   ARROW
+   ========================================================= */
+
+.abhyuday-session-arrow {
+    flex: 0 0 auto;
+
+    color: #a95d29;
+
+    font-size: 21px;
+
+    transition:
+        transform 0.2s ease;
+}
+
+
+.abhyuday-session-card:hover
+.abhyuday-session-arrow {
+    transform: translateX(4px);
+}
+
+
+/* =========================================================
+   EMPTY STATE
+   ========================================================= */
+
+.abhyuday-empty {
+    padding: 35px 20px;
+
+    border:
+        1px dashed rgba(61, 40, 29, 0.20);
+
+    border-radius: 16px;
+
+    text-align: center;
+
+    background:
+        rgba(255, 250, 240, 0.60);
+}
+
+
+.abhyuday-empty-icon {
+    margin-bottom: 10px;
+
+    color: #b78a4b;
+
+    font-size: 24px;
+}
+
+
+.abhyuday-empty h3 {
+    margin: 0 0 6px;
+
+    color: #3d281d;
+
+    font-size: 16px;
+}
+
+
+.abhyuday-empty p {
+    margin: 0;
+
+    color: #75665a;
+
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+    .abhyuday-title-section {
+        padding-top: 60px;
+    }
+
+
+    .abhyuday-description {
+        padding-left: 28px;
+
+        padding-right: 28px;
+    }
+
+
+    .abhyuday-description-text {
+        font-size: 16px;
+    }
+
+
+    .abhyuday-programs {
+        padding-left: 25px;
+
+        padding-right: 25px;
+    }
+
+
+    .abhyuday-program-grid {
+        gap: 20px;
+    }
+
+
+    .abhyuday-program-column {
+        padding: 23px 18px;
+    }
+
+
+    .abhyuday-program-title {
+        font-size: 27px;
+    }
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+    .abhyuday-page::before {
+        opacity: 0.12;
+
+        background-size: auto 100%;
+
+        background-position: center top;
+    }
+
+
+    .abhyuday-title-section {
+        padding:
+            48px
+            18px
+            28px;
+    }
+
+
+    .abhyuday-title {
+        font-size: 36px;
+    }
+
+
+    .abhyuday-acronym {
+        margin-top: 22px;
+
+        padding: 0 8px;
+
+        font-size: 12px;
+
+        line-height: 1.9;
+    }
+
+
+    .abhyuday-acronym-row {
+        gap: 3px 10px;
+    }
+
+
+    .abhyuday-acronym-item strong {
+        font-size: 15px;
+    }
+
+
+    .abhyuday-title-divider {
+        margin-top: 20px;
+    }
+
+
+    .abhyuday-title-divider span {
+        width: 40px;
+    }
+
+
+    .abhyuday-description {
+        padding:
+            15px
+            18px
+            55px;
+    }
+
+
+    .abhyuday-description-text {
+        font-size: 15px;
+
+        line-height: 1.9;
+    }
+
+
+    .abhyuday-description-text p {
+        margin-bottom: 23px;
+
+        text-align: justify;
+    }
+
+
+    .abhyuday-final {
+        margin-top: 30px;
+
+        padding-top: 22px;
+
+        font-size: 15px;
+
+        line-height: 1.8;
+    }
+
+
+    /* PROGRAMS */
+
+    .abhyuday-programs {
+        padding:
+            5px
+            15px
+            70px;
+    }
+
+
+    .abhyuday-program-grid {
+        grid-template-columns: 1fr;
+
+        gap: 22px;
+    }
+
+
+    .abhyuday-program-column {
+        padding:
+            22px
+            15px;
+
+        border-radius: 18px;
+    }
+
+
+    .abhyuday-program-title {
+        font-size: 26px;
+
+        margin-bottom: 20px;
+    }
+
+
+    .abhyuday-session-card {
+        min-height: 82px;
+
+        gap: 10px;
+
+        padding: 9px;
+    }
+
+
+    .abhyuday-session-image {
+        flex-basis: 55px;
+
+        width: 55px;
+
+        height: 55px;
+    }
+
+
+    .abhyuday-session-number {
+        flex-basis: 32px;
+    }
+
+
+    .abhyuday-session-number strong {
+        font-size: 18px;
+    }
+
+
+    .abhyuday-session-info h4 {
+        font-size: 15px;
+    }
+
+
+    .abhyuday-session-info p {
+        font-size: 10px;
+    }
+
+
+    .abhyuday-session-arrow {
+        font-size: 18px;
+    }
+}
+
+
+/* =========================================================
+   SMALL PHONES
+   ========================================================= */
+
+@media (max-width: 400px) {
+
+    .abhyuday-title {
+        font-size: 32px;
+    }
+
+
+    .abhyuday-acronym {
+        font-size: 11px;
+    }
+
+
+    .abhyuday-acronym-row {
+        gap: 2px 7px;
+    }
+
+
+    .abhyuday-description-text {
+        font-size: 14px;
+
+        line-height: 1.85;
+    }
+
+
+    .abhyuday-programs {
+        padding-left: 11px;
+
+        padding-right: 11px;
+    }
+
+
+    .abhyuday-session-image {
+        flex-basis: 50px;
+
+        width: 50px;
+
+        height: 50px;
+    }
+
+
+    .abhyuday-session-number {
+        flex-basis: 28px;
+    }
+
+
+    .abhyuday-session-info h4 {
+        font-size: 14px;
+    }
+}
+
+</style>
+
+
 <!-- =========================================================
-     YUVA MANCH — HERO
-========================================================= -->
+     ABHYUDAY PAGE
+     ========================================================= -->
 
-<section class="yuva-hero">
+<section class="abhyuday-page">
 
-    <div class="yuva-hero-glow"></div>
+    <div class="abhyuday-content">
 
-    <div class="yuva-hero-content">
 
-        <span class="yuva-eyebrow">
-            युवा मंच
-        </span>
+        <!-- =================================================
+             TITLE
+        ================================================== -->
 
-        <h1>
-            इतिहासाची आवड,
-            <br>
-            <span>विचारांची ताकद.</span>
-        </h1>
+        <section class="abhyuday-title-section">
 
-        <p>
-            इतिहास जाणून घेणाऱ्या, शिकण्याची इच्छा असणाऱ्या
-            आणि आपल्या विचारांना आत्मविश्वासाने मांडू इच्छिणाऱ्या
-            प्रत्येकासाठी एक व्यासपीठ.
-        </p>
+            <h1 class="abhyuday-title">
+                अभ्युदय | ABHYUDAY
+            </h1>
 
-        <div class="yuva-hero-buttons">
 
-            <a href="#shivdarshan" class="yuva-primary-btn">
-                शिवदर्शन सत्रे
-                <span>→</span>
-            </a>
+            <div class="abhyuday-acronym">
 
-            <a href="#school-sessions" class="yuva-secondary-btn">
-                पुढची वाटचाल
-            </a>
+                <div class="abhyuday-acronym-row">
 
-        </div>
+                    <div class="abhyuday-acronym-item">
+                        <strong>A</strong> — Awareness
+                    </div>
 
-    </div>
+                    <div class="abhyuday-acronym-item">
+                        <strong>B</strong> — Beyond
+                    </div>
 
-    <div class="yuva-hero-mark">
-        <span>यु</span>
-        <small>वा मंच</small>
-    </div>
+                    <div class="abhyuday-acronym-item">
+                        <strong>H</strong> — History
+                    </div>
 
-</section>
+                    <div class="abhyuday-acronym-item">
+                        <strong>Y</strong> — Youth
+                    </div>
 
+                </div>
 
-<!-- =========================================================
-     WHAT IS YUVA MANCH
-========================================================= -->
 
-<section class="yuva-intro">
+                <div class="abhyuday-acronym-row">
 
-    <div class="yuva-section-label">
-        ०१ · युवा मंच
-    </div>
+                    <div class="abhyuday-acronym-item">
+                        <strong>U</strong> — Understanding
+                    </div>
 
-    <div class="yuva-intro-grid">
+                    <div class="abhyuday-acronym-item">
+                        <strong>D</strong> — Discovery
+                    </div>
 
-        <div class="yuva-intro-title">
+                    <div class="abhyuday-acronym-item">
+                        <strong>A</strong> — Archives
+                    </div>
 
-            <h2>
-                शिकण्यासाठी,
-                <br>
-                बोलण्यासाठी,
-                <br>
-                <span>घडण्यासाठी.</span>
-            </h2>
+                    <div class="abhyuday-acronym-item">
+                        <strong>Y</strong> — Yesterday to Today
+                    </div>
 
-        </div>
+                </div>
 
-        <div class="yuva-intro-text">
-
-            <p>
-                ‘युवा मंच’ हे केवळ इतिहास शिकण्याचे व्यासपीठ नाही.
-                इतिहासाची आवड असलेल्या प्रत्येक व्यक्तीला आपले
-                ज्ञान इतरांसोबत शेअर करता यावे, स्वतःचे विचार
-                मांडता यावेत आणि त्यातून आत्मविश्वास वाढवता यावा,
-                यासाठी ही संकल्पना उभी करण्यात आली आहे.
-            </p>
-
-            <p>
-                तुम्हाला एखाद्या ऐतिहासिक विषयाबद्दल माहिती आहे?
-                तुम्हाला एखाद्या गड-किल्ल्याची कथा सांगायची आहे?
-                किंवा फक्त स्वतःच्या ज्ञानाची आणि वक्तृत्वाची
-                चाचणी घ्यायची आहे?
-                <strong>युवा मंच तुमच्यासाठी आहे.</strong>
-            </p>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =========================================================
-     SHIVDARSHAN
-========================================================= -->
-
-<section class="shivdarshan-section" id="shivdarshan">
-
-    <div class="shivdarshan-number">
-        ०२
-    </div>
-
-    <div class="shivdarshan-content">
-
-        <span class="yuva-small-title">
-            शिवदर्शन · ऑनलाइन सत्रे
-        </span>
-
-        <h2>
-            इतिहास ऐकण्यापासून
-            <br>
-            <span>इतिहास सांगण्यापर्यंत.</span>
-        </h2>
-
-        <p>
-            ‘शिवदर्शन’ ही युवा मंचाच्या माध्यमातून घेतली जाणारी
-            ऑनलाइन सत्रांची मालिका आहे. इतिहास, छत्रपती शिवाजी
-            महाराजांचे कार्य, गडकिल्ले, मावळे आणि आपल्या समृद्ध
-            वारशाशी संबंधित विविध विषयांवर सहभागी आपले विचार
-            आणि माहिती मांडतात.
-        </p>
-
-        <p>
-            या सत्रांचा उद्देश केवळ माहिती देणे नाही.
-            प्रत्येक सहभागीने स्वतः अभ्यास करावा,
-            विषय समजून घ्यावा आणि तो आत्मविश्वासाने
-            इतरांसमोर मांडावा, हीच या उपक्रमामागची भूमिका आहे.
-        </p>
-
-    </div>
-
-</section>
-
-
-<!-- =========================================================
-     HOW IT WORKS
-========================================================= -->
-
-<section class="yuva-process">
-
-    <div class="yuva-process-heading">
-
-        <span class="yuva-small-title">
-            आमची पद्धत
-        </span>
-
-        <h2>
-            एक विषय.
-            <br>
-            एक सत्र.
-            <br>
-            <span>एक नवा आत्मविश्वास.</span>
-        </h2>
-
-    </div>
-
-
-    <div class="yuva-process-cards">
-
-        <div class="yuva-process-card">
-
-            <span class="process-icon">
-                ०१
-            </span>
-
-            <h3>
-                विषय निवडा
-            </h3>
-
-            <p>
-                इतिहासाशी संबंधित आपल्या आवडीचा
-                विषय निवडा आणि त्याचा अभ्यास करा.
-            </p>
-
-        </div>
-
-
-        <div class="yuva-process-card">
-
-            <span class="process-icon">
-                ०२
-            </span>
-
-            <h3>
-                अभ्यास करा
-            </h3>
-
-            <p>
-                उपलब्ध माहिती, संदर्भ आणि इतिहासाचा
-                अभ्यास करून विषय समजून घ्या.
-            </p>
-
-        </div>
-
-
-        <div class="yuva-process-card">
-
-            <span class="process-icon">
-                ०३
-            </span>
-
-            <h3>
-                मांडणी करा
-            </h3>
-
-            <p>
-                ऑनलाइन सत्रात आपला विषय इतरांसमोर
-                आत्मविश्वासाने मांडण्याची संधी मिळवा.
-            </p>
-
-        </div>
-
-
-        <div class="yuva-process-card featured">
-
-            <span class="process-icon">
-                ✦
-            </span>
-
-            <h3>
-                आत्मविश्वास वाढवा
-            </h3>
-
-            <p>
-                प्रत्येक सत्रातून ज्ञानासोबत
-                संवादकौशल्य आणि आत्मविश्वास वाढवा.
-            </p>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =========================================================
-     SCHOOL OFFLINE SESSIONS
-========================================================= -->
-
-<section class="school-session-section" id="school-sessions">
-
-    <div class="school-session-inner">
-
-        <div class="school-session-badge">
-            लवकरच
-        </div>
-
-        <span class="yuva-small-title">
-            युवा मंच · नवी वाटचाल
-        </span>
-
-        <h2>
-            आता शिवदर्शन
-            <br>
-            <span>शाळेच्या वर्गातही!</span>
-        </h2>
-
-        <p>
-            ऑनलाइन सत्रांमधून सुरू झालेला हा उपक्रम आता
-            प्रत्यक्ष विद्यार्थ्यांपर्यंत पोहोचवण्याचा आमचा प्रयत्न आहे.
-        </p>
-
-        <p>
-            पुढील महिन्यापासून ‘युवा मंच’ अंतर्गत शाळांमध्ये
-            ऑफलाइन सत्रे सुरू करण्याचा आमचा मानस आहे.
-            विद्यार्थ्यांना इतिहासाशी जोडणे, त्यांच्यात
-            प्रश्न विचारण्याची सवय निर्माण करणे आणि
-            स्वतःचे विचार आत्मविश्वासाने मांडण्यास प्रोत्साहन देणे,
-            हा या उपक्रमाचा मुख्य उद्देश असेल.
-        </p>
-
-        <div class="school-points">
-
-            <div>
-                <span>✦</span>
-                इतिहासाची ओळख
             </div>
 
-            <div>
-                <span>✦</span>
-                संवाद व चर्चा
+
+            <div class="abhyuday-title-divider">
+
+                <span></span>
+
+                <i>✦</i>
+
+                <span></span>
+
             </div>
 
-            <div>
-                <span>✦</span>
-                वक्तृत्वाचा आत्मविश्वास
+        </section>
+
+
+        <!-- =================================================
+             DESCRIPTION
+        ================================================== -->
+
+        <section class="abhyuday-description">
+
+            <div class="abhyuday-description-text">
+
+                <p>
+                    इतिहास हा केवळ भूतकाळात घडलेल्या घटनांचा संग्रह नसतो; तो वर्तमान समजून घेण्याची, विचार करण्याची आणि भविष्यासाठी दिशा ठरवण्याची दृष्टी देतो. इतिहासातील व्यक्तिमत्त्वे, विचार आणि कार्यपद्धती यांचा अभ्यास केवळ स्मरणापुरता मर्यादित न राहता त्यातून आजच्या जीवनासाठी काय शिकता येईल, याचा विचार व्हावा, या भूमिकेतून ‘अभ्युदय’ या विभागाची संकल्पना आकाराला आली आहे.
+                </p>
+
+
+                <p>
+                    छत्रपती शिवाजी महाराजांचे जीवन व कार्य हा या विभागाचा महत्त्वाचा केंद्रबिंदू आहे. मात्र त्यांची ओळख केवळ युद्धे आणि पराक्रमाच्या कथांपुरती मर्यादित न ठेवता स्वराज्याची संकल्पना, नेतृत्व, प्रशासन, मुत्सद्देगिरी, अर्थव्यवस्था, अभियांत्रिकी, नौदल, व्यवस्थापन, सामाजिक संघटन आणि दूरदृष्टी अशा विविध पैलूंच्या माध्यमातून त्यांचा विचार समजून घेण्याचा प्रयत्न केला जातो. इतिहासातील या अनुभवांचा आणि विचारांचा आजच्या जीवनाशी संबंध जोडत, त्यातून वर्तमानासाठी उपयुक्त दृष्टी निर्माण करण्यावर भर दिला जातो.
+                </p>
+
+
+                <p>
+                    ‘शिवदर्शन’ या ऑनलाइन सत्रांच्या माध्यमातून छत्रपती शिवाजी महाराज आणि महाराष्ट्राच्या इतिहासातील विविध विषय सहभागींपर्यंत संवादात्मक पद्धतीने पोहोचवले जातात. व्याख्यानापुरते मर्यादित न राहता प्रश्नोत्तर, उदाहरणे, चर्चा आणि विचारमंथनाच्या माध्यमातून विषय समजून घेण्याचा प्रयत्न केला जातो. इतिहासातील एखादी घटना किंवा विचार समजून घेतल्यानंतर त्याचा आजच्या परिस्थितीशी आणि आपल्या दैनंदिन जीवनाशी संबंध जोडण्यावर विशेष भर असतो.
+                </p>
+
+
+                <p>
+                    शाळा आणि महाविद्यालयांमध्येही विद्यार्थ्यांसाठी विविध इतिहासपर आणि विचारप्रवर्तक सत्रांचे आयोजन केले जाते. अभ्यासक्रमाच्या पलीकडे जाऊन छत्रपती शिवाजी महाराजांचे कार्य, स्वराज्याची संकल्पना, नेतृत्व आणि इतिहासातील विविध पैलू विद्यार्थ्यांपर्यंत पोहोचवताना प्रश्न विचारण्याची, विचार करण्याची, आपले मत मांडण्याची आणि इतिहासाकडे चिकित्सक दृष्टीने पाहण्याची सवय निर्माण व्हावी, हा प्रयत्न असतो.
+                </p>
+
+
+                <p>
+                    यासोबतच युवकांमध्ये इतिहास, नेतृत्व, सामाजिक जाणीव, व्यक्तिमत्त्व विकास आणि जबाबदारीची भावना निर्माण करणारे विविध उपक्रम राबवले जातात. इतिहासातील प्रेरणादायी विचार आणि अनुभव वर्तमानातील आव्हानांशी जोडत, युवकांना केवळ इतिहास जाणणारे नव्हे तर त्यातून शिकून आपल्या भूमिकेचा विचार करणारे नागरिक म्हणून घडवण्याचा प्रयत्न केला जातो.
+                </p>
+
+
+                <p>
+                    विविध वयोगटांसाठी व्याख्याने, चर्चासत्रे, कार्यशाळा, ऑनलाइन सत्रे आणि विशेष उपक्रमांच्या माध्यमातून इतिहास, वारसा, नेतृत्व, संस्कृती आणि समकालीन संदर्भांवर संवाद घडवला जातो. विषय सांगणे हा या उपक्रमांचा अंतिम उद्देश नसून, त्यातून जिज्ञासा निर्माण व्हावी, विचारांना चालना मिळावी आणि इतिहासाशी असलेले नाते वर्तमानातील कृतीशी जोडले जावे, ही अभ्युदय मागची भूमिका आहे.
+                </p>
+
+
+                <p class="abhyuday-final">
+
+                    इतिहास समजून घेता यावा,
+                    विचारांना दिशा मिळावी आणि त्यातून
+                    उद्याचा उज्ज्वल मार्ग घडावा, यासाठी
+
+                    <strong>
+                        ‘अभ्युदय’ तुमच्यापर्यंत पोहोचत आहे!!
+                    </strong>
+
+                </p>
+
             </div>
 
-            <div>
-                <span>✦</span>
-                प्रश्न विचारण्याची सवय
+        </section>
+
+
+        <!-- =================================================
+             PROGRAMS
+        ================================================== -->
+
+        <section class="abhyuday-programs">
+
+            <div class="abhyuday-program-grid">
+
+
+                <!-- =================================================
+                     ONLINE SHIVDARSHAN
+                ================================================== -->
+
+                <div class="abhyuday-program-column">
+
+                    <span class="abhyuday-program-label">
+                        ऑनलाइन उपक्रम
+                    </span>
+
+
+                    <h2 class="abhyuday-program-title">
+                        शिवदर्शन सत्रे
+                    </h2>
+
+
+                    <div class="abhyuday-session-list">
+
+                        {% if online_sessions %}
+
+                            {% for session in online_sessions %}
+
+                            <div class="abhyuday-session-card">
+
+
+                                <!-- IMAGE -->
+
+                                <div class="abhyuday-session-image">
+
+                                    {% if session.image_url %}
+
+                                        <img
+                                            src="{{ session.image_url }}"
+                                            alt="{{ session.title }}"
+                                            loading="lazy"
+                                        >
+
+                                    {% else %}
+
+                                        <div class="abhyuday-session-placeholder">
+                                            ✦
+                                        </div>
+
+                                    {% endif %}
+
+                                </div>
+
+
+                                <!-- NUMBER -->
+
+                                <div class="abhyuday-session-number">
+
+                                    <strong>
+                                        {{ '%02d' | format(loop.index) }}
+                                    </strong>
+
+                                    <span>
+                                        सत्र
+                                    </span>
+
+                                </div>
+
+
+                                <!-- INFORMATION -->
+
+                                <div class="abhyuday-session-info">
+
+                                    <h4>
+                                        {{ session.title }}
+                                    </h4>
+
+
+                                    {% if session.text %}
+
+                                    <p>
+                                        {{ session.text }}
+                                    </p>
+
+                                    {% endif %}
+
+
+                                    {% if session.event_date %}
+
+                                    <div class="abhyuday-session-date">
+
+                                        {{ session.event_date.strftime('%d %B %Y') }}
+
+                                    </div>
+
+                                    {% endif %}
+
+                                </div>
+
+
+                                <!-- ARROW -->
+
+                                <div class="abhyuday-session-arrow">
+                                    →
+                                </div>
+
+
+                            </div>
+
+                            {% endfor %}
+
+
+                        {% else %}
+
+                            <div class="abhyuday-empty">
+
+                                <div class="abhyuday-empty-icon">
+                                    ✦
+                                </div>
+
+                                <h3>
+                                    सत्रे लवकरच उपलब्ध होतील
+                                </h3>
+
+                                <p>
+                                    नवीन शिवदर्शन सत्रांची माहिती लवकरच येथे प्रकाशित केली जाईल.
+                                </p>
+
+                            </div>
+
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+
+                <!-- =================================================
+                     COLLEGE / EDUCATIONAL SESSIONS
+                ================================================== -->
+
+                <div class="abhyuday-program-column">
+
+                    <span class="abhyuday-program-label">
+                        शैक्षणिक उपक्रम
+                    </span>
+
+
+                    <h2 class="abhyuday-program-title">
+                        महाविद्यालयीन सत्रे
+                    </h2>
+
+
+                    <div class="abhyuday-session-list">
+
+                        {% if offline_sessions %}
+
+                            {% for session in offline_sessions %}
+
+                            <div class="abhyuday-session-card">
+
+
+                                <!-- IMAGE -->
+
+                                <div class="abhyuday-session-image">
+
+                                    {% if session.image_url %}
+
+                                        <img
+                                            src="{{ session.image_url }}"
+                                            alt="{{ session.title }}"
+                                            loading="lazy"
+                                        >
+
+                                    {% else %}
+
+                                        <div class="abhyuday-session-placeholder">
+                                            ✦
+                                        </div>
+
+                                    {% endif %}
+
+                                </div>
+
+
+                                <!-- NUMBER -->
+
+                                <div class="abhyuday-session-number">
+
+                                    <strong>
+                                        {{ '%02d' | format(loop.index) }}
+                                    </strong>
+
+                                    <span>
+                                        सत्र
+                                    </span>
+
+                                </div>
+
+
+                                <!-- INFORMATION -->
+
+                                <div class="abhyuday-session-info">
+
+                                    <h4>
+                                        {{ session.title }}
+                                    </h4>
+
+
+                                    {% if session.text %}
+
+                                    <p>
+                                        {{ session.text }}
+                                    </p>
+
+                                    {% endif %}
+
+
+                                    {% if session.event_date %}
+
+                                    <div class="abhyuday-session-date">
+
+                                        {{ session.event_date.strftime('%d %B %Y') }}
+
+                                    </div>
+
+                                    {% endif %}
+
+                                </div>
+
+
+                                <!-- ARROW -->
+
+                                <div class="abhyuday-session-arrow">
+                                    →
+                                </div>
+
+
+                            </div>
+
+                            {% endfor %}
+
+
+                        {% else %}
+
+                            <div class="abhyuday-empty">
+
+                                <div class="abhyuday-empty-icon">
+                                    ✦
+                                </div>
+
+                                <h3>
+                                    सत्रे लवकरच उपलब्ध होतील
+                                </h3>
+
+                                <p>
+                                    नवीन शैक्षणिक सत्रांची माहिती लवकरच येथे प्रकाशित केली जाईल.
+                                </p>
+
+                            </div>
+
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+
             </div>
 
-        </div>
+        </section>
+
 
     </div>
 
 </section>
 
 
-<!-- =========================================================
-     VISION
-========================================================= -->
+<script>
 
-<section class="yuva-vision">
+/* =========================================================
+   ABHYUDAY PAGE JS
+   ========================================================= */
 
-    <div class="vision-symbol">
-        ∞
-    </div>
+document.addEventListener("DOMContentLoaded", function () {
 
-    <span class="yuva-small-title">
-        आमची दृष्टी
-    </span>
+    /*
+     * Session cards
+     * Add a small visual feedback when a user clicks a card.
+     */
 
-    <h2>
-        प्रत्येक जिज्ञासू युवकाला
-        <br>
-        <span>आपला आवाज मिळावा.</span>
-    </h2>
+    const sessionCards =
+        document.querySelectorAll(".abhyuday-session-card");
 
-    <p>
-        इतिहास वाचणारा प्रत्येक युवक केवळ वाचक राहू नये;
-        त्याने प्रश्न विचारावेत, चर्चा करावी, विचार मांडावेत
-        आणि इतरांनाही प्रेरणा द्यावी.
-    </p>
+    sessionCards.forEach(function (card) {
 
-    <div class="vision-quote">
-        “ज्ञानातून विचार,
-        विचारातून आत्मविश्वास,
-        आणि आत्मविश्वासातून नेतृत्व.”
-    </div>
+        card.addEventListener("click", function () {
 
-</section>
+            card.style.transform = "translateY(-1px)";
+
+            setTimeout(function () {
+                card.style.transform = "";
+            }, 150);
+
+        });
+
+    });
 
 
-<!-- =========================================================
-     JOIN YUVA MANCH
-========================================================= -->
+    /*
+     * Prevent image dragging.
+     */
 
-<section class="yuva-join">
+    const sessionImages =
+        document.querySelectorAll(".abhyuday-session-image img");
 
-    <span class="yuva-eyebrow">
-        तुमच्यासाठी एक संधी
-    </span>
+    sessionImages.forEach(function (image) {
 
-    <h2>
-        इतिहासाची आवड आहे?
-        <br>
-        <span>मग तुमच्यासाठी मंच तयार आहे.</span>
-    </h2>
+        image.addEventListener("dragstart", function (event) {
+            event.preventDefault();
+        });
 
-    <p>
-        तुम्ही विद्यार्थी असाल, इतिहासप्रेमी असाल
-        किंवा एखादा विषय इतरांसमोर मांडण्याची इच्छा असेल —
-        युवा मंचावर तुमचे स्वागत आहे.
-    </p>
+    });
 
-    <a href="{{ url_for('contact') }}" class="yuva-join-button">
-        युवा मंचाशी जोडा
-        <span>→</span>
-    </a>
 
-</section>
+    /*
+     * Smooth reveal when program section
+     * enters the viewport.
+     */
+
+    const programColumns =
+        document.querySelectorAll(".abhyuday-program-column");
+
+    if ("IntersectionObserver" in window) {
+
+        const observer =
+            new IntersectionObserver(
+                function (entries, observer) {
+
+                    entries.forEach(function (entry) {
+
+                        if (entry.isIntersecting) {
+
+                            entry.target.style.opacity = "1";
+                            entry.target.style.transform =
+                                "translateY(0)";
+
+                            observer.unobserve(entry.target);
+                        }
+
+                    });
+
+                },
+                {
+                    threshold: 0.08
+                }
+            );
+
+
+        programColumns.forEach(function (column) {
+
+            column.style.opacity = "0";
+
+            column.style.transform =
+                "translateY(18px)";
+
+            column.style.transition =
+                "opacity 0.5s ease, transform 0.5s ease";
+
+            observer.observe(column);
+
+        });
+
+    }
+
+});
+
+</script>
 
 {% endblock %}

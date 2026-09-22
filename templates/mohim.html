@@ -5,121 +5,433 @@
 {% endblock %}
 
 {% block content %}
+<style>
+/* ================================
+   MOHIM CARDS
+================================ */
 
+.mohim-list {
+    width: min(1100px, 92%);
+    margin: 40px auto 70px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+}
+
+.mohim-card {
+    display: flex;
+    text-decoration: none;
+    color: inherit;
+    background: #fff;
+    border-radius: 18px;
+    overflow: hidden;
+    border: 1px solid rgba(137, 71, 32, 0.14);
+    box-shadow: 0 8px 24px rgba(45, 28, 18, 0.10);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    min-height: 190px;
+}
+
+.mohim-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 14px 32px rgba(45, 28, 18, 0.16);
+}
+
+
+/* ================================
+   IMAGE
+================================ */
+
+.mohim-photo {
+    width: 48%;
+    min-width: 48%;
+    height: 220px;
+    overflow: hidden;
+    background: #241b16;
+}
+
+.mohim-photo img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transition: transform 0.35s ease;
+}
+
+.mohim-card:hover .mohim-photo img {
+    transform: scale(1.04);
+}
+
+
+/* ================================
+   CARD INFORMATION
+================================ */
+
+.mohim-info {
+    flex: 1;
+    padding: 24px 22px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 16px;
+}
+
+
+/* ================================
+   MOHIM NUMBER
+================================ */
+
+.mohim-number {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #894720;
+}
+
+.mohim-number span {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.mohim-number strong {
+    font-size: 25px;
+    line-height: 1;
+    font-weight: 700;
+}
+
+
+/* ================================
+   NAME
+================================ */
+
+.mohim-name span {
+    display: block;
+    margin-bottom: 6px;
+    color: #8a776b;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.mohim-name h2 {
+    margin: 0;
+    color: #2b211c;
+    font-size: 20px;
+    line-height: 1.3;
+    font-weight: 700;
+}
+
+
+/* ================================
+   TABLET
+================================ */
+
+@media (max-width: 900px) {
+
+    .mohim-list {
+        grid-template-columns: 1fr;
+        gap: 22px;
+    }
+
+    .mohim-photo {
+        width: 42%;
+        min-width: 42%;
+        height: 210px;
+    }
+}
+
+
+/* ================================
+   MOBILE
+================================ */
+
+@media (max-width: 600px) {
+
+    .mohim-list {
+        width: 92%;
+        grid-template-columns: 1fr;
+        gap: 20px;
+        margin-top: 30px;
+    }
+
+    .mohim-card {
+        display: block;
+    }
+
+    .mohim-photo {
+        width: 100%;
+        min-width: 100%;
+        height: 210px;
+    }
+
+    .mohim-info {
+        padding: 17px 18px 20px;
+        gap: 13px;
+    }
+
+    .mohim-name h2 {
+        font-size: 19px;
+    }
+
+    .mohim-number strong {
+        font-size: 23px;
+    }
+}
+</style>
 <section class="mohim-page">
 
+    <!-- ==================================================
+         PAGE INTRO
+    ================================================== -->
+
     <div class="mohim-intro">
-        <span class="mohim-label">सेवक सह्याद्रीचे</span>
+
         <h1>मोहिम</h1>
+
         <div class="mohim-line">
             <span></span>
             <i>✦</i>
             <span></span>
         </div>
+
         <p>
-            सह्याद्री, इतिहास, संस्कृती आणि समाजाशी
-            संबंधित विविध उपक्रमांमधून सकारात्मक
-            परिवर्तन घडवण्याचा एक प्रयत्न.
+            गडकिल्ले हे आपल्या इतिहासाची जिवंत साक्ष देणारे ठेवे आहेत.
+            त्यांच्या तटबंदीपासून बुरुजांपर्यंत आणि प्रत्येक पायवाटेपासून
+            अवशेषांपर्यंत आपल्या पूर्वजांच्या पराक्रमाची, दूरदृष्टीची आणि
+            कर्तृत्वाची साक्ष दडलेली आहे. त्यामुळे गडांकडे केवळ
+            पर्यटनाच्या दृष्टीने न पाहता, त्यांच्याशी आपले नाते आणि जबाबदारी
+            जपण्याचा प्रयत्न सेवक सह्याद्रीचेच्या प्रत्येक मोहिमेतून करण्यात येतो.
+
+            सेवक सह्याद्रीचेच्या गडकिल्ले मोहिमा या केवळ गडभ्रमंती किंवा
+            स्वच्छता मोहिमांपुरत्या मर्यादित नसतात. इतिहास, संस्कृती, स्वच्छता,
+            पर्यावरण, संवाद आणि युवकांचा सहभाग यांचा सुंदर संगम या मोहिमांमध्ये
+            घडवण्याचा प्रयत्न केला जातो.
+
+            मोहिमेपूर्वी संबंधित गडाचा इतिहास, भौगोलिक स्थान, ऐतिहासिक महत्त्व
+            आणि मोहिमेचे स्वरूप याबाबत सहभागी मावळ्यांना माहिती दिली जाते.
+            गडावर पोहोचल्यानंतर परिसराची पाहणी करून कचरा, प्लास्टिक आणि इतर
+            अनावश्यक वस्तूंचे संकलन केले जाते. शक्य तिथे गड परिसराची स्वच्छता
+            करून संकलित केलेला कचरा योग्य पद्धतीने खाली आणण्याची जबाबदारी
+            घेतली जाते.
+
+            यासोबतच गडावरील तटबंदी, बुरुज, दरवाजे, पाण्याच्या टाक्या,
+            मंदिरे, समाधीस्थळे आणि इतर ऐतिहासिक अवशेषांची पाहणी केली जाते.
+            या वास्तूंना कोणतीही हानी होणार नाही याची काळजी घेत,
+            त्यांच्या संवर्धनाबाबत सहभागींच्या मनात जाणीव निर्माण केली जाते.
+
+            मात्र या मोहिमेचा अनुभव केवळ कामापुरता मर्यादित राहत नाही.
+            गडाच्या ऐतिहासिक वातावरणात सहभागी मावळ्यांना एकत्र आणत
+            वाद्यांच्या साथीने शिवगीते आणि पोवाडे सादर केले जातात.
+            या माध्यमातून इतिहास आणि संस्कृतीशी असलेले नाते अधिक जिवंत
+            करण्याचा प्रयत्न केला जातो.
+
+            इतिहासाची आवड केवळ ऐकण्यात न राहता ती सहभागींच्या विचारांमध्ये
+            उतरावी, यासाठी प्रश्नमंजूषा आणि चर्चासत्रांचे आयोजन केले जाते.
+            गडाचा इतिहास, छत्रपती शिवाजी महाराजांचे कार्य, स्वराज्याची
+            संकल्पना तसेच मोहिमेशी संबंधित विविध विषयांवर सहभागी मावळ्यांमध्ये
+            संवाद घडवला जातो.
+
+            प्रश्न विचारणे, आपले मत मांडणे आणि इतरांचे विचार ऐकणे यामुळे
+            मोहिमेला अभ्यासपूर्ण स्वरूप मिळते.
+
+            युवकांचा सहभाग अधिक उत्स्फूर्त आणि आनंददायी राहावा यासाठी
+            विविध ऐतिहासिक आणि मनोरंजक खेळ देखील घेतले जातात. या खेळांमधून
+            टीमवर्क, नेतृत्व, निर्णयक्षमता, संवाद आणि समन्वय यांसारख्या
+            गुणांना चालना देण्याचा प्रयत्न केला जातो.
+
+            अशा प्रकारे एका मोहिमेत गडभ्रमंतीसोबत स्वच्छता, इतिहासासोबत
+            प्रबोधन, संस्कृतीसोबत आनंद आणि उपक्रमांसोबत सामाजिक जबाबदारी
+            अनुभवता यावी, हा सेवक सह्याद्रीचेचा प्रयत्न असतो.
+
+            गडावरून परतताना केवळ काही छायाचित्रे घेऊन न येता,
+            इतिहासाची नवी जाणीव, आपल्या वारशाप्रतीची जबाबदारी आणि काहीतरी
+            चांगले करण्याची प्रेरणा सोबत घेऊन यावी, हीच या मोहिमांमागची भूमिका आहे.
         </p>
+
     </div>
 
 
     <!-- ==================================================
-         LATEST 3 MOHIM — LARGE FEATURED CARDS
+         ALL MOHIM CARDS
     ================================================== -->
 
-    <section class="latest-mohim">
+    {% if latest_mohim or all_mohim %}
 
+    <div class="mohim-list">
 
-        {% if latest_mohim %}
-            <div class="featured-mohim-list">
+        <!-- FIRST 3 / LATEST MOHIM -->
 
-                {% for item in latest_mohim %}
-                    {% set trek = item.trek %}
+        {% for item in latest_mohim %}
 
-                    <article class="featured-mohim {% if loop.index is even %}featured-reverse{% endif %}">
+        {% set trek = item.trek %}
 
-                        <div class="featured-image">
-                            {% if item.main_photo %}
-                                <img src="{{ item.main_photo }}" alt="{{ trek.title }}" loading="lazy">
-                            {% else %}
-                                <img src="{{ url_for('static', filename='img/placeholder.svg') }}" alt="{{ trek.title }}">
-                            {% endif %}
-                        </div>
+        <a
+            href="{{ url_for('mohim_detail', trek_id=trek.id) }}"
+            class="mohim-card"
+        >
 
-                        <div class="featured-content">
-                            <span class="featured-number">मोहिम {{ item.number }}</span>
-                            <span class="featured-category">{{ trek.category }}</span>
+            <!-- BATCH PHOTO -->
 
-                            <h2>{{ trek.title }}</h2>
+            <div class="mohim-photo">
 
-                            <div class="featured-meta">
-                                <span>📍 {{ trek.location }}</span>
-                                <span>📅 {{ trek.event_date.strftime('%d %B %Y') }}</span>
-                                <span>⏱ {{ trek.duration }}</span>
-                            </div>
+                {% if item.main_photo %}
 
-                            <p class="featured-short-description">
-                                {{ trek.description[:180] }}{% if trek.description|length > 180 %}...{% endif %}
-                            </p>
+                <img
+                    src="{{ item.main_photo }}"
+                    alt="{{ trek.title }}"
+                    loading="lazy"
+                >
 
-                            <a href="{{ url_for('mohim_detail', trek_id=trek.id) }}" class="mohim-button">
-                                अधिक माहिती
-                                <span>↓</span>
-                            </a>
-                        </div>
+                {% elif trek.image_url %}
 
-                    </article>
-                {% endfor %}
+                <img
+                    src="{{ trek.image_url }}"
+                    alt="{{ trek.title }}"
+                    loading="lazy"
+                >
 
-            </div>
-        {% endif %}
+                {% else %}
 
-    </section>
+                <img
+                    src="{{ url_for('static', filename='img/placeholder.svg') }}"
+                    alt="{{ trek.title }}"
+                >
 
-
-    <!-- ==================================================
-         ALL OTHER MOHIM — SMALL CARDS
-    ================================================== -->
-
-    {% if all_mohim %}
-        <section class="all-mohim">
-
-            <div class="all-mohim-list">
-
-                {% for item in all_mohim %}
-                    {% set trek = item.trek %}
-
-                    <a href="{{ url_for('mohim_detail', trek_id=trek.id) }}" class="compact-mohim">
-
-                        <div class="compact-number">
-                            <strong>{{ item.number }}</strong>
-                            <span>मोहिम</span>
-                        </div>
-
-                        <div class="compact-content">
-                            <span>{{ trek.category }}</span>
-                            <h3>{{ trek.title }}</h3>
-                            <p>
-                                📍 {{ trek.location }}
-                                &nbsp;&nbsp;
-                                📅 {{ trek.event_date.strftime('%d %B %Y') }}
-                            </p>
-                        </div>
-
-                        <div class="compact-arrow">→</div>
-
-                    </a>
-                {% endfor %}
+                {% endif %}
 
             </div>
-        </section>
-    {% elif not latest_mohim %}
-        <div class="mohim-empty">
-            <div>✦</div>
-            <h2>सध्या कोणतीही मोहिम उपलब्ध नाही</h2>
-            <p>नवीन मोहिमांची माहिती लवकरच येथे उपलब्ध होईल.</p>
-        </div>
+
+
+            <!-- MOHIM INFORMATION -->
+
+            <div class="mohim-info">
+
+                <!-- CIRCLE NUMBER -->
+
+                <div class="mohim-number">
+
+                    <span>मोहिम</span>
+
+                    <strong>{{ item.number }}</strong>
+
+                </div>
+
+
+                <!-- NAME -->
+
+                <div class="mohim-name">
+
+                    <span>
+                        {{ trek.category }}
+                    </span>
+
+                    <h2>
+                        {{ trek.title }}
+                    </h2>
+
+                </div>
+
+            </div>
+
+        </a>
+
+        {% endfor %}
+
+
+        <!-- REMAINING MOHIM -->
+
+        {% for item in all_mohim %}
+
+        {% set trek = item.trek %}
+
+        <a
+            href="{{ url_for('mohim_detail', trek_id=trek.id) }}"
+            class="mohim-card"
+        >
+
+            <!-- BATCH PHOTO -->
+
+            <div class="mohim-photo">
+
+                {% if item.main_photo %}
+
+                <img
+                    src="{{ item.main_photo }}"
+                    alt="{{ trek.title }}"
+                    loading="lazy"
+                >
+
+                {% elif trek.image_url %}
+
+                <img
+                    src="{{ trek.image_url }}"
+                    alt="{{ trek.title }}"
+                    loading="lazy"
+                >
+
+                {% else %}
+
+                <img
+                    src="{{ url_for('static', filename='img/placeholder.svg') }}"
+                    alt="{{ trek.title }}"
+                >
+
+                {% endif %}
+
+            </div>
+
+
+            <!-- MOHIM INFORMATION -->
+
+            <div class="mohim-info">
+
+                <div class="mohim-number">
+
+                    <span>मोहिम</span>
+
+                    <strong>{{ item.number }}</strong>
+
+                </div>
+
+
+                <div class="mohim-name">
+
+                    <span>
+                        {{ trek.category }}
+                    </span>
+
+                    <h2>
+                        {{ trek.title }}
+                    </h2>
+
+                </div>
+
+            </div>
+
+        </a>
+
+        {% endfor %}
+
+    </div>
+
+
+    {% else %}
+
+    <!-- EMPTY STATE -->
+
+    <div class="mohim-empty">
+
+        <div>✦</div>
+
+        <h2>
+            सध्या कोणतीही मोहिम उपलब्ध नाही
+        </h2>
+
+        <p>
+            नवीन मोहिमांची माहिती लवकरच येथे उपलब्ध होईल.
+        </p>
+
+    </div>
+
     {% endif %}
 
 </section>

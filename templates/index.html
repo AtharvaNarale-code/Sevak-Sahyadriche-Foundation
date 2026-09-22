@@ -7,6 +7,883 @@
 
 {% block content %}
 
+<style>
+
+/* =========================================================
+   HOME PAGE
+   ========================================================= */
+
+.home {
+    min-height: 100vh;
+    background: #f7f0df;
+    color: #3d281d;
+    font-family:
+        "Noto Sans Devanagari",
+        "Baloo 2",
+        sans-serif;
+}
+
+
+/* =========================================================
+   LOGO
+   ========================================================= */
+
+.home-logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 70px 20px 20px;
+}
+
+.home-logo img {
+    width: min(260px, 65vw);
+    height: auto;
+
+    display: block;
+}
+
+
+/* =========================================================
+   DECORATION
+   ========================================================= */
+
+.small-line {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 12px;
+
+    margin: 12px auto 30px;
+}
+
+.small-line span {
+    width: 55px;
+    height: 1px;
+
+    background: #b78a4b;
+}
+
+.small-line i {
+    color: #a95d29;
+
+    font-size: 15px;
+    font-style: normal;
+}
+
+
+/* =========================================================
+   INTRO
+   ========================================================= */
+
+.home-intro {
+    max-width: 850px;
+
+    margin: 0 auto;
+
+    padding: 0 25px 65px;
+
+    color: #615348;
+
+    font-size: 17px;
+
+    line-height: 2;
+
+    text-align: center;
+}
+
+
+/* =========================================================
+   FOUR MAIN SECTIONS
+   ========================================================= */
+
+.main-sections {
+    max-width: 1100px;
+
+    margin: 0 auto;
+
+    padding: 0 25px 85px;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 22px;
+}
+
+
+/* =========================================================
+   MAIN CARD
+   ========================================================= */
+
+.main-card {
+    display: flex;
+
+    align-items: center;
+
+    gap: 22px;
+
+    min-height: 155px;
+
+    padding: 28px;
+
+    box-sizing: border-box;
+
+    background:
+        rgba(255, 250, 240, 0.88);
+
+    border:
+        1px solid rgba(61, 40, 29, 0.12);
+
+    border-radius: 22px;
+
+    color: inherit;
+
+    text-decoration: none;
+
+    box-shadow:
+        0 10px 30px rgba(61, 40, 29, 0.06);
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        border-color 0.25s ease;
+}
+
+.main-card:hover {
+    transform: translateY(-4px);
+
+    border-color:
+        rgba(169, 93, 41, 0.30);
+
+    box-shadow:
+        0 16px 38px rgba(61, 40, 29, 0.10);
+
+    color: inherit;
+}
+
+
+/* =========================================================
+   CARD ICON
+   ========================================================= */
+
+.card-icon {
+    flex: 0 0 65px;
+
+    width: 65px;
+    height: 65px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 17px;
+
+    background: #eadfc9;
+
+    color: #a95d29;
+
+    font-size: 27px;
+}
+
+
+/* =========================================================
+   CARD CONTENT
+   ========================================================= */
+
+.main-card h2 {
+    margin: 0 0 7px;
+
+    color: #3d281d;
+
+    font-family:
+        "Baloo 2",
+        "Noto Sans Devanagari",
+        sans-serif;
+
+    font-size: 25px;
+
+    font-weight: 800;
+
+    line-height: 1.2;
+}
+
+.main-card p {
+    margin: 0;
+
+    color: #75665a;
+
+    font-size: 13px;
+
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   SECTION TITLE
+   ========================================================= */
+
+.section-title {
+    margin-bottom: 30px;
+
+    text-align: center;
+}
+
+.section-title span {
+    display: block;
+
+    margin-bottom: 5px;
+
+    color: #a95d29;
+
+    font-size: 13px;
+
+    font-weight: 800;
+
+    letter-spacing: 0.8px;
+}
+
+.section-title h2 {
+    margin: 0;
+
+    color: #3d281d;
+
+    font-family:
+        "Baloo 2",
+        "Noto Sans Devanagari",
+        sans-serif;
+
+    font-size: 34px;
+
+    font-weight: 800;
+}
+
+
+/* =========================================================
+   NOTIFICATIONS
+   ========================================================= */
+
+.home-notifications {
+    max-width: 1100px;
+
+    margin: 0 auto;
+
+    padding: 20px 25px 90px;
+}
+
+
+.notification-list {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 14px;
+}
+
+
+/* =========================================================
+   NOTIFICATION ITEM
+   ========================================================= */
+
+.notification-item {
+    display: flex;
+
+    align-items: center;
+
+    gap: 20px;
+
+    padding: 17px 20px;
+
+    background:
+        rgba(255, 250, 240, 0.90);
+
+    border:
+        1px solid rgba(61, 40, 29, 0.12);
+
+    border-radius: 17px;
+
+    color: inherit;
+
+    text-decoration: none;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.notification-item:hover {
+    transform: translateY(-2px);
+
+    border-color:
+        rgba(169, 93, 41, 0.30);
+
+    box-shadow:
+        0 8px 22px rgba(61, 40, 29, 0.07);
+
+    color: inherit;
+}
+
+
+/* =========================================================
+   DATE
+   ========================================================= */
+
+.notification-date {
+    flex: 0 0 60px;
+
+    width: 60px;
+
+    text-align: center;
+
+    padding: 8px 5px;
+
+    background: #eadfc9;
+
+    border-radius: 12px;
+}
+
+.notification-date strong {
+    display: block;
+
+    color: #3d281d;
+
+    font-size: 25px;
+
+    line-height: 1;
+}
+
+.notification-date small {
+    display: block;
+
+    margin-top: 4px;
+
+    color: #a95d29;
+
+    font-size: 10px;
+
+    font-weight: 800;
+}
+
+
+/* =========================================================
+   NOTIFICATION CONTENT
+   ========================================================= */
+
+.notification-content {
+    flex: 1;
+
+    min-width: 0;
+}
+
+.notification-content span {
+    display: block;
+
+    margin-bottom: 3px;
+
+    color: #a95d29;
+
+    font-size: 10px;
+
+    font-weight: 800;
+}
+
+.notification-content h3 {
+    margin: 0 0 3px;
+
+    color: #3d281d;
+
+    font-size: 17px;
+
+    font-weight: 800;
+}
+
+.notification-content p {
+    margin: 0;
+
+    color: #75665a;
+
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   NOTIFICATION ARROW
+   ========================================================= */
+
+.notification-arrow {
+    flex: 0 0 auto;
+
+    color: #a95d29;
+
+    font-size: 22px;
+
+    transition:
+        transform 0.2s ease;
+}
+
+.notification-item:hover
+.notification-arrow {
+    transform: translateX(4px);
+}
+
+
+/* =========================================================
+   VIEW MORE
+   ========================================================= */
+
+.view-more {
+    display: block;
+
+    width: fit-content;
+
+    margin: 25px auto 0;
+
+    color: #894720;
+
+    font-size: 13px;
+
+    font-weight: 800;
+
+    text-decoration: none;
+}
+
+.view-more:hover {
+    text-decoration: underline;
+}
+
+
+/* =========================================================
+   NO NOTIFICATION
+   ========================================================= */
+
+.no-notification {
+    padding: 40px 20px;
+
+    border:
+        1px dashed rgba(61, 40, 29, 0.20);
+
+    border-radius: 17px;
+
+    text-align: center;
+
+    color: #806f61;
+}
+
+.no-notification span {
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: #b78a4b;
+
+    font-size: 25px;
+}
+
+.no-notification p {
+    margin: 0;
+
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   ABOUT
+   ========================================================= */
+
+.home-about {
+    max-width: 850px;
+
+    margin: 0 auto;
+
+    padding: 30px 25px 90px;
+
+    text-align: center;
+}
+
+.home-about > p {
+    max-width: 700px;
+
+    margin: 0 auto 28px;
+
+    color: #615348;
+
+    font-size: 15px;
+
+    line-height: 1.9;
+}
+
+
+/* =========================================================
+   SIMPLE BUTTON
+   ========================================================= */
+
+.simple-button {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 11px 22px;
+
+    border:
+        1px solid #3d281d;
+
+    border-radius: 100px;
+
+    color: #3d281d;
+
+    background: transparent;
+
+    text-decoration: none;
+
+    font-size: 12px;
+
+    font-weight: 800;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease;
+}
+
+.simple-button:hover {
+    background: #3d281d;
+
+    color: #f7f0df;
+}
+
+
+/* =========================================================
+   DONATE
+   ========================================================= */
+
+.home-donate {
+    max-width: 1100px;
+
+    margin: 0 auto;
+
+    padding: 35px 40px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 30px;
+
+    background:
+        #3d281d;
+
+    border-radius: 25px;
+
+    color: #f7f0df;
+}
+
+.home-donate span {
+    color: #d4a86d;
+
+    font-size: 12px;
+
+    font-weight: 800;
+}
+
+.home-donate h2 {
+    margin: 6px 0 8px;
+
+    color: #f7f0df;
+
+    font-size: 28px;
+
+    font-weight: 800;
+}
+
+.home-donate p {
+    max-width: 650px;
+
+    margin: 0;
+
+    color: rgba(247, 240, 223, 0.72);
+
+    font-size: 13px;
+
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   DONATE BUTTON
+   ========================================================= */
+
+.donate-button {
+    flex: 0 0 auto;
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 13px 25px;
+
+    border-radius: 100px;
+
+    background: #f7f0df;
+
+    color: #3d281d;
+
+    text-decoration: none;
+
+    font-size: 13px;
+
+    font-weight: 800;
+
+    white-space: nowrap;
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease;
+}
+
+.donate-button:hover {
+    transform: translateY(-2px);
+
+    background: #ffffff;
+
+    color: #3d281d;
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+    .main-sections {
+        gap: 17px;
+    }
+
+    .main-card {
+        padding: 22px;
+
+        gap: 16px;
+    }
+
+    .card-icon {
+        flex-basis: 55px;
+
+        width: 55px;
+        height: 55px;
+
+        font-size: 23px;
+    }
+
+    .main-card h2 {
+        font-size: 22px;
+    }
+
+    .home-donate {
+        margin-left: 25px;
+        margin-right: 25px;
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+    .home-logo {
+        padding-top: 48px;
+    }
+
+    .home-logo img {
+        width: min(220px, 65vw);
+    }
+
+    .home-intro {
+        padding:
+            0
+            20px
+            50px;
+
+        font-size: 14px;
+
+        line-height: 1.9;
+    }
+
+
+    /* MAIN CARDS */
+
+    .main-sections {
+        grid-template-columns: 1fr;
+
+        padding:
+            0
+            18px
+            65px;
+
+        gap: 14px;
+    }
+
+    .main-card {
+        min-height: 125px;
+
+        padding: 20px;
+
+        border-radius: 17px;
+    }
+
+    .card-icon {
+        flex-basis: 53px;
+
+        width: 53px;
+        height: 53px;
+    }
+
+    .main-card h2 {
+        font-size: 21px;
+    }
+
+    .main-card p {
+        font-size: 12px;
+
+        line-height: 1.6;
+    }
+
+
+    /* NOTIFICATIONS */
+
+    .home-notifications {
+        padding:
+            10px
+            18px
+            65px;
+    }
+
+    .section-title h2 {
+        font-size: 29px;
+    }
+
+    .notification-item {
+        gap: 12px;
+
+        padding: 12px;
+    }
+
+    .notification-date {
+        flex-basis: 52px;
+
+        width: 52px;
+    }
+
+    .notification-date strong {
+        font-size: 21px;
+    }
+
+    .notification-content h3 {
+        font-size: 14px;
+    }
+
+    .notification-content p {
+        font-size: 10px;
+    }
+
+
+    /* ABOUT */
+
+    .home-about {
+        padding:
+            20px
+            18px
+            65px;
+    }
+
+    .home-about > p {
+        font-size: 13px;
+    }
+
+
+    /* DONATE */
+
+    .home-donate {
+        margin:
+            0
+            15px
+            45px;
+
+        padding:
+            28px
+            22px;
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        border-radius: 20px;
+    }
+
+    .home-donate h2 {
+        font-size: 23px;
+    }
+
+    .home-donate p {
+        font-size: 12px;
+    }
+
+    .donate-button {
+        width: 100%;
+    }
+
+}
+
+
+/* =========================================================
+   SMALL PHONES
+   ========================================================= */
+
+@media (max-width: 400px) {
+
+    .home-logo img {
+        width: 190px;
+    }
+
+    .home-intro {
+        font-size: 13px;
+    }
+
+    .main-card {
+        padding: 17px;
+    }
+
+    .card-icon {
+        flex-basis: 47px;
+
+        width: 47px;
+        height: 47px;
+
+        font-size: 20px;
+    }
+
+    .main-card h2 {
+        font-size: 19px;
+    }
+
+    .notification-content h3 {
+        font-size: 13px;
+    }
+
+}
+
+</style>
+
 
 <!-- ==================================================
      MAIN HOME
@@ -14,16 +891,25 @@
 
 <section class="home">
 
-    <!-- LOGO -->
+
+    <!-- =================================================
+         LOGO
+    ================================================== -->
 
     <div class="home-logo">
 
         <img
             src="{{ url_for('static', filename='img/logo.png') }}"
-            alt="सेवक सह्याद्रीचे लोगो">
+            alt="सेवक सह्याद्रीचे लोगो"
+        >
 
     </div>
-    <!-- SMALL DECORATION -->
+
+
+    <!-- =================================================
+         DECORATION
+    ================================================== -->
+
     <div class="small-line">
 
         <span></span>
@@ -33,25 +919,45 @@
         <span></span>
 
     </div>
-    <!-- INTRO -->
+
+
+    <!-- =================================================
+         INTRO
+    ================================================== -->
+
     <p class="home-intro">
-इतिहासाचा बोध घेऊन, आपल्या पूर्वजांच्या कार्यातून शिकायचे
- आणि त्या शिकवणीचा उपयोग वर्तमानातील कर्तव्य म्हणून
-  समाजासाठी काहीतरी सकारात्मक घडविण्यासाठी करायचा.
+
+        {% if current_language == 'mr' %}
+
+            इतिहासाचा बोध घेऊन, आपल्या पूर्वजांच्या कार्यातून
+            शिकायचे आणि त्या शिकवणीचा उपयोग वर्तमानातील
+            कर्तव्य म्हणून समाजासाठी काहीतरी सकारात्मक
+            घडविण्यासाठी करायचा.
+
+        {% else %}
+
+            Learn from history and from the work of our
+            ancestors, and use those lessons as a responsibility
+            in the present to create something positive for society.
+
+        {% endif %}
 
     </p>
 
 
-    <!-- ============================================
+    <!-- =================================================
          FOUR MAIN SECTIONS
-    ============================================ -->
+    ================================================== -->
 
     <section class="main-sections">
 
+
         <!-- MOHIM -->
 
-        <a href="{{ url_for('mohim') }}"
-           class="main-card">
+        <a
+            href="{{ url_for('mohim') }}"
+            class="main-card"
+        >
 
             <div class="card-icon">
                 ⛰
@@ -60,12 +966,31 @@
             <div>
 
                 <h2>
-                    मोहिम
+
+                    {% if current_language == 'mr' %}
+                        मोहिम
+                    {% else %}
+                        Mohim
+                    {% endif %}
+
                 </h2>
 
                 <p>
-                    गडभ्रमंतीतून इतिहास जाणून घेत,
-                    स्वच्छता व संवर्धनातून गड-किल्ल्यांचा वारसा जपणे.
+
+                    {% if current_language == 'mr' %}
+
+                        गडभ्रमंतीतून इतिहास जाणून घेत,
+                        स्वच्छता व संवर्धनातून गड-किल्ल्यांचा
+                        वारसा जपणे.
+
+                    {% else %}
+
+                        Discover history through fort
+                        expeditions while preserving
+                        and protecting our heritage.
+
+                    {% endif %}
+
                 </p>
 
             </div>
@@ -75,8 +1000,10 @@
 
         <!-- FOREIGN DIASPORA -->
 
-        <a href="{{ url_for('foreign_diaspora') }}"
-           class="main-card">
+        <a
+            href="{{ url_for('foreign_diaspora') }}"
+            class="main-card"
+        >
 
             <div class="card-icon">
                 ◉
@@ -85,12 +1012,26 @@
             <div>
 
                 <h2>
-                    ओढ (ODH)
+                    ODH
+                    <span style="font-size:0.8em;">
+                        ({% if current_language == 'mr' %}ओढ{% else %}ओढ{% endif %})
+                    </span>
                 </h2>
 
                 <p>
-                    परदेशातील मराठी माणसाला आपल्या इतिहास,
-                     संस्कृती आणि मातृभूमीच्या वारशाशी जोडणारे व्यासपीठ.
+                    {% if current_language == 'mr' %}
+                        परदेशातील मराठी माणसाला आपल्या
+                        इतिहास, संस्कृती आणि मातृभूमीच्या
+                        वारशाशी जोडणारे व्यासपीठ.
+
+                    {% else %}
+
+                        A platform connecting Marathi people
+                        abroad with their history, culture
+                        and heritage.
+
+                    {% endif %}
+
                 </p>
 
             </div>
@@ -100,8 +1041,10 @@
 
         <!-- YUVA MANCH -->
 
-        <a href="{{ url_for('yuva_manch') }}"
-           class="main-card">
+        <a
+            href="{{ url_for('yuva_manch') }}"
+            class="main-card"
+        >
 
             <div class="card-icon">
                 ✦
@@ -110,12 +1053,29 @@
             <div>
 
                 <h2>
-                    युवा मंच
+
+                    {% if current_language == 'mr' %}
+                        अभ्युदय
+                    {% else %}
+                        Abhyuday
+                    {% endif %}
+
                 </h2>
 
                 <p>
-                    युवकांच्या विचारांना
-                    आणि ऊर्जेला सकारात्मक दिशा.
+
+                    {% if current_language == 'mr' %}
+
+                        युवकांच्या विचारांना आणि ऊर्जेला
+                        सकारात्मक दिशा.
+
+                    {% else %}
+
+                        Giving young minds and their energy
+                        a positive direction.
+
+                    {% endif %}
+
                 </p>
 
             </div>
@@ -125,8 +1085,10 @@
 
         <!-- LEKH -->
 
-        <a href="{{ url_for('lekh') }}"
-           class="main-card">
+        <a
+            href="{{ url_for('lekh') }}"
+            class="main-card"
+        >
 
             <div class="card-icon">
                 ✎
@@ -135,35 +1097,67 @@
             <div>
 
                 <h2>
-                    लेख
+
+                    {% if current_language == 'mr' %}
+                        लेख
+                    {% else %}
+                        Articles
+                    {% endif %}
+
                 </h2>
 
                 <p>
-                    इतिहास, वारसा आणि संस्कृतीविषयक
-                     लेखन व वैचारिक मांडणी.
+
+                    {% if current_language == 'mr' %}
+
+                        इतिहास, वारसा आणि संस्कृतीविषयक
+                        लेखन व वैचारिक मांडणी.
+
+                    {% else %}
+
+                        Writing and thoughtful perspectives
+                        on history, heritage and culture.
+
+                    {% endif %}
+
                 </p>
 
             </div>
 
         </a>
 
+
     </section>
 
 
-    <!-- ============================================
+    <!-- =================================================
          UPCOMING NOTIFICATIONS
-    ============================================ -->
+    ================================================== -->
 
     <section class="home-notifications">
+
 
         <div class="section-title">
 
             <span>
-                सूचना
+
+                {% if current_language == 'mr' %}
+                    सूचना
+                {% else %}
+                    Updates
+                {% endif %}
+
             </span>
 
+
             <h2>
-                आगामी उपक्रम
+
+                {% if current_language == 'mr' %}
+                    आगामी उपक्रम
+                {% else %}
+                    Upcoming Activities
+                {% endif %}
+
             </h2>
 
         </div>
@@ -171,13 +1165,18 @@
 
         {% if upcoming %}
 
+
             <div class="notification-list">
+
 
                 {% for item in upcoming %}
 
+
                     <a
                         href="{{ url_for('trek_detail', trek_id=item.id) }}"
-                        class="notification-item">
+                        class="notification-item"
+                    >
+
 
                         <div class="notification-date">
 
@@ -195,12 +1194,20 @@
                         <div class="notification-content">
 
                             <span>
-                                {{ item.category }}
+
+                                {% if current_language == 'mr' %}
+                                    {{ item.category }}
+                                {% else %}
+                                    {{ item.category }}
+                                {% endif %}
+
                             </span>
+
 
                             <h3>
                                 {{ item.title }}
                             </h3>
+
 
                             <p>
                                 {{ item.location }}
@@ -213,49 +1220,79 @@
                             →
                         </div>
 
+
                     </a>
 
+
                 {% endfor %}
+
 
             </div>
 
 
             <a
                 href="{{ url_for('treks') }}"
-                class="view-more">
+                class="view-more"
+            >
 
-                सर्व सूचना पहा →
+                {% if current_language == 'mr' %}
+                    सर्व सूचना पहा →
+                {% else %}
+                    View all activities →
+                {% endif %}
 
             </a>
 
+
         {% else %}
+
 
             <div class="no-notification">
 
                 <span>✦</span>
 
                 <p>
-                    सध्या कोणतीही आगामी सूचना नाही.
+
+                    {% if current_language == 'mr' %}
+
+                        सध्या कोणतीही आगामी सूचना नाही.
+
+                    {% else %}
+
+                        There are currently no upcoming activities.
+
+                    {% endif %}
+
                 </p>
 
             </div>
 
+
         {% endif %}
+
 
     </section>
 
 
-    <!-- ============================================
+    <!-- =================================================
          SHORT ABOUT
-    ============================================ -->
+    ================================================== -->
 
     <section class="home-about">
+
 
         <div class="section-title">
 
             <span>
-                आमच्याबद्दल
+
+                {% if current_language == 'mr' %}
+                    आमच्याबद्दल
+                {% else %}
+                    About Us
+                {% endif %}
+
             </span>
+
 
             <h2>
                 सेवक सह्याद्रीचे
@@ -266,45 +1303,86 @@
 
         <p>
 
-            आपल्या इतिहासाचा, संस्कृतीचा आणि
-            सह्याद्रीचा वारसा समजून घेऊन तो
-            पुढील पिढीपर्यंत पोहोचवण्यासाठी
-            सकारात्मक कार्य करण्याचा आमचा प्रयत्न.
+            {% if current_language == 'mr' %}
+
+                आपल्या इतिहासाचा, संस्कृतीचा आणि सह्याद्रीचा
+                वारसा समजून घेऊन तो पुढील पिढीपर्यंत
+                पोहोचवण्यासाठी सकारात्मक कार्य करण्याचा
+                आमचा प्रयत्न.
+
+            {% else %}
+
+                We strive to understand and preserve the
+                heritage of our history, culture and Sahyadri,
+                and pass it on to future generations through
+                meaningful action.
+
+            {% endif %}
 
         </p>
 
 
-        <a href="{{ url_for('about') }}"
-           class="simple-button">
+        <a
+            href="{{ url_for('about') }}"
+            class="simple-button"
+        >
 
-            अधिक जाणून घ्या
+            {% if current_language == 'mr' %}
+                अधिक जाणून घ्या
+            {% else %}
+                Learn More
+            {% endif %}
 
         </a>
+
 
     </section>
 
 
-    <!-- ============================================
+    <!-- =================================================
          DONATE
-    ============================================ -->
+    ================================================== -->
 
     <section class="home-donate">
+
 
         <div>
 
             <span>
-                आपली साथ
+
+                {% if current_language == 'mr' %}
+                    आपली साथ
+                {% else %}
+                    Your Support
+                {% endif %}
+
             </span>
 
+
             <h2>
-                या प्रवासात सहभागी व्हा
+
+                {% if current_language == 'mr' %}
+                    या प्रवासात सहभागी व्हा
+                {% else %}
+                    Be Part of This Journey
+                {% endif %}
+
             </h2>
+
 
             <p>
 
-                आपल्या वेळेने, सहभागाने,
-                ज्ञानाने किंवा योगदानाने
-                या कार्याला हातभार लावा.
+                {% if current_language == 'mr' %}
+
+                    आपल्या वेळेने, सहभागाने, ज्ञानाने
+                    किंवा योगदानाने या कार्याला हातभार लावा.
+
+                {% else %}
+
+                    Contribute your time, participation,
+                    knowledge or support to this work.
+
+                {% endif %}
 
             </p>
 
@@ -313,16 +1391,183 @@
 
         <a
             href="{{ url_for('donate') }}"
-            class="donate-button">
+            class="donate-button"
+        >
 
-            देणगी द्या
+            {% if current_language == 'mr' %}
+                देणगी द्या
+            {% else %}
+                Donate
+            {% endif %}
 
         </a>
+
 
     </section>
 
 
 </section>
+
+
+<script>
+
+/* =========================================================
+   HOME PAGE JS
+   ========================================================= */
+
+document.addEventListener("DOMContentLoaded", function () {
+
+
+    /* -------------------------------------------------------
+       MAIN CARDS
+    ------------------------------------------------------- */
+
+    const mainCards =
+        document.querySelectorAll(".main-card");
+
+
+    mainCards.forEach(function (card) {
+
+        card.addEventListener("click", function () {
+
+            card.style.transform =
+                "translateY(-1px)";
+
+            setTimeout(function () {
+
+                card.style.transform = "";
+
+            }, 120);
+
+        });
+
+    });
+
+
+    /* -------------------------------------------------------
+       NOTIFICATION CARDS
+    ------------------------------------------------------- */
+
+    const notificationItems =
+        document.querySelectorAll(
+            ".notification-item"
+        );
+
+
+    notificationItems.forEach(function (item) {
+
+        item.addEventListener(
+            "click",
+            function () {
+
+                item.style.transform =
+                    "translateY(-1px)";
+
+                setTimeout(function () {
+
+                    item.style.transform = "";
+
+                }, 120);
+
+            }
+        );
+
+    });
+
+
+    /* -------------------------------------------------------
+       SCROLL REVEAL
+    ------------------------------------------------------- */
+
+    const revealItems =
+        document.querySelectorAll(
+            ".main-card, " +
+            ".notification-item, " +
+            ".home-about, " +
+            ".home-donate"
+        );
+
+
+    if ("IntersectionObserver" in window) {
+
+
+        const observer =
+            new IntersectionObserver(
+                function (entries, observer) {
+
+                    entries.forEach(
+                        function (entry) {
+
+                            if (
+                                entry.isIntersecting
+                            ) {
+
+                                entry.target.style.opacity =
+                                    "1";
+
+                                entry.target.style.transform =
+                                    "translateY(0)";
+
+                                observer.unobserve(
+                                    entry.target
+                                );
+
+                            }
+
+                        }
+                    );
+
+                },
+                {
+                    threshold: 0.08
+                }
+            );
+
+
+        revealItems.forEach(function (item) {
+
+            item.style.opacity = "0";
+
+            item.style.transform =
+                "translateY(18px)";
+
+            item.style.transition =
+                "opacity 0.5s ease, " +
+                "transform 0.5s ease, " +
+                "box-shadow 0.25s ease, " +
+                "border-color 0.25s ease";
+
+            observer.observe(item);
+
+        });
+
+    }
+
+
+    /* -------------------------------------------------------
+       PREVENT IMAGE DRAGGING
+       ------------------------------------------------------- */
+
+    const logo =
+        document.querySelector(".home-logo img");
+
+
+    if (logo) {
+
+        logo.addEventListener(
+            "dragstart",
+            function (event) {
+
+                event.preventDefault();
+
+            }
+        );
+
+    }
+
+});
+
+</script>
 
 
 {% endblock %}

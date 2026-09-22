@@ -1,0 +1,38 @@
+{% extends "admin/base_admin.html" %}
+{% block title %}Online Sessions — Sevak Sahyadriche{% endblock %}
+{% block admin_content %}
+<div class="admin-topbar">
+  <div>
+    <h1>Online Sessions</h1>
+    <p class="admin-subtitle">Manage online sessions, photos, text and feedback.</p>
+  </div>
+  <a href="{{ url_for('admin_online_session_new') }}" class="btn btn-primary btn-sm">+ Add Session</a>
+</div>
+
+{% if items %}
+<div class="table-wrap">
+<table class="admin-table">
+  <thead><tr><th>Title</th><th>Date</th><th>Type</th><th>Status</th><th>Actions</th></tr></thead>
+  <tbody>
+  {% for item in items %}
+  <tr>
+    <td><strong>{{ item.title }}</strong></td>
+    <td>{{ item.event_date.strftime('%d %b %Y') if item.event_date else '—' }}</td>
+    <td>{{ 'Upcoming' if item.is_upcoming else 'Completed / General' }}</td>
+    <td><span class="status-dot {{ 'on' if item.is_published else 'off' }}"></span>{{ 'Published' if item.is_published else 'Hidden' }}</td>
+    <td class="action-links">
+      <a href="{{ url_for('online_sessions') }}" class="btn btn-ghost btn-sm" target="_blank">View</a>
+      <a href="{{ url_for('admin_online_session_edit', item_id=item.id) }}" class="btn btn-ghost btn-sm">Edit</a>
+      <form class="inline-form" method="POST" action="{{ url_for('admin_online_session_delete', item_id=item.id) }}" onsubmit="return confirm('Delete this online session?');">
+        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+      </form>
+    </td>
+  </tr>
+  {% endfor %}
+  </tbody>
+</table>
+</div>
+{% else %}
+<div class="empty-state"><div style="font-size:32px">🎥</div><p>No online sessions added yet.</p></div>
+{% endif %}
+{% endblock %}

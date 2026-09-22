@@ -1,0 +1,59 @@
+{% extends "admin/base_admin.html" %}
+{% block title %}{{ 'Add' if mode=='new' else 'Edit' }} Tourism Plan — Sevak Sahyadriche{% endblock %}
+{% block admin_content %}
+<div class="admin-topbar">
+  <h1>{{ 'Add Tourism Plan' if mode=='new' else 'Edit: ' + item.title }}</h1>
+  <a href="{{ url_for('admin_tourism_planning') }}" class="btn btn-ghost btn-sm">&larr; Back to List</a>
+</div>
+
+<form class="admin-form" method="POST" enctype="multipart/form-data">
+  <div class="form-group">
+    <label>Title</label>
+    <input type="text" name="title" class="form-control" value="{{ item.title if item else '' }}" required>
+  </div>
+
+  <div class="form-group">
+    <label>Details</label>
+    <textarea name="details" class="form-control" style="min-height:180px;" required>{{ item.details if item else '' }}</textarea>
+  </div>
+
+  <div class="form-row-2">
+    <div class="form-group">
+      <label>Location</label>
+      <input type="text" name="location" class="form-control" value="{{ item.location if item else '' }}">
+    </div>
+    <div class="form-group">
+      <label>Date</label>
+      <input type="date" name="event_date" class="form-control" value="{{ item.event_date.strftime('%Y-%m-%d') if item and item.event_date else '' }}">
+    </div>
+  </div>
+
+  <div class="form-row-2">
+    <div class="form-group">
+      <label>Poster / Photo</label>
+      <input type="file" name="poster" class="form-control" accept="image/*">
+      {% if item and item.poster_url %}
+        <img src="{{ item.poster_url }}" class="current-img-preview" alt="current poster">
+        <small style="color:#6b6259;">Current poster — upload a new one to replace it.</small>
+      {% endif %}
+    </div>
+    <div class="form-group">
+      <label>Feedback (for past plan)</label>
+      <textarea name="feedback" class="form-control" style="min-height:120px;">{{ item.feedback if item and item.feedback else '' }}</textarea>
+    </div>
+  </div>
+
+  <div class="checkbox-row">
+    <input type="checkbox" id="is_completed" name="is_completed" {{ 'checked' if item and item.is_completed }}>
+    <label for="is_completed" style="margin:0;">Past / Completed</label>
+  </div>
+
+  <div class="checkbox-row">
+    <input type="checkbox" id="is_published" name="is_published" {{ 'checked' if not item or item.is_published }}>
+    <label for="is_published" style="margin:0;">Published (visible on public site)</label>
+  </div>
+
+  <button type="submit" class="btn btn-primary">{{ 'Add Plan' if mode=='new' else 'Save Changes' }}</button>
+  <a href="{{ url_for('admin_tourism_planning') }}" class="btn btn-ghost">Cancel</a>
+</form>
+{% endblock %}

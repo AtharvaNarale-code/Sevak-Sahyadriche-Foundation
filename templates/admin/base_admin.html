@@ -17,6 +17,10 @@
 <div class="sidebar-title">Manage</div>
 <a href="{{ url_for('admin_dashboard') }}" class="{{ 'active' if request.endpoint=='admin_dashboard' }}">Dashboard</a>
 <a href="{{ url_for('admin_treks') }}" class="{{ 'active' if request.endpoint in ['admin_treks','admin_trek_new','admin_trek_edit'] }}"> Treks &amp; Events</a>
+<a href="{{ url_for('admin_online_sessions') }}" class="{{ 'active' if request.endpoint in ['admin_online_sessions','admin_online_session_new','admin_online_session_edit'] }}">Online Sessions</a>
+<a href="{{ url_for('admin_tourism_planning') }}" class="{{ 'active' if request.endpoint in ['admin_tourism_planning','admin_tourism_plan_new','admin_tourism_plan_edit'] }}">Tourism Planning</a>
+<a href="{{ url_for('admin_yuva_sessions') }}" class="{{ 'active' if request.endpoint in ['admin_yuva_sessions','admin_yuva_session_new','admin_yuva_session_edit'] }}">Yuva Manch</a>
+<a href="{{ url_for('admin_articles') }}" class="{{ 'active' if request.endpoint in ['admin_articles','admin_article_new','admin_article_edit'] }}">Articles</a>
 <a href="{{ url_for('admin_messages') }}" class="{{ 'active' if request.endpoint=='admin_messages' }}">Contact Messages</a>
 <div class="sidebar-title">Account</div>
 <a href="{{ url_for('admin_change_password') }}" class="{{ 'active' if request.endpoint=='admin_change_password' }}">Change Password</a>

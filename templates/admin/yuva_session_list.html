@@ -1,0 +1,39 @@
+{% extends "admin/base_admin.html" %}
+{% block title %}Yuva Manch Sessions — Sevak Sahyadriche{% endblock %}
+{% block admin_content %}
+<div class="admin-topbar">
+  <div>
+    <h1>Yuva Manch</h1>
+    <p class="admin-subtitle">Manage online Shivdarshan and offline college sessions.</p>
+  </div>
+  <a href="{{ url_for('admin_yuva_session_new') }}" class="btn btn-primary btn-sm">+ Add Session</a>
+</div>
+
+{% if items %}
+<div class="table-wrap">
+<table class="admin-table">
+  <thead><tr><th>Title</th><th>Type</th><th>Date</th><th>Feedback</th><th>Status</th><th>Actions</th></tr></thead>
+  <tbody>
+  {% for item in items %}
+  <tr>
+    <td><strong>{{ item.title }}</strong></td>
+    <td>{{ 'Online / Shivdarshan' if item.session_type == 'online' else 'Offline / College' }}</td>
+    <td>{{ item.event_date.strftime('%d %b %Y') if item.event_date else '—' }}</td>
+    <td>{{ 'Added' if item.feedback else '—' }}</td>
+    <td><span class="status-dot {{ 'on' if item.is_published else 'off' }}"></span>{{ 'Published' if item.is_published else 'Hidden' }}</td>
+    <td class="action-links">
+      <a href="{{ url_for('yuva_manch') }}" class="btn btn-ghost btn-sm" target="_blank">View</a>
+      <a href="{{ url_for('admin_yuva_session_edit', item_id=item.id) }}" class="btn btn-ghost btn-sm">Edit</a>
+      <form class="inline-form" method="POST" action="{{ url_for('admin_yuva_session_delete', item_id=item.id) }}" onsubmit="return confirm('Delete this Yuva Manch session?');">
+        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+      </form>
+    </td>
+  </tr>
+  {% endfor %}
+  </tbody>
+</table>
+</div>
+{% else %}
+<div class="empty-state"><div style="font-size:32px">🎓</div><p>No Yuva Manch sessions added yet.</p></div>
+{% endif %}
+{% endblock %}

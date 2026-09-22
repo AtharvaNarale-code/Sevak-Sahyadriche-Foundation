@@ -1,0 +1,507 @@
+{% extends "base.html" %}
+
+{% block title %}{{ article.title }} — सेवक सह्याद्रीचे{% endblock %}
+
+{% block content %}
+
+<style>
+
+/* =========================================================
+   ARTICLE DETAIL
+========================================================= */
+
+.article-detail {
+    background: #fbf5e9;
+    min-height: 100vh;
+    padding: 70px 20px 100px;
+}
+
+.article-container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+
+/* =========================================================
+   BACK BUTTON
+========================================================= */
+
+.article-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    color: #894720;
+    text-decoration: none;
+
+    font-weight: 600;
+
+    margin-bottom: 45px;
+
+    transition: 0.2s ease;
+}
+
+.article-back:hover {
+    gap: 12px;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.article-header {
+    text-align: center;
+    margin-bottom: 45px;
+}
+
+.article-category {
+    display: inline-block;
+
+    color: #894720;
+
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 700;
+
+    margin-bottom: 18px;
+}
+
+.article-title {
+    font-size: clamp(2.2rem, 5vw, 4rem);
+
+    line-height: 1.15;
+
+    color: #894720;
+
+    margin: 0 auto 20px;
+
+    max-width: 850px;
+}
+
+.article-date {
+    color: #777;
+    font-size: 0.9rem;
+}
+
+
+/* =========================================================
+   ARTICLE IMAGE
+========================================================= */
+
+.article-image {
+    width: 100%;
+    max-height: 520px;
+
+    object-fit: cover;
+
+    border-radius: 18px;
+
+    margin-bottom: 50px;
+
+    display: block;
+
+    /*
+     * Prevent image dragging
+     */
+    -webkit-user-drag: none;
+}
+
+
+/* =========================================================
+   ARTICLE BODY
+========================================================= */
+
+.article-body {
+    background: #fffdf8;
+
+    border-radius: 18px;
+
+    padding: clamp(25px, 5vw, 55px);
+
+    box-shadow:
+        0 8px 30px rgba(80, 45, 20, 0.07);
+
+    color: #333;
+
+    font-size: 1.08rem;
+
+    line-height: 1.9;
+
+    white-space: pre-line;
+
+    overflow-wrap: break-word;
+
+    /*
+     * TEXT PROTECTION
+     */
+
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+
+    -webkit-user-drag: none;
+}
+
+.article-body p {
+    margin: 0 0 1.5em;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.article-footer {
+    text-align: center;
+
+    margin-top: 55px;
+
+    padding-top: 35px;
+
+    border-top:
+        1px solid rgba(137, 71, 32, 0.15);
+}
+
+.article-footer-text {
+    color: #777;
+
+    margin-bottom: 20px;
+}
+
+.article-back-bottom {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    padding: 12px 22px;
+
+    border: 1px solid #894720;
+
+    border-radius: 30px;
+
+    color: #894720;
+
+    text-decoration: none;
+
+    font-weight: 600;
+
+    transition: 0.2s ease;
+}
+
+.article-back-bottom:hover {
+    background: #894720;
+    color: white;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .article-detail {
+        padding: 45px 15px 70px;
+    }
+
+    .article-back {
+        margin-bottom: 30px;
+    }
+
+    .article-header {
+        margin-bottom: 30px;
+    }
+
+    .article-title {
+        font-size: 2rem;
+    }
+
+    .article-image {
+        border-radius: 12px;
+
+        margin-bottom: 30px;
+
+        max-height: 350px;
+    }
+
+    .article-body {
+        padding: 24px 20px;
+
+        font-size: 1rem;
+
+        line-height: 1.8;
+
+        border-radius: 12px;
+    }
+}
+
+</style>
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    /*
+     * =====================================================
+     * PROTECT ARTICLE CONTENT
+     * =====================================================
+     */
+
+    const articleBody =
+        document.querySelector(".article-body");
+
+    if (!articleBody) {
+        return;
+    }
+
+
+    /*
+     * -----------------------------------------------------
+     * Disable right click
+     * -----------------------------------------------------
+     */
+
+    articleBody.addEventListener(
+        "contextmenu",
+        function (event) {
+
+            event.preventDefault();
+
+        }
+    );
+
+
+    /*
+     * -----------------------------------------------------
+     * Disable copy
+     * -----------------------------------------------------
+     */
+
+    articleBody.addEventListener(
+        "copy",
+        function (event) {
+
+            event.preventDefault();
+
+        }
+    );
+
+
+    /*
+     * -----------------------------------------------------
+     * Disable cut
+     * -----------------------------------------------------
+     */
+
+    articleBody.addEventListener(
+        "cut",
+        function (event) {
+
+            event.preventDefault();
+
+        }
+    );
+
+
+    /*
+     * -----------------------------------------------------
+     * Disable dragging
+     * -----------------------------------------------------
+     */
+
+    articleBody.addEventListener(
+        "dragstart",
+        function (event) {
+
+            event.preventDefault();
+
+        }
+    );
+
+
+    /*
+     * =====================================================
+     * BLOCK KEYBOARD SHORTCUTS
+     * =====================================================
+     *
+     * Only blocks shortcuts when the selected text
+     * belongs to the article body.
+     */
+
+    document.addEventListener(
+        "keydown",
+        function (event) {
+
+            const selection =
+                window.getSelection();
+
+            if (
+                !selection ||
+                selection.isCollapsed
+            ) {
+                return;
+            }
+
+
+            const selectedNode =
+                selection.anchorNode;
+
+            if (!selectedNode) {
+                return;
+            }
+
+
+            const parent =
+                selectedNode.nodeType === Node.TEXT_NODE
+                    ? selectedNode.parentElement
+                    : selectedNode;
+
+
+            if (!parent) {
+                return;
+            }
+
+
+            const insideArticle =
+                parent.closest(".article-body");
+
+
+            if (!insideArticle) {
+                return;
+            }
+
+
+            /*
+             * Block:
+             *
+             * Ctrl + C
+             * Ctrl + X
+             * Ctrl + A
+             * Ctrl + S
+             * Ctrl + U
+             */
+
+            if (
+                (event.ctrlKey || event.metaKey) &&
+                [
+                    "c",
+                    "x",
+                    "a",
+                    "s",
+                    "u"
+                ].includes(
+                    event.key.toLowerCase()
+                )
+            ) {
+
+                event.preventDefault();
+
+            }
+
+        }
+    );
+
+});
+</script>
+
+
+<section class="article-detail">
+
+    <div class="article-container">
+
+
+        <!-- ==================================================
+             BACK
+        ================================================== -->
+
+        <a
+            href="{{ url_for('lekh') }}"
+            class="article-back"
+        >
+            ← सर्व लेख
+        </a>
+
+
+        <!-- ==================================================
+             HEADER
+        ================================================== -->
+
+        <header class="article-header">
+
+            <span class="article-category">
+                लेख
+            </span>
+
+            <h1 class="article-title">
+                {{ article.title }}
+            </h1>
+
+
+            {% if article.created_at %}
+
+            <div class="article-date">
+                {{ article.created_at.strftime('%d %B %Y') }}
+            </div>
+
+            {% endif %}
+
+        </header>
+
+
+        <!-- ==================================================
+             IMAGE
+        ================================================== -->
+
+        {% if article.image_url %}
+
+        <img
+            src="{{ article.image_url }}"
+            alt="{{ article.title }}"
+            class="article-image"
+            draggable="false"
+        >
+
+        {% endif %}
+
+
+        <!-- ==================================================
+             FULL ARTICLE
+        ================================================== -->
+
+        <article class="article-body">
+
+            {{ article.text }}
+
+        </article>
+
+
+        <!-- ==================================================
+             FOOTER
+        ================================================== -->
+
+        <div class="article-footer">
+
+            <div class="article-footer-text">
+                सेवक सह्याद्रीचे
+            </div>
+
+
+            <a
+                href="{{ url_for('lekh') }}"
+                class="article-back-bottom"
+            >
+                ← सर्व लेखांकडे परत
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

@@ -183,6 +183,103 @@ class ContactMessage(db.Model):
     is_read = db.Column(db.Boolean, default=False)
 
 
+class MohimMeta(db.Model):
+    """Extra admin-managed information for a Mohim/Trek entry."""
+    __tablename__ = "mohim_meta"
+
+    id = db.Column(db.Integer, primary_key=True)
+    trek_id = db.Column(
+        db.Integer,
+        db.ForeignKey("treks.id", ondelete="CASCADE"),
+        nullable=False,
+        unique=True,
+    )
+    circle_batch = db.Column(db.String(150), nullable=True)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+
+
+class OnlineSession(db.Model):
+    """Online session/content item managed from the admin panel."""
+    __tablename__ = "online_sessions"
+
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(200), nullable=False)
+    text = db.Column(db.Text, nullable=False)
+    feedback = db.Column(db.Text, nullable=True)
+    image_url = db.Column(db.String(500), nullable=True)
+    is_upcoming = db.Column(db.Boolean, default=False)
+    event_date = db.Column(db.Date, nullable=True)
+    is_published = db.Column(db.Boolean, default=True)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+
+    @property
+    def image(self):
+        if self.image_url:
+            return self.image_url
+        return url_for("static", filename="img/placeholder.svg")
+
+
+class TourismPlan(db.Model):
+    """Past/upcoming tourism planning item."""
+    __tablename__ = "tourism_plans"
+
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(200), nullable=False)
+    details = db.Column(db.Text, nullable=False)
+    location = db.Column(db.String(200), nullable=True)
+    event_date = db.Column(db.Date, nullable=True)
+    poster_url = db.Column(db.String(500), nullable=True)
+    feedback = db.Column(db.Text, nullable=True)
+    is_completed = db.Column(db.Boolean, default=False)
+    is_published = db.Column(db.Boolean, default=True)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+
+    @property
+    def poster(self):
+        if self.poster_url:
+            return self.poster_url
+        return url_for("static", filename="img/placeholder.svg")
+
+
+class YuvaSession(db.Model):
+    """Online or offline college session for Yuva Manch."""
+    __tablename__ = "yuva_sessions"
+
+    id = db.Column(db.Integer, primary_key=True)
+    session_type = db.Column(db.String(20), nullable=False, default="online")
+    title = db.Column(db.String(200), nullable=False)
+    text = db.Column(db.Text, nullable=False)
+    feedback = db.Column(db.Text, nullable=True)
+    image_url = db.Column(db.String(500), nullable=True)
+    event_date = db.Column(db.Date, nullable=True)
+    is_published = db.Column(db.Boolean, default=True)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+
+    @property
+    def image(self):
+        if self.image_url:
+            return self.image_url
+        return url_for("static", filename="img/placeholder.svg")
+
+
+class Article(db.Model):
+    """Article / Lekh published by the foundation."""
+    __tablename__ = "articles"
+
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(250), nullable=False)
+    text = db.Column(db.Text, nullable=False)
+    image_url = db.Column(db.String(500), nullable=True)
+    is_published = db.Column(db.Boolean, default=True)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+
+    @property
+    def image(self):
+        if self.image_url:
+            return self.image_url
+        return url_for("static", filename="img/placeholder.svg")
+
+
 # On Vercel, initialize the temporary SQLite database for the current
 # serverless instance so public pages and the admin panel can load.
 if IS_VERCEL:
@@ -446,12 +543,67 @@ def foreign_diaspora():
 
 @app.route("/yuva-manch")
 def yuva_manch():
-    return render_template("yuva_manch.html")
+    online_sessions = (
+        YuvaSession.query
+        .filter_by(session_type="online", is_published=True)
+        .order_by(YuvaSession.event_date.desc().nullslast(), YuvaSession.created_at.desc())
+        .all()
+    )
+    offline_sessions = (
+        YuvaSession.query
+        .filter_by(session_type="offline", is_published=True)
+        .order_by(YuvaSession.event_date.desc().nullslast(), YuvaSession.created_at.desc())
+        .all()
+    )
+    return render_template(
+        "yuva_manch.html",
+        online_sessions=online_sessions,
+        offline_sessions=offline_sessions,
+    )
 
 
 @app.route("/lekh")
 def lekh():
-    return render_template("lekh.html")
+    articles = (
+        Article.query
+        .filter_by(is_published=True)
+        .order_by(Article.created_at.desc())
+        .all()
+    )
+    return render_template("lekh.html", articles=articles)
+@app.route("/lekh/<int:article_id>")
+def lekh_detail(article_id):
+    article = (
+        Article.query
+        .filter_by(id=article_id, is_published=True)
+        .first_or_404()
+    )
+
+    return render_template(
+        "lekh_detail.html",
+        article=article
+    )
+
+@app.route("/online-sessions")
+def online_sessions():
+    sessions = (
+        OnlineSession.query
+        .filter_by(is_published=True)
+        .order_by(OnlineSession.event_date.desc().nullslast(), OnlineSession.created_at.desc())
+        .all()
+    )
+    return render_template("online_sessions.html", sessions=sessions)
+
+
+@app.route("/tourism-planning")
+def tourism_planning():
+    plans = (
+        TourismPlan.query
+        .filter_by(is_published=True)
+        .order_by(TourismPlan.event_date.desc().nullslast(), TourismPlan.created_at.desc())
+        .all()
+    )
+    return render_template("tourism_planning.html", plans=plans)
 
 
 @app.route("/donate")
@@ -507,6 +659,10 @@ def admin_dashboard():
     upcoming_count = Trek.query.filter(Trek.event_date >= date.today()).count()
     unread_messages = ContactMessage.query.filter_by(is_read=False).count()
     recent_treks = Trek.query.order_by(Trek.created_at.desc()).limit(5).all()
+    online_session_count = OnlineSession.query.count()
+    tourism_plan_count = TourismPlan.query.count()
+    yuva_session_count = YuvaSession.query.count()
+    article_count = Article.query.count()
 
     return render_template(
         "admin/dashboard.html",
@@ -514,6 +670,10 @@ def admin_dashboard():
         upcoming_count=upcoming_count,
         unread_messages=unread_messages,
         recent_treks=recent_treks,
+        online_session_count=online_session_count,
+        tourism_plan_count=tourism_plan_count,
+        yuva_session_count=yuva_session_count,
+        article_count=article_count,
     )
 
 
@@ -556,6 +716,58 @@ def _save_uploaded_image(file_storage):
         os.path.join(app.config["UPLOAD_FOLDER"], unique_name)
     )
     return unique_name
+
+def _save_content_image(file_storage, folder="content"):
+    """Upload a CMS image to Vercel Blob, or save it locally during development."""
+    if not file_storage or not file_storage.filename:
+        return None
+
+    if not allowed_file(file_storage.filename):
+        flash("Unsupported image format. Use png, jpg, jpeg, webp or gif.", "danger")
+        return None
+
+    filename = secure_filename(file_storage.filename)
+    unique_name = f"{datetime.utcnow().strftime('%Y%m%d%H%M%S%f')}_{filename}"
+
+    if IS_VERCEL:
+        temp_path = os.path.join("/tmp", unique_name)
+        file_storage.save(temp_path)
+
+        uploaded = blob.upload_file(
+            local_path=temp_path,
+            path=f"{folder}/{unique_name}",
+            access="public",
+        )
+        return uploaded.url
+
+    local_folder = os.path.join(BASE_DIR, "static", "img", folder)
+    os.makedirs(local_folder, exist_ok=True)
+    file_storage.save(os.path.join(local_folder, unique_name))
+
+    return url_for(
+        "static",
+        filename=f"img/{folder}/{unique_name}",
+    )
+
+
+def _parse_optional_date(value):
+    """Return a date from an HTML date input, or None when blank/invalid."""
+    value = (value or "").strip()
+    if not value:
+        return None
+
+    try:
+        return datetime.strptime(value, "%Y-%m-%d").date()
+    except ValueError:
+        return None
+
+
+def _content_image_url(value):
+    """Keep Blob/static URLs unchanged and provide a safe placeholder."""
+    if value:
+        return value
+    return url_for("static", filename="img/placeholder.svg")
+
 
 
 def _trek_from_form(trek):
@@ -645,6 +857,426 @@ def admin_trek_toggle_publish(trek_id):
     trek.is_published = not trek.is_published
     db.session.commit()
     return redirect(url_for("admin_treks"))
+
+
+
+# ---------------------------------------------------------------------
+# ADMIN PANEL - CONTENT MANAGEMENT
+# ---------------------------------------------------------------------
+
+@app.route("/admin/mohim/<int:trek_id>/circle-batch", methods=["POST"])
+@login_required
+def admin_mohim_circle_batch(trek_id):
+    trek = Trek.query.get_or_404(trek_id)
+
+    meta = MohimMeta.query.filter_by(trek_id=trek.id).first()
+    if not meta:
+        meta = MohimMeta(trek_id=trek.id)
+        db.session.add(meta)
+
+    meta.circle_batch = request.form.get("circle_batch", "").strip()
+    db.session.commit()
+
+    flash(f'Circle Batch for "{trek.title}" has been updated.', "success")
+    return redirect(url_for("admin_trek_edit", trek_id=trek.id))
+
+
+@app.route("/admin/online-sessions")
+@login_required
+def admin_online_sessions():
+    items = OnlineSession.query.order_by(
+        OnlineSession.event_date.desc().nullslast(),
+        OnlineSession.created_at.desc(),
+    ).all()
+    return render_template("admin/online_session_list.html", items=items)
+
+
+@app.route("/admin/online-sessions/new", methods=["GET", "POST"])
+@login_required
+def admin_online_session_new():
+    if request.method == "POST":
+        item = OnlineSession(
+            title=request.form.get("title", "").strip(),
+            text=request.form.get("text", "").strip(),
+            feedback=request.form.get("feedback", "").strip() or None,
+            is_upcoming=request.form.get("is_upcoming") == "on",
+            event_date=_parse_optional_date(request.form.get("event_date")),
+            is_published=request.form.get("is_published") == "on",
+        )
+
+        image_url = _save_content_image(
+            request.files.get("image"),
+            folder="online-sessions",
+        )
+        if image_url:
+            item.image_url = image_url
+
+        if not item.title or not item.text:
+            flash("Title and text are required.", "danger")
+            return render_template(
+                "admin/online_session_form.html",
+                item=item,
+                mode="new",
+            )
+
+        db.session.add(item)
+        db.session.commit()
+        flash(f'"{item.title}" has been added.', "success")
+        return redirect(url_for("admin_online_sessions"))
+
+    return render_template(
+        "admin/online_session_form.html",
+        item=None,
+        mode="new",
+    )
+
+
+@app.route("/admin/online-sessions/<int:item_id>/edit", methods=["GET", "POST"])
+@login_required
+def admin_online_session_edit(item_id):
+    item = OnlineSession.query.get_or_404(item_id)
+
+    if request.method == "POST":
+        item.title = request.form.get("title", "").strip()
+        item.text = request.form.get("text", "").strip()
+        item.feedback = request.form.get("feedback", "").strip() or None
+        item.is_upcoming = request.form.get("is_upcoming") == "on"
+        item.event_date = _parse_optional_date(request.form.get("event_date"))
+        item.is_published = request.form.get("is_published") == "on"
+
+        image_url = _save_content_image(
+            request.files.get("image"),
+            folder="online-sessions",
+        )
+        if image_url:
+            item.image_url = image_url
+
+        if not item.title or not item.text:
+            flash("Title and text are required.", "danger")
+            return render_template(
+                "admin/online_session_form.html",
+                item=item,
+                mode="edit",
+            )
+
+        db.session.commit()
+        flash(f'"{item.title}" has been updated.', "success")
+        return redirect(url_for("admin_online_sessions"))
+
+    return render_template(
+        "admin/online_session_form.html",
+        item=item,
+        mode="edit",
+    )
+
+
+@app.route("/admin/online-sessions/<int:item_id>/delete", methods=["POST"])
+@login_required
+def admin_online_session_delete(item_id):
+    item = OnlineSession.query.get_or_404(item_id)
+    db.session.delete(item)
+    db.session.commit()
+    flash("Online session deleted.", "info")
+    return redirect(url_for("admin_online_sessions"))
+
+
+@app.route("/admin/tourism-planning")
+@login_required
+def admin_tourism_planning():
+    items = TourismPlan.query.order_by(
+        TourismPlan.event_date.desc().nullslast(),
+        TourismPlan.created_at.desc(),
+    ).all()
+    return render_template("admin/tourism_plan_list.html", items=items)
+
+
+@app.route("/admin/tourism-planning/new", methods=["GET", "POST"])
+@login_required
+def admin_tourism_plan_new():
+    if request.method == "POST":
+        item = TourismPlan(
+            title=request.form.get("title", "").strip(),
+            details=request.form.get("details", "").strip(),
+            location=request.form.get("location", "").strip() or None,
+            event_date=_parse_optional_date(request.form.get("event_date")),
+            feedback=request.form.get("feedback", "").strip() or None,
+            is_completed=request.form.get("is_completed") == "on",
+            is_published=request.form.get("is_published") == "on",
+        )
+
+        poster_url = _save_content_image(
+            request.files.get("poster"),
+            folder="tourism-planning",
+        )
+        if poster_url:
+            item.poster_url = poster_url
+
+        if not item.title or not item.details:
+            flash("Title and details are required.", "danger")
+            return render_template(
+                "admin/tourism_plan_form.html",
+                item=item,
+                mode="new",
+            )
+
+        db.session.add(item)
+        db.session.commit()
+        flash(f'"{item.title}" has been added.', "success")
+        return redirect(url_for("admin_tourism_planning"))
+
+    return render_template(
+        "admin/tourism_plan_form.html",
+        item=None,
+        mode="new",
+    )
+
+
+@app.route("/admin/tourism-planning/<int:item_id>/edit", methods=["GET", "POST"])
+@login_required
+def admin_tourism_plan_edit(item_id):
+    item = TourismPlan.query.get_or_404(item_id)
+
+    if request.method == "POST":
+        item.title = request.form.get("title", "").strip()
+        item.details = request.form.get("details", "").strip()
+        item.location = request.form.get("location", "").strip() or None
+        item.event_date = _parse_optional_date(request.form.get("event_date"))
+        item.feedback = request.form.get("feedback", "").strip() or None
+        item.is_completed = request.form.get("is_completed") == "on"
+        item.is_published = request.form.get("is_published") == "on"
+
+        poster_url = _save_content_image(
+            request.files.get("poster"),
+            folder="tourism-planning",
+        )
+        if poster_url:
+            item.poster_url = poster_url
+
+        if not item.title or not item.details:
+            flash("Title and details are required.", "danger")
+            return render_template(
+                "admin/tourism_plan_form.html",
+                item=item,
+                mode="edit",
+            )
+
+        db.session.commit()
+        flash(f'"{item.title}" has been updated.', "success")
+        return redirect(url_for("admin_tourism_planning"))
+
+    return render_template(
+        "admin/tourism_plan_form.html",
+        item=item,
+        mode="edit",
+    )
+
+
+@app.route("/admin/tourism-planning/<int:item_id>/delete", methods=["POST"])
+@login_required
+def admin_tourism_plan_delete(item_id):
+    item = TourismPlan.query.get_or_404(item_id)
+    db.session.delete(item)
+    db.session.commit()
+    flash("Tourism planning item deleted.", "info")
+    return redirect(url_for("admin_tourism_planning"))
+
+
+@app.route("/admin/yuva-sessions")
+@login_required
+def admin_yuva_sessions():
+    items = YuvaSession.query.order_by(
+        YuvaSession.event_date.desc().nullslast(),
+        YuvaSession.created_at.desc(),
+    ).all()
+    return render_template("admin/yuva_session_list.html", items=items)
+
+
+@app.route("/admin/yuva-sessions/new", methods=["GET", "POST"])
+@login_required
+def admin_yuva_session_new():
+    if request.method == "POST":
+        session_type = request.form.get("session_type", "online")
+        if session_type not in ("online", "offline"):
+            session_type = "online"
+
+        item = YuvaSession(
+            session_type=session_type,
+            title=request.form.get("title", "").strip(),
+            text=request.form.get("text", "").strip(),
+            feedback=request.form.get("feedback", "").strip() or None,
+            event_date=_parse_optional_date(request.form.get("event_date")),
+            is_published=request.form.get("is_published") == "on",
+        )
+
+        image_url = _save_content_image(
+            request.files.get("image"),
+            folder="yuva-sessions",
+        )
+        if image_url:
+            item.image_url = image_url
+
+        if not item.title or not item.text:
+            flash("Title and text are required.", "danger")
+            return render_template(
+                "admin/yuva_session_form.html",
+                item=item,
+                mode="new",
+            )
+
+        db.session.add(item)
+        db.session.commit()
+        flash(f'"{item.title}" has been added.', "success")
+        return redirect(url_for("admin_yuva_sessions"))
+
+    return render_template(
+        "admin/yuva_session_form.html",
+        item=None,
+        mode="new",
+    )
+
+
+@app.route("/admin/yuva-sessions/<int:item_id>/edit", methods=["GET", "POST"])
+@login_required
+def admin_yuva_session_edit(item_id):
+    item = YuvaSession.query.get_or_404(item_id)
+
+    if request.method == "POST":
+        session_type = request.form.get("session_type", "online")
+        if session_type not in ("online", "offline"):
+            session_type = "online"
+
+        item.session_type = session_type
+        item.title = request.form.get("title", "").strip()
+        item.text = request.form.get("text", "").strip()
+        item.feedback = request.form.get("feedback", "").strip() or None
+        item.event_date = _parse_optional_date(request.form.get("event_date"))
+        item.is_published = request.form.get("is_published") == "on"
+
+        image_url = _save_content_image(
+            request.files.get("image"),
+            folder="yuva-sessions",
+        )
+        if image_url:
+            item.image_url = image_url
+
+        if not item.title or not item.text:
+            flash("Title and text are required.", "danger")
+            return render_template(
+                "admin/yuva_session_form.html",
+                item=item,
+                mode="edit",
+            )
+
+        db.session.commit()
+        flash(f'"{item.title}" has been updated.', "success")
+        return redirect(url_for("admin_yuva_sessions"))
+
+    return render_template(
+        "admin/yuva_session_form.html",
+        item=item,
+        mode="edit",
+    )
+
+
+@app.route("/admin/yuva-sessions/<int:item_id>/delete", methods=["POST"])
+@login_required
+def admin_yuva_session_delete(item_id):
+    item = YuvaSession.query.get_or_404(item_id)
+    db.session.delete(item)
+    db.session.commit()
+    flash("Yuva session deleted.", "info")
+    return redirect(url_for("admin_yuva_sessions"))
+
+
+@app.route("/admin/articles")
+@login_required
+def admin_articles():
+    items = Article.query.order_by(Article.created_at.desc()).all()
+    return render_template("admin/article_list.html", items=items)
+
+
+@app.route("/admin/articles/new", methods=["GET", "POST"])
+@login_required
+def admin_article_new():
+    if request.method == "POST":
+        item = Article(
+            title=request.form.get("title", "").strip(),
+            text=request.form.get("text", "").strip(),
+            is_published=request.form.get("is_published") == "on",
+        )
+
+        image_url = _save_content_image(
+            request.files.get("image"),
+            folder="articles",
+        )
+        if image_url:
+            item.image_url = image_url
+
+        if not item.title or not item.text:
+            flash("Title and text are required.", "danger")
+            return render_template(
+                "admin/article_form.html",
+                item=item,
+                mode="new",
+            )
+
+        db.session.add(item)
+        db.session.commit()
+        flash(f'"{item.title}" has been added.', "success")
+        return redirect(url_for("admin_articles"))
+
+    return render_template(
+        "admin/article_form.html",
+        item=None,
+        mode="new",
+    )
+
+
+@app.route("/admin/articles/<int:item_id>/edit", methods=["GET", "POST"])
+@login_required
+def admin_article_edit(item_id):
+    item = Article.query.get_or_404(item_id)
+
+    if request.method == "POST":
+        item.title = request.form.get("title", "").strip()
+        item.text = request.form.get("text", "").strip()
+        item.is_published = request.form.get("is_published") == "on"
+
+        image_url = _save_content_image(
+            request.files.get("image"),
+            folder="articles",
+        )
+        if image_url:
+            item.image_url = image_url
+
+        if not item.title or not item.text:
+            flash("Title and text are required.", "danger")
+            return render_template(
+                "admin/article_form.html",
+                item=item,
+                mode="edit",
+            )
+
+        db.session.commit()
+        flash(f'"{item.title}" has been updated.', "success")
+        return redirect(url_for("admin_articles"))
+
+    return render_template(
+        "admin/article_form.html",
+        item=item,
+        mode="edit",
+    )
+
+
+@app.route("/admin/articles/<int:item_id>/delete", methods=["POST"])
+@login_required
+def admin_article_delete(item_id):
+    item = Article.query.get_or_404(item_id)
+    db.session.delete(item)
+    db.session.commit()
+    flash("Article deleted.", "info")
+    return redirect(url_for("admin_articles"))
+
 
 
 # ---------------------------------------------------------------------

@@ -1,16 +1,18 @@
 <!DOCTYPE html>
-<html lang="mr">
+<html lang="{{ 'mr' if current_language == 'mr' else 'en' }}">
 
 <head>
     <meta charset="UTF-8">
 
     <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+          content="width=device-width, initial-scale=2.0">
 
     <meta name="description"
-          content="सेवक सह्याद्रीचे">
+          content="Sevak Sahydriche">
 
-    <title>{% block title %}सेवक सह्याद्रीचे{% endblock %}</title>
+    <title>
+        {% block title %}Sevak Sahydriche{% endblock %}
+    </title>
 
     <link rel="stylesheet"
           href="{{ url_for('static', filename='css/style.css') }}">
@@ -29,58 +31,106 @@
 
 <body>
 
-<!-- =====================================================
-     HEADER
-====================================================== -->
-
 <header class="top-header">
 
     <div class="header-container">
 
+        <!-- BRAND NAME — NEVER TRANSLATED -->
+
         <a href="{{ url_for('home') }}"
            class="site-name">
-            सेवक सह्याद्रीचे
+
+            Sevak Sahyadriche
+
         </a>
 
-        <button
-            class="three-dot"
-            id="menuButton"
-            type="button"
-            aria-label="मेनू"
-            aria-expanded="false">
 
-            <span></span>
-            <span></span>
-            <span></span>
+        <!-- RIGHT SIDE -->
 
-        </button>
+        <div class="header-actions">
+
+            <!-- LANGUAGE SWITCH -->
+
+            <div class="language-switch">
+
+                {% if current_language == 'mr' %}
+
+                    <a href="{{ url_for('set_language', lang='en', next=request.path) }}"
+                       class="language-option active">
+
+                        English
+
+                    </a>
+
+                    <span>|</span>
+
+                    <span class="language-option">
+
+                        मराठी
+
+                    </span>
+
+                {% else %}
+
+                    <span class="language-option">
+
+                        English
+
+                    </span>
+
+                    <span>|</span>
+
+                    <a href="{{ url_for('set_language', lang='mr', next=request.path) }}"
+                       class="language-option active">
+
+                        मराठी
+
+                    </a>
+
+                {% endif %}
+
+            </div>
+
+
+            <!-- THREE DOT MENU -->
+
+            <button
+                class="three-dot"
+                id="menuButton"
+                type="button"
+                aria-label="Menu">
+
+                <span></span>
+                <span></span>
+                <span></span>
+
+            </button>
+
+        </div>
 
     </div>
 
 </header>
 
 
-<!-- =====================================================
-     SIDE MENU
-====================================================== -->
+<!-- ================= SIDE MENU ================= -->
 
 <div class="menu-overlay"
-     id="menuOverlay">
-</div>
+     id="menuOverlay"></div>
 
 
 <aside class="side-menu"
-       id="sideMenu"
-       aria-hidden="true">
+       id="sideMenu">
 
     <div class="side-menu-header">
 
-        <span>मेनू</span>
+        <span>
+            {{ 'मेनू' if current_language == 'mr' else 'Menu' }}
+        </span>
 
         <button
             id="menuClose"
-            type="button"
-            aria-label="मेनू बंद करा">
+            type="button">
 
             ×
 
@@ -92,37 +142,37 @@
     <nav>
 
         <a href="{{ url_for('home') }}">
-            मुख्यपृष्ठ
+            {{ 'मुख्यपृष्ठ' if current_language == 'mr' else 'Home' }}
         </a>
 
         <a href="{{ url_for('about') }}">
-            आमच्याबद्दल
+            {{ 'आमच्याबद्दल' if current_language == 'mr' else 'About Us' }}
         </a>
 
         <a href="{{ url_for('treks') }}">
-            सूचना
+            {{ 'सूचना' if current_language == 'mr' else 'Events' }}
         </a>
 
         <a href="{{ url_for('donate') }}">
-            देणगी
+            {{ 'देणगी' if current_language == 'mr' else 'Donate' }}
         </a>
 
         <a href="{{ url_for('contact') }}">
-            संपर्क करा
+            {{ 'संपर्क करा' if current_language == 'mr' else 'Contact' }}
         </a>
 
         <a href="{{ url_for('gallery') }}">
-            गॅलरी
+            {{ 'गॅलरी' if current_language == 'mr' else 'Gallery' }}
         </a>
+
+        <div class="menu-line"></div>
 
     </nav>
 
 </aside>
 
 
-<!-- =====================================================
-     FLASH MESSAGES
-====================================================== -->
+<!-- ================= FLASH ================= -->
 
 {% with messages = get_flashed_messages(with_categories=true) %}
 
@@ -145,10 +195,6 @@
 {% endwith %}
 
 
-<!-- =====================================================
-     MAIN CONTENT
-====================================================== -->
-
 <main>
 
     {% block content %}{% endblock %}
@@ -156,114 +202,56 @@
 </main>
 
 
-<!-- =====================================================
-     GLOBAL FOOTER
-====================================================== -->
+<!-- ================= FOOTER ================= -->
 
-<footer class="site-footer">
+<footer class="footer">
 
-    <div class="footer-inner">
+    <div class="footer-logo">
 
-        <div class="footer-brand">
-
-            <img
-                src="{{ url_for('static', filename='img/logo.png') }}"
-                alt="सेवक सह्याद्रीचे"
-                class="footer-logo">
-
-            <h3>सेवक सह्याद्रीचे</h3>
-
-            <p class="footer-tagline">
-                इतिहास • संस्कृती • समाज • सह्याद्री
-            </p>
-
-            <p class="footer-description">
-                सह्याद्रीचा वारसा जपत, इतिहासातून प्रेरणा घेऊन
-                समाजासाठी सकारात्मक कार्य करण्याचा एक प्रयत्न.
-            </p>
-
-        </div>
-
-
-        <div class="footer-column">
-
-            <span class="footer-heading">
-                दुवे
-            </span>
-
-            <a href="{{ url_for('home') }}">
-                मुख्यपृष्ठ
-            </a>
-
-            <a href="{{ url_for('about') }}">
-                आमच्याबद्दल
-            </a>
-
-            <a href="{{ url_for('treks') }}">
-                सूचना
-            </a>
-
-            <a href="{{ url_for('contact') }}">
-                संपर्क
-            </a>
-
-        </div>
-
-
-        <div class="footer-column">
-
-            <span class="footer-heading">
-                आमच्याशी जोडा
-            </span>
-
-            <a
-                href="YOUR_INSTAGRAM_LINK"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="footer-social-link">
-
-                <span>◎</span>
-                Instagram
-
-            </a>
-
-            <a
-                href="YOUR_YOUTUBE_LINK"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="footer-social-link">
-
-                <span>▶</span>
-                YouTube
-
-            </a>
-
-        </div>
+        <img
+            src="{{ url_for('static', filename='img/logo.png') }}"
+            alt=" "
+            draggable="false">
 
     </div>
 
+    <h3>
+        सेवक सह्याद्रीचे
+    </h3>
 
-    <div class="footer-bottom">
+    <p>
+        इतिहास • संस्कृती • समाज • सह्याद्री
+    </p>
 
-        <p>
-            © 2026 सेवक सह्याद्रीचे
-        </p>
+    <div class="footer-links">
 
-        <p class="footer-message">
-            सह्याद्री जपूया • इतिहास जगवूया
-        </p>
+        <a href="{{ url_for('about') }}">
+            {{ 'आमच्याबद्दल' if current_language == 'mr' else 'About Us' }}
+        </a>
+
+        <a href="{{ url_for('contact') }}">
+            {{ 'संपर्क' if current_language == 'mr' else 'Contact' }}
+        </a>
+
+        <a href="{{ url_for('donate') }}">
+            {{ 'देणगी' if current_language == 'mr' else 'Donate' }}
+        </a>
+
+    </div>
+
+    <div class="copyright">
+
+        © {{ current_year }} सेवक सह्याद्रीचे
 
     </div>
 
 </footer>
 
 
-<!-- =====================================================
-     SIDE MENU JAVASCRIPT
-====================================================== -->
+</body>
 
+</html>
 <script>
-
 document.addEventListener("DOMContentLoaded", function () {
 
     const menuButton = document.getElementById("menuButton");
@@ -272,97 +260,54 @@ document.addEventListener("DOMContentLoaded", function () {
     const menuOverlay = document.getElementById("menuOverlay");
 
     if (!menuButton || !menuClose || !sideMenu || !menuOverlay) {
-        console.error("Menu elements not found.");
+        console.error("Menu elements missing");
         return;
     }
 
-
     function openMenu() {
-
         sideMenu.classList.add("active");
         menuOverlay.classList.add("active");
-
-        sideMenu.setAttribute("aria-hidden", "false");
-        menuButton.setAttribute("aria-expanded", "true");
-
         document.body.classList.add("menu-open");
-    }
 
+        menuButton.setAttribute("aria-expanded", "true");
+        sideMenu.setAttribute("aria-hidden", "false");
+    }
 
     function closeMenu() {
-
         sideMenu.classList.remove("active");
         menuOverlay.classList.remove("active");
-
-        sideMenu.setAttribute("aria-hidden", "true");
-        menuButton.setAttribute("aria-expanded", "false");
-
         document.body.classList.remove("menu-open");
+
+        menuButton.setAttribute("aria-expanded", "false");
+        sideMenu.setAttribute("aria-hidden", "true");
     }
 
-
-    /* OPEN */
-
-    menuButton.addEventListener("click", function (event) {
-
-        event.preventDefault();
-
+    menuButton.addEventListener("click", function (e) {
+        e.preventDefault();
+        e.stopPropagation();
         openMenu();
-
     });
 
-
-    /* CLOSE */
-
-    menuClose.addEventListener("click", function (event) {
-
-        event.preventDefault();
-
+    menuClose.addEventListener("click", function (e) {
+        e.preventDefault();
         closeMenu();
-
     });
-
-
-    /* CLICK OUTSIDE */
 
     menuOverlay.addEventListener("click", function () {
-
         closeMenu();
-
     });
 
-
-    /* ESCAPE */
-
-    document.addEventListener("keydown", function (event) {
-
-        if (event.key === "Escape") {
-
+    document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape") {
             closeMenu();
-
         }
-
     });
 
-
-    /* CLOSE AFTER CLICKING A MENU LINK */
-
-    const menuLinks = sideMenu.querySelectorAll("a");
-
-    menuLinks.forEach(function (link) {
-
+    sideMenu.querySelectorAll("a").forEach(function (link) {
         link.addEventListener("click", function () {
-
             closeMenu();
-
         });
-
     });
 
 });
-
 </script>
-
-
-</body>
-</html>

@@ -1,438 +1,913 @@
 {% extends "base.html" %}
 
 {% block title %}
-परदेशस्थ सह्याद्री | सेवक सह्याद्रीचे
+{% if current_language == 'mr' %}
+    परदेशस्थ सह्याद्री | सेवक सह्याद्रीचे
+{% else %}
+    ODH | Sevak Sahyadriche
+{% endif %}
 {% endblock %}
+
 
 {% block content %}
 
-<main class="fd-page">
+<section class="odh-page">
 
-    <!-- =====================================================
-         HERO
-    ====================================================== -->
-    <section class="fd-hero">
+    <!-- ==========================================
+         ODH INTRO
+    =========================================== -->
 
-        <div class="fd-hero-content">
+    <div class="odh-intro">
 
-            <div class="fd-label">
-        परदेशस्थ सह्याद्री
-            </div>
+        <h1>
+            {% if current_language == 'mr' %}
+                ओढ | ODH — Overseas Diaspora & Heritage
+            {% else %}
+                ODH — Overseas Diaspora & Heritage
+            {% endif %}
+        </h1>
 
-            <h1>
-                मातीपासून दूर,
-                <span>सह्याद्रीपासून नाही.</span>
-            </h1>
-
-            <p class="fd-hero-text">
-                जगाच्या कोणत्याही कोपऱ्यात आपण राहत असलो,
-                तरी आपल्या मातीतल्या इतिहासाशी, संस्कृतीशी
-                आणि सह्याद्रीशी असलेलं नातं कायम जिवंत राहावं,
-                यासाठी एकत्र येऊया.
-            </p>
-
-            <div class="fd-hero-buttons">
-
-                <a href="{{ url_for('contact') }}" class="fd-btn fd-btn-main">
-                    आमच्याशी जोडा
-                    <span>→</span>
-                </a>
-
-                <a href="#fd-vision" class="fd-btn fd-btn-link">
-                    अधिक जाणून घ्या ↓
-                </a>
-
-            </div>
-
+        <div class="odh-line">
+            <span></span>
+            <i>✦</i>
+            <span></span>
         </div>
-
-
-        <!-- GLOBAL VISUAL -->
-
-        <div class="fd-globe">
-
-            <div class="fd-glow"></div>
-
-            <div class="fd-ring fd-ring-1"></div>
-            <div class="fd-ring fd-ring-2"></div>
-            <div class="fd-ring fd-ring-3"></div>
-
-            <div class="fd-globe-core">
-
-                <small>आपली माती</small>
-
-                <strong>
-                    सह्याद्री
-                </strong>
-
-                <span>
-                    ♥
-                </span>
-
-            </div>
-
-            <div class="fd-location fd-india">
-                <b>●</b>
-                भारत
-            </div>
-
-            <div class="fd-location fd-world">
-                <b>●</b>
-                जगभर
-            </div>
-
-            <div class="fd-location fd-community">
-                <b>●</b>
-                परिवार
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- =====================================================
-         INTRO STRIP
-    ====================================================== -->
-
-    <section class="fd-intro-strip">
-
-        <div>
-            <strong>एक माती</strong>
-            <span>जिच्याशी नातं कायम</span>
-        </div>
-
-        <div>
-            <strong>एक इतिहास</strong>
-            <span>जो जगाला सांगायचा आहे</span>
-        </div>
-
-        <div>
-            <strong>एक परिवार</strong>
-            <span>जो सीमांच्या पलीकडे आहे</span>
-        </div>
-
-    </section>
-
-
-    <!-- =====================================================
-         VISION
-    ====================================================== -->
-
-    <section class="fd-section fd-vision" id="fd-vision">
-
-        <div class="fd-section-heading">
-
-            <span>आपली संकल्पना</span>
-
-            <h2>
-                अंतर वाढलं,
-                <em>नातं नाही.</em>
-            </h2>
-
-        </div>
-
-
-        <div class="fd-vision-grid">
-
-            <div class="fd-vision-text">
-
-                <p>
-                    आज महाराष्ट्रातील अनेक युवक शिक्षण,
-                    नोकरी आणि व्यवसायाच्या निमित्ताने
-                    जगाच्या विविध देशांमध्ये स्थायिक झाले आहेत.
-                </p>
-
-                <p>
-                    भौगोलिक अंतर वाढलं असलं तरी आपल्या
-                    इतिहासाशी, संस्कृतीशी आणि सह्याद्रीशी
-                    असलेलं नातं तुटायला नको.
-                </p>
-
-                <p>
-                    <strong>
-                        परदेशस्थ सह्याद्री
-                    </strong>
-                    ही याच भावनेतून निर्माण झालेली एक
-                    जोडणी आहे — जिथे जगभरातील
-                    सह्याद्रीप्रेमी एकमेकांशी जोडले जातील,
-                    अनुभवांची देवाणघेवाण करतील आणि
-                    आपल्या मातीसाठी काहीतरी योगदान देतील.
-                </p>
-
-            </div>
-
-
-            <div class="fd-quote-card">
-
-                <div class="fd-quote-mark">
-                    “
-                </div>
-
-                <h3>
-                    सह्याद्रीपासून
-                    कितीही दूर गेलो,
-                    तरी सह्याद्री
-                    आपल्या मनातच असतो.
-                </h3>
-
-                <div class="fd-quote-line"></div>
-
-                <span>
-                    — सेवक सह्याद्रीचे
-                </span>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- =====================================================
-         WAYS TO CONNECT
-    ====================================================== -->
-
-    <section class="fd-section fd-connect">
-
-        <div class="fd-section-heading center">
-
-            <span>आपली भूमिका</span>
-
-            <h2>
-                तुम्ही कसे
-                <em>जोडू शकता?</em>
-            </h2>
-
-            <p>
-                तुमच्याकडे वेळ असो, ज्ञान असो,
-                कौशल्य असो किंवा फक्त एक चांगली कल्पना —
-                प्रत्येक योगदान महत्त्वाचं आहे.
-            </p>
-
-        </div>
-
-
-        <div class="fd-cards">
-
-
-            <!-- CARD 1 -->
-
-            <article class="fd-card">
-
-                <div class="fd-card-number">
-                    01
-                </div>
-
-                <div class="fd-card-icon">
-                    ✦
-                </div>
-
-                <h3>
-                    ज्ञानाची देवाणघेवाण
-                </h3>
-
-                <p>
-                    इतिहास, संस्कृती, तंत्रज्ञान,
-                    शिक्षण किंवा तुमच्या क्षेत्रातील
-                    अनुभव इतर युवकांपर्यंत पोहोचवा.
-                </p>
-
-                <a href="{{ url_for('contact') }}">
-                    तुमचा अनुभव जोडा →
-                </a>
-
-            </article>
-
-
-            <!-- CARD 2 -->
-
-            <article class="fd-card fd-card-featured">
-
-                <div class="fd-card-number">
-                    02
-                </div>
-
-                <div class="fd-card-icon">
-                    ♥
-                </div>
-
-                <h3>
-                    उपक्रमांना साथ
-                </h3>
-
-                <p>
-                    गडकिल्ले संवर्धन, स्वच्छता,
-                    वृक्षारोपण, इतिहास प्रबोधन आणि
-                    विविध सामाजिक उपक्रमांमध्ये
-                    आपल्या परीने योगदान द्या.
-                </p>
-
-                <a href="{{ url_for('contact') }}">
-                    सेवेत सहभागी व्हा →
-                </a>
-
-            </article>
-
-
-            <!-- CARD 3 -->
-
-            <article class="fd-card">
-
-                <div class="fd-card-number">
-                    03
-                </div>
-
-                <div class="fd-card-icon">
-                    ◎
-                </div>
-
-                <h3>
-                    जागतिक परिवार उभारा
-                </h3>
-
-                <p>
-                    आपल्या शहरातील, देशातील आणि
-                    जगभरातील मराठी व सह्याद्रीप्रेमी
-                    मित्रांना या विचाराशी जोडा.
-                </p>
-
-                <a href="{{ url_for('contact') }}">
-                    परिवाराशी जोडा →
-                </a>
-
-            </article>
-
-        </div>
-
-    </section>
-
-
-    <!-- =====================================================
-         VALUES
-    ====================================================== -->
-
-    <section class="fd-values">
-
-        <div class="fd-values-heading">
-
-            <span>आपले मूल्य</span>
-
-            <h2>
-                परदेशात असूनही
-                <br>
-                <em>मातीशी जोडलेले.</em>
-            </h2>
-
-        </div>
-
-
-        <div class="fd-values-list">
-
-            <div class="fd-value">
-
-                <span>01</span>
-
-                <div>
-                    <h3>इतिहास</h3>
-
-                    <p>
-                        आपल्या गौरवशाली इतिहासाची
-                        ओळख पुढील पिढीपर्यंत पोहोचवणे.
-                    </p>
-                </div>
-
-            </div>
-
-
-            <div class="fd-value">
-
-                <span>02</span>
-
-                <div>
-                    <h3>संस्कृती</h3>
-
-                    <p>
-                        महाराष्ट्राची भाषा, परंपरा
-                        आणि संस्कृती जिवंत ठेवणे.
-                    </p>
-                </div>
-
-            </div>
-
-
-            <div class="fd-value">
-
-                <span>03</span>
-
-                <div>
-                    <h3>समाजसेवा</h3>
-
-                    <p>
-                        आपल्या ज्ञानाचा आणि क्षमतेचा
-                        समाजासाठी सकारात्मक उपयोग करणे.
-                    </p>
-                </div>
-
-            </div>
-
-
-            <div class="fd-value">
-
-                <span>04</span>
-
-                <div>
-                    <h3>एकजूट</h3>
-
-                    <p>
-                        जगभरातील सह्याद्रीप्रेमींना
-                        एका विचाराने जोडणे.
-                    </p>
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- =====================================================
-         FINAL CTA
-    ====================================================== -->
-
-    <section class="fd-final">
-
-        <div class="fd-final-decoration">
-            ✦
-        </div>
-
-        <span>
-            अंतर कितीही असो...
-        </span>
-
-        <h2>
-            सह्याद्रीशी नातं
-            <br>
-            <em>जपायचं आहे.</em>
-        </h2>
 
         <p>
-            चला, जगभरातील सह्याद्रीप्रेमींना
-            एका परिवारात जोडूया.
+            माणूस जगाच्या कोणत्याही कोपऱ्यात पोहोचला तरी त्याच्या मुळांचा प्रवास मात्र
+            मातृभूमीतच सुरू झालेला असतो. शिक्षण, व्यवसाय, रोजगार किंवा विविध
+            संधींच्या निमित्ताने मराठी माणूस आज जगाच्या कानाकोपऱ्यात पोहोचला आहे
+            आणि आपल्या कर्तृत्वातून विविध क्षेत्रांत योगदान देत आहे. भौगोलिक सीमा
+            ओलांडून जगभर विखुरलेल्या या मराठी माणसाचे मातृभूमीशी असलेले नाते मात्र
+            आजही तितकेच जिवंत आहे. आपल्या इतिहासाच्या, संस्कृतीच्या, परंपरांच्या आणि
+            वारशाच्या असंख्य कथा त्या मातीशी जोडलेल्या आहेत. छत्रपती शिवाजी महाराजांचे
+            जीवन व कार्य, स्वराज्याची संकल्पना, गड-किल्ल्यांचा इतिहास, पराक्रम आणि
+            त्यागाच्या कथा, महाराष्ट्राची संस्कृती, परंपरा, व्यक्तिमत्त्वे, भूगोल आणि समृद्ध
+            वारसा यांची ओळख प्रत्येक पिढीला असणे आवश्यक आहे.
+
+            मात्र परदेशात वाढणाऱ्या अनेक मराठी कुटुंबांसाठी या वारशाशी प्रत्यक्ष परिचय
+            होण्याच्या संधी तुलनेने मर्यादित असतात. शालेय अभ्यासक्रमात प्रत्येक गोष्ट
+            समाविष्ट असेलच असे नाही, पाठ्यपुस्तकांपलीकडील इतिहास आणि सांस्कृतिक संदर्भ
+            समजून घेण्यासाठी आवश्यक माध्यमे सहज उपलब्ध असतीलच असे नाही आणि
+            मातृभूमीपासूनचे भौगोलिक अंतर वाढल्याने या गोष्टींपर्यंत पोहोचणे आणखी
+            कठीण होऊ शकते.
+
+            परंतु जाणून घेण्याची उत्सुकता मात्र तिथेही असते. आपली मुळे कुठे आहेत,
+            आपल्या पूर्वजांनी काय घडवले, आपल्या मातृभूमीचा इतिहास काय आहे, तिच्या
+            गड-किल्ल्यांमागच्या कथा कोणत्या आहेत, आपल्या परंपरांचा अर्थ काय आहे
+            आणि आपल्या सांस्कृतिक वारशाचे स्वरूप काय आहे, हे जाणून घेण्याची इच्छा
+            प्रत्येक पिढीत निर्माण होऊ शकते. या जिज्ञासेला आपल्या मातीशी जोडणारे एक
+            माध्यम उपलब्ध करून देण्याच्या विचारातून ‘ओढ’ या उपक्रमाची संकल्पना
+            आकाराला आली.
+
+            ‘ओढ’ हा केवळ परदेशातील मराठी समाजाशी संवाद साधण्याचा उपक्रम नसून,
+            जगाच्या विविध भागांत राहणाऱ्या मराठी माणसाला आपल्या इतिहास, संस्कृती
+            आणि मातृभूमीच्या वारशाशी जोडण्याचा एक प्रयत्न आहे. वय, देश किंवा पिढी
+            यांची मर्यादा न ठेवता, ज्यांना आपल्या मुळांविषयी जाणून घ्यायचे आहे
+            अशा प्रत्येकासाठी हे व्यासपीठ खुले राहील.
+
+            या उपक्रमांतर्गत विविध वयोगटांसाठी ऑनलाइन संवादात्मक सत्रांचे आयोजन
+            केले जाईल. इतिहास केवळ ऐकवण्यापुरता मर्यादित न ठेवता प्रश्नोत्तर, चर्चा,
+            संवाद आणि विविध उपक्रमांच्या माध्यमातून तो समजून घेण्याचा प्रयत्न केला
+            जाईल. छत्रपती शिवाजी महाराजांचे जीवन व नेतृत्व, स्वराज्याची संकल्पना,
+            महाराष्ट्रातील गड-किल्ले, इतिहासातील महत्त्वाच्या घटना व व्यक्तिमत्त्वे,
+            महाराष्ट्राची संस्कृती व परंपरा, भूगोल, कला आणि विविध पैलूंमधून आपल्या
+            वारशाची ओळख करून दिली जाईल.
+
+            मात्र मातृभूमीशी असलेले नाते केवळ ऑनलाइन माध्यमातून अनुभवता येत नाही.
+            इतिहास ज्या भूमीवर घडला, त्या भूमीला प्रत्यक्ष पाहणे, तिच्या वास्तूंना
+            स्पर्श न करता त्यांचा इतिहास समजून घेणे, गड-किल्ल्यांवर उभे राहून
+            त्या परिसराचा अनुभव घेणे आणि आपल्या सांस्कृतिक वारशाशी प्रत्यक्ष
+            परिचय करून घेणे हा या जोडणीचा पुढचा टप्पा असेल.
+
+            म्हणूनच भारतभेटीवर येणाऱ्या सहभागींसाठी गड-किल्ले, ऐतिहासिक स्थळे
+            आणि सांस्कृतिक वारसास्थळांच्या नियोजित heritage tours आयोजित करण्याचा
+            प्रयत्न केला जाईल. संबंधित स्थळाचा इतिहास, त्याचे महत्त्व, स्थापत्य,
+            भौगोलिक वैशिष्ट्ये आणि त्यामागील कथा समजून घेत हा प्रवास केवळ
+            पर्यटनापुरता मर्यादित न राहता अनुभवातून इतिहास जाणून घेण्याची संधी ठरेल.
+
+            परदेशात जन्मलेली किंवा वाढलेली पिढी असो, परदेशात स्थायिक झालेले पालक
+            असोत किंवा आपल्या मातृभूमीशी पुन्हा अधिक जवळून जोडले जाऊ इच्छिणारे
+            कुणीही असो. आपल्या मुळांशी संवाद साधण्यासाठी प्रत्येकाला एक दुवा मिळावा,
+            हा ‘ओढ’चा प्रयत्न आहे.
+
+            कारण मातृभूमीपासूनचे अंतर कितीही असो, इतिहासाशी नाते जोडण्यासाठी आणि
+            आपल्या मुळांकडे परतण्यासाठी मनातली ‘ओढ’ पुरेशी असते! मातृभूमीची ओळख
+            अधिक जवळून जाणून घेता यावी, यासाठी ‘ओढ’ तुमच्यापर्यंत पोहोचत आहे!!
         </p>
 
-        <a href="{{ url_for('contact') }}" class="fd-final-button">
-            सेवक सह्याद्रीचे परिवाराशी जोडा
-            <span>→</span>
-        </a>
+    </div>
 
-        <small>
-            सेवक सह्याद्रीचे • परदेशस्थ सह्याद्री
-        </small>
 
-    </section>
+    <!-- ==========================================
+         TWO MAIN COLUMNS
+    =========================================== -->
 
-</main>
+    <div class="odh-columns">
+
+
+        <!-- ======================================
+             ONLINE SESSIONS
+        ======================================= -->
+
+        <section class="odh-column">
+
+            <div class="odh-column-heading">
+
+                <span>०१</span>
+
+                <div>
+                    <h2>
+                        {% if current_language == 'mr' %}
+                            ऑनलाइन सत्रे
+                        {% else %}
+                            Online Sessions
+                        {% endif %}
+                    </h2>
+
+                    <p>
+                        {% if current_language == 'mr' %}
+                            इतिहास आणि वारशाशी संवाद
+                        {% else %}
+                            Connecting with history and heritage
+                        {% endif %}
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="odh-items">
+
+
+                <!-- SESSION 01 -->
+
+                <a href="#" class="odh-item">
+
+                    <div class="odh-item-photo">
+
+                        <img
+                            src="{{ url_for('static', filename='img/image1.jpg') }}"
+                            alt="शिवदर्शन"
+                            loading="lazy"
+                            draggable="false"
+                        >
+
+                    </div>
+
+                    <div class="odh-item-content">
+
+                        <span class="odh-item-number">
+                            01
+                        </span>
+
+                        <div>
+
+                            <span class="odh-item-label">
+                                {% if current_language == 'mr' %}
+                                    ऑनलाइन सत्र
+                                {% else %}
+                                    Online Session
+                                {% endif %}
+                            </span>
+
+                            <h3>
+                                शिवदर्शन
+                            </h3>
+
+                        </div>
+
+                        <span class="odh-arrow">
+                            →
+                        </span>
+
+                    </div>
+
+                </a>
+
+
+                <!-- SESSION 02 -->
+
+                <a href="#" class="odh-item">
+
+                    <div class="odh-item-photo">
+
+                        <img
+                            src="{{ url_for('static', filename='img/image2.jpg') }}"
+                            alt="इतिहास संवाद"
+                            loading="lazy"
+                            draggable="false"
+                        >
+
+                    </div>
+
+                    <div class="odh-item-content">
+
+                        <span class="odh-item-number">
+                            02
+                        </span>
+
+                        <div>
+
+                            <span class="odh-item-label">
+                                {% if current_language == 'mr' %}
+                                    ऑनलाइन सत्र
+                                {% else %}
+                                    Online Session
+                                {% endif %}
+                            </span>
+
+                            <h3>
+                                इतिहास संवाद
+                            </h3>
+
+                        </div>
+
+                        <span class="odh-arrow">
+                            →
+                        </span>
+
+                    </div>
+
+                </a>
+
+
+                <!-- SESSION 03 -->
+
+                <a href="#" class="odh-item">
+
+                    <div class="odh-item-photo">
+
+                        <img
+                            src="{{ url_for('static', filename='img/logo.png') }}"
+                            alt="सह्याद्री संवाद"
+                            loading="lazy"
+                            draggable="false"
+                        >
+
+                    </div>
+
+                    <div class="odh-item-content">
+
+                        <span class="odh-item-number">
+                            03
+                        </span>
+
+                        <div>
+
+                            <span class="odh-item-label">
+                                {% if current_language == 'mr' %}
+                                    ऑनलाइन सत्र
+                                {% else %}
+                                    Online Session
+                                {% endif %}
+                            </span>
+
+                            <h3>
+                                सह्याद्री संवाद
+                            </h3>
+
+                        </div>
+
+                        <span class="odh-arrow">
+                            →
+                        </span>
+
+                    </div>
+
+                </a>
+
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ======================================
+             TOURISM PLANNING
+        ======================================= -->
+
+        <section class="odh-column">
+
+            <div class="odh-column-heading">
+
+                <span>०२</span>
+
+                <div>
+
+                    <h2>
+                        {% if current_language == 'mr' %}
+                            पर्यटन नियोजन
+                        {% else %}
+                            Tourism Planning
+                        {% endif %}
+                    </h2>
+
+                    <p>
+                        {% if current_language == 'mr' %}
+                            मातृभूमीशी प्रत्यक्ष जोडणारे प्रवास
+                        {% else %}
+                            Heritage journeys connecting you to your roots
+                        {% endif %}
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="odh-items">
+
+
+                <!-- TOURISM 01 -->
+
+                <a href="#" class="odh-item">
+
+                    <div class="odh-item-photo">
+
+                        <img
+                            src="{{ url_for('static', filename='img/image1.jpg') }}"
+                            alt="सह्याद्री भ्रमंती"
+                            loading="lazy"
+                            draggable="false"
+                        >
+
+                    </div>
+
+                    <div class="odh-item-content">
+
+                        <span class="odh-item-number">
+                            01
+                        </span>
+
+                        <div>
+
+                            <span class="odh-item-label">
+                                {% if current_language == 'mr' %}
+                                    वारसा भ्रमंती
+                                {% else %}
+                                    Heritage Tour
+                                {% endif %}
+                            </span>
+
+                            <h3>
+                                सह्याद्री भ्रमंती
+                            </h3>
+
+                        </div>
+
+                        <span class="odh-arrow">
+                            →
+                        </span>
+
+                    </div>
+
+                </a>
+
+
+                <!-- TOURISM 02 -->
+
+                <a href="#" class="odh-item">
+
+                    <div class="odh-item-photo">
+
+                        <img
+                            src="{{ url_for('static', filename='img/image2.jpg') }}"
+                            alt="गडकिल्ले भ्रमंती"
+                            loading="lazy"
+                            draggable="false"
+                        >
+
+                    </div>
+
+                    <div class="odh-item-content">
+
+                        <span class="odh-item-number">
+                            02
+                        </span>
+
+                        <div>
+
+                            <span class="odh-item-label">
+                                {% if current_language == 'mr' %}
+                                    वारसा भ्रमंती
+                                {% else %}
+                                    Heritage Tour
+                                {% endif %}
+                            </span>
+
+                            <h3>
+                                गडकिल्ले भ्रमंती
+                            </h3>
+
+                        </div>
+
+                        <span class="odh-arrow">
+                            →
+                        </span>
+
+                    </div>
+
+                </a>
+
+
+                <!-- TOURISM 03 -->
+
+                <a href="#" class="odh-item">
+
+                    <div class="odh-item-photo">
+
+                        <img
+                            src="{{ url_for('static', filename='img/logo.png') }}"
+                            alt="ऐतिहासिक स्थळे"
+                            loading="lazy"
+                            draggable="false"
+                        >
+
+                    </div>
+
+                    <div class="odh-item-content">
+
+                        <span class="odh-item-number">
+                            03
+                        </span>
+
+                        <div>
+
+                            <span class="odh-item-label">
+                                {% if current_language == 'mr' %}
+                                    वारसा स्थळे
+                                {% else %}
+                                    Heritage Sites
+                                {% endif %}
+                            </span>
+
+                            <h3>
+                                ऐतिहासिक स्थळे
+                            </h3>
+
+                        </div>
+
+                        <span class="odh-arrow">
+                            →
+                        </span>
+
+                    </div>
+
+                </a>
+
+
+            </div>
+
+        </section>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- ==========================================
+     PAGE-SPECIFIC CSS
+=========================================== -->
+
+<style>
+
+/* ==========================================
+   ODH PAGE
+========================================== */
+
+.odh-page {
+    width: 100%;
+    padding: 45px 0 20px;
+}
+
+
+/* ==========================================
+   INTRO
+========================================== */
+
+.odh-intro {
+    width: min(1050px, 90%);
+    margin: 0 auto;
+    text-align: center;
+}
+
+.odh-intro h1 {
+    margin: 0;
+
+    color: #2b211c;
+
+    font-size: clamp(28px, 4vw, 44px);
+    line-height: 1.2;
+    font-weight: 700;
+}
+
+.odh-line {
+    width: min(420px, 80%);
+    margin: 18px auto 25px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+}
+
+.odh-line span {
+    height: 1px;
+    flex: 1;
+
+    background: rgba(137, 71, 32, 0.35);
+}
+
+.odh-line i {
+    color: #894720;
+    font-size: 15px;
+    font-style: normal;
+}
+
+.odh-intro p {
+    margin: 0;
+
+    color: #5c4b40;
+
+    font-size: 16px;
+    line-height: 2;
+
+    text-align: justify;
+}
+
+
+/* ==========================================
+   TWO COLUMNS
+========================================== */
+
+.odh-columns {
+    width: min(1120px, 92%);
+    margin: 58px auto 80px;
+
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 42px;
+}
+
+
+/* ==========================================
+   COLUMN HEADING
+========================================== */
+
+.odh-column-heading {
+    display: flex;
+    align-items: flex-start;
+
+    gap: 16px;
+
+    margin-bottom: 22px;
+    padding-bottom: 15px;
+
+    border-bottom: 1px solid rgba(137, 71, 32, 0.18);
+}
+
+.odh-column-heading > span {
+    flex-shrink: 0;
+
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #894720;
+    color: #fff;
+
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.odh-column-heading h2 {
+    margin: 0;
+
+    color: #2b211c;
+
+    font-size: 25px;
+    line-height: 1.2;
+    font-weight: 700;
+}
+
+.odh-column-heading p {
+    margin: 6px 0 0;
+
+    color: #8a776b;
+
+    font-size: 13px;
+    line-height: 1.4;
+}
+
+
+/* ==========================================
+   ITEMS
+========================================== */
+
+.odh-items {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+
+/* ==========================================
+   CARD
+========================================== */
+
+.odh-item {
+    display: block;
+
+    width: 100%;
+
+    text-decoration: none;
+    color: inherit;
+
+    background: #fff;
+
+    border: 1px solid rgba(137, 71, 32, 0.13);
+
+    border-radius: 16px;
+
+    overflow: hidden;
+
+    box-shadow: 0 7px 22px rgba(50, 32, 20, 0.08);
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.odh-item:hover {
+    transform: translateY(-4px);
+
+    box-shadow: 0 13px 30px rgba(50, 32, 20, 0.14);
+}
+
+
+/* ==========================================
+   CARD IMAGE
+========================================== */
+
+.odh-item-photo {
+    width: 100%;
+    height: 190px;
+
+    overflow: hidden;
+
+    background: #241b16;
+}
+
+.odh-item-photo img {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    user-select: none;
+    -webkit-user-drag: none;
+
+    transition: transform 0.35s ease;
+}
+
+.odh-item:hover .odh-item-photo img {
+    transform: scale(1.045);
+}
+
+
+/* ==========================================
+   CARD CONTENT
+========================================== */
+
+.odh-item-content {
+    min-height: 82px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 15px;
+
+    padding: 15px 17px;
+}
+
+.odh-item-number {
+    flex-shrink: 0;
+
+    width: 34px;
+    height: 34px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: rgba(137, 71, 32, 0.09);
+
+    color: #894720;
+
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.odh-item-content > div {
+    min-width: 0;
+    flex: 1;
+}
+
+.odh-item-label {
+    display: block;
+
+    margin-bottom: 4px;
+
+    color: #9a8577;
+
+    font-size: 11px;
+    font-weight: 600;
+
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.odh-item-content h3 {
+    margin: 0;
+
+    color: #2b211c;
+
+    font-size: 19px;
+    line-height: 1.3;
+
+    font-weight: 700;
+
+    overflow-wrap: break-word;
+}
+
+.odh-arrow {
+    flex-shrink: 0;
+
+    color: #894720;
+
+    font-size: 22px;
+
+    transition: transform 0.2s ease;
+}
+
+.odh-item:hover .odh-arrow {
+    transform: translateX(4px);
+}
+
+
+/* ==========================================
+   TABLET
+========================================== */
+
+@media (max-width: 850px) {
+
+    .odh-columns {
+        grid-template-columns: 1fr;
+
+        gap: 48px;
+    }
+
+}
+
+
+/* ==========================================
+   MOBILE
+========================================== */
+
+@media (max-width: 600px) {
+
+    .odh-page {
+        padding-top: 32px;
+    }
+
+    .odh-intro {
+        width: 92%;
+    }
+
+    .odh-intro h1 {
+        font-size: 28px;
+    }
+
+    .odh-intro p {
+        font-size: 15px;
+        line-height: 1.85;
+
+        text-align: left;
+    }
+
+    .odh-columns {
+        width: 92%;
+
+        margin-top: 40px;
+        margin-bottom: 55px;
+
+        gap: 42px;
+    }
+
+    .odh-column-heading {
+        gap: 12px;
+    }
+
+    .odh-column-heading > span {
+        width: 38px;
+        height: 38px;
+
+        font-size: 12px;
+    }
+
+    .odh-column-heading h2 {
+        font-size: 22px;
+    }
+
+    .odh-column-heading p {
+        font-size: 12px;
+    }
+
+    .odh-item-photo {
+        height: 200px;
+    }
+
+    .odh-item-content {
+        min-height: 76px;
+
+        padding: 14px 15px;
+
+        gap: 12px;
+    }
+
+    .odh-item-number {
+        width: 32px;
+        height: 32px;
+    }
+
+    .odh-item-content h3 {
+        font-size: 18px;
+    }
+
+}
+
+
+/* ==========================================
+   VERY SMALL PHONES
+========================================== */
+
+@media (max-width: 380px) {
+
+    .odh-item-photo {
+        height: 180px;
+    }
+
+    .odh-item-content h3 {
+        font-size: 17px;
+    }
+
+    .odh-arrow {
+        font-size: 19px;
+    }
+
+}
+
+</style>
+
+
+<!-- ==========================================
+     PAGE-SPECIFIC JS
+=========================================== -->
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const images = document.querySelectorAll(".odh-item-photo img");
+
+    images.forEach(function (img) {
+
+        img.addEventListener("contextmenu", function (event) {
+            event.preventDefault();
+        });
+
+        img.addEventListener("dragstart", function (event) {
+            event.preventDefault();
+        });
+
+    });
+
+});
+
+</script>
 
 {% endblock %}

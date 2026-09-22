@@ -1,10 +1,4 @@
 
-body {
-    margin: 0 !important;
-    background: #f6efdf !important;
-    color: #3d281d !important;
-    font-family: Arial, sans-serif !important;
-}
 /* =====================================================
    SEVAK SAHYADRICHE
    Minimal Marathi / Cream Theme
@@ -686,36 +680,6 @@ button {
     font-weight: 800;
 
     white-space: nowrap;
-
-}
-
-
-.main-card p {
-
-    color:
-        var(--muted);
-
-    font-size: 12px;
-
-    line-height: 1.6;
-
-    margin: 0;
-
-}
-
-
-.arrow {
-
-    position: absolute;
-
-    right: 14px;
-
-    bottom: 10px;
-
-    color:
-        var(--saffron);
-
-    font-size: 18px;
 
 }
 
@@ -3398,169 +3362,6 @@ button {
 
 }
 /* =====================================================
-   FINAL LOGO + HEADER FIX
-===================================================== */
-
-/* Never show a second logo in the header */
-.header-logo {
-    display: none !important;
-}
-
-
-/* Prevent anything from creating horizontal scrolling */
-html,
-body {
-    max-width: 100%;
-    overflow-x: hidden;
-}
-
-
-/* Header */
-.top-header {
-    width: 100%;
-}
-
-
-.header-container {
-    width: 100%;
-    max-width: 1350px;
-    height: 62px;
-
-    margin: 0 auto;
-
-    padding: 0 15px 0 30px;
-
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    position: relative;
-}
-
-/* Left name */
-.site-name {
-    display: block;
-
-    font-size: 40px;
-    font-weight: 700;
-
-    color: #3d281d;
-
-    white-space: nowrap;
-}
-
-
-/* Three dots */
-.three-dot {
-    flex-shrink: 0;
-
-    width: 44px;
-    height: 44px;
-
-    margin: 0;
-
-    padding: 0;
-
-    border: none;
-
-    background: transparent;
-
-    display: flex;
-    flex-direction: column;
-
-    align-items: center;
-    justify-content: center;
-
-    gap: 4px;
-
-    cursor: pointer;
-}
-
-
-.three-dot span {
-    display: block;
-
-    width: 4px;
-    height: 4px;
-
-    min-width: 4px;
-    min-height: 4px;
-
-    border-radius: 50%;
-
-    background: #3d281d;
-}
-
-
-/* =====================================================
-   MAIN LOGO
-===================================================== */
-
-.home-logo {
-    width: 300px !important;
-    height: 300px !important;
-
-    max-width: 80vw;
-    max-height: 80vw;
-
-    margin: -15px auto 10px !important;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    overflow: hidden;
-}
-
-.home-logo img {
-
-    display: block;
-
-    width: 100% !important;
-    height: 100% !important;
-
-    max-width: 100% !important;
-    max-height: 100% !important;
-
-    object-fit: contain !important;
-
-    position: static !important;
-
-    transform: none !important;
-}
-
-
-/* =====================================================
-   MOBILE
-===================================================== */
-
-@media (max-width: 700px) {
-
-    .header-container {
-
-        height: 70px;
-
-        padding:
-            0 8px 0 15px;
-    }
-
-
-    .site-name {
-
-        font-size: 16px;
-    }
-
-
-    .home-logo {
-
-        width: 165px !important;
-        height: 165px !important;
-
-        margin:
-            15px auto 20px !important;
-    }
-
-}   grid-t/* =====================================================
    MOHIM PAGE
    Latest 3 = large feature cards
    Remaining = compact list cards
@@ -9000,5 +8801,351 @@ body.menu-open {
     .lekh-instagram-section {
         margin-left: 10px;
         margin-right: 10px;
+    }
+}
+/* =========================================================
+   FINAL GLOBAL CLEANUP + RESPONSIVE LAYER
+   Keeps the original cream/brown visual language.
+========================================================= */
+
+/* Prevent accidental horizontal overflow on every page */
+html,
+body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+img,
+svg,
+video {
+    max-width: 100%;
+}
+
+iframe {
+    max-width: 100%;
+}
+
+/* ---------------------------------------------------------
+   HEADER
+--------------------------------------------------------- */
+
+.top-header {
+    width: 100%;
+    background: #894720;
+    border-bottom: none;
+    position: relative;
+    z-index: 10000;
+}
+
+.header-container {
+    width: 100%;
+    max-width: 1350px;
+    min-height: 78px;
+    height: 78px;
+    margin: 0 auto;
+    padding: 0 15px 0 30px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    position: relative;
+    z-index: 10001;
+}
+
+.site-name {
+    display: block;
+    color: #ffffff !important;
+    font-size: 20px;
+    font-weight: 700;
+    white-space: nowrap;
+    text-decoration: none;
+}
+
+.site-name:hover {
+    color: #ffffff !important;
+}
+
+/* The current header uses the brand name rather than a second center logo. */
+.header-logo {
+    display: none !important;
+}
+
+/* Right-side header controls */
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Language switch */
+.language-switch {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    padding: 7px 11px;
+
+    border: 1px solid rgba(255,255,255,.35);
+    border-radius: 999px;
+
+    background: rgba(255,255,255,.10);
+}
+
+.language-option {
+    color: rgba(255,255,255,.72);
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.language-option.active {
+    color: #ffffff;
+}
+
+.language-option:hover {
+    color: #ffffff;
+}
+
+.language-switch > span:not(.language-option) {
+    color: rgba(255,255,255,.45);
+}
+
+/* Three-dot menu */
+.three-dot {
+    flex-shrink: 0;
+    position: relative;
+    z-index: 10002;
+}
+
+.three-dot span {
+    background: #ffffff !important;
+}
+
+/* ---------------------------------------------------------
+   HOME — RESPONSIVE GRID
+--------------------------------------------------------- */
+
+.main-sections {
+    width: 100%;
+}
+
+@media (max-width: 1000px) {
+    .main-sections {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 620px) {
+    .main-sections {
+        grid-template-columns: 1fr;
+        gap: 14px;
+    }
+
+    .main-card {
+        min-height: 150px;
+        padding: 20px 18px;
+    }
+
+    .main-card h2 {
+        white-space: normal;
+        font-size: 19px;
+    }
+}
+
+/* ---------------------------------------------------------
+   COMMON MOBILE SAFETY
+--------------------------------------------------------- */
+
+@media (max-width: 768px) {
+
+    .header-container {
+        min-height: 68px;
+        height: 68px;
+        padding: 0 10px 0 15px;
+    }
+
+    .site-name {
+        font-size: 18px;
+        max-width: 55vw;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .header-actions {
+        gap: 5px;
+    }
+
+    .language-switch {
+        padding: 6px 8px;
+        gap: 6px;
+    }
+
+    .language-option {
+        font-size: 12px;
+    }
+
+    .three-dot {
+        width: 40px;
+        height: 40px;
+    }
+
+    /* Prevent long Marathi/English text from breaking layouts */
+    h1,
+    h2,
+    h3,
+    h4,
+    p,
+    a,
+    span {
+        overflow-wrap: break-word;
+    }
+
+    /* Keep common content inside the viewport */
+    .home,
+    .mohim-page,
+    .mohim-detail-page,
+    .contact-page {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    /* Common two-column layouts collapse */
+    .founder-section,
+    .growth-section,
+    .story-block {
+        max-width: 100%;
+    }
+
+    /* Tables never force the whole page wider */
+    table {
+        max-width: 100%;
+    }
+
+    /* Buttons remain easy to tap */
+    button,
+    .join-button,
+    .join-quote,
+    .detail-join-button,
+    .donate-button {
+        max-width: 100%;
+    }
+}
+
+/* ---------------------------------------------------------
+   SMALL PHONES
+--------------------------------------------------------- */
+
+@media (max-width: 480px) {
+
+    .header-container {
+        padding-left: 12px;
+        padding-right: 7px;
+    }
+
+    .site-name {
+        font-size: 17px;
+        max-width: 48vw;
+    }
+
+    .language-switch {
+        padding: 5px 7px;
+    }
+
+    .language-option {
+        font-size: 11px;
+    }
+
+    .home {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    .home h1 {
+        font-size: 32px;
+    }
+
+    .home-intro {
+        font-size: 16px;
+        line-height: 1.75;
+    }
+
+    .section-title h2 {
+        font-size: 25px;
+    }
+
+    .notification-item {
+        align-items: flex-start;
+    }
+
+    .notification-date {
+        width: 48px;
+        height: 55px;
+    }
+
+    .notification-date strong {
+        font-size: 18px;
+    }
+}
+
+/* ---------------------------------------------------------
+   ODH / FOREIGN DIASPORA FALLBACK
+   The page also has its own CSS, these rules only protect
+   it if the viewport becomes very narrow.
+--------------------------------------------------------- */
+
+@media (max-width: 480px) {
+
+    .odh-columns {
+        width: 94%;
+    }
+
+    .odh-item-photo {
+        max-width: 100%;
+    }
+
+    .odh-intro p {
+        overflow-wrap: break-word;
+    }
+}
+
+/* ---------------------------------------------------------
+   MOHIM DETAIL / GALLERY SAFETY
+--------------------------------------------------------- */
+
+@media (max-width: 600px) {
+
+    .mohim-photo-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    .detail-info-box {
+        grid-template-columns: 1fr !important;
+    }
+
+    .detail-info-row {
+        align-items: flex-start;
+        flex-wrap: wrap;
+    }
+
+    .detail-info-row strong {
+        text-align: left;
+    }
+}
+
+/* ---------------------------------------------------------
+   TOUCH DEVICES
+--------------------------------------------------------- */
+
+@media (hover: none) and (pointer: coarse) {
+
+    .main-card:hover,
+    .odh-item:hover,
+    .mohim-card:hover,
+    .lekh-card:hover,
+    .join-button:hover {
+        transform: none;
     }
 }
