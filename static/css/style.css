@@ -167,9 +167,9 @@ button {
 
 .home-logo {
 
-    width: 210px;
+    width: 220px;
 
-    height: 210px;
+    height: 220px;
 
     margin:
         0 auto 25px;
@@ -181,7 +181,6 @@ button {
     justify-content: center;
 
 }
-
 
 /* =====================================================
    THREE DOT BUTTON
@@ -443,9 +442,9 @@ button {
 
 .home-logo {
 
-    width: 150px;
+    width: 300px;
 
-    height: 150px;
+    height: 300px;
 
     margin:
         0 auto 25px;

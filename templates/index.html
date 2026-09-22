@@ -959,9 +959,12 @@
             class="main-card"
         >
 
-            <div class="card-icon">
-                ⛰
-            </div>
+            <div class="card-icon mohim-card-icon">
+    <img 
+        src="{{ url_for('static', filename='img/Mohim-logo.png') }}" 
+        alt="मोहिम - MOHIM"
+    >
+</div>
 
             <div>
 
@@ -997,47 +1000,50 @@
 
         </a>
 
+<!-- FOREIGN DIASPORA -->
 
-        <!-- FOREIGN DIASPORA -->
+<a 
+    href="{{ url_for('foreign_diaspora') }}" 
+    class="main-card" 
+>
+<div class="card-icon odh-card-icon">
+    <img
+        src="{{ url_for('static', filename='img/odh-logo.jpeg') }}"
+        alt="ओढ - ODH"
+    >
+</div>
 
-        <a
-            href="{{ url_for('foreign_diaspora') }}"
-            class="main-card"
-        >
+    <div>
 
-            <div class="card-icon">
-                ◉
-            </div>
+        <h2>
+            {% if current_language == 'mr' %}
+                ओढ
+            {% else %}
+                ODH
+            {% endif %}
+        </h2>
 
-            <div>
+        <p>
 
-                <h2>
-                    ODH
-                    <span style="font-size:0.8em;">
-                        ({% if current_language == 'mr' %}ओढ{% else %}ओढ{% endif %})
-                    </span>
-                </h2>
+            {% if current_language == 'mr' %}
 
-                <p>
-                    {% if current_language == 'mr' %}
-                        परदेशातील मराठी माणसाला आपल्या
-                        इतिहास, संस्कृती आणि मातृभूमीच्या
-                        वारशाशी जोडणारे व्यासपीठ.
+                परदेशातील मराठी माणसाला आपल्या 
+                इतिहास, संस्कृती आणि मातृभूमीच्या 
+                वारशाशी जोडणारे व्यासपीठ.
 
-                    {% else %}
+            {% else %}
 
-                        A platform connecting Marathi people
-                        abroad with their history, culture
-                        and heritage.
+                A platform connecting Marathi people 
+                abroad with their history, culture 
+                and heritage.
 
-                    {% endif %}
+            {% endif %}
 
-                </p>
+        </p>
 
-            </div>
+    </div>
 
-        </a>
-
+</a>
 
         <!-- YUVA MANCH -->
 
@@ -1046,9 +1052,12 @@
             class="main-card"
         >
 
-            <div class="card-icon">
-                ✦
-            </div>
+            <div class="card-icon abhyuday-card-icon">
+<img
+        src="{{ url_for('static', filename='img/abhyuday-logo.png') }}"
+        alt="अभ्युदय"
+    >
+</div>
 
             <div>
 
@@ -1090,9 +1099,11 @@
             class="main-card"
         >
 
-            <div class="card-icon">
-                ✎
-            </div>
+            <div class="card-icon lekh-card-icon">
+                <img 
+        src="{{ url_for('static', filename='img/lekh-logo.png') }}" 
+        alt="लेख - LEKH">
+    </div>
 
             <div>
 

@@ -4,14 +4,13 @@
 अभ्युदय | सेवक सह्याद्रीचे
 {% endblock %}
 
-
 {% block content %}
 
 <style>
 
 /* =========================================================
-   ABHYUDAY / YUVA MANCH PAGE
-   ========================================================= */
+   ABHYUDAY PAGE
+========================================================= */
 
 .abhyuday-page {
     position: relative;
@@ -34,12 +33,13 @@
 
 /* =========================================================
    BACKGROUND ART
-   ========================================================= */
+========================================================= */
 
 .abhyuday-page::before {
     content: "";
 
     position: absolute;
+
     inset: 0;
 
     background-image:
@@ -60,8 +60,8 @@
 
 
 /* =========================================================
-   CONTENT
-   ========================================================= */
+   CONTENT ABOVE BACKGROUND
+========================================================= */
 
 .abhyuday-content {
     position: relative;
@@ -74,7 +74,7 @@
 
 /* =========================================================
    TITLE SECTION
-   ========================================================= */
+========================================================= */
 
 .abhyuday-title-section {
     max-width: 1100px;
@@ -107,7 +107,7 @@
 
 /* =========================================================
    ACRONYM
-   ========================================================= */
+========================================================= */
 
 .abhyuday-acronym {
     max-width: 950px;
@@ -162,7 +162,7 @@
 
 /* =========================================================
    TITLE DIVIDER
-   ========================================================= */
+========================================================= */
 
 .abhyuday-title-divider {
     display: flex;
@@ -197,7 +197,7 @@
 
 /* =========================================================
    DESCRIPTION
-   ========================================================= */
+========================================================= */
 
 .abhyuday-description {
     max-width: 1120px;
@@ -215,7 +215,7 @@
 
     font-size: 17px;
 
-    font-weight: 500;
+    font-weight: 700;
 
     line-height: 2;
 
@@ -232,7 +232,7 @@
 
 /* =========================================================
    FINAL STATEMENT
-   ========================================================= */
+========================================================= */
 
 .abhyuday-final {
     margin-top: 40px;
@@ -262,7 +262,7 @@
 
 /* =========================================================
    PROGRAM SECTION
-   ========================================================= */
+========================================================= */
 
 .abhyuday-programs {
     max-width: 1200px;
@@ -276,8 +276,7 @@
 .abhyuday-program-grid {
     display: grid;
 
-    grid-template-columns:
-        repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
 
     gap: 28px;
 
@@ -287,16 +286,14 @@
 
 /* =========================================================
    PROGRAM COLUMN
-   ========================================================= */
+========================================================= */
 
 .abhyuday-program-column {
     padding: 28px;
 
-    background:
-        rgba(255, 250, 240, 0.82);
+    background: rgba(255, 250, 240, 0.68);
 
-    border:
-        1px solid rgba(61, 40, 29, 0.13);
+    border: 1px solid rgba(61, 40, 29, 0.13);
 
     border-radius: 22px;
 
@@ -304,10 +301,6 @@
         0 12px 35px rgba(61, 40, 29, 0.06);
 }
 
-
-/* =========================================================
-   PROGRAM LABEL
-   ========================================================= */
 
 .abhyuday-program-label {
     display: block;
@@ -325,10 +318,6 @@
     letter-spacing: 0.5px;
 }
 
-
-/* =========================================================
-   PROGRAM TITLE
-   ========================================================= */
 
 .abhyuday-program-title {
     margin: 0 0 25px;
@@ -351,8 +340,8 @@
 
 
 /* =========================================================
-   SESSION LIST
-   ========================================================= */
+   ADMIN SESSION CONTAINER
+========================================================= */
 
 .abhyuday-session-list {
     display: flex;
@@ -364,8 +353,8 @@
 
 
 /* =========================================================
-   SESSION CARD
-   ========================================================= */
+   ADMIN SESSION CARD STYLE
+========================================================= */
 
 .abhyuday-session-card {
     display: flex;
@@ -380,17 +369,11 @@
 
     box-sizing: border-box;
 
-    background:
-        rgba(251, 246, 234, 0.95);
+    background: rgba(251, 246, 234, 0.92);
 
-    border:
-        1px solid rgba(61, 40, 29, 0.12);
+    border: 1px solid rgba(61, 40, 29, 0.12);
 
     border-radius: 16px;
-
-    text-decoration: none;
-
-    color: inherit;
 
     transition:
         transform 0.2s ease,
@@ -402,27 +385,21 @@
 .abhyuday-session-card:hover {
     transform: translateY(-3px);
 
-    border-color:
-        rgba(169, 93, 41, 0.30);
+    border-color: rgba(169, 93, 41, 0.30);
 
     box-shadow:
         0 8px 22px rgba(61, 40, 29, 0.08);
-
-    text-decoration: none;
-
-    color: inherit;
 }
 
 
 /* =========================================================
    SESSION IMAGE
-   ========================================================= */
+========================================================= */
 
 .abhyuday-session-image {
     flex: 0 0 64px;
 
     width: 64px;
-
     height: 64px;
 
     overflow: hidden;
@@ -439,7 +416,6 @@
     display: block;
 
     width: 100%;
-
     height: 100%;
 
     object-fit: cover;
@@ -447,29 +423,8 @@
 
 
 /* =========================================================
-   FALLBACK IMAGE
-   ========================================================= */
-
-.abhyuday-session-placeholder {
-    width: 100%;
-
-    height: 100%;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    color: #a95d29;
-
-    font-size: 20px;
-}
-
-
-/* =========================================================
    SESSION NUMBER
-   ========================================================= */
+========================================================= */
 
 .abhyuday-session-number {
     flex: 0 0 40px;
@@ -506,7 +461,7 @@
 
 /* =========================================================
    SESSION TEXT
-   ========================================================= */
+========================================================= */
 
 .abhyuday-session-info {
     flex: 1;
@@ -541,37 +496,12 @@
     font-size: 12px;
 
     line-height: 1.5;
-
-    display: -webkit-box;
-
-    -webkit-line-clamp: 2;
-
-    line-clamp: 2;
-
-    -webkit-box-orient: vertical;
-
-    overflow: hidden;
-}
-
-
-/* =========================================================
-   DATE
-   ========================================================= */
-
-.abhyuday-session-date {
-    margin-top: 6px;
-
-    color: #a95d29;
-
-    font-size: 11px;
-
-    font-weight: 700;
 }
 
 
 /* =========================================================
    ARROW
-   ========================================================= */
+========================================================= */
 
 .abhyuday-session-arrow {
     flex: 0 0 auto;
@@ -579,67 +509,12 @@
     color: #a95d29;
 
     font-size: 21px;
-
-    transition:
-        transform 0.2s ease;
-}
-
-
-.abhyuday-session-card:hover
-.abhyuday-session-arrow {
-    transform: translateX(4px);
-}
-
-
-/* =========================================================
-   EMPTY STATE
-   ========================================================= */
-
-.abhyuday-empty {
-    padding: 35px 20px;
-
-    border:
-        1px dashed rgba(61, 40, 29, 0.20);
-
-    border-radius: 16px;
-
-    text-align: center;
-
-    background:
-        rgba(255, 250, 240, 0.60);
-}
-
-
-.abhyuday-empty-icon {
-    margin-bottom: 10px;
-
-    color: #b78a4b;
-
-    font-size: 24px;
-}
-
-
-.abhyuday-empty h3 {
-    margin: 0 0 6px;
-
-    color: #3d281d;
-
-    font-size: 16px;
-}
-
-
-.abhyuday-empty p {
-    margin: 0;
-
-    color: #75665a;
-
-    font-size: 12px;
 }
 
 
 /* =========================================================
    TABLET
-   ========================================================= */
+========================================================= */
 
 @media (max-width: 900px) {
 
@@ -647,35 +522,27 @@
         padding-top: 60px;
     }
 
-
     .abhyuday-description {
         padding-left: 28px;
-
         padding-right: 28px;
     }
-
 
     .abhyuday-description-text {
         font-size: 16px;
     }
 
-
     .abhyuday-programs {
         padding-left: 25px;
-
         padding-right: 25px;
     }
-
 
     .abhyuday-program-grid {
         gap: 20px;
     }
 
-
     .abhyuday-program-column {
         padding: 23px 18px;
     }
-
 
     .abhyuday-program-title {
         font-size: 27px;
@@ -685,7 +552,7 @@
 
 /* =========================================================
    MOBILE
-   ========================================================= */
+========================================================= */
 
 @media (max-width: 700px) {
 
@@ -752,6 +619,8 @@
 
     .abhyuday-description-text {
         font-size: 15px;
+
+        font-weight: 700;
 
         line-height: 1.9;
     }
@@ -821,7 +690,6 @@
         flex-basis: 55px;
 
         width: 55px;
-
         height: 55px;
     }
 
@@ -849,12 +717,13 @@
     .abhyuday-session-arrow {
         font-size: 18px;
     }
+
 }
 
 
 /* =========================================================
    SMALL PHONES
-   ========================================================= */
+========================================================= */
 
 @media (max-width: 400px) {
 
@@ -876,13 +745,14 @@
     .abhyuday-description-text {
         font-size: 14px;
 
+        font-weight: 700;
+
         line-height: 1.85;
     }
 
 
     .abhyuday-programs {
         padding-left: 11px;
-
         padding-right: 11px;
     }
 
@@ -891,7 +761,6 @@
         flex-basis: 50px;
 
         width: 50px;
-
         height: 50px;
     }
 
@@ -904,6 +773,7 @@
     .abhyuday-session-info h4 {
         font-size: 14px;
     }
+
 }
 
 </style>
@@ -911,7 +781,7 @@
 
 <!-- =========================================================
      ABHYUDAY PAGE
-     ========================================================= -->
+========================================================= -->
 
 <section class="abhyuday-page">
 
@@ -932,7 +802,7 @@
             <div class="abhyuday-acronym">
 
                 <div class="abhyuday-acronym-row">
-
+                    
                     <div class="abhyuday-acronym-item">
                         <strong>A</strong> — Awareness
                     </div>
@@ -974,7 +844,6 @@
 
             </div>
 
-
             <div class="abhyuday-title-divider">
 
                 <span></span>
@@ -988,9 +857,10 @@
         </section>
 
 
-        <!-- =================================================
-             DESCRIPTION
-        ================================================== -->
+
+<!-- =================================================
+DESCRIPTION
+================================================== -->
 
         <section class="abhyuday-description">
 
@@ -1000,42 +870,29 @@
                     इतिहास हा केवळ भूतकाळात घडलेल्या घटनांचा संग्रह नसतो; तो वर्तमान समजून घेण्याची, विचार करण्याची आणि भविष्यासाठी दिशा ठरवण्याची दृष्टी देतो. इतिहासातील व्यक्तिमत्त्वे, विचार आणि कार्यपद्धती यांचा अभ्यास केवळ स्मरणापुरता मर्यादित न राहता त्यातून आजच्या जीवनासाठी काय शिकता येईल, याचा विचार व्हावा, या भूमिकेतून ‘अभ्युदय’ या विभागाची संकल्पना आकाराला आली आहे.
                 </p>
 
-
                 <p>
                     छत्रपती शिवाजी महाराजांचे जीवन व कार्य हा या विभागाचा महत्त्वाचा केंद्रबिंदू आहे. मात्र त्यांची ओळख केवळ युद्धे आणि पराक्रमाच्या कथांपुरती मर्यादित न ठेवता स्वराज्याची संकल्पना, नेतृत्व, प्रशासन, मुत्सद्देगिरी, अर्थव्यवस्था, अभियांत्रिकी, नौदल, व्यवस्थापन, सामाजिक संघटन आणि दूरदृष्टी अशा विविध पैलूंच्या माध्यमातून त्यांचा विचार समजून घेण्याचा प्रयत्न केला जातो. इतिहासातील या अनुभवांचा आणि विचारांचा आजच्या जीवनाशी संबंध जोडत, त्यातून वर्तमानासाठी उपयुक्त दृष्टी निर्माण करण्यावर भर दिला जातो.
                 </p>
-
 
                 <p>
                     ‘शिवदर्शन’ या ऑनलाइन सत्रांच्या माध्यमातून छत्रपती शिवाजी महाराज आणि महाराष्ट्राच्या इतिहासातील विविध विषय सहभागींपर्यंत संवादात्मक पद्धतीने पोहोचवले जातात. व्याख्यानापुरते मर्यादित न राहता प्रश्नोत्तर, उदाहरणे, चर्चा आणि विचारमंथनाच्या माध्यमातून विषय समजून घेण्याचा प्रयत्न केला जातो. इतिहासातील एखादी घटना किंवा विचार समजून घेतल्यानंतर त्याचा आजच्या परिस्थितीशी आणि आपल्या दैनंदिन जीवनाशी संबंध जोडण्यावर विशेष भर असतो.
                 </p>
 
-
                 <p>
                     शाळा आणि महाविद्यालयांमध्येही विद्यार्थ्यांसाठी विविध इतिहासपर आणि विचारप्रवर्तक सत्रांचे आयोजन केले जाते. अभ्यासक्रमाच्या पलीकडे जाऊन छत्रपती शिवाजी महाराजांचे कार्य, स्वराज्याची संकल्पना, नेतृत्व आणि इतिहासातील विविध पैलू विद्यार्थ्यांपर्यंत पोहोचवताना प्रश्न विचारण्याची, विचार करण्याची, आपले मत मांडण्याची आणि इतिहासाकडे चिकित्सक दृष्टीने पाहण्याची सवय निर्माण व्हावी, हा प्रयत्न असतो.
                 </p>
-
 
                 <p>
                     यासोबतच युवकांमध्ये इतिहास, नेतृत्व, सामाजिक जाणीव, व्यक्तिमत्त्व विकास आणि जबाबदारीची भावना निर्माण करणारे विविध उपक्रम राबवले जातात. इतिहासातील प्रेरणादायी विचार आणि अनुभव वर्तमानातील आव्हानांशी जोडत, युवकांना केवळ इतिहास जाणणारे नव्हे तर त्यातून शिकून आपल्या भूमिकेचा विचार करणारे नागरिक म्हणून घडवण्याचा प्रयत्न केला जातो.
                 </p>
 
-
                 <p>
                     विविध वयोगटांसाठी व्याख्याने, चर्चासत्रे, कार्यशाळा, ऑनलाइन सत्रे आणि विशेष उपक्रमांच्या माध्यमातून इतिहास, वारसा, नेतृत्व, संस्कृती आणि समकालीन संदर्भांवर संवाद घडवला जातो. विषय सांगणे हा या उपक्रमांचा अंतिम उद्देश नसून, त्यातून जिज्ञासा निर्माण व्हावी, विचारांना चालना मिळावी आणि इतिहासाशी असलेले नाते वर्तमानातील कृतीशी जोडले जावे, ही अभ्युदय मागची भूमिका आहे.
                 </p>
 
-
                 <p class="abhyuday-final">
-
-                    इतिहास समजून घेता यावा,
-                    विचारांना दिशा मिळावी आणि त्यातून
-                    उद्याचा उज्ज्वल मार्ग घडावा, यासाठी
-
-                    <strong>
-                        ‘अभ्युदय’ तुमच्यापर्यंत पोहोचत आहे!!
-                    </strong>
-
+                    इतिहास समजून घेता यावा, विचारांना दिशा मिळावी आणि त्यातून उद्याचा उज्ज्वल मार्ग घडावा, यासाठी
+                    <strong>‘अभ्युदय’ तुमच्यापर्यंत पोहोचत आहे!!</strong>
                 </p>
 
             </div>
@@ -1043,25 +900,25 @@
         </section>
 
 
-        <!-- =================================================
-             PROGRAMS
-        ================================================== -->
+
+<!-- =================================================
+    TWO PROGRAM COLUMNS
+    SESSIONS COME FROM ADMIN PANEL
+================================================== -->
 
         <section class="abhyuday-programs">
 
             <div class="abhyuday-program-grid">
 
-
-                <!-- =================================================
-                     ONLINE SHIVDARSHAN
-                ================================================== -->
+<!-- =================================================
+    ONLINE SHIVDARSHAN
+================================================== -->
 
                 <div class="abhyuday-program-column">
 
                     <span class="abhyuday-program-label">
                         ऑनलाइन उपक्रम
                     </span>
-
 
                     <h2 class="abhyuday-program-title">
                         शिवदर्शन सत्रे
@@ -1070,129 +927,23 @@
 
                     <div class="abhyuday-session-list">
 
-                        {% if online_sessions %}
-
-                            {% for session in online_sessions %}
-
-                            <div class="abhyuday-session-card">
-
-
-                                <!-- IMAGE -->
-
-                                <div class="abhyuday-session-image">
-
-                                    {% if session.image_url %}
-
-                                        <img
-                                            src="{{ session.image_url }}"
-                                            alt="{{ session.title }}"
-                                            loading="lazy"
-                                        >
-
-                                    {% else %}
-
-                                        <div class="abhyuday-session-placeholder">
-                                            ✦
-                                        </div>
-
-                                    {% endif %}
-
-                                </div>
-
-
-                                <!-- NUMBER -->
-
-                                <div class="abhyuday-session-number">
-
-                                    <strong>
-                                        {{ '%02d' | format(loop.index) }}
-                                    </strong>
-
-                                    <span>
-                                        सत्र
-                                    </span>
-
-                                </div>
-
-
-                                <!-- INFORMATION -->
-
-                                <div class="abhyuday-session-info">
-
-                                    <h4>
-                                        {{ session.title }}
-                                    </h4>
-
-
-                                    {% if session.text %}
-
-                                    <p>
-                                        {{ session.text }}
-                                    </p>
-
-                                    {% endif %}
-
-
-                                    {% if session.event_date %}
-
-                                    <div class="abhyuday-session-date">
-
-                                        {{ session.event_date.strftime('%d %B %Y') }}
-
-                                    </div>
-
-                                    {% endif %}
-
-                                </div>
-
-
-                                <!-- ARROW -->
-
-                                <div class="abhyuday-session-arrow">
-                                    →
-                                </div>
-
-
-                            </div>
-
-                            {% endfor %}
-
-
-                        {% else %}
-
-                            <div class="abhyuday-empty">
-
-                                <div class="abhyuday-empty-icon">
-                                    ✦
-                                </div>
-
-                                <h3>
-                                    सत्रे लवकरच उपलब्ध होतील
-                                </h3>
-
-                                <p>
-                                    नवीन शिवदर्शन सत्रांची माहिती लवकरच येथे प्रकाशित केली जाईल.
-                                </p>
-
-                            </div>
-
-                        {% endif %}
+                        <!-- ADMIN PANEL GENERATED SESSIONS -->
 
                     </div>
 
                 </div>
 
 
-                <!-- =================================================
-                     COLLEGE / EDUCATIONAL SESSIONS
-                ================================================== -->
+
+<!-- =================================================
+COLLEGE / EDUCATIONAL SESSIONS
+================================================== -->
 
                 <div class="abhyuday-program-column">
 
                     <span class="abhyuday-program-label">
                         शैक्षणिक उपक्रम
                     </span>
-
 
                     <h2 class="abhyuday-program-title">
                         महाविद्यालयीन सत्रे
@@ -1201,113 +952,7 @@
 
                     <div class="abhyuday-session-list">
 
-                        {% if offline_sessions %}
-
-                            {% for session in offline_sessions %}
-
-                            <div class="abhyuday-session-card">
-
-
-                                <!-- IMAGE -->
-
-                                <div class="abhyuday-session-image">
-
-                                    {% if session.image_url %}
-
-                                        <img
-                                            src="{{ session.image_url }}"
-                                            alt="{{ session.title }}"
-                                            loading="lazy"
-                                        >
-
-                                    {% else %}
-
-                                        <div class="abhyuday-session-placeholder">
-                                            ✦
-                                        </div>
-
-                                    {% endif %}
-
-                                </div>
-
-
-                                <!-- NUMBER -->
-
-                                <div class="abhyuday-session-number">
-
-                                    <strong>
-                                        {{ '%02d' | format(loop.index) }}
-                                    </strong>
-
-                                    <span>
-                                        सत्र
-                                    </span>
-
-                                </div>
-
-
-                                <!-- INFORMATION -->
-
-                                <div class="abhyuday-session-info">
-
-                                    <h4>
-                                        {{ session.title }}
-                                    </h4>
-
-
-                                    {% if session.text %}
-
-                                    <p>
-                                        {{ session.text }}
-                                    </p>
-
-                                    {% endif %}
-
-
-                                    {% if session.event_date %}
-
-                                    <div class="abhyuday-session-date">
-
-                                        {{ session.event_date.strftime('%d %B %Y') }}
-
-                                    </div>
-
-                                    {% endif %}
-
-                                </div>
-
-
-                                <!-- ARROW -->
-
-                                <div class="abhyuday-session-arrow">
-                                    →
-                                </div>
-
-
-                            </div>
-
-                            {% endfor %}
-
-
-                        {% else %}
-
-                            <div class="abhyuday-empty">
-
-                                <div class="abhyuday-empty-icon">
-                                    ✦
-                                </div>
-
-                                <h3>
-                                    सत्रे लवकरच उपलब्ध होतील
-                                </h3>
-
-                                <p>
-                                    नवीन शैक्षणिक सत्रांची माहिती लवकरच येथे प्रकाशित केली जाईल.
-                                </p>
-
-                            </div>
-
-                        {% endif %}
+                        <!-- ADMIN PANEL GENERATED SESSIONS -->
 
                     </div>
 
@@ -1322,107 +967,5 @@
     </div>
 
 </section>
-
-
-<script>
-
-/* =========================================================
-   ABHYUDAY PAGE JS
-   ========================================================= */
-
-document.addEventListener("DOMContentLoaded", function () {
-
-    /*
-     * Session cards
-     * Add a small visual feedback when a user clicks a card.
-     */
-
-    const sessionCards =
-        document.querySelectorAll(".abhyuday-session-card");
-
-    sessionCards.forEach(function (card) {
-
-        card.addEventListener("click", function () {
-
-            card.style.transform = "translateY(-1px)";
-
-            setTimeout(function () {
-                card.style.transform = "";
-            }, 150);
-
-        });
-
-    });
-
-
-    /*
-     * Prevent image dragging.
-     */
-
-    const sessionImages =
-        document.querySelectorAll(".abhyuday-session-image img");
-
-    sessionImages.forEach(function (image) {
-
-        image.addEventListener("dragstart", function (event) {
-            event.preventDefault();
-        });
-
-    });
-
-
-    /*
-     * Smooth reveal when program section
-     * enters the viewport.
-     */
-
-    const programColumns =
-        document.querySelectorAll(".abhyuday-program-column");
-
-    if ("IntersectionObserver" in window) {
-
-        const observer =
-            new IntersectionObserver(
-                function (entries, observer) {
-
-                    entries.forEach(function (entry) {
-
-                        if (entry.isIntersecting) {
-
-                            entry.target.style.opacity = "1";
-                            entry.target.style.transform =
-                                "translateY(0)";
-
-                            observer.unobserve(entry.target);
-                        }
-
-                    });
-
-                },
-                {
-                    threshold: 0.08
-                }
-            );
-
-
-        programColumns.forEach(function (column) {
-
-            column.style.opacity = "0";
-
-            column.style.transform =
-                "translateY(18px)";
-
-            column.style.transition =
-                "opacity 0.5s ease, transform 0.5s ease";
-
-            observer.observe(column);
-
-        });
-
-    }
-
-});
-
-</script>
 
 {% endblock %}

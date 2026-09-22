@@ -5,179 +5,590 @@
 {% endblock %}
 
 {% block content %}
+
 <style>
-/* ================================
-   MOHIM CARDS
-================================ */
+
+/* =========================================================
+   MOHIM PAGE
+========================================================= */
+
+.mohim-page {
+    position: relative;
+
+    width: 100%;
+    min-height: 100vh;
+
+    background: #f7f0df;
+
+    color: #3d281d;
+
+    font-family:
+        "Noto Sans Devanagari",
+        "Baloo 2",
+        sans-serif;
+
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   BACKGROUND IMAGE
+========================================================= */
+
+.mohim-page::before {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background-image:
+        url("{{ url_for('static', filename='img/mohim bg.jpeg') }}");
+
+    background-repeat: no-repeat;
+
+    background-position: center top;
+
+    background-size: cover;
+
+    opacity: 0.15;
+
+    pointer-events: none;
+
+    z-index: 0;
+}
+
+
+/* Keep all content above background */
+
+.mohim-page > * {
+    position: relative;
+
+    z-index: 1;
+}
+
+
+/* =========================================================
+   INTRO
+========================================================= */
+
+.mohim-intro {
+    width: 100%;
+
+    max-width: 1180px;
+
+    margin: 0 auto;
+
+    padding: 70px 35px 65px;
+
+    box-sizing: border-box;
+
+    text-align: center;
+}
+
+
+/* =========================================================
+   TITLE
+========================================================= */
+
+.mohim-intro h1 {
+    margin: 0;
+
+    color: #3d281d;
+
+    font-family:
+        "Baloo 2",
+        "Noto Sans Devanagari",
+        sans-serif;
+
+    font-size: clamp(58px, 7vw, 90px);
+
+    font-weight: 800;
+
+    line-height: 1.05;
+}
+
+
+/* =========================================================
+   DIVIDER
+========================================================= */
+
+.mohim-line {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 14px;
+
+    margin: 22px auto 32px;
+}
+
+
+.mohim-line span {
+    width: 65px;
+
+    height: 1px;
+
+    background: #b78a4b;
+}
+
+
+.mohim-line i {
+    color: #a95d29;
+
+    font-size: 17px;
+
+    font-style: normal;
+}
+
+
+/* =========================================================
+   DESCRIPTION
+   Centered block + justified text
+========================================================= */
+
+.mohim-intro p {
+    width: min(1050px, 100%);
+
+    margin: 0 auto;
+
+    color: #51443b;
+
+    font-size: 17px;
+
+    font-weight: 700;
+
+    line-height: 2;
+
+    text-align: justify;
+}
+
+
+/* =========================================================
+   MOHIM LIST
+========================================================= */
 
 .mohim-list {
     width: min(1100px, 92%);
-    margin: 40px auto 70px;
+
+    margin: 20px auto 90px;
+
     display: grid;
+
     grid-template-columns: repeat(2, 1fr);
+
     gap: 24px;
 }
 
+
+/* =========================================================
+   MOHIM CARD
+========================================================= */
+
 .mohim-card {
     display: flex;
+
     text-decoration: none;
+
     color: inherit;
-    background: #fff;
+
+    background: rgba(255, 250, 240, 0.92);
+
     border-radius: 18px;
+
     overflow: hidden;
+
     border: 1px solid rgba(137, 71, 32, 0.14);
-    box-shadow: 0 8px 24px rgba(45, 28, 18, 0.10);
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
+
+    box-shadow:
+        0 8px 24px rgba(45, 28, 18, 0.10);
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+
     min-height: 190px;
 }
 
+
 .mohim-card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 14px 32px rgba(45, 28, 18, 0.16);
+
+    box-shadow:
+        0 14px 32px rgba(45, 28, 18, 0.16);
 }
 
 
-/* ================================
-   IMAGE
-================================ */
+/* =========================================================
+   PHOTO
+========================================================= */
 
 .mohim-photo {
     width: 48%;
+
     min-width: 48%;
+
     height: 220px;
+
     overflow: hidden;
+
     background: #241b16;
 }
 
+
 .mohim-photo img {
     display: block;
+
     width: 100%;
+
     height: 100%;
+
     object-fit: cover;
+
     object-position: center;
-    transition: transform 0.35s ease;
+
+    transition:
+        transform 0.35s ease;
 }
+
 
 .mohim-card:hover .mohim-photo img {
     transform: scale(1.04);
 }
 
 
-/* ================================
+/* =========================================================
    CARD INFORMATION
-================================ */
+========================================================= */
 
 .mohim-info {
     flex: 1;
+
     padding: 24px 22px;
+
     display: flex;
+
     flex-direction: column;
+
     justify-content: center;
+
     gap: 16px;
 }
 
 
-/* ================================
+/* =========================================================
    MOHIM NUMBER
-================================ */
+========================================================= */
 
 .mohim-number {
     display: flex;
+
     align-items: center;
+
     gap: 8px;
+
     color: #894720;
 }
 
+
 .mohim-number span {
     font-size: 14px;
+
     font-weight: 600;
 }
+
 
 .mohim-number strong {
     font-size: 25px;
+
     line-height: 1;
+
     font-weight: 700;
 }
 
 
-/* ================================
+/* =========================================================
    NAME
-================================ */
+========================================================= */
 
 .mohim-name span {
     display: block;
+
     margin-bottom: 6px;
+
     color: #8a776b;
+
     font-size: 13px;
+
     font-weight: 600;
 }
 
+
 .mohim-name h2 {
     margin: 0;
+
     color: #2b211c;
+
+    font-family:
+        "Baloo 2",
+        "Noto Sans Devanagari",
+        sans-serif;
+
     font-size: 20px;
+
     line-height: 1.3;
+
     font-weight: 700;
 }
 
 
-/* ================================
-   TABLET
-================================ */
+/* =========================================================
+   EMPTY STATE
+========================================================= */
 
-@media (max-width: 900px) {
+.mohim-empty {
+    width: min(900px, 92%);
 
-    .mohim-list {
-        grid-template-columns: 1fr;
-        gap: 22px;
-    }
+    margin: 40px auto 90px;
 
-    .mohim-photo {
-        width: 42%;
-        min-width: 42%;
-        height: 210px;
-    }
+    padding: 60px 25px;
+
+    text-align: center;
+
+    border: 1px dashed rgba(61, 40, 29, 0.20);
+
+    border-radius: 20px;
+
+    background: rgba(255, 250, 240, 0.45);
 }
 
 
-/* ================================
+.mohim-empty > div {
+    color: #b78a4b;
+
+    font-size: 30px;
+}
+
+
+.mohim-empty h2 {
+    margin: 10px 0;
+
+    color: #3d281d;
+}
+
+
+.mohim-empty p {
+    margin: 0;
+
+    color: #75665a;
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 900px) {
+
+    .mohim-intro {
+        padding:
+            60px
+            28px
+            50px;
+    }
+
+
+    .mohim-intro h1 {
+        font-size: 65px;
+    }
+
+
+    .mohim-intro p {
+        font-size: 16px;
+
+        line-height: 1.9;
+    }
+
+
+    .mohim-list {
+        grid-template-columns: 1fr;
+
+        gap: 22px;
+    }
+
+
+    .mohim-photo {
+        width: 42%;
+
+        min-width: 42%;
+
+        height: 210px;
+    }
+
+}
+
+
+/* =========================================================
    MOBILE
-================================ */
+========================================================= */
 
 @media (max-width: 600px) {
 
+    .mohim-page::before {
+        opacity: 0.10;
+
+        background-size: auto 100%;
+
+        background-position: center top;
+    }
+
+
+    .mohim-intro {
+        padding:
+            50px
+            18px
+            45px;
+    }
+
+
+    .mohim-intro h1 {
+        font-size: 55px;
+    }
+
+
+    .mohim-line {
+        margin:
+            20px
+            auto
+            25px;
+
+        gap: 10px;
+    }
+
+
+    .mohim-line span {
+        width: 48px;
+    }
+
+
+    .mohim-intro p {
+        width: 100%;
+
+        font-size: 14px;
+
+        line-height: 1.9;
+
+        text-align: justify;
+    }
+
+
     .mohim-list {
         width: 92%;
+
         grid-template-columns: 1fr;
+
         gap: 20px;
-        margin-top: 30px;
+
+        margin-top: 20px;
+
+        margin-bottom: 70px;
     }
+
 
     .mohim-card {
         display: block;
     }
 
+
     .mohim-photo {
         width: 100%;
+
         min-width: 100%;
+
         height: 210px;
     }
 
+
     .mohim-info {
-        padding: 17px 18px 20px;
+        padding:
+            17px
+            18px
+            20px;
+
         gap: 13px;
     }
+
 
     .mohim-name h2 {
         font-size: 19px;
     }
 
+
     .mohim-number strong {
         font-size: 23px;
     }
+
+
+    .mohim-empty {
+        width: 92%;
+
+        padding: 50px 20px;
+    }
+
 }
+
+
+/* =========================================================
+   SMALL PHONES
+========================================================= */
+
+@media (max-width: 400px) {
+
+    .mohim-intro {
+        padding-top: 42px;
+    }
+
+
+    .mohim-intro h1 {
+        font-size: 48px;
+    }
+
+
+    .mohim-intro p {
+        font-size: 13px;
+
+        line-height: 1.85;
+
+        text-align: justify;
+    }
+
+
+    .mohim-photo {
+        height: 190px;
+    }
+
+
+    .mohim-info {
+        padding:
+            15px
+            16px
+            18px;
+    }
+
+
+    .mohim-name h2 {
+        font-size: 18px;
+    }
+
+}
+
 </style>
+
+
 <section class="mohim-page">
+
 
     <!-- ==================================================
          PAGE INTRO
@@ -185,13 +596,21 @@
 
     <div class="mohim-intro">
 
-        <h1>मोहिम</h1>
+        <h1>
+            मोहिम
+        </h1>
+
 
         <div class="mohim-line">
+
             <span></span>
+
             <i>✦</i>
+
             <span></span>
+
         </div>
+
 
         <p>
             गडकिल्ले हे आपल्या इतिहासाची जिवंत साक्ष देणारे ठेवे आहेत.
@@ -258,6 +677,7 @@
 
     <div class="mohim-list">
 
+
         <!-- FIRST 3 / LATEST MOHIM -->
 
         {% for item in latest_mohim %}
@@ -305,13 +725,17 @@
 
             <div class="mohim-info">
 
-                <!-- CIRCLE NUMBER -->
+                <!-- MOHIM NUMBER -->
 
                 <div class="mohim-number">
 
-                    <span>मोहिम</span>
+                    <span>
+                        मोहिम
+                    </span>
 
-                    <strong>{{ item.number }}</strong>
+                    <strong>
+                        {{ item.number }}
+                    </strong>
 
                 </div>
 
@@ -386,9 +810,13 @@
 
                 <div class="mohim-number">
 
-                    <span>मोहिम</span>
+                    <span>
+                        मोहिम
+                    </span>
 
-                    <strong>{{ item.number }}</strong>
+                    <strong>
+                        {{ item.number }}
+                    </strong>
 
                 </div>
 
@@ -420,7 +848,9 @@
 
     <div class="mohim-empty">
 
-        <div>✦</div>
+        <div>
+            ✦
+        </div>
 
         <h2>
             सध्या कोणतीही मोहिम उपलब्ध नाही
@@ -433,6 +863,7 @@
     </div>
 
     {% endif %}
+
 
 </section>
 
