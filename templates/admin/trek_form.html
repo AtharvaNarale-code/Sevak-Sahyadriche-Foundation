@@ -2,15 +2,89 @@
 {% block title %}{{ 'Add' if mode=='new' else 'Edit' }} Trek — Sevak Sahyadriche{% endblock %}
 
 {% block admin_content %}
+
+<style>
+  .image-help {
+    display: block;
+    margin-top: 8px;
+    color: #6b6259;
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+  .gallery-picker {
+    margin-top: 10px;
+  }
+
+  .gallery-preview {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 12px;
+    margin-top: 16px;
+  }
+
+  .gallery-preview-item {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 1 / 1;
+    border: 1px solid #dfd2c3;
+    border-radius: 10px;
+    background: #f7f1e8;
+  }
+
+  .gallery-preview-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .gallery-count {
+    margin-top: 10px;
+    color: #894720;
+    font-size: 14px;
+    font-weight: 700;
+  }
+
+  .current-gallery {
+    margin-top: 18px;
+  }
+
+  .current-gallery-title {
+    margin: 0 0 10px;
+    font-size: 15px;
+    color: #3c2b23;
+  }
+
+  @media (max-width: 800px) {
+    .gallery-preview {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 520px) {
+    .gallery-preview {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+</style>
+
 <div class="admin-topbar">
   <h1>{{ 'Add New Trek / Event' if mode=='new' else 'Edit: ' + trek.title }}</h1>
   <a href="{{ url_for('admin_treks') }}" class="btn btn-ghost btn-sm">&larr; Back to List</a>
 </div>
 
 <form class="admin-form" method="POST" enctype="multipart/form-data">
+
   <div class="form-group">
     <label>Title</label>
-    <input type="text" name="title" class="form-control" value="{{ trek.title if trek else '' }}" required>
+    <input
+      type="text"
+      name="title"
+      class="form-control"
+      value="{{ trek.title if trek else '' }}"
+      placeholder="e.g. Rajgad Fort Trek"
+    >
   </div>
 
   <div class="form-row-2">
@@ -18,15 +92,26 @@
       <label>Category</label>
       <select name="category" class="form-control">
         {% for c in ['Trek', 'Cultural Event', 'Fort Visit', 'Workshop'] %}
-        <option value="{{ c }}" {{ 'selected' if trek and trek.category==c }}>{{ c }}</option>
+        <option
+          value="{{ c }}"
+          {% if (trek and trek.category == c) or (not trek and c == 'Trek') %}selected{% endif %}
+        >
+          {{ c }}
+        </option>
         {% endfor %}
       </select>
     </div>
+
     <div class="form-group">
       <label>Difficulty</label>
       <select name="difficulty" class="form-control">
         {% for d in ['Easy', 'Moderate', 'Difficult'] %}
-        <option value="{{ d }}" {{ 'selected' if trek and trek.difficulty==d }}>{{ d }}</option>
+        <option
+          value="{{ d }}"
+          {% if (trek and trek.difficulty == d) or (not trek and d == 'Moderate') %}selected{% endif %}
+        >
+          {{ d }}
+        </option>
         {% endfor %}
       </select>
     </div>
@@ -34,89 +119,265 @@
 
   <div class="form-group">
     <label>Location</label>
-    <input type="text" name="location" class="form-control" value="{{ trek.location if trek else '' }}" placeholder="e.g. Rajgad Fort, Pune District" required>
+    <input
+      type="text"
+      name="location"
+      class="form-control"
+      value="{{ trek.location if trek else '' }}"
+      placeholder="e.g. Rajgad Fort, Pune District"
+    >
   </div>
 
   <div class="form-group">
     <label>Description</label>
-    <textarea name="description" class="form-control" style="min-height: 150px;" required>{{ trek.description if trek else '' }}</textarea>
+    <textarea
+      name="description"
+      class="form-control"
+      style="min-height: 150px;"
+      placeholder="Describe the trek or event..."
+    >{{ trek.description if trek else '' }}</textarea>
   </div>
 
   <div class="form-group">
-  <label>Activity Title</label>
-  <input
-    type="text"
-    name="activity_title"
-    class="form-control"
-    value="{{ trek.activity_title if trek else '' }}"
-    placeholder="e.g. स्वच्छता मोहीम"
-  >
-</div>
+    <label>Activity Title</label>
+    <input
+      type="text"
+      name="activity_title"
+      class="form-control"
+      value="{{ trek.activity_title if trek else '' }}"
+      placeholder="e.g. स्वच्छता मोहीम"
+    >
+  </div>
 
-<div class="form-group">
-  <label>Activity Description</label>
-  <textarea
-    name="activity_description"
-    class="form-control"
-    style="min-height: 150px;"
-    placeholder="Describe what activity was conducted during this Mohim..."
-  >{{ trek.activity_description if trek else '' }}</textarea>
-</div>
+  <div class="form-group">
+    <label>Activity Description</label>
+    <textarea
+      name="activity_description"
+      class="form-control"
+      style="min-height: 150px;"
+      placeholder="Describe what activity was conducted during this Mohim..."
+    >{{ trek.activity_description if trek else '' }}</textarea>
+  </div>
 
   <div class="form-row-2">
     <div class="form-group">
       <label>Event Date</label>
-      <input type="date" name="event_date" class="form-control" value="{{ trek.event_date.strftime('%Y-%m-%d') if trek else '' }}" required>
+      <input
+        type="date"
+        name="event_date"
+        class="form-control"
+        value="{{ trek.event_date.strftime('%Y-%m-%d') if trek and trek.event_date else '' }}"
+      >
+      <small class="image-help">
+        Optional. If left blank while creating a new Trek, the backend uses today's date.
+      </small>
     </div>
+
     <div class="form-group">
       <label>Duration</label>
-      <input type="text" name="duration" class="form-control" value="{{ trek.duration if trek else '1 Day' }}" placeholder="e.g. 2 Days, 1 Night">
+      <input
+        type="text"
+        name="duration"
+        class="form-control"
+        value="{{ trek.duration if trek else '1 Day' }}"
+        placeholder="e.g. 2 Days, 1 Night"
+      >
     </div>
   </div>
 
   <div class="form-row-2">
     <div class="form-group">
       <label>Price</label>
-      <input type="text" name="price" class="form-control" value="{{ trek.price if trek else 'Free' }}" placeholder="e.g. ₹699 or Free">
+      <input
+        type="text"
+        name="price"
+        class="form-control"
+        value="{{ trek.price if trek else 'Free' }}"
+        placeholder="e.g. ₹699 or Free"
+      >
     </div>
+
     <div class="form-group">
-      <label>Trek Image</label>
-      <input type="file" name="image" class="form-control" accept="image/*">
+      <label>Main / Cover Image</label>
+      <input
+        type="file"
+        name="image"
+        class="form-control"
+        accept="image/*"
+      >
+
+      <small class="image-help">
+        Optional. This image is used as the main cover image.
+      </small>
+
       {% if trek and trek.image_filename %}
-        <img src="{{ trek.image_url }}" class="current-img-preview" alt="current image">
-        <small style="color:#6b6259;">Current image — upload a new one to replace it.</small>
+        <img
+          src="{{ trek.image_url }}"
+          class="current-img-preview"
+          alt="current image"
+        >
+        <small class="image-help">
+          Current main image — upload a new one to replace it.
+        </small>
       {% endif %}
     </div>
+  </div>
+
+  <!-- MULTIPLE GALLERY IMAGES -->
+  <div class="form-group">
+    <label>Gallery Images</label>
+
+    <input
+      id="galleryImages"
+      type="file"
+      name="gallery_images"
+      class="form-control gallery-picker"
+      accept="image/png,image/jpeg,image/webp,image/gif"
+      multiple
+    >
+
+    <small class="image-help">
+      Select multiple images at once. You can add 4, 5, 10 or more images.
+      This field is optional.
+    </small>
+
+    <div id="galleryCount" class="gallery-count"></div>
+
+    <div id="galleryPreview" class="gallery-preview"></div>
+
+    {% if trek and trek.gallery_images %}
+      <div class="current-gallery">
+        <p class="current-gallery-title">
+          Existing gallery images: {{ trek.gallery_images|length }}
+        </p>
+
+        <div class="gallery-preview">
+          {% for gallery_image in trek.gallery_images %}
+            <div class="gallery-preview-item">
+              <img
+                src="{{ gallery_image.image_url }}"
+                alt="Gallery image {{ loop.index }}"
+                loading="lazy"
+              >
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    {% endif %}
   </div>
 
   <div class="form-row-2">
     <div class="form-group">
       <label>Total Slots</label>
-      <input type="number" min="0" name="total_slots" class="form-control" value="{{ trek.total_slots if trek else 30 }}">
+      <input
+        type="number"
+        min="0"
+        name="total_slots"
+        class="form-control"
+        value="{{ trek.total_slots if trek else 30 }}"
+      >
     </div>
+
     <div class="form-group">
       <label>Slots Filled</label>
-      <input type="number" min="0" name="slots_filled" class="form-control" value="{{ trek.slots_filled if trek else 0 }}">
+      <input
+        type="number"
+        min="0"
+        name="slots_filled"
+        class="form-control"
+        value="{{ trek.slots_filled if trek else 0 }}"
+      >
     </div>
   </div>
 
   <div class="form-row-2">
     <div class="form-group">
       <label>Coordinator Name</label>
-      <input type="text" name="contact_person" class="form-control" value="{{ trek.contact_person if trek else '' }}">
+      <input
+        type="text"
+        name="contact_person"
+        class="form-control"
+        value="{{ trek.contact_person if trek else '' }}"
+        placeholder="Coordinator name"
+      >
     </div>
+
     <div class="form-group">
       <label>Coordinator Phone</label>
-      <input type="text" name="contact_phone" class="form-control" value="{{ trek.contact_phone if trek else '' }}">
+      <input
+        type="text"
+        name="contact_phone"
+        class="form-control"
+        value="{{ trek.contact_phone if trek else '' }}"
+        placeholder="Phone number"
+      >
     </div>
   </div>
 
   <div class="checkbox-row">
-    <input type="checkbox" id="is_published" name="is_published" {{ 'checked' if not trek or trek.is_published }}>
-    <label for="is_published" style="margin:0;">Published (visible on public site)</label>
+    <input
+      type="checkbox"
+      id="is_published"
+      name="is_published"
+      {% if not trek or trek.is_published %}checked{% endif %}
+    >
+    <label for="is_published" style="margin:0;">
+      Published (visible on public site)
+    </label>
   </div>
 
-  <button type="submit" class="btn btn-primary">{{ 'Add Trek / Event' if mode=='new' else 'Save Changes' }}</button>
-  <a href="{{ url_for('admin_treks') }}" class="btn btn-ghost">Cancel</a>
+  <button type="submit" class="btn btn-primary">
+    {{ 'Add Trek / Event' if mode=='new' else 'Save Changes' }}
+  </button>
+
+  <a href="{{ url_for('admin_treks') }}" class="btn btn-ghost">
+    Cancel
+  </a>
+
 </form>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const input = document.getElementById("galleryImages");
+  const preview = document.getElementById("galleryPreview");
+  const count = document.getElementById("galleryCount");
+
+  if (!input) return;
+
+  input.addEventListener("change", function () {
+    preview.innerHTML = "";
+
+    const files = Array.from(input.files || []);
+
+    if (files.length === 0) {
+      count.textContent = "";
+      return;
+    }
+
+    count.textContent =
+      files.length + (files.length === 1 ? " image selected" : " images selected");
+
+    files.forEach(function (file) {
+      if (!file.type.startsWith("image/")) return;
+
+      const reader = new FileReader();
+
+      reader.onload = function (event) {
+        const wrapper = document.createElement("div");
+        wrapper.className = "gallery-preview-item";
+
+        const img = document.createElement("img");
+        img.src = event.target.result;
+        img.alt = file.name;
+
+        wrapper.appendChild(img);
+        preview.appendChild(wrapper);
+      };
+
+      reader.readAsDataURL(file);
+    });
+  });
+});
+</script>
+
 {% endblock %}

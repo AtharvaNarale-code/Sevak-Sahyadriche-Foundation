@@ -1,4 +1,3 @@
-#pythonpython -m pip install Flask-Login 
 """
 Sevak Sahyadriche Foundation - Website Backend
 Flask application powering the public site (home, about, treks/events,
@@ -80,8 +79,7 @@ app.config["MAX_CONTENT_LENGTH"] = 4 * 1024 * 1024  # 4 MB uploads
 # Production secrets MUST be supplied through environment variables.
 # Never commit real SECRET_KEY / ADMIN_PASSWORD_HASH values to GitHub.
 
-if IS_VERCEL:
-    os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
 
 db = SQLAlchemy(app)
@@ -176,6 +174,48 @@ class Trek(db.Model):
 
         return url_for("static", filename="img/placeholder.svg")
 
+# trek class image to add multiple images --Atharva
+class TrekImage(db.Model):
+    """Additional gallery images belonging to a Trek/Event."""
+    __tablename__ = "trek_images"
+    @property
+    def public_url(self):
+        if not self.image_url:
+            return url_for("static", filename="img/placeholder.svg")
+
+        if self.image_url.startswith(("http://", "https://", "/")):
+            return self.image_url
+
+        return url_for(
+            "static",
+            filename=f"img/treks/{self.image_url}"
+        )
+    id = db.Column(db.Integer, primary_key=True)
+
+    trek_id = db.Column(
+        db.Integer,
+        db.ForeignKey("treks.id", ondelete="CASCADE"),
+        nullable=False,
+        index=True,
+    )
+
+    image_url = db.Column(db.String(500), nullable=False)
+
+    original_filename = db.Column(db.String(255), nullable=True)
+
+    created_at = db.Column(
+        db.DateTime,
+        default=datetime.utcnow
+    )
+
+    trek = db.relationship(
+        "Trek",
+        backref=db.backref(
+            "gallery_images",
+            lazy=True,
+            cascade="all, delete-orphan"
+        )
+    )
 
 class ContactMessage(db.Model):
     __tablename__ = "contact_messages"
@@ -416,6 +456,27 @@ def gallery():
         .all()
     )
     return render_template("gallery.html", treks=past_treks)
+
+
+@app.route("/gallery/<int:trek_id>")
+def gallery_detail(trek_id):
+    trek = Trek.query.get_or_404(trek_id)
+
+    if not trek.is_published and not current_user.is_authenticated:
+        abort(404)
+
+    gallery_images = (
+        TrekImage.query
+        .filter_by(trek_id=trek.id)
+        .order_by(TrekImage.created_at.asc(), TrekImage.id.asc())
+        .all()
+    )
+
+    return render_template(
+        "gallery_detail.html",
+        trek=trek,
+        gallery_images=gallery_images,
+    )
 
 
 @app.route("/contact", methods=["GET", "POST"])
@@ -823,37 +884,69 @@ def _content_image_url(value):
 
 def _trek_from_form(trek):
     trek.title = request.form.get("title", "").strip()
-    trek.category = request.form.get("category", "Trek")
+    trek.category = request.form.get("category", "Trek").strip() or "Trek"
     trek.location = request.form.get("location", "").strip()
     trek.description = request.form.get("description", "").strip()
-    trek.activity_title = request.form.get("activity_title", "").strip() or None
-    trek.activity_description = request.form.get("activity_description", "").strip() or None
-    trek.difficulty = request.form.get("difficulty", "Moderate")
-    trek.duration = request.form.get("duration", "1 Day").strip()
-    trek.price = request.form.get("price", "Free").strip()
-    trek.contact_person = request.form.get("contact_person", "").strip()
-    trek.contact_phone = request.form.get("contact_phone", "").strip()
+
+    trek.activity_title = (
+        request.form.get("activity_title", "").strip() or None
+    )
+    trek.activity_description = (
+        request.form.get("activity_description", "").strip() or None
+    )
+
+    trek.difficulty = (
+        request.form.get("difficulty", "Moderate").strip() or "Moderate"
+    )
+    trek.duration = (
+        request.form.get("duration", "").strip() or "1 Day"
+    )
+    trek.price = (
+        request.form.get("price", "").strip() or "Free"
+    )
+
+    trek.contact_person = (
+        request.form.get("contact_person", "").strip() or None
+    )
+    trek.contact_phone = (
+        request.form.get("contact_phone", "").strip() or None
+    )
+
     trek.is_published = request.form.get("is_published") == "on"
 
     try:
         trek.total_slots = int(request.form.get("total_slots") or 0)
     except ValueError:
         trek.total_slots = 0
+
     try:
         trek.slots_filled = int(request.form.get("slots_filled") or 0)
     except ValueError:
         trek.slots_filled = 0
 
+    # Event date is still NOT NULL in the existing database.
+    # If admin leaves it blank, use today's date as a safe fallback.
     date_str = request.form.get("event_date")
-    if date_str:
-        trek.event_date = datetime.strptime(date_str, "%Y-%m-%d").date()
 
-    uploaded_name = _save_uploaded_image(request.files.get("image"))
+    if date_str:
+        try:
+            trek.event_date = datetime.strptime(
+                date_str, "%Y-%m-%d"
+            ).date()
+        except ValueError:
+            trek.event_date = date.today()
+    elif trek.event_date is None:
+        trek.event_date = date.today()
+
+    # Existing single/main image
+    uploaded_name = _save_uploaded_image(
+        request.files.get("image")
+    )
+
     if uploaded_name:
         trek.image_filename = uploaded_name
 
     return trek
-
 
 @app.route("/admin/treks/new", methods=["GET", "POST"])
 @login_required
@@ -862,13 +955,32 @@ def admin_trek_new():
         trek = Trek(event_date=date.today())
         trek = _trek_from_form(trek)
 
-        if not trek.title or not trek.location or not trek.description:
-            flash("Title, location, and description are required.", "danger")
-            return render_template("admin/trek_form.html", trek=trek, mode="new")
-
+        # Save first so the Trek receives its database ID.
         db.session.add(trek)
+        db.session.flush()
+
+        # Optional multiple gallery images.
+        gallery_files = request.files.getlist("gallery_images")
+
+        for image_file in gallery_files:
+            if not image_file or not image_file.filename:
+                continue
+
+            uploaded_url = _save_uploaded_image(image_file)
+
+            if uploaded_url:
+                db.session.add(
+                    TrekImage(
+                        trek_id=trek.id,
+                        image_url=uploaded_url,
+                        original_filename=image_file.filename,
+                    )
+                )
+
         db.session.commit()
-        flash(f'"{trek.title}" has been added.', "success")
+
+        display_name = trek.title or "Trek/Event"
+        flash(f'"{display_name}" has been added.', "success")
         return redirect(url_for("admin_treks"))
 
     return render_template("admin/trek_form.html", trek=None, mode="new")
@@ -882,12 +994,28 @@ def admin_trek_edit(trek_id):
     if request.method == "POST":
         trek = _trek_from_form(trek)
 
-        if not trek.title or not trek.location or not trek.description:
-            flash("Title, location, and description are required.", "danger")
-            return render_template("admin/trek_form.html", trek=trek, mode="edit")
+        # Optional multiple gallery images.
+        gallery_files = request.files.getlist("gallery_images")
+
+        for image_file in gallery_files:
+            if not image_file or not image_file.filename:
+                continue
+
+            uploaded_url = _save_uploaded_image(image_file)
+
+            if uploaded_url:
+                db.session.add(
+                    TrekImage(
+                        trek_id=trek.id,
+                        image_url=uploaded_url,
+                        original_filename=image_file.filename,
+                    )
+                )
 
         db.session.commit()
-        flash(f'"{trek.title}" has been updated.', "success")
+
+        display_name = trek.title or "Trek/Event"
+        flash(f'"{display_name}" has been updated.', "success")
         return redirect(url_for("admin_treks"))
 
     return render_template("admin/trek_form.html", trek=trek, mode="edit")

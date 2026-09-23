@@ -6,627 +6,77 @@
 
 {% block content %}
 
-<style>
-
-/* =========================================================
-   TEXT PROTECTION
-========================================================= */
-
-.protected-content {
-    user-select: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-
-    -webkit-user-drag: none;
-}
-
-
-/* =========================================================
-   MOHIM DETAIL PAGE
-========================================================= */
-
-.mohim-detail-page {
-    width: min(1100px, 92%);
-    margin: 40px auto 70px;
-}
-
-
-/* =========================================================
-   BACK BUTTON
-========================================================= */
-
-.detail-back {
-    display: inline-block;
-    margin-bottom: 25px;
-
-    color: #894720;
-    text-decoration: none;
-
-    font-size: 15px;
-    font-weight: 600;
-
-    transition: opacity 0.2s ease;
-}
-
-.detail-back:hover {
-    opacity: 0.7;
-}
-
-
-/* =========================================================
-   HEADER
-========================================================= */
-
-.mohim-detail-header {
-    text-align: center;
-    margin-bottom: 45px;
-}
-
-.detail-number {
-    display: block;
-
-    color: #894720;
-    font-size: 15px;
-    font-weight: 700;
-
-    margin-bottom: 8px;
-}
-
-.detail-category {
-    display: inline-block;
-
-    color: #8a776b;
-    font-size: 14px;
-    font-weight: 600;
-
-    margin-bottom: 12px;
-}
-
-.mohim-detail-header h1 {
-    margin: 0;
-
-    color: #2b211c;
-
-    font-size: clamp(30px, 5vw, 48px);
-    line-height: 1.15;
-    font-weight: 700;
-}
-
-.detail-meta {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-
-    gap: 15px 25px;
-
-    margin-top: 20px;
-
-    color: #6f625a;
-    font-size: 14px;
-}
-
-
-/* =========================================================
-   DETAIL SECTIONS
-========================================================= */
-
-.detail-section {
-    margin-top: 55px;
-}
-
-.detail-section-heading {
-    margin-bottom: 22px;
-}
-
-.detail-section-heading span {
-    display: block;
-
-    margin-bottom: 5px;
-
-    color: #894720;
-
-    font-size: 13px;
-    font-weight: 700;
-
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-
-.detail-section-heading h2 {
-    margin: 0;
-
-    color: #2b211c;
-
-    font-size: 28px;
-    line-height: 1.2;
-}
-
-
-/* =========================================================
-   DESCRIPTION
-========================================================= */
-
-.detail-description {
-    color: #4d4038;
-
-    font-size: 16px;
-    line-height: 1.9;
-
-    white-space: pre-line;
-
-    margin: 0;
-}
-
-
-/* =========================================================
-   PHOTO GALLERY
-========================================================= */
-
-.detail-gallery-section {
-    margin-top: 40px;
-}
-
-.mohim-photo-grid {
-    display: grid;
-
-    grid-template-columns: repeat(3, 1fr);
-
-    gap: 18px;
-}
-
-.mohim-photo {
-    display: block;
-
-    height: 240px;
-
-    overflow: hidden;
-
-    border-radius: 16px;
-
-    background: #241b16;
-
-    text-decoration: none;
-}
-
-.mohim-photo img {
-    display: block;
-
-    width: 100%;
-    height: 100%;
-
-    object-fit: cover;
-
-    transition: transform 0.35s ease;
-}
-
-.mohim-photo:hover img {
-    transform: scale(1.04);
-}
-
-
-/* =========================================================
-   INFORMATION BOX
-========================================================= */
-
-.detail-info-box {
-    margin-top: 28px;
-
-    background: #fff;
-
-    border: 1px solid rgba(137, 71, 32, 0.14);
-
-    border-radius: 18px;
-
-    overflow: hidden;
-
-    box-shadow: 0 8px 24px rgba(45, 28, 18, 0.08);
-}
-
-.detail-info-row {
-    display: flex;
-
-    justify-content: space-between;
-    align-items: center;
-
-    gap: 20px;
-
-    padding: 17px 22px;
-
-    border-bottom: 1px solid rgba(137, 71, 32, 0.10);
-}
-
-.detail-info-row:last-child {
-    border-bottom: none;
-}
-
-.detail-info-row span {
-    color: #8a776b;
-
-    font-size: 14px;
-    font-weight: 600;
-}
-
-.detail-info-row strong {
-    color: #2b211c;
-
-    font-size: 15px;
-
-    text-align: right;
-}
-
-
-/* =========================================================
-   ACTIVITY
-========================================================= */
-
-.detail-activity {
-    padding-top: 5px;
-}
-
-
-/* =========================================================
-   JOIN BUTTON
-========================================================= */
-
-.detail-join-button {
-    display: flex;
-
-    width: fit-content;
-
-    margin: 50px auto 0;
-    padding: 14px 28px;
-
-    align-items: center;
-    gap: 15px;
-
-    background: #894720;
-    color: #fff;
-
-    border-radius: 10px;
-
-    text-decoration: none;
-
-    font-size: 15px;
-    font-weight: 700;
-
-    transition:
-        transform 0.2s ease,
-        background 0.2s ease;
-}
-
-.detail-join-button:hover {
-    transform: translateY(-2px);
-
-    background: #713a1a;
-}
-
-.detail-join-button span {
-    font-size: 20px;
-}
-
-
-/* =========================================================
-   COMPLETED MESSAGE
-========================================================= */
-
-.detail-completed {
-    width: fit-content;
-
-    margin: 50px auto 0;
-    padding: 14px 25px;
-
-    background: #f4eee8;
-
-    color: #6f625a;
-
-    border-radius: 10px;
-
-    font-size: 14px;
-    font-weight: 600;
-}
-
-
-/* =========================================================
-   TABLET
-========================================================= */
-
-@media (max-width: 900px) {
-
-    .mohim-photo-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .mohim-photo {
-        height: 220px;
-    }
-}
-
-
-/* =========================================================
-   MOBILE
-========================================================= */
-
-@media (max-width: 600px) {
-
-    .mohim-detail-page {
-        width: 92%;
-
-        margin-top: 30px;
-    }
-
-    .mohim-detail-header {
-        margin-bottom: 35px;
-    }
-
-    .mohim-detail-header h1 {
-        font-size: 30px;
-    }
-
-    .detail-meta {
-        flex-direction: column;
-
-        gap: 8px;
-    }
-
-    .detail-section {
-        margin-top: 42px;
-    }
-
-    .detail-section-heading h2 {
-        font-size: 24px;
-    }
-
-    .detail-description {
-        font-size: 15px;
-        line-height: 1.8;
-    }
-
-    .mohim-photo-grid {
-        grid-template-columns: 1fr;
-
-        gap: 15px;
-    }
-
-    .mohim-photo {
-        height: 230px;
-    }
-
-    .detail-info-row {
-        padding: 15px 17px;
-    }
-
-    .detail-info-row span,
-    .detail-info-row strong {
-        font-size: 13px;
-    }
-
-    .detail-join-button,
-    .detail-completed {
-        margin-top: 35px;
-    }
-}
-
-</style>
-
-
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-
-    /*
-     * =====================================================
-     * PROTECT MOHIM TEXT
-     * =====================================================
-     */
-
-    const protectedContent =
-        document.querySelectorAll(".protected-content");
-
-    if (!protectedContent.length) {
-        return;
-    }
-
-
-    /*
-     * Disable right click
-     */
-
-    protectedContent.forEach(function (element) {
-
-        element.addEventListener("contextmenu", function (event) {
-            event.preventDefault();
-        });
-
-
-        /*
-         * Disable copy
-         */
-
-        element.addEventListener("copy", function (event) {
-            event.preventDefault();
-        });
-
-
-        /*
-         * Disable cut
-         */
-
-        element.addEventListener("cut", function (event) {
-            event.preventDefault();
-        });
-
-
-        /*
-         * Disable dragging
-         */
-
-        element.addEventListener("dragstart", function (event) {
-            event.preventDefault();
-        });
-
-    });
-
-
-    /*
-     * =====================================================
-     * BLOCK COPY KEYBOARD SHORTCUTS
-     * =====================================================
-     *
-     * We check whether the current text selection is inside
-     * one of our protected sections.
-     */
-
-    document.addEventListener("keydown", function (event) {
-
-        const selection = window.getSelection();
-
-        if (!selection || selection.isCollapsed) {
-            return;
-        }
-
-
-        const selectedNode = selection.anchorNode;
-
-        if (!selectedNode) {
-            return;
-        }
-
-
-        const parent =
-            selectedNode.nodeType === Node.TEXT_NODE
-                ? selectedNode.parentElement
-                : selectedNode;
-
-
-        if (!parent) {
-            return;
-        }
-
-
-        const protectedElement =
-            parent.closest(".protected-content");
-
-
-        if (!protectedElement) {
-            return;
-        }
-
-
-        /*
-         * Ctrl+C
-         * Ctrl+X
-         * Ctrl+A
-         * Ctrl+S
-         * Ctrl+U
-         */
-
-        if (
-            (event.ctrlKey || event.metaKey) &&
-            ["c", "x", "a", "s", "u"].includes(
-                event.key.toLowerCase()
-            )
-        ) {
-
-            event.preventDefault();
-
-        }
-
-    });
-
-});
-</script>
-
-
 <section class="mohim-detail-page">
 
-
-    <!-- ==================================================
-         BACK
-    ================================================== -->
-
-    <a
-        href="{{ url_for('mohim') }}"
-        class="detail-back"
-    >
-        ← सर्व मोहिम
-    </a>
-
-
-    <!-- ==================================================
-         HEADER
-    ================================================== -->
+    <a href="{{ url_for('mohim') }}" class="detail-back">← सर्व मोहिम</a>
 
     <header class="mohim-detail-header">
-
-        <span class="detail-number">
-            मोहिम {{ mohim_number }}
-        </span>
-
-        <span class="detail-category">
-            {{ trek.category }}
-        </span>
-
-        <h1>
-            {{ trek.title }}
-        </h1>
-
+        <span class="detail-number">मोहिम {{ mohim_number }}</span>
+        <span class="detail-category">{{ trek.category }}</span>
+        <h1>{{ trek.title }}</h1>
 
         <div class="detail-meta">
-
-            <span>
-                📍 {{ trek.location }}
-            </span>
-
-            <span>
-                📅 {{ trek.event_date.strftime('%d %B %Y') }}
-            </span>
-
-            <span>
-                ⏱ {{ trek.duration }}
-            </span>
-
+            <span>📍 {{ trek.location }}</span>
+            <span>📅 {{ trek.event_date.strftime('%d %B %Y') }}</span>
+            <span>⏱ {{ trek.duration }}</span>
         </div>
-
     </header>
 
 
+    <!-- PHOTOS -->
+    {% if photos %}
+        <section class="detail-section detail-gallery-section">
+            <div class="detail-section-heading">
+                <span>छायाचित्रे</span>
+                <h2>मोहिमेचे फोटो</h2>
+            </div>
+
+            <div class="mohim-photo-grid">
+                {% for photo in photos %}
+                    <a href="{{ photo }}" target="_blank" rel="noopener" class="mohim-photo">
+                        <img src="{{ photo }}" alt="{{ trek.title }} - फोटो {{ loop.index }}" loading="lazy">
+                    </a>
+                {% endfor %}
+            </div>
+        </section>
+    {% endif %}
+
+
+
     <!-- ==================================================
-         PHOTOS
+         ADMIN-UPLOADED TREK GALLERY
     ================================================== -->
 
-    {% if photos %}
+    {% if trek.gallery_images %}
 
     <section class="detail-section detail-gallery-section">
 
         <div class="detail-section-heading">
 
-            <span>
-                छायाचित्रे
-            </span>
+            <span>Gallery</span>
 
             <h2>
-                मोहिमेचे फोटो
+                मोहिमेचे नवीन फोटो
             </h2>
 
         </div>
 
-
         <div class="mohim-photo-grid">
 
-            {% for photo in photos %}
+            {% for gallery_image in trek.gallery_images %}
 
             <a
-                href="{{ photo }}"
+                href="{{ gallery_image.public_url }}"
                 target="_blank"
                 rel="noopener"
                 class="mohim-photo"
             >
 
                 <img
-                    src="{{ photo }}"
+                    src="{{ gallery_image.public_url }}"
                     alt="{{ trek.title }} - फोटो {{ loop.index }}"
                     loading="lazy"
+                    draggable="false"
                 >
 
             </a>
@@ -640,195 +90,54 @@ document.addEventListener("DOMContentLoaded", function () {
     {% endif %}
 
 
-    <!-- ==================================================
-         DETAILS
-    ================================================== -->
-
+    <!-- DETAILS -->
     <section class="detail-section">
-
         <div class="detail-section-heading">
-
-            <span>
-                मोहिम माहिती
-            </span>
-
-            <h2>
-                मोहिम तपशील
-            </h2>
-
+            <span>मोहिम माहिती</span>
+            <h2>मोहिम तपशील</h2>
         </div>
 
-
-        <p class="detail-description protected-content">
-
+        <p class="detail-description">
             {{ details or trek.description }}
-
         </p>
 
-
         <div class="detail-info-box">
-
-            <div class="detail-info-row">
-
-                <span>
-                    किंमत
-                </span>
-
-                <strong>
-                    {{ trek.price }}
-                </strong>
-
-            </div>
-
-
-            <div class="detail-info-row">
-
-                <span>
-                    कालावधी
-                </span>
-
-                <strong>
-                    {{ trek.duration }}
-                </strong>
-
-            </div>
-
-
-            <div class="detail-info-row">
-
-                <span>
-                    अवघडपणा
-                </span>
-
-                <strong>
-                    {{ trek.difficulty }}
-                </strong>
-
-            </div>
-
-
-            <div class="detail-info-row">
-
-                <span>
-                    एकूण जागा
-                </span>
-
-                <strong>
-                    {{ trek.total_slots }}
-                </strong>
-
-            </div>
-
-
-            <div class="detail-info-row">
-
-                <span>
-                    उपलब्ध जागा
-                </span>
-
-                <strong>
-                    {{ trek.slots_left }}
-                </strong>
-
-            </div>
-
-
+            <div class="detail-info-row"><span>किंमत</span><strong>{{ trek.price }}</strong></div>
+            <div class="detail-info-row"><span>कालावधी</span><strong>{{ trek.duration }}</strong></div>
+            <div class="detail-info-row"><span>अवघडपणा</span><strong>{{ trek.difficulty }}</strong></div>
+            <div class="detail-info-row"><span>एकूण जागा</span><strong>{{ trek.total_slots }}</strong></div>
+            <div class="detail-info-row"><span>उपलब्ध जागा</span><strong>{{ trek.slots_left }}</strong></div>
             {% if trek.contact_person %}
-
-            <div class="detail-info-row">
-
-                <span>
-                    समन्वयक
-                </span>
-
-                <strong>
-                    {{ trek.contact_person }}
-                </strong>
-
-            </div>
-
+                <div class="detail-info-row"><span>समन्वयक</span><strong>{{ trek.contact_person }}</strong></div>
             {% endif %}
-
-
             {% if trek.contact_phone %}
-
-            <div class="detail-info-row">
-
-                <span>
-                    संपर्क
-                </span>
-
-                <strong>
-                    {{ trek.contact_phone }}
-                </strong>
-
-            </div>
-
+                <div class="detail-info-row"><span>संपर्क</span><strong>{{ trek.contact_phone }}</strong></div>
             {% endif %}
-
         </div>
-
     </section>
 
 
-    <!-- ==================================================
-         ACTIVITY
-    ================================================== -->
-
+    <!-- ACTIVITY -->
     <section class="detail-section detail-activity">
+        <div class="detail-section-heading">
+            <span>Activity Conducted</span>
+            <h2>उपक्रम / Activity Conducted</h2>
+        </div>
 
-    <div class="detail-section-heading">
-
-        <span>
-            {{ activity_title or 'उपक्रम' }}
-        </span>
-
-        <h2>
-            {{ activity_title or 'उपक्रम' }}
-        </h2>
-
-    </div>
-
-    {% if activity_description %}
-
-    <p class="detail-description protected-content">
-        {{ activity_description }}
-    </p>
-
-    {% endif %}
-
-</section>
+        <p class="detail-description">
+            {{ activity or trek.description }}
+        </p>
+    </section>
 
 
-    <!-- ==================================================
-         JOIN
-    ================================================== -->
-
+    <!-- JOIN -->
     {% if trek.is_upcoming %}
-
-    <a
-        href="{{ url_for('contact') }}"
-        class="detail-join-button"
-    >
-
-        सहभागी व्हा
-
-        <span>
-            →
-        </span>
-
-    </a>
-
+        <a href="{{ url_for('contact') }}" class="detail-join-button">
+            सहभागी व्हा <span>→</span>
+        </a>
     {% else %}
-
-    <div class="detail-completed">
-
-        ही मोहिम पूर्ण झाली आहे
-
-    </div>
-
+        <div class="detail-completed">ही मोहिम पूर्ण झाली आहे</div>
     {% endif %}
-
 
 </section>
 

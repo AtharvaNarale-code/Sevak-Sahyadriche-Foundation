@@ -210,6 +210,80 @@
 }
 
 
+
+/* ==================================================
+   GALLERY
+================================================== */
+
+.trek-gallery-section {
+    margin-top: 48px;
+    padding-top: 35px;
+    border-top: 1px solid rgba(137, 71, 32, 0.12);
+}
+
+.trek-gallery-heading {
+    margin: 0 0 18px;
+    color: #3c2b23;
+    font-size: 23px;
+}
+
+.trek-gallery-subtitle {
+    margin: -8px 0 22px;
+    color: #76675d;
+    font-size: 14px;
+}
+
+.trek-gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.trek-gallery-item {
+    display: block;
+    height: 230px;
+    overflow: hidden;
+    border-radius: 14px;
+    background: #eee5d6;
+    text-decoration: none;
+}
+
+.trek-gallery-item img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+    user-select: none;
+    -webkit-user-drag: none;
+}
+
+.trek-gallery-item:hover img {
+    transform: scale(1.04);
+}
+
+@media (max-width: 900px) {
+    .trek-gallery-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 600px) {
+    .trek-gallery-section {
+        margin-top: 38px;
+        padding-top: 28px;
+    }
+
+    .trek-gallery-grid {
+        grid-template-columns: 1fr;
+        gap: 14px;
+    }
+
+    .trek-gallery-item {
+        height: 230px;
+    }
+}
+
 /* ==================================================
    MOBILE
 ================================================== */
@@ -514,7 +588,48 @@
             </aside>
 
 
+
         </div>
+
+        {% if trek.gallery_images %}
+        <!-- ==================================================
+             PHOTO GALLERY
+        ================================================== -->
+
+        <section class="trek-gallery-section">
+
+            <h2 class="trek-gallery-heading">
+                Photo Gallery
+            </h2>
+
+            <p class="trek-gallery-subtitle">
+                Photos from this trek / event
+            </p>
+
+            <div class="trek-gallery-grid">
+
+                {% for gallery_image in trek.gallery_images %}
+
+                <a
+                    href="{{ gallery_image.public_url }}"
+                    target="_blank"
+                    rel="noopener"
+                    class="trek-gallery-item"
+                >
+                    <img
+                        src="{{ gallery_image.public_url }}"
+                        alt="{{ trek.title }} — Gallery image {{ loop.index }}"
+                        loading="lazy"
+                        draggable="false"
+                    >
+                </a>
+
+                {% endfor %}
+
+            </div>
+
+        </section>
+        {% endif %}
 
     </div>
 
@@ -529,18 +644,24 @@
 
 document.addEventListener("contextmenu", function (event) {
 
-    if (event.target.classList.contains("trek-detail-image")) {
+    if (
+        event.target.classList.contains("trek-detail-image") ||
+        event.target.closest(".trek-gallery-item")
+    ) {
         event.preventDefault();
     }
 
 });
 
 
-/* Prevent dragging the event image */
+/* Prevent dragging event and gallery images */
 
 document.addEventListener("dragstart", function (event) {
 
-    if (event.target.classList.contains("trek-detail-image")) {
+    if (
+        event.target.classList.contains("trek-detail-image") ||
+        event.target.closest(".trek-gallery-item")
+    ) {
         event.preventDefault();
     }
 
