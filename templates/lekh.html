@@ -786,92 +786,125 @@
              DESCRIPTION
         ================================================== -->
 
-        <section class="lekh-description">
+        <section class="lekh-articles">
 
-            <p>
-                गड-किल्ले, ऐतिहासिक घटना, व्यक्तिमत्त्वे, परंपरा,
-                संस्कृती आणि विविध सामाजिक-सांस्कृतिक विषयांवर
-                संदर्भाधारित लेखन व वैचारिक मांडणी.
-            </p>
+    <div class="lekh-section-title">
+        <span>लेख</span>
+        <h2>लेख व विचार</h2>
+    </div>
 
-        </section>
 
-            <div class="lekh-article-list">
+    {% if articles %}
 
-                <!--
-                    =================================================
-                    ADMIN PANEL GENERATED ARTICLES
-                    =================================================
+    <div class="lekh-article-list">
 
-                    Each article can contain:
+        {% for article in articles %}
 
-                    1. Picture
-                    2. Article title
-                    3. Article paragraph / excerpt
-                    4. Author
-                    5. Date / category
-                    6. "Read More" link
+        <a
+            href="{{ url_for('lekh_detail', article_id=article.id) }}"
+            class="lekh-article-card"
+        >
 
-                    Suggested future structure:
+            <!-- ARTICLE IMAGE -->
 
-                    <article class="lekh-article-card">
+            <div class="lekh-article-image">
 
-                        <div class="lekh-article-image">
-                            <img src="ARTICLE_IMAGE" alt="ARTICLE_TITLE">
-                        </div>
+                {% if article.image_url %}
 
-                        <div class="lekh-article-content">
+                <img
+                    src="{{ article.image_url }}"
+                    alt="{{ article.title }}"
+                    loading="lazy"
+                >
 
-                            <span class="lekh-article-number">
-                                लेख ०१
-                            </span>
+                {% else %}
 
-                            <h3>
-                                ARTICLE TITLE
-                            </h3>
+                <img
+                    src="{{ url_for('static', filename='img/placeholder.svg') }}"
+                    alt="{{ article.title }}"
+                    loading="lazy"
+                >
 
-                            <p class="lekh-article-excerpt">
-                                ARTICLE PARAGRAPH / SUMMARY
-                            </p>
-
-                            <div class="lekh-article-meta">
-                                <span>लेखक</span>
-                                <span>•</span>
-                                <span>वर्ग</span>
-                            </div>
-
-                            <a href="#" class="lekh-read-more">
-                                पूर्ण लेख
-                                <span>→</span>
-                            </a>
-
-                        </div>
-
-                    </article>
-                -->
+                {% endif %}
 
             </div>
 
 
-            <!-- Empty until admin adds articles -->
+            <!-- ARTICLE CONTENT -->
 
-            <div class="lekh-empty">
+            <div class="lekh-article-content">
 
-                <div class="lekh-empty-icon">
-                    ✦
-                </div>
+                <span class="lekh-article-number">
+                    लेख {{ loop.index }}
+                </span>
+
 
                 <h3>
-                    लेख लवकरच येथे प्रकाशित होतील
+                    {{ article.title }}
                 </h3>
 
-                <p>
-                    नवीन लेख, विचार आणि संदर्भाधारित मांडणी येथे उपलब्ध होईल.
+
+                <p class="lekh-article-excerpt">
+
+                    {{ article.text[:220] }}
+
+                    {% if article.text|length > 220 %}
+                    ...
+                    {% endif %}
+
                 </p>
+
+
+                <div class="lekh-article-meta">
+
+                    {% if article.created_at %}
+
+                    <span>
+                        {{ article.created_at.strftime('%d %B %Y') }}
+                    </span>
+
+                    {% endif %}
+
+                </div>
+
+
+                <span class="lekh-read-more">
+                    पूर्ण लेख
+                    <span>→</span>
+                </span>
 
             </div>
 
-        </section>
+        </a>
+
+        {% endfor %}
+
+    </div>
+
+
+    {% else %}
+
+    <!-- EMPTY STATE -->
+
+    <div class="lekh-empty">
+
+        <div class="lekh-empty-icon">
+            ✦
+        </div>
+
+        <h3>
+            लेख लवकरच येथे प्रकाशित होतील
+        </h3>
+
+        <p>
+            नवीन लेख, विचार आणि संदर्भाधारित मांडणी येथे उपलब्ध होईल.
+        </p>
+
+    </div>
+
+    {% endif %}
+
+</section>
 
 
         <div class="lekh-bottom-mark">

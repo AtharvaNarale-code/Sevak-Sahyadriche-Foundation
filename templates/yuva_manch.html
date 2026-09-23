@@ -927,7 +927,52 @@ DESCRIPTION
 
                     <div class="abhyuday-session-list">
 
-                        <!-- ADMIN PANEL GENERATED SESSIONS -->
+                        {% if online_sessions %}
+
+                            {% for session in online_sessions %}
+
+                            <article class="abhyuday-session-card">
+
+                                <div class="abhyuday-session-image">
+                                    <img
+                                        src="{{ session.image }}"
+                                        alt="{{ session.title }}"
+                                        loading="lazy"
+                                    >
+                                </div>
+
+                                <div class="abhyuday-session-number">
+                                    <strong>{{ "%02d"|format(loop.index) }}</strong>
+                                    <span>सत्र</span>
+                                </div>
+
+                                <div class="abhyuday-session-info">
+                                    <h4>{{ session.title }}</h4>
+
+                                    <p>
+                                        {% if session.event_date %}
+                                            {{ session.event_date.strftime('%d %B %Y') }}
+                                        {% else %}
+                                            ऑनलाइन सत्र
+                                        {% endif %}
+                                    </p>
+                                </div>
+
+                                <div class="abhyuday-session-arrow">
+                                    →
+                                </div>
+
+                            </article>
+
+                            {% endfor %}
+
+                        {% else %}
+
+                            <div class="odh-empty">
+                                सध्या कोणतेही शिवदर्शन सत्र उपलब्ध नाही.
+                            </div>
+
+                        {% endif %}
 
                     </div>
 
@@ -952,7 +997,52 @@ COLLEGE / EDUCATIONAL SESSIONS
 
                     <div class="abhyuday-session-list">
 
-                        <!-- ADMIN PANEL GENERATED SESSIONS -->
+                        {% if offline_sessions %}
+
+                            {% for session in offline_sessions %}
+
+                            <article class="abhyuday-session-card">
+
+                                <div class="abhyuday-session-image">
+                                    <img
+                                        src="{{ session.image }}"
+                                        alt="{{ session.title }}"
+                                        loading="lazy"
+                                    >
+                                </div>
+
+                                <div class="abhyuday-session-number">
+                                    <strong>{{ "%02d"|format(loop.index) }}</strong>
+                                    <span>सत्र</span>
+                                </div>
+
+                                <div class="abhyuday-session-info">
+                                    <h4>{{ session.title }}</h4>
+
+                                    <p>
+                                        {% if session.event_date %}
+                                            {{ session.event_date.strftime('%d %B %Y') }}
+                                        {% else %}
+                                            महाविद्यालयीन सत्र
+                                        {% endif %}
+                                    </p>
+                                </div>
+
+                                <div class="abhyuday-session-arrow">
+                                    →
+                                </div>
+
+                            </article>
+
+                            {% endfor %}
+
+                        {% else %}
+
+                            <div class="odh-empty">
+                                सध्या कोणतेही महाविद्यालयीन सत्र उपलब्ध नाही.
+                            </div>
+
+                        {% endif %}
 
                     </div>
 

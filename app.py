@@ -138,6 +138,11 @@ class Trek(db.Model):
     category = db.Column(db.String(30), nullable=False, default="Trek")  # Trek / Cultural Event / Fort Visit
     location = db.Column(db.String(150), nullable=False)
     description = db.Column(db.Text, nullable=False)
+
+    # Mohim activity information
+    activity_title = db.Column(db.String(200), nullable=True)
+    activity_description = db.Column(db.Text, nullable=True)
+
     difficulty = db.Column(db.String(30), default="Moderate")  # Easy / Moderate / Difficult
     event_date = db.Column(db.Date, nullable=False)
     duration = db.Column(db.String(50), default="1 Day")
@@ -280,11 +285,32 @@ class Article(db.Model):
         return url_for("static", filename="img/placeholder.svg")
 
 
+def _ensure_trek_activity_columns():
+    """Add the Mohim activity columns to an existing treks table if needed."""
+    from sqlalchemy import inspect, text
+
+    inspector = inspect(db.engine)
+    columns = {column["name"] for column in inspector.get_columns("treks")}
+
+    if "activity_title" not in columns:
+        db.session.execute(
+            text("ALTER TABLE treks ADD COLUMN activity_title VARCHAR(200)")
+        )
+
+    if "activity_description" not in columns:
+        db.session.execute(
+            text("ALTER TABLE treks ADD COLUMN activity_description TEXT")
+        )
+
+    db.session.commit()
+
+
 # On Vercel, initialize the temporary SQLite database for the current
 # serverless instance so public pages and the admin panel can load.
 if IS_VERCEL:
     with app.app_context():
         db.create_all()
+        _ensure_trek_activity_columns()
 
 
 @login_manager.user_loader
@@ -523,7 +549,6 @@ def mohim_detail(trek_id):
         number = trek.id
 
     photos = _mohim_photos(number)
-    activity = _mohim_text_file(number, "activity.txt")
     details = _mohim_text_file(number, "details.txt")
 
     return render_template(
@@ -531,14 +556,40 @@ def mohim_detail(trek_id):
         trek=trek,
         mohim_number=number,
         photos=photos,
-        activity=activity,
+        activity_title=trek.activity_title,
+        activity_description=trek.activity_description,
         details=details,
     )
 
 
 @app.route("/foreign-diaspora")
 def foreign_diaspora():
-    return render_template("foreign_diaspora.html")
+
+    online_sessions = (
+        OnlineSession.query
+        .filter_by(is_published=True)
+        .order_by(
+            OnlineSession.event_date.desc().nullslast(),
+            OnlineSession.created_at.desc()
+        )
+        .all()
+    )
+
+    tourism_plans = (
+        TourismPlan.query
+        .filter_by(is_published=True)
+        .order_by(
+            TourismPlan.event_date.desc().nullslast(),
+            TourismPlan.created_at.desc()
+        )
+        .all()
+    )
+
+    return render_template(
+        "foreign_diaspora.html",
+        online_sessions=online_sessions,
+        tourism_plans=tourism_plans,
+    )
 
 
 @app.route("/yuva-manch")
@@ -775,6 +826,8 @@ def _trek_from_form(trek):
     trek.category = request.form.get("category", "Trek")
     trek.location = request.form.get("location", "").strip()
     trek.description = request.form.get("description", "").strip()
+    trek.activity_title = request.form.get("activity_title", "").strip() or None
+    trek.activity_description = request.form.get("activity_description", "").strip() or None
     trek.difficulty = request.form.get("difficulty", "Moderate")
     trek.duration = request.form.get("duration", "1 Day").strip()
     trek.price = request.form.get("price", "Free").strip()
@@ -1425,6 +1478,7 @@ def seed_demo():
 if __name__ == "__main__":
     with app.app_context():
         db.create_all()
+        _ensure_trek_activity_columns()
 
     app.run(
         debug=os.environ.get("FLASK_DEBUG", "0") == "1",

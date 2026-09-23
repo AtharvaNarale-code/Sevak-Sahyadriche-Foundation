@@ -777,26 +777,27 @@ document.addEventListener("DOMContentLoaded", function () {
 
     <section class="detail-section detail-activity">
 
-        <div class="detail-section-heading">
+    <div class="detail-section-heading">
 
-            <span>
-                Activity Conducted
-            </span>
+        <span>
+            {{ activity_title or 'उपक्रम' }}
+        </span>
 
-            <h2>
-                उपक्रम / Activity Conducted
-            </h2>
+        <h2>
+            {{ activity_title or 'उपक्रम' }}
+        </h2>
 
-        </div>
+    </div>
 
+    {% if activity_description %}
 
-        <p class="detail-description protected-content">
+    <p class="detail-description protected-content">
+        {{ activity_description }}
+    </p>
 
-            {{ activity or trek.description }}
+    {% endif %}
 
-        </p>
-
-    </section>
+</section>
 
 
     <!-- ==================================================

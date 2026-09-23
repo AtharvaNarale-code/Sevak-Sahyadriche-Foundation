@@ -847,11 +847,59 @@
             </div>
 
 
-            <!-- ADMIN PANEL WILL INSERT ONLINE SESSIONS HERE -->
-
             <div class="odh-items">
 
-                <!-- Dynamic online sessions -->
+                {% if online_sessions %}
+
+                    {% for item in online_sessions %}
+
+                    <a href="{{ url_for('online_sessions') }}" class="odh-item">
+
+                        <div class="odh-item-photo">
+                            <img
+                                src="{{ item.image }}"
+                                alt="{{ item.title }}"
+                                loading="lazy"
+                            >
+                        </div>
+
+                        <div class="odh-item-content">
+
+                            <span class="odh-item-number">
+                                {{ "%02d"|format(loop.index) }}
+                            </span>
+
+                            <div>
+                                <span class="odh-item-label">
+                                    {% if item.is_upcoming %}
+                                        {% if current_language == 'mr' %}आगामी सत्र{% else %}Upcoming Session{% endif %}
+                                    {% else %}
+                                        {% if current_language == 'mr' %}सत्र{% else %}Session{% endif %}
+                                    {% endif %}
+                                </span>
+
+                                <h3>{{ item.title }}</h3>
+                            </div>
+
+                            <span class="odh-arrow">→</span>
+
+                        </div>
+
+                    </a>
+
+                    {% endfor %}
+
+                {% else %}
+
+                    <div class="odh-empty">
+                        {% if current_language == 'mr' %}
+                            सध्या कोणतेही ऑनलाइन सत्र उपलब्ध नाही.
+                        {% else %}
+                            No online sessions are currently available.
+                        {% endif %}
+                    </div>
+
+                {% endif %}
 
             </div>
 
@@ -900,11 +948,59 @@
             </div>
 
 
-            <!-- ADMIN PANEL WILL INSERT TOURISM ITEMS HERE -->
-
             <div class="odh-items">
 
-                <!-- Dynamic tourism planning items -->
+                {% if tourism_plans %}
+
+                    {% for item in tourism_plans %}
+
+                    <a href="{{ url_for('tourism_planning') }}" class="odh-item">
+
+                        <div class="odh-item-photo">
+                            <img
+                                src="{{ item.poster }}"
+                                alt="{{ item.title }}"
+                                loading="lazy"
+                            >
+                        </div>
+
+                        <div class="odh-item-content">
+
+                            <span class="odh-item-number">
+                                {{ "%02d"|format(loop.index) }}
+                            </span>
+
+                            <div>
+                                <span class="odh-item-label">
+                                    {% if item.is_completed %}
+                                        {% if current_language == 'mr' %}पूर्ण झालेले{% else %}Completed{% endif %}
+                                    {% else %}
+                                        {% if current_language == 'mr' %}पर्यटन नियोजन{% else %}Tourism Plan{% endif %}
+                                    {% endif %}
+                                </span>
+
+                                <h3>{{ item.title }}</h3>
+                            </div>
+
+                            <span class="odh-arrow">→</span>
+
+                        </div>
+
+                    </a>
+
+                    {% endfor %}
+
+                {% else %}
+
+                    <div class="odh-empty">
+                        {% if current_language == 'mr' %}
+                            सध्या कोणतेही पर्यटन नियोजन उपलब्ध नाही.
+                        {% else %}
+                            No tourism plans are currently available.
+                        {% endif %}
+                    </div>
+
+                {% endif %}
 
             </div>
 
